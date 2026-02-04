@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ペライチLP改修 完全指示書</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* Guide-specific overrides */
+.copy-block{background:#1e293b;color:#e2e8f0;padding:1rem 1.2rem;border-radius:var(--radius);margin:.6rem 0;font-family:"Courier New",monospace;font-size:.85rem;line-height:1.6;white-space:pre-wrap;position:relative}
+.copy-block::before{content:'コピーして使用';position:absolute;top:.4rem;right:.6rem;font-size:.65rem;background:var(--c-accent);color:#1e293b;padding:.1rem .5rem;border-radius:4px;font-weight:700;font-family:"Noto Sans JP",sans-serif}
+.step-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1rem 0}
+.step-box{background:#f8fafc;border:1px solid var(--c-border);border-radius:var(--radius);padding:1rem;text-align:center}
+.step-num{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;background:var(--c-primary);color:#fff;border-radius:50%;font-weight:700;margin-bottom:.5rem}
+.step-box h4{margin:.3rem 0;font-size:.9rem}
+.step-box p{font-size:.82rem;color:var(--c-text-sub);margin:0}
+.op-table{margin:1rem 0}
+.op-table td:first-child{font-weight:600;white-space:nowrap;width:200px}
+.section-map{counter-reset:sec}
+.section-map li{counter-increment:sec;padding:.5rem .8rem;margin:.3rem 0;background:#f8fafc;border-radius:var(--radius);border-left:3px solid var(--c-primary);font-size:.88rem}
+.section-map li::before{content:counter(sec) ". ";font-weight:700;color:var(--c-primary)}
+.section-map li.new::after{content:'新規追加';font-size:.7rem;background:var(--c-success-light);color:var(--c-success);padding:.1rem .4rem;border-radius:4px;margin-left:.5rem;font-weight:600}
+.section-map li.edit::after{content:'改修';font-size:.7rem;background:var(--c-accent-light);color:#92400e;padding:.1rem .4rem;border-radius:4px;margin-left:.5rem;font-weight:600}
+.section-map li.keep::after{content:'既存活用';font-size:.7rem;background:#f1f5f9;color:#64748b;padding:.1rem .4rem;border-radius:4px;margin-left:.5rem;font-weight:600}
+.qa-item{margin:.8rem 0}
+.qa-q{font-weight:700;color:var(--c-primary);margin-bottom:.3rem}
+.qa-a{padding-left:1rem;border-left:2px solid var(--c-border);font-size:.9rem;color:var(--c-text-sub)}
+.checklist-final{list-style:none;margin:0;padding:0}
+.checklist-final li{padding:.5rem .5rem .5rem 2rem;position:relative;font-size:.88rem;border-bottom:1px solid #f1f5f9}
+.checklist-final li::before{content:'☐';position:absolute;left:.3rem;top:.5rem;font-size:1rem}
+.diagram{background:#f8fafc;border:1px solid var(--c-border);border-radius:var(--radius);padding:1.5rem;margin:1rem 0;font-family:"Courier New",monospace;font-size:.82rem;line-height:1.8;white-space:pre-wrap}
+.cta-example{display:inline-block;padding:.6rem 1.5rem;border-radius:6px;font-weight:700;font-size:.9rem;margin:.3rem .5rem .3rem 0}
+.cta-primary{background:#dc2626;color:#fff}
+.cta-secondary{background:transparent;color:#1e293b;border:2px solid #1e293b}
+.cta-green{background:#16a34a;color:#fff}
+.img-placeholder{background:linear-gradient(135deg,#dbeafe,#e0e7ff);border:2px dashed #93c5fd;border-radius:var(--radius);padding:2rem;text-align:center;color:var(--c-primary);font-weight:600;margin:.8rem 0}
+.section-divider{border:none;border-top:3px solid var(--c-primary);margin:2rem 0}
+.warn-box{background:#fef3c7;border:1px solid #fbbf24;border-radius:var(--radius);padding:.8rem 1rem;font-size:.85rem;margin:.8rem 0}
+.code-block{background:#1e293b;color:#a5f3fc;padding:1rem 1.2rem;border-radius:var(--radius);margin:.6rem 0;font-family:"Courier New",monospace;font-size:.8rem;line-height:1.6;overflow-x:auto;white-space:pre}
+</style>
+</head>
+<body>
+
+<!-- サイドナビ -->
+<nav id="sidebar">
+<div class="nav-header">LP改修ガイド</div>
+<ul>
+<li><a href="#basics" class="active">基本操作</a></li>
+<li><a href="#structure">全体構成</a></li>
+<li><a href="#sec1">1. ファーストビュー</a></li>
+<li><a href="#sec2">2. No.1バッジ</a></li>
+<li><a href="#sec3">3. お悩み</a></li>
+<li><a href="#sec4">4. AI活用事例</a></li>
+<li><a href="#sec5">5. 当校の特徴</a></li>
+<li><a href="#sec6">6. カリキュラム</a></li>
+<li><a href="#sec7">7. 助成金</a></li>
+<li><a href="#sec8">8. 料金表</a></li>
+<li><a href="#sec9">9. 受講の流れ</a></li>
+<li><a href="#sec10">10. ウェビナー申込み</a></li>
+<li><a href="#sec11">11. 資料DL</a></li>
+<li><a href="#sec12">12. よくある質問</a></li>
+<li><a href="#tracking">トラッキング設置</a></li>
+<li><a href="#checklist">公開前チェック</a></li>
+</ul>
+</nav>
+
+<!-- メインコンテンツ -->
+<main id="content">
+
+<!-- Hero -->
+<div class="hero">
+<div class="hero-inner">
+<div class="hero-label">LP Revision Guide</div>
+<h1>ペライチLP改修 完全指示書</h1>
+<p class="hero-sub">対象LP: fc.horiemon.ai/kaigo<br>目的: 個人プラン寄りのLPを介護法人向けに最適化し、ウェビナー申込み・資料請求のCVR 4%以上を達成する</p>
+<div class="hero-badges">
+<span class="badge">ペライチ操作ガイド付き</span>
+<span class="badge">コピペ対応テキスト</span>
+<span class="badge">トラッキング設置手順</span>
+</div>
+</div>
+</div>
+
+<!-- 1. ペライチの基本操作 -->
+<section id="basics">
+<h2><span class="section-num">STEP 0</span>ペライチの基本操作</h2>
+
+<h3>ログイン〜編集画面を開くまで</h3>
+<div class="step-grid">
+<div class="step-box">
+<div class="step-num">1</div>
+<h4>ログイン</h4>
+<p>peraichi.com にアクセスし、右上の「ログイン」からメールアドレスとパスワードでログイン</p>
+</div>
+<div class="step-box">
+<div class="step-num">2</div>
+<h4>マイページ</h4>
+<p>ログイン後、マイページに移動。介護校LPの「編集」ボタンをクリック</p>
+</div>
+<div class="step-box">
+<div class="step-num">3</div>
+<h4>編集開始</h4>
+<p>ビジュアル編集画面が開く。セクション（ブロック）ごとに編集できる</p>
+</div>
+</div>
+
+<h3>編集画面の見方</h3>
+<div class="diagram">┌─────────────────────────────────────────┐
+│  上部メニューバー                              │
+│  [ブロック挿入] [ページ設定] [プレビュー] [公開]       │
+├─────────────────────────────────────────┤
+│                                         │
+│  ┌──────────────────────────────┐        │
+│  │  セクション（ブロック）1          │        │
+│  │  ※カーソルを合わせると編集ボタン表示  │        │
+│  └──────────────────────────────┘        │
+│           ＋ ← ブロック追加ボタン              │
+│  ┌──────────────────────────────┐        │
+│  │  セクション（ブロック）2          │        │
+│  └──────────────────────────────┘        │
+│           ＋                              │
+│  ┌──────────────────────────────┐        │
+│  │  セクション（ブロック）3          │        │
+│  └──────────────────────────────┘        │
+│                                         │
+└─────────────────────────────────────────┘</div>
+
+<h3>操作一覧</h3>
+<div class="table-scroll">
+<table class="op-table">
+<thead><tr><th>やりたいこと</th><th>操作方法</th></tr></thead>
+<tbody>
+<tr><td>テキストを変更する</td><td>テキスト部分をクリック → 直接編集</td></tr>
+<tr><td>画像を変更する</td><td>画像をクリック →「画像を変更」→ アップロードまたは選択</td></tr>
+<tr><td>ボタンのリンクを変更</td><td>ボタンをクリック →「リンク先URL」を入力</td></tr>
+<tr><td>ボタンの色を変更</td><td>ボタンをクリック →「カラー設定」から選択</td></tr>
+<tr><td>新しいセクションを追加</td><td>セクション間の「＋」ボタン → テンプレートから選択</td></tr>
+<tr><td>セクションの順番を変える</td><td>セクション左端の「↑↓」矢印をクリック</td></tr>
+<tr><td>セクションを削除する</td><td>セクション右上の「×」ボタン</td></tr>
+<tr><td>背景色を変える</td><td>セクション「編集」→「背景設定」</td></tr>
+<tr><td>フォームを設置</td><td>「＋」→「フォーム」カテゴリからテンプレートを選択</td></tr>
+<tr><td>HTMLを埋め込む</td><td>「＋」→「HTML埋め込み」ブロックを選択</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout callout-warning">
+<strong>編集時の注意:</strong> こまめに「保存」する ／ 変更後は「プレビュー」で確認 ／ スマホ表示も確認する（介護現場はスマホ閲覧が多い）／ すべて完了してから「公開」
+</div>
+</section>
+
+<!-- 全体構成 -->
+<section id="structure">
+<h2><span class="section-num">構成</span>改修後のLP全体構成</h2>
+<p>以下の順番でセクションを配置します。「新規追加」のセクションはペライチの「＋」ボタンから追加してください。</p>
+<ol class="section-map">
+<li class="edit">ファーストビュー（最重要・大幅改修）</li>
+<li class="new">4冠No.1バッジ</li>
+<li class="new">こんなお悩みありませんか？</li>
+<li class="new">介護現場のAI活用事例</li>
+<li class="edit">当校の特徴</li>
+<li class="keep">カリキュラム概要</li>
+<li class="edit">助成金で実質7万円/人</li>
+<li class="keep">料金表</li>
+<li class="new">受講の流れ</li>
+<li class="new">ウェビナー申込みフォーム（主CTA）</li>
+<li class="new">資料ダウンロード（副CTA）</li>
+<li class="new">よくある質問</li>
+<li class="keep">フッター</li>
+</ol>
+</section>
+
+<!-- セクション1: ファーストビュー -->
+<section id="sec1">
+<h2><span class="section-num">01</span>ファーストビュー <span class="priority priority-high">最重要</span></h2>
+<p>訪問者が最初に目にする部分。介護事業所の施設長・管理者が「自分向けだ」と一目でわかることがゴール。</p>
+
+<h3>キャッチコピー（大見出し）</h3>
+<div class="copy-block">介護事業所のAI人材育成
+助成金で実質 月5,833円/人〜</div>
+
+<h3>サブコピー（小見出し）</h3>
+<div class="copy-block">堀江貴文プロデュース｜法人向け生成AI研修 No.1（4冠）
+240以上の動画講義＋チャットサポート＋月1回の伴走MTG
+介護・在宅医療の現場で即使えるAI活用法を学べます</div>
+
+<h3>CTAボタン（2つ設置）</h3>
+<p>
+<span class="cta-example cta-primary">無料ウェビナーに申し込む</span>
+<span class="cta-example cta-secondary">資料を無料ダウンロード</span>
+</p>
+<div class="table-scroll">
+<table>
+<thead><tr><th>ボタン</th><th>テキスト</th><th>色</th><th>リンク先</th></tr></thead>
+<tbody>
+<tr><td>主CTA</td><td>無料ウェビナーに申し込む</td><td>赤またはオレンジ（目立つ色）</td><td><code>#webinar</code>（ページ内リンク）</td></tr>
+<tr><td>副CTA</td><td>資料を無料ダウンロード</td><td>白枠（アウトライン）</td><td><code>#download</code>（ページ内リンク）</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>ページ内リンクの設定方法</h3>
+<div class="card">
+<ol>
+<li>リンク先にしたいセクション（例: ウェビナー申込み）の「編集」を開く</li>
+<li>「セクションID」に <code>webinar</code> と入力して保存</li>
+<li>ファーストビューのボタンの「リンク設定」を開く</li>
+<li>リンク先URLに <code>#webinar</code> と入力</li>
+<li>資料ダウンロードも同様（セクションID: <code>download</code>、ボタンリンク: <code>#download</code>）</li>
+</ol>
+</div>
+
+<h3>背景画像について</h3>
+<ul>
+<li>現在の堀江貴文の写真入り画像は維持してOK</li>
+<li>テキストが読みにくい場合 → セクション編集 →「背景設定」→「オーバーレイ」→ 黒を選択 → 不透明度 30-40%</li>
+</ul>
+</section>
+
+<!-- セクション2: No.1バッジ -->
+<section id="sec2">
+<h2><span class="section-num">02</span>4冠No.1バッジ <span class="priority priority-high">新規追加</span></h2>
+<p>ファーストビュー直下に配置。信頼性を一瞬で伝える。</p>
+
+<h3>操作手順</h3>
+<div class="card">
+<ol>
+<li>ファーストビューの下の「＋」をクリック</li>
+<li>「画像」カテゴリから「画像を横並びに配置できるテンプレート」を選択（「ギャラリー」や「画像4列」など）</li>
+<li>説明資料p.19-20の4冠バッジ画像をアップロード</li>
+</ol>
+</div>
+
+<h3>見出しテキスト</h3>
+<div class="copy-block">法人向け生成AI研修サービス 4冠達成</div>
+
+<h3>配置するバッジ（横一列に4つ）</h3>
+<div class="metrics-row">
+<div class="metric"><span class="metric-value">No.1</span><span class="metric-label">実績社数<br>前年比伸び率</span></div>
+<div class="metric"><span class="metric-value">No.1</span><span class="metric-label">講義の<br>分かりやすさ</span></div>
+<div class="metric"><span class="metric-value">No.1</span><span class="metric-label">信頼度<br>（総合的に）</span></div>
+<div class="metric"><span class="metric-value">No.1</span><span class="metric-label">満足度</span></div>
+</div>
+
+<h3>補足テキスト（小さく）</h3>
+<div class="copy-block">※「法人向け生成AI研修サービス」に関する市場調査《No.1検証調査》
+（株）未来トレンド研究機構 調べ ※2025年11月時点</div>
+
+<div class="img-placeholder">説明資料 p.19-20 の4冠バッジ画像をスクリーンショットで切り出してアップロード</div>
+</section>
+
+<!-- セクション3: お悩み -->
+<section id="sec3">
+<h2><span class="section-num">03</span>こんなお悩みありませんか？ <span class="priority priority-high">新規追加</span></h2>
+<p>ターゲットの課題に共感し、「自分ごと」として読み進めてもらう。</p>
+
+<h3>操作手順</h3>
+<div class="card">
+<ol>
+<li>「＋」をクリック</li>
+<li>「テキスト」カテゴリから「チェックリスト型」や「リスト型」のテンプレートを選択</li>
+<li>以下の内容を入力</li>
+<li>背景色を薄いグレーに設定</li>
+</ol>
+</div>
+
+<h3>見出し</h3>
+<div class="copy-block">介護事業所の経営者・施設長の皆様、こんなお悩みはありませんか？</div>
+
+<h3>悩みリスト</h3>
+<div class="copy-block">☑ 慢性的な人手不足で、スタッフの業務負担が限界に近い
+☑ 介護記録や書類作成に毎日2時間以上かかっている
+☑ AIやDXに興味はあるが、何から始めればよいかわからない
+☑ 研修に費用をかけたいが、予算の確保が難しい
+☑ ICT化を進めたいが、現場のITスキルにばらつきがある
+☑ 補助金・助成金を活用したいが、制度が複雑でわかりにくい</div>
+
+<h3>締めの一文</h3>
+<div class="copy-block">ホリエモンAI学校 介護校が、これらの課題をまとめて解決します。</div>
+</section>
+
+<!-- セクション4: AI活用事例 -->
+<section id="sec4">
+<h2><span class="section-num">04</span>介護現場のAI活用事例 <span class="priority priority-high">新規追加</span></h2>
+<p>AIが介護現場で具体的にどう使えるかを示す。</p>
+
+<h3>操作手順</h3>
+<div class="card">
+<ol>
+<li>「＋」→「テキスト＋画像」カテゴリから「3列レイアウト」を選択</li>
+<li>各列にアイコン画像（またはペライチのアイコン素材）とテキストを配置</li>
+</ol>
+</div>
+
+<h3>見出し</h3>
+<div class="copy-block">介護現場で"今日から"使えるAI活用法</div>
+
+<h3>3列の内容</h3>
+<div class="step-grid">
+<div class="step-box">
+<div class="step-num">1</div>
+<h4>介護記録の効率化</h4>
+<p>AIが音声やメモから介護記録を自動作成。記録業務を最大50%削減します。</p>
+</div>
+<div class="step-box">
+<div class="step-num">2</div>
+<h4>シフト作成の自動化</h4>
+<p>スタッフの希望・資格・配置基準を考慮し、AIが最適なシフトを提案します。</p>
+</div>
+<div class="step-box">
+<div class="step-num">3</div>
+<h4>家族対応文書の作成</h4>
+<p>ご家族への報告書・お知らせ文書をAIが下書き。丁寧な文面を短時間で作成できます。</p>
+</div>
+</div>
+
+<h3>3列の下に追加テキスト</h3>
+<div class="copy-block">このほか、ケアプラン作成支援、事故報告書の作成、研修資料の作成など、
+240以上の動画講義で介護・在宅医療の現場に特化したAI活用法を学べます。</div>
+</section>
+
+<!-- セクション5: 当校の特徴 -->
+<section id="sec5">
+<h2><span class="section-num">05</span>当校の特徴 <span class="priority priority-mid">既存を改修</span></h2>
+<p>既存の内容はそのまま活かしつつ、介護向けの文脈に変更する。</p>
+
+<h3>見出しを変更</h3>
+<div class="copy-block">介護事業所に選ばれる3つの理由</div>
+
+<h3>特徴1</h3>
+<div class="card">
+<h4>タイトル</h4>
+<div class="copy-block">240講座以上の動画で「現場で使えるAI」を習得</div>
+<h4>説明文</h4>
+<div class="copy-block">介護記録、ケアプラン、シフト作成など、介護・在宅医療で実際に使用できる動画講義が240以上。PC操作ができれば受講可能で、受講者の95%がAI未経験者です。</div>
+</div>
+
+<h3>特徴2</h3>
+<div class="card">
+<h4>タイトル</h4>
+<div class="copy-block">チャットでいつでも質問OK。講師が直接回答</div>
+<h4>説明文</h4>
+<div class="copy-block">動画を見てもわからないことは、チャットでいつでも講師に質問できます。「自分の業務にどう使えば？」という現場の疑問にも個別に回答します。</div>
+</div>
+
+<h3>特徴3</h3>
+<div class="card">
+<h4>タイトル</h4>
+<div class="copy-block">毎月の伴走MTGで確実に業務改善</div>
+<h4>説明文</h4>
+<div class="copy-block">毎月のミーティングで学習進捗を確認し、実際の業務改善に落とし込みます。「学んで終わり」ではなく、現場でAIを使いこなせるまでサポートします。</div>
+</div>
+</section>
+
+<!-- セクション6: カリキュラム -->
+<section id="sec6">
+<h2><span class="section-num">06</span>カリキュラム概要 <span class="priority priority-sub">既存活用</span></h2>
+<p>説明資料p.6のカリキュラム画像がLPにあればそのまま活用。なければ以下を追加。</p>
+
+<h3>見出し</h3>
+<div class="copy-block">業務・業種に合わせたオーダーメイドのカリキュラム</div>
+
+<h3>補足テキスト（画像の下に配置）</h3>
+<div class="copy-block">「困りごとシート」を起点に、改善効果の高い順に学びを設計。
+基礎学習は社内環境に合わせてご提案します（ChatGPT、Geminiなど）。
+カリキュラムは2ヶ月〜6ヶ月まで、ご都合に合わせて作成可能です。</div>
+
+<div class="img-placeholder">説明資料 p.6 のカリキュラム画像をアップロード</div>
+</section>
+
+<!-- セクション7: 助成金 -->
+<section id="sec7">
+<h2><span class="section-num">07</span>助成金で実質7万円/人 <span class="priority priority-high">改修・強化</span></h2>
+<p>助成金による低コスト導入を強く訴求する。最大の武器。</p>
+
+<h3>見出し</h3>
+<div class="copy-block">人材開発支援助成金で受講料の最大75%をカバー
+実質 月5,833円/人〜 で導入できます</div>
+
+<h3>助成金の仕組み（図解）</h3>
+<div class="card">
+<div class="revenue-flow">
+<div class="revenue-box" style="background:#dbeafe;border:2px solid #2563eb">年間受講料 <strong>310,000円</strong>/人</div>
+<div style="text-align:center;font-size:1.5rem;color:var(--c-primary);margin:.3rem 0">↓</div>
+<div class="revenue-box" style="background:#fee2e2;border:1px solid #dc2626">助成金で <strong>-230,000円</strong></div>
+<div style="text-align:center;font-size:1.5rem;color:var(--c-primary);margin:.3rem 0">↓</div>
+<div class="revenue-box" style="background:#fef9c3;border:2px solid #f59e0b;font-size:1.1rem">実質負担 <strong style="font-size:1.3rem">70,000円</strong>/人（月額 約5,833円）</div>
+</div>
+</div>
+<p class="note">※説明資料p.10の画像をそのままアップロードしてもOK</p>
+
+<h3>助成金対象の条件</h3>
+<div class="copy-block">以下の3つを満たせば、助成金を活用できます:
+
+✓ 社長・役員ではなく、社員が受講する
+✓ 受講者が雇用保険に加入している
+✓ 研修を業務時間内に受講できる
+
+※4名以上の受講で、社労士サポートフィーは当社が負担します</div>
+
+<h3>CTAボタン</h3>
+<p><span class="cta-example cta-green">助成金が使えるか無料で相談する</span></p>
+<p class="note">リンク先: <code>#webinar</code>（ウェビナー申込みセクションへ）</p>
+</section>
+
+<!-- セクション8: 料金表 -->
+<section id="sec8">
+<h2><span class="section-num">08</span>料金表 <span class="priority priority-sub">既存活用</span></h2>
+<p>料金表PDFの内容をそのまま表で掲載。すでにあればそのまま活用。</p>
+
+<h3>見出し</h3>
+<div class="copy-block">料金プラン（4名以上のご受講で社労士サポート無料）</div>
+
+<h3>掲載する表</h3>
+<div class="table-scroll">
+<table>
+<thead><tr><th>人数</th><th>料金（税別）</th><th>助成金75%</th><th>実質負担額</th><th>無料アカウント</th></tr></thead>
+<tbody>
+<tr><td>2人</td><td>62万円</td><td>48万円</td><td><strong>14万円</strong></td><td>-</td></tr>
+<tr><td>4人</td><td>124万円</td><td>96万円</td><td><strong>28万円</strong></td><td>-</td></tr>
+<tr><td>6人</td><td>186万円</td><td>144万円</td><td><strong>42万円</strong></td><td>+1</td></tr>
+<tr><td>8人</td><td>248万円</td><td>192万円</td><td><strong>56万円</strong></td><td>+2</td></tr>
+<tr class="row-highlight"><td>10人</td><td>310万円</td><td>240万円</td><td><strong>70万円</strong></td><td>+3</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>補足テキスト</h3>
+<div class="copy-block">※1名のみでの法人受講はお受けできません（2名以上〜）
+※大企業は助成金上限60%
+※助成金の交付・却下の責任は当社では負いかねます。受講前に提携社労士（TRIPORT社労士法人）との無料チェック面談を実施してください。</div>
+
+<h3>操作手順</h3>
+<div class="card">
+<p>ペライチの「＋」→「テーブル」ブロックを追加して上記の内容を入力。または料金表PDFの画像をそのままアップロード。</p>
+</div>
+</section>
+
+<!-- セクション9: 受講の流れ -->
+<section id="sec9">
+<h2><span class="section-num">09</span>受講の流れ <span class="priority priority-high">新規追加</span></h2>
+<p>申込みから受講開始までのステップを明確にし、不安を解消する。</p>
+
+<h3>操作手順</h3>
+<div class="card">
+<ol>
+<li>「＋」→「ステップ」や「フロー」型のテンプレートを選択</li>
+<li>以下の内容を入力</li>
+</ol>
+</div>
+
+<h3>見出し</h3>
+<div class="copy-block">ご契約までの流れ</div>
+
+<h3>ステップ</h3>
+<div class="step-grid">
+<div class="step-box">
+<div class="step-num">1</div>
+<h4>無料ウェビナーに参加</h4>
+<p>またはお問い合わせ</p>
+</div>
+<div class="step-box">
+<div class="step-num">2</div>
+<h4>個別Web会議でご説明</h4>
+<p>30分・無料</p>
+</div>
+<div class="step-box">
+<div class="step-num">3</div>
+<h4>社労士と助成金チェック</h4>
+<p>無料面談</p>
+</div>
+<div class="step-box">
+<div class="step-num">4</div>
+<h4>ご契約・受講開始</h4>
+<p>最短2週間で開始</p>
+</div>
+</div>
+</section>
+
+<!-- セクション10: ウェビナー申込み -->
+<section id="sec10">
+<h2><span class="section-num">10</span>ウェビナー申込みフォーム <span class="priority priority-high">新規追加・主CTA</span></h2>
+<p>LP全体で最も重要なコンバージョンポイント。</p>
+
+<div class="callout callout-warning">
+<strong>セクションIDの設定を忘れずに:</strong> このセクションの「編集」→「セクションID」に <code>webinar</code> と入力してください。ファーストビューのボタンからリンクするために必要です。
+</div>
+
+<h3>操作手順</h3>
+<div class="card">
+<ol>
+<li>「＋」→「フォーム」カテゴリからフォーム付きのテンプレートを選択</li>
+<li>セクションIDに <code>webinar</code> を設定</li>
+<li>背景色を薄い青に設定して目立たせる</li>
+</ol>
+</div>
+
+<h3>見出し</h3>
+<div class="copy-block">無料ウェビナー開催中
+「介護現場のAI活用最前線 - 記録業務を半分にする方法」</div>
+
+<h3>ウェビナー情報</h3>
+<div class="copy-block">日時: 毎月第2・第4木曜日 14:00〜15:00
+形式: Zoom Webinar（オンライン・参加無料）
+内容: 介護現場でのAI活用デモ、助成金の活用方法、質疑応答</div>
+
+<h3>フォーム項目（3項目以内に絞る）</h3>
+<div class="table-scroll">
+<table>
+<thead><tr><th>項目名</th><th>入力形式</th><th>必須/任意</th></tr></thead>
+<tbody>
+<tr><td>お名前</td><td>テキスト</td><td><span class="tag tag-negative">必須</span></td></tr>
+<tr><td>メールアドレス</td><td>メール</td><td><span class="tag tag-negative">必須</span></td></tr>
+<tr><td>法人名・施設名</td><td>テキスト</td><td><span class="tag tag-neutral">任意</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>フォーム設定</h3>
+<div class="card">
+<ol>
+<li>フォームブロックの「編集」をクリック</li>
+<li>「項目を追加」で上記3項目を設定</li>
+<li>「送信先メールアドレス」に自社のメールアドレスを入力</li>
+<li>「送信ボタンのテキスト」を以下に変更:</li>
+</ol>
+<div class="copy-block">ウェビナーに申し込む（無料）</div>
+<p><strong>送信完了メッセージ:</strong></p>
+<div class="copy-block">お申し込みありがとうございます。
+ご登録いただいたメールアドレスにウェビナーの詳細をお送りしました。</div>
+</div>
+</section>
+
+<!-- セクション11: 資料DL -->
+<section id="sec11">
+<h2><span class="section-num">11</span>資料ダウンロード <span class="priority priority-mid">新規追加・副CTA</span></h2>
+<p>ウェビナーに申し込むほどではないが興味がある人を取りこぼさない。</p>
+
+<div class="callout callout-warning">
+<strong>セクションIDの設定:</strong> <code>download</code> を設定してください。
+</div>
+
+<h3>見出し</h3>
+<div class="copy-block">介護事業所のためのAI研修ガイド【無料PDF】</div>
+
+<h3>説明文</h3>
+<div class="copy-block">以下の内容をまとめた資料を無料でダウンロードいただけます:
+・介護現場で使えるAI活用事例
+・カリキュラムの詳細
+・助成金を活用した導入ステップ
+・料金シミュレーション</div>
+
+<h3>フォーム項目</h3>
+<div class="table-scroll">
+<table>
+<thead><tr><th>項目名</th><th>入力形式</th><th>必須/任意</th></tr></thead>
+<tbody>
+<tr><td>お名前</td><td>テキスト</td><td><span class="tag tag-negative">必須</span></td></tr>
+<tr><td>メールアドレス</td><td>メール</td><td><span class="tag tag-negative">必須</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>送信ボタンテキスト</h3>
+<div class="copy-block">無料で資料をダウンロードする</div>
+</section>
+
+<!-- セクション12: よくある質問 -->
+<section id="sec12">
+<h2><span class="section-num">12</span>よくある質問 <span class="priority priority-high">新規追加</span></h2>
+<p>検討段階の不安・疑問を解消する。「＋」→「FAQ」や「アコーディオン」型テンプレートを選択。</p>
+
+<h3>見出し</h3>
+<div class="copy-block">よくあるご質問</div>
+
+<h3>Q&A（以下をそのままコピペ）</h3>
+
+<div class="qa-item">
+<div class="qa-q">Q1: AIの知識がまったくないスタッフでも受講できますか？</div>
+<div class="qa-a">はい。受講者の95%がAI未経験者です。PC操作ができる程度のスキルがあれば安心して受講いただけます。</div>
+</div>
+
+<div class="qa-item">
+<div class="qa-q">Q2: 助成金は本当に使えますか？手続きは難しくないですか？</div>
+<div class="qa-a">雇用保険に加入している社員が業務時間内に受講する場合、人材開発支援助成金の対象になります。提携社労士（TRIPORT社労士法人）が申請手続きを無料でサポートしますので、手続きの負担はほとんどありません。</div>
+</div>
+
+<div class="qa-item">
+<div class="qa-q">Q3: 1名だけでも受講できますか？</div>
+<div class="qa-a">法人プランは2名以上からお申込みいただけます。4名以上の場合、社労士サポートフィーを当社で負担いたします。</div>
+</div>
+
+<div class="qa-item">
+<div class="qa-q">Q4: 受講期間はどのくらいですか？</div>
+<div class="qa-a">1年間の受講期間です。カリキュラムは2ヶ月〜6ヶ月で設計し、残りの期間は実際の業務改善に伴走型でサポートします。</div>
+</div>
+
+<div class="qa-item">
+<div class="qa-q">Q5: どんなAIツールを学べますか？</div>
+<div class="qa-a">ChatGPT、Gemini、Copilotなど主要な生成AIツールに対応しています。社内環境に合わせて基礎学習の内容をカスタマイズします。</div>
+</div>
+
+<div class="qa-item">
+<div class="qa-q">Q6: 忙しくて受講の時間が取れるか心配です。</div>
+<div class="qa-a">動画講義は好きな時間に視聴可能です。月曜に課題が出され、翌週の火曜までに提出する形式なので、業務の合間に進められます。助成金の要件として全員で合計10時間の視聴が必要ですが、10名受講なら1名あたり1時間で要件クリアです。</div>
+</div>
+</section>
+
+<!-- トラッキング設置 -->
+<section id="tracking">
+<h2><span class="section-num">設定</span>トラッキングコードの設置</h2>
+
+<h3>Google Analytics 4（GA4）の設置</h3>
+
+<h4>GA4の準備</h4>
+<div class="card">
+<ol>
+<li><strong>analytics.google.com</strong> にアクセス（Googleアカウントが必要）</li>
+<li>「管理」→「プロパティを作成」</li>
+<li>プロパティ名: ホリエモンAI学校 介護校 LP</li>
+<li>「データストリーム」→「ウェブ」を選択</li>
+<li>ウェブサイトのURL: <code>fc.horiemon.ai/kaigo</code></li>
+<li><strong>「計測ID」（G-XXXXXXXXXX）をメモする</strong></li>
+</ol>
+</div>
+
+<h4>ペライチに設置する</h4>
+<div class="card">
+<ol>
+<li>ペライチの編集画面で上部の「ページ設定」をクリック</li>
+<li>「アクセス解析」または「外部サービス連携」を探す</li>
+<li>「Google Analytics」欄に計測ID（G-XXXXXXXXXX）を貼り付け</li>
+<li>保存</li>
+</ol>
+</div>
+
+<div class="callout callout-info">
+上記の設定欄がない場合は「ページ設定」→「HTMLタグ埋め込み」→「headタグ内」に以下のコードを貼り付けてください。
+</div>
+
+<div class="code-block">&lt;!-- Google tag (gtag.js) --&gt;
+&lt;script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"&gt;&lt;/script&gt;
+&lt;script&gt;
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+&lt;/script&gt;</div>
+<p class="note">※ G-XXXXXXXXXX は実際の計測IDに置き換えてください</p>
+
+<hr class="section-divider">
+
+<h3>Facebookピクセルの設置</h3>
+
+<h4>ピクセルの準備</h4>
+<div class="card">
+<ol>
+<li><strong>business.facebook.com</strong> にアクセス</li>
+<li>「イベントマネージャ」→「データソースを追加」→「ピクセル」</li>
+<li>ピクセル名: 介護校LP</li>
+<li><strong>ピクセルIDをメモする</strong></li>
+</ol>
+</div>
+
+<h4>ペライチに設置する</h4>
+<div class="card">
+<p>「ページ設定」→「HTMLタグ埋め込み」→「headタグ内」に以下を貼り付け:</p>
+</div>
+
+<div class="code-block">&lt;!-- Meta Pixel Code --&gt;
+&lt;script&gt;
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', 'XXXXXXXXXXXXXXXX');
+fbq('track', 'PageView');
+&lt;/script&gt;
+&lt;noscript&gt;&lt;img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=XXXXXXXXXXXXXXXX&amp;ev=PageView&amp;noscript=1"
+/&gt;&lt;/noscript&gt;
+&lt;!-- End Meta Pixel Code --&gt;</div>
+<p class="note">※ XXXXXXXXXXXXXXXX は実際のピクセルIDに置き換えてください</p>
+
+<div class="warn-box">
+<strong>ペライチのプランについて:</strong> HTML埋め込みは「レギュラープラン」以上で利用可能です。フリープラン・ライトプランでは使えません。
+</div>
+</section>
+
+<!-- 公開前チェックリスト -->
+<section id="checklist">
+<h2><span class="section-num">確認</span>公開前チェックリスト</h2>
+
+<h3>内容チェック</h3>
+<ul class="checklist-final">
+<li>ファーストビューが「介護事業所向け」と一目でわかる</li>
+<li>「助成金で実質月5,833円/人」が目立つ位置にある</li>
+<li>CTAボタン（ウェビナー申込み）がファーストビュー・中盤・下部の3箇所にある</li>
+<li>4冠バッジがファーストビュー直下にある</li>
+<li>料金表が掲載されている</li>
+<li>よくある質問が掲載されている</li>
+<li>フォームの項目が3つ以内に収まっている</li>
+<li>フォームの送信テスト済み（自分のメールで送信してみる）</li>
+<li>フォーム送信後の確認メッセージが表示される</li>
+</ul>
+
+<h3>表示チェック</h3>
+<ul class="checklist-final">
+<li>スマホ表示でテキストが読めること（文字が小さすぎないか）</li>
+<li>スマホ表示でCTAボタンが押しやすいサイズになっていること</li>
+<li>画像が正しく表示されていること</li>
+<li>ページの読み込みが遅くないこと（大きすぎる画像がないか）</li>
+<li>すべてのリンクが正しく動作すること</li>
+</ul>
+
+<h3>トラッキングチェック</h3>
+<ul class="checklist-final">
+<li>GA4の計測IDが正しく設置されていること</li>
+<li>Facebookピクセルが正しく設置されていること</li>
+<li>GA4のリアルタイムレポートで自分のアクセスが表示されること</li>
+</ul>
+
+<h3>公開手順</h3>
+<div class="card">
+<ol>
+<li>すべてのチェックが完了</li>
+<li>ペライチ上部の「公開」ボタンをクリック</li>
+<li>確認ダイアログで「公開する」をクリック</li>
+<li>公開後、実際のURLにアクセスして最終確認</li>
+</ol>
+</div>
+
+<hr class="section-divider">
+
+<h3>補足: ペライチのプラン別 利用可能機能</h3>
+<div class="table-scroll">
+<table>
+<thead><tr><th>機能</th><th>必要なプラン</th></tr></thead>
+<tbody>
+<tr><td>テキスト・画像編集</td><td>全プラン</td></tr>
+<tr><td>フォーム設置</td><td>ライトプラン以上</td></tr>
+<tr><td>HTMLタグ埋め込み（GA4・ピクセル）</td><td>レギュラープラン以上</td></tr>
+<tr><td>独自ドメイン</td><td>レギュラープラン以上</td></tr>
+<tr><td>A/Bテスト</td><td>ビジネスプラン</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="footer-note">
+ペライチLP改修 完全指示書 ／ ホリエモンAI学校 介護校 デジタルマーケティング計画
+</div>
+</section>
+
+</main>
+
+<!-- 上に戻るボタン -->
+<button class="back-to-top" id="backToTop" aria-label="上に戻る">↑</button>
+<script>
+const b=document.getElementById('backToTop');
+window.addEventListener('scroll',()=>{b.classList.toggle('visible',window.scrollY>400)});
+b.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+// Active nav
+const sections=document.querySelectorAll('section');
+const links=document.querySelectorAll('#sidebar a');
+window.addEventListener('scroll',()=>{
+let cur='';
+sections.forEach(s=>{if(window.scrollY>=s.offsetTop-100)cur=s.id});
+links.forEach(l=>{l.classList.toggle('active',l.getAttribute('href')==='#'+cur)});
+});
+</script>
+</body>
+</html>
