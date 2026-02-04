@@ -1,0 +1,368 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: ウェビナー専用LP - 介護校
+  screenshotPath: ../images/webinar-lp-preview.png
+-->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ content.html_title }}</title>
+{{ standard_header_includes }}
+<style>
+/* ========== Reset & Base ========== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --c-primary:#1e40af;
+  --c-primary-light:#dbeafe;
+  --c-accent:#f59e0b;
+  --c-accent-light:#fef3c7;
+  --c-text:#1a1a2e;
+  --c-text-sub:#555;
+  --c-bg:#f5f6fa;
+  --c-surface:#fff;
+  --c-border:#e2e8f0;
+  --c-success:#16a34a;
+  --c-danger:#dc2626;
+  --radius:8px;
+}
+html{scroll-behavior:smooth;font-size:15px}
+body{font-family:"Noto Sans JP","Hiragino Sans","Hiragino Kaku Gothic ProN",sans-serif;color:var(--c-text);background:var(--c-bg);line-height:1.7;margin:0;padding:0}
+
+/* ========== Header Bar ========== */
+.lp-header{background:#1e293b;padding:.6rem 2rem;display:flex;align-items:center;justify-content:space-between}
+.lp-header-logo{color:#fff;font-size:.85rem;font-weight:700;text-decoration:none}
+.lp-header-cta{background:var(--c-accent);color:#1e293b;padding:.4rem 1.2rem;border-radius:20px;font-size:.78rem;font-weight:700;text-decoration:none;transition:.15s}
+.lp-header-cta:hover{background:#d97706;color:#fff}
+
+/* ========== Hero ========== */
+.lp-hero{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);color:#fff;padding:4rem 2rem 3rem;text-align:center}
+.lp-hero-label{display:inline-block;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.4);color:var(--c-accent);padding:.3rem 1rem;border-radius:20px;font-size:.75rem;font-weight:700;margin-bottom:1.2rem;letter-spacing:.05em}
+.lp-hero h1{font-size:2rem;font-weight:800;line-height:1.4;margin-bottom:1rem;max-width:800px;margin-left:auto;margin-right:auto}
+.lp-hero h1 .highlight{color:var(--c-accent)}
+.lp-hero-sub{font-size:1rem;color:#94a3b8;margin-bottom:1.5rem;max-width:600px;margin-left:auto;margin-right:auto}
+.lp-hero-meta{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin-top:1.5rem}
+.lp-hero-meta-item{text-align:center}
+.lp-hero-meta-item .value{display:block;font-size:1.3rem;font-weight:800;color:var(--c-accent)}
+.lp-hero-meta-item .label{display:block;font-size:.75rem;color:#94a3b8}
+
+/* ========== Sections ========== */
+.lp-section{padding:3rem 2rem;max-width:900px;margin:0 auto}
+.lp-section:nth-child(even){background:#fff}
+.lp-section h2{font-size:1.4rem;font-weight:800;text-align:center;margin-bottom:2rem;position:relative;padding-bottom:.8rem}
+.lp-section h2::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:60px;height:3px;background:var(--c-primary);border-radius:2px}
+
+/* ========== Problem Section ========== */
+.problem-list{list-style:none;padding:0;max-width:700px;margin:0 auto}
+.problem-list li{padding:.8rem 1rem .8rem 3rem;margin:.5rem 0;background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius);position:relative;font-size:.9rem}
+.problem-list li::before{content:'✓';position:absolute;left:1rem;top:.8rem;width:24px;height:24px;background:var(--c-danger);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700}
+
+/* ========== Benefits ========== */
+.benefit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.benefit-card{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius);padding:1.5rem;text-align:center;transition:.15s}
+.benefit-card:hover{box-shadow:0 4px 12px rgba(0,0,0,.08);transform:translateY(-2px)}
+.benefit-icon{font-size:2rem;margin-bottom:.8rem}
+.benefit-card h3{font-size:.95rem;font-weight:700;margin-bottom:.5rem;color:var(--c-primary)}
+.benefit-card p{font-size:.82rem;color:var(--c-text-sub);margin:0}
+
+/* ========== Agenda ========== */
+.agenda-list{max-width:700px;margin:0 auto;padding:0;list-style:none;counter-reset:agenda}
+.agenda-item{counter-increment:agenda;padding:1rem 1rem 1rem 3.5rem;margin:.6rem 0;background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius);position:relative}
+.agenda-item::before{content:counter(agenda);position:absolute;left:1rem;top:1rem;width:28px;height:28px;background:var(--c-primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700}
+.agenda-item h4{font-size:.9rem;font-weight:700;margin:0 0 .2rem}
+.agenda-item p{font-size:.82rem;color:var(--c-text-sub);margin:0}
+
+/* ========== Speaker ========== */
+.speaker-section{display:flex;gap:2rem;align-items:center;max-width:700px;margin:0 auto;background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius);padding:1.5rem 2rem}
+.speaker-img{width:120px;height:120px;border-radius:50%;background:var(--c-primary-light);flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;color:var(--c-primary);font-weight:700;font-size:.8rem}
+.speaker-img img{width:100%;height:100%;object-fit:cover}
+.speaker-info h3{font-size:1rem;font-weight:700;margin:0 0 .3rem}
+.speaker-info .title{font-size:.82rem;color:var(--c-primary);font-weight:600;margin-bottom:.5rem}
+.speaker-info p{font-size:.82rem;color:var(--c-text-sub);margin:0}
+
+/* ========== Details Box ========== */
+.details-box{max-width:700px;margin:0 auto;background:var(--c-surface);border:2px solid var(--c-primary);border-radius:var(--radius);overflow:hidden}
+.details-header{background:var(--c-primary);color:#fff;padding:.8rem 1.5rem;font-weight:700;font-size:1rem}
+.details-body{padding:1.2rem 1.5rem}
+.details-row{display:flex;padding:.5rem 0;border-bottom:1px solid var(--c-border);font-size:.88rem}
+.details-row:last-child{border-bottom:none}
+.details-label{width:140px;font-weight:700;flex-shrink:0;color:var(--c-primary)}
+.details-value{flex:1}
+
+/* ========== Badges ========== */
+.badge-row{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin:1.5rem 0}
+.badge-item{background:var(--c-accent-light);border:1px solid rgba(245,158,11,.3);border-radius:var(--radius);padding:.8rem 1.2rem;text-align:center;min-width:140px}
+.badge-item .badge-value{display:block;font-size:1.2rem;font-weight:800;color:#92400e}
+.badge-item .badge-label{display:block;font-size:.72rem;color:#92400e;margin-top:.2rem}
+
+/* ========== Form Section ========== */
+.form-section{background:linear-gradient(135deg,#1e40af,#3b82f6);padding:3rem 2rem;text-align:center}
+.form-section h2{color:#fff;margin-bottom:.5rem}
+.form-section h2::after{background:#fff}
+.form-section .form-sub{color:rgba(255,255,255,.8);font-size:.9rem;margin-bottom:1.5rem}
+.form-wrapper{max-width:520px;margin:0 auto;background:#fff;border-radius:var(--radius);padding:2rem;box-shadow:0 8px 32px rgba(0,0,0,.15)}
+.form-note{color:rgba(255,255,255,.7);font-size:.75rem;margin-top:1rem}
+
+/* ========== Subsidy ========== */
+.subsidy-highlight{background:var(--c-accent-light);border:2px solid var(--c-accent);border-radius:var(--radius);padding:1.5rem 2rem;text-align:center;max-width:700px;margin:1.5rem auto 0}
+.subsidy-highlight .big{font-size:1.8rem;font-weight:800;color:#92400e}
+.subsidy-highlight p{font-size:.85rem;color:#92400e;margin:.3rem 0 0}
+
+/* ========== FAQ ========== */
+.faq-list{max-width:700px;margin:0 auto}
+.faq-item{margin:.6rem 0;border:1px solid var(--c-border);border-radius:var(--radius);overflow:hidden}
+.faq-q{padding:.8rem 1.2rem;font-weight:700;font-size:.9rem;background:var(--c-surface);cursor:pointer;position:relative;padding-left:2.5rem}
+.faq-q::before{content:'Q';position:absolute;left:.8rem;top:.8rem;width:24px;height:24px;background:var(--c-primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700}
+.faq-a{padding:.8rem 1.2rem .8rem 2.5rem;font-size:.85rem;color:var(--c-text-sub);background:#f8fafc;border-top:1px solid var(--c-border)}
+
+/* ========== Footer CTA ========== */
+.footer-cta{background:#1e293b;color:#fff;padding:2.5rem 2rem;text-align:center}
+.footer-cta h2{color:#fff;margin-bottom:1rem}
+.footer-cta h2::after{background:var(--c-accent)}
+.footer-cta p{color:#94a3b8;font-size:.9rem;margin-bottom:1.5rem}
+.cta-btn{display:inline-block;background:var(--c-accent);color:#1e293b;padding:.8rem 2.5rem;border-radius:6px;font-weight:700;font-size:1rem;text-decoration:none;transition:.15s}
+.cta-btn:hover{background:#d97706;color:#fff;transform:translateY(-2px);box-shadow:0 4px 12px rgba(245,158,11,.4)}
+
+/* ========== Footer ========== */
+.lp-footer{background:#0f172a;color:#64748b;padding:1.5rem 2rem;text-align:center;font-size:.75rem}
+.lp-footer a{color:#94a3b8;text-decoration:none}
+
+/* ========== Responsive ========== */
+@media(max-width:768px){
+  .lp-hero h1{font-size:1.4rem}
+  .lp-hero{padding:2.5rem 1.2rem 2rem}
+  .lp-section{padding:2rem 1.2rem}
+  .benefit-grid{grid-template-columns:1fr}
+  .speaker-section{flex-direction:column;text-align:center}
+  .details-row{flex-direction:column}
+  .details-label{width:auto;margin-bottom:.2rem}
+  .lp-hero-meta{gap:1rem}
+  .badge-row{flex-direction:column;align-items:center}
+  .form-wrapper{padding:1.2rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ヘッダーバー -->
+<header class="lp-header">
+  {% module "header_logo" path="@hubspot/linked_image", label="ロゴ",
+    link="https://fc.horiemon.ai/kaigo",
+    alt="ホリエモンAI学校 介護校",
+    override_inherited_src=true %}
+  <a href="#form" class="lp-header-cta">今すぐ申し込む（無料）</a>
+</header>
+
+<!-- ヒーローセクション -->
+<section class="lp-hero">
+  <div class="lp-hero-label">参加費無料 ／ オンライン開催 ／ 録画配信あり</div>
+  {% module "hero_title" path="@hubspot/rich_text", label="ヒーロータイトル",
+    html="<h1>介護現場の<span class='highlight'>AI活用</span>最前線<br>記録業務を半分にする方法</h1>" %}
+  {% module "hero_subtitle" path="@hubspot/rich_text", label="ヒーローサブタイトル",
+    html="<p class='lp-hero-sub'>介護事業所の経営者・施設長・管理者のための無料ウェビナー。<br>助成金を活用したAI研修の導入方法を具体的にご紹介します。</p>" %}
+  <div class="lp-hero-meta">
+    <div class="lp-hero-meta-item">
+      {% module "meta_date" path="@hubspot/text", label="開催日",
+        value="3/13（木）14:00〜" %}
+      <span class="label">開催日時</span>
+    </div>
+    <div class="lp-hero-meta-item">
+      <span class="value">60</span>
+      <span class="label">分（質疑応答含む）</span>
+    </div>
+    <div class="lp-hero-meta-item">
+      <span class="value">無料</span>
+      <span class="label">参加費</span>
+    </div>
+    <div class="lp-hero-meta-item">
+      <span class="value">Zoom</span>
+      <span class="label">オンライン開催</span>
+    </div>
+  </div>
+</section>
+
+<!-- こんなお悩みありませんか？ -->
+<section class="lp-section">
+  <h2>こんなお悩みありませんか？</h2>
+  {% module "problems" path="@hubspot/rich_text", label="お悩みリスト",
+    html="<ul class='problem-list'>
+      <li>慢性的な人手不足で、記録業務に毎日2時間以上かかっている</li>
+      <li>AIやDXに取り組みたいが、何から始めればいいかわからない</li>
+      <li>職員のITリテラシーが低く、新しいツールの導入が進まない</li>
+      <li>研修コストが高く、助成金があるらしいが申請方法がわからない</li>
+      <li>他の施設がAIを導入し始めていて、取り残される不安がある</li>
+    </ul>" %}
+</section>
+
+<!-- ウェビナーで得られること -->
+<section class="lp-section" style="background:#fff">
+  <h2>このウェビナーで得られること</h2>
+  <div class="benefit-grid">
+    {% module "benefit_1" path="@hubspot/rich_text", label="メリット1",
+      html="<div class='benefit-card'>
+        <div class='benefit-icon'>📋</div>
+        <h3>介護記録のAI活用法</h3>
+        <p>音声入力・AI要約で記録業務を50%削減する具体的な手順をデモ付きでご紹介</p>
+      </div>" %}
+    {% module "benefit_2" path="@hubspot/rich_text", label="メリット2",
+      html="<div class='benefit-card'>
+        <div class='benefit-icon'>💰</div>
+        <h3>助成金の活用方法</h3>
+        <p>人材開発支援助成金で受講料の最大75%OFF。申請手順と社労士サポートの流れを解説</p>
+      </div>" %}
+    {% module "benefit_3" path="@hubspot/rich_text", label="メリット3",
+      html="<div class='benefit-card'>
+        <div class='benefit-icon'>🏥</div>
+        <h3>介護施設の導入事例</h3>
+        <p>実際にAI研修を導入した介護事業所の成果と、現場職員の変化をご紹介</p>
+      </div>" %}
+  </div>
+</section>
+
+<!-- プログラム -->
+<section class="lp-section">
+  <h2>プログラム</h2>
+  {% module "agenda" path="@hubspot/rich_text", label="プログラム内容",
+    html="<ol class='agenda-list'>
+      <li class='agenda-item'>
+        <h4>介護業界のAI活用トレンド（10分）</h4>
+        <p>2026年の介護×AI最新動向。導入が進む施設と遅れる施設の差とは</p>
+      </li>
+      <li class='agenda-item'>
+        <h4>介護記録をAIで効率化 — 実演デモ（20分）</h4>
+        <p>ChatGPTを使った介護記録の作成・要約・ケアプラン作成を実際の画面でデモ</p>
+      </li>
+      <li class='agenda-item'>
+        <h4>助成金で実質75%OFF — 導入ステップ解説（15分）</h4>
+        <p>人材開発支援助成金の申請条件・手順・社労士サポートの流れを具体的に解説</p>
+      </li>
+      <li class='agenda-item'>
+        <h4>質疑応答（15分）</h4>
+        <p>参加者からのご質問にリアルタイムでお答えします</p>
+      </li>
+    </ol>" %}
+</section>
+
+<!-- 実績バッジ -->
+<section class="lp-section" style="background:#fff">
+  <h2>ホリエモンAI学校が選ばれる理由</h2>
+  <div class="badge-row">
+    <div class="badge-item">
+      <span class="badge-value">No.1 4冠</span>
+      <span class="badge-label">法人向け生成AI研修</span>
+    </div>
+    <div class="badge-item">
+      <span class="badge-value">240+</span>
+      <span class="badge-label">講座数</span>
+    </div>
+    <div class="badge-item">
+      <span class="badge-value">95%</span>
+      <span class="badge-label">受講者がAI未経験</span>
+    </div>
+    <div class="badge-item">
+      <span class="badge-value">75%OFF</span>
+      <span class="badge-label">助成金適用</span>
+    </div>
+  </div>
+  <div class="subsidy-highlight">
+    <div class="big">受講料 実質 月5,833円/人〜</div>
+    <p>年間31万円 → 助成金適用で実質7万円/人（月額換算 約5,833円）</p>
+  </div>
+</section>
+
+<!-- 講師紹介 -->
+<section class="lp-section">
+  <h2>講師紹介</h2>
+  <div class="speaker-section">
+    {% module "speaker_image" path="@hubspot/linked_image", label="講師写真",
+      alt="講師写真",
+      override_inherited_src=true,
+      img_class="speaker-img" %}
+    <div class="speaker-info">
+      {% module "speaker_info" path="@hubspot/rich_text", label="講師情報",
+        html="<h3>講師名をここに入力</h3>
+          <div class='title'>ホリエモンAI学校 介護校</div>
+          <p>講師のプロフィール・経歴をここに入力してください。介護業界での実績やAI活用の専門性をアピールする内容を記載します。</p>" %}
+    </div>
+  </div>
+</section>
+
+<!-- 開催概要 -->
+<section class="lp-section" style="background:#fff">
+  <h2>開催概要</h2>
+  <div class="details-box">
+    <div class="details-header">ウェビナー詳細</div>
+    <div class="details-body">
+      {% module "event_details" path="@hubspot/rich_text", label="開催概要",
+        html="<div class='details-row'><span class='details-label'>テーマ</span><span class='details-value'>介護現場のAI活用最前線 - 記録業務を半分にする方法</span></div>
+        <div class='details-row'><span class='details-label'>日時</span><span class='details-value'>2026年3月13日（木）14:00〜15:00</span></div>
+        <div class='details-row'><span class='details-label'>形式</span><span class='details-value'>Zoom ウェビナー（オンライン）</span></div>
+        <div class='details-row'><span class='details-label'>参加費</span><span class='details-value'><strong>無料</strong></span></div>
+        <div class='details-row'><span class='details-label'>対象</span><span class='details-value'>介護事業所の経営者・施設長・管理者・DX推進担当の方</span></div>
+        <div class='details-row'><span class='details-label'>定員</span><span class='details-value'>100名（先着順）</span></div>
+        <div class='details-row'><span class='details-label'>参加方法</span><span class='details-value'>お申し込み後、開催前日にZoomリンクをメールでお送りします</span></div>
+        <div class='details-row'><span class='details-label'>録画</span><span class='details-value'>参加者全員に録画を配信します（当日参加できない方もお申し込みください）</span></div>" %}
+    </div>
+  </div>
+</section>
+
+<!-- 申込みフォーム -->
+<section class="form-section" id="form">
+  <h2>無料ウェビナーに申し込む</h2>
+  <p class="form-sub">以下のフォームに入力して、今すぐお席を確保してください</p>
+  <div class="form-wrapper">
+    {% module "webinar_form" path="@hubspot/form", label="ウェビナー申込みフォーム",
+      form={
+        "response_type": "inline",
+        "message": "お申し込みありがとうございます。ご登録いただいたメールアドレスに詳細をお送りしました。"
+      } %}
+  </div>
+  <p class="form-note">※ 個人情報はプライバシーポリシーに基づき適切に管理いたします</p>
+</section>
+
+<!-- よくある質問 -->
+<section class="lp-section">
+  <h2>よくある質問</h2>
+  <div class="faq-list">
+    {% module "faq_content" path="@hubspot/rich_text", label="FAQ",
+      html="<div class='faq-item'>
+        <div class='faq-q'>参加費は本当に無料ですか？</div>
+        <div class='faq-a'>はい、完全無料です。ウェビナー内での営業行為もありません。AI活用のヒントをお持ち帰りいただくことが目的です。</div>
+      </div>
+      <div class='faq-item'>
+        <div class='faq-q'>当日参加できない場合はどうなりますか？</div>
+        <div class='faq-a'>お申し込みいただいた方全員に録画を配信いたします。当日参加できなくてもお気軽にお申し込みください。</div>
+      </div>
+      <div class='faq-item'>
+        <div class='faq-q'>ITやAIの知識がなくても理解できますか？</div>
+        <div class='faq-a'>はい。受講者の95%がAI未経験者です。専門用語を使わず、介護現場に即した具体例で解説しますのでご安心ください。</div>
+      </div>
+      <div class='faq-item'>
+        <div class='faq-q'>助成金は本当に使えますか？</div>
+        <div class='faq-a'>人材開発支援助成金（事業展開等リスキリング支援コース）の対象です。申請条件や手順はウェビナー内で詳しく解説します。社労士によるサポートも無料でご案内しています。</div>
+      </div>
+      <div class='faq-item'>
+        <div class='faq-q'>スマートフォンからでも参加できますか？</div>
+        <div class='faq-a'>はい、Zoomアプリをインストールしていただければスマートフォンからもご参加いただけます。</div>
+      </div>" %}
+  </div>
+</section>
+
+<!-- フッターCTA -->
+<section class="footer-cta">
+  <h2>介護現場のAI活用を始めませんか？</h2>
+  <p>参加無料・オンライン開催・録画配信あり。お気軽にお申し込みください。</p>
+  <a href="#form" class="cta-btn">無料ウェビナーに申し込む →</a>
+</section>
+
+<!-- フッター -->
+<footer class="lp-footer">
+  {% module "footer_text" path="@hubspot/rich_text", label="フッター",
+    html="<p>© 2026 ホリエモンAI学校 介護校 ｜ <a href='https://fc.horiemon.ai/kaigo'>ホーム</a> ｜ <a href='#'>プライバシーポリシー</a></p>" %}
+</footer>
+
+{{ standard_footer_includes }}
+</body>
+</html>
