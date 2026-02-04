@@ -22,7 +22,6 @@
   --purple:#7928CA;
   --blue:#0070F3;
   --dark:#1a202c;
-  --gold:#D4AF37;
   --bg-gray:#f5f7fa;
   --text:#333;
   --text-sub:#4a5568;
@@ -34,30 +33,27 @@ body{font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Helvetica Neue",san
 
 /* ========== Utility ========== */
 .highlight{background:linear-gradient(transparent 75%,#ffe4f1 75%);padding:0 .15em;font-weight:900}
-.container{max-width:880px;margin:0 auto;padding:0 20px}
-.text-center{text-align:center}
 
 /* ========== Header ========== */
-.lp-header{background:var(--dark);padding:.8rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,.2)}
+.lp-header{background:rgba(26,32,44,.95);padding:.8rem 2rem;display:flex;align-items:center;justify-content:space-between;position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(8px);box-shadow:0 2px 10px rgba(0,0,0,.2)}
 .lp-header-logo{color:#fff;font-size:.9rem;font-weight:700;text-decoration:none;letter-spacing:.05em}
 .lp-header-cta{background:var(--gradient);color:#fff;padding:.5rem 1.5rem;border-radius:50px;font-size:.8rem;font-weight:700;text-decoration:none;transition:.2s;box-shadow:0 4px 15px rgba(121,40,202,.3)}
 .lp-header-cta:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(121,40,202,.4)}
 
-/* ========== Hero ========== */
-.lp-hero{background:linear-gradient(135deg,#0f0c29 0%,#302b63 50%,#24243e 100%);color:#fff;padding:5rem 2rem 4rem;text-align:center;position:relative;overflow:hidden}
-.lp-hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 30% 50%,rgba(255,0,128,.08) 0%,transparent 50%);pointer-events:none}
-.lp-hero-badge{display:inline-block;background:rgba(255,0,128,.15);border:1px solid rgba(255,0,128,.4);color:var(--accent);padding:.4rem 1.2rem;border-radius:50px;font-size:.78rem;font-weight:700;margin-bottom:1.5rem;letter-spacing:.08em}
-.lp-hero h1{font-size:2.4rem;font-weight:900;line-height:1.5;margin-bottom:1.2rem;letter-spacing:.03em}
-.lp-hero h1 .hero-accent{color:var(--accent)}
-.lp-hero-sub{font-size:1.05rem;color:rgba(255,255,255,.7);margin-bottom:2rem;max-width:640px;margin-left:auto;margin-right:auto;line-height:1.8}
-.hero-meta{display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap;margin:2rem 0}
-.hero-meta-item{text-align:center;min-width:100px}
-.hero-meta-item .val{display:block;font-size:1.6rem;font-weight:900;color:var(--accent)}
-.hero-meta-item .lbl{display:block;font-size:.72rem;color:rgba(255,255,255,.6);margin-top:.2rem}
-.hero-cta{margin-top:2rem}
-.hero-cta .cta-btn{display:inline-block;background:var(--gradient);color:#fff;padding:20px 50px;border-radius:50px;font-size:1.2rem;font-weight:700;text-decoration:none;transition:.25s;box-shadow:0 10px 25px rgba(121,40,202,.3);letter-spacing:.05em}
+/* ========== Hero — Full-screen BG image + bottom-right text ========== */
+.lp-hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;justify-content:flex-end;overflow:hidden;padding:0}
+.lp-hero-bg{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.lp-hero::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.35);z-index:1}
+.lp-hero-content{position:relative;z-index:2;padding:3rem 4rem;max-width:680px;text-align:left}
+.lp-hero-content h1{font-size:2.2rem;font-weight:900;color:#fff;line-height:1.6;letter-spacing:.03em;margin-bottom:1rem;text-shadow:0 2px 20px rgba(0,0,0,.4)}
+.lp-hero-content h1 .hero-accent{color:var(--accent)}
+.lp-hero-sub{font-size:1rem;color:rgba(255,255,255,.85);line-height:1.8;margin-bottom:1.5rem;text-shadow:0 1px 8px rgba(0,0,0,.3)}
+.hero-cta{margin-top:1.5rem}
+.hero-cta .cta-btn{display:inline-block;background:var(--gradient);color:#fff;padding:18px 45px;border-radius:50px;font-size:1.15rem;font-weight:700;text-decoration:none;transition:.25s;box-shadow:0 10px 25px rgba(121,40,202,.3);letter-spacing:.05em}
 .hero-cta .cta-btn:hover{transform:translateY(-3px);box-shadow:0 14px 35px rgba(121,40,202,.4)}
-.hero-cta .cta-note{display:block;color:rgba(255,255,255,.5);font-size:.75rem;margin-top:.8rem}
+.hero-cta .cta-note{display:block;color:rgba(255,255,255,.6);font-size:.75rem;margin-top:.8rem}
+.hero-badge-row{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.2rem}
+.hero-badge-item{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;padding:.3rem .8rem;border-radius:50px;font-size:.72rem;font-weight:700;backdrop-filter:blur(4px)}
 
 /* ========== Section Common ========== */
 .lp-section{padding:80px 20px}
@@ -65,10 +61,8 @@ body{font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Helvetica Neue",san
 .lp-section.bg-gray{background:var(--bg-gray)}
 .lp-section.bg-dark{background:var(--dark);color:#fff}
 .section-title{font-size:2.2rem;font-weight:900;text-align:center;margin-bottom:60px;letter-spacing:.05em;line-height:1.4}
-.section-title .highlight{background:linear-gradient(transparent 75%,#ffe4f1 75%)}
 .bg-dark .section-title{color:#fff}
 .bg-dark .section-title .highlight{background:linear-gradient(transparent 75%,rgba(255,0,128,.3) 75%)}
-.section-lead{text-align:center;font-size:1rem;color:var(--text-sub);margin-top:-40px;margin-bottom:50px;line-height:1.8}
 
 /* ========== CTA Button (inline) ========== */
 .cta-block{text-align:center;padding:40px 20px}
@@ -77,12 +71,15 @@ body{font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Helvetica Neue",san
 .cta-block .cta-note{display:block;color:var(--text-sub);font-size:.78rem;margin-top:.8rem}
 .bg-dark .cta-block .cta-note{color:rgba(255,255,255,.5)}
 
-/* ========== Problem / Mindset (dark) ========== */
-.mindset-text{max-width:700px;margin:0 auto;font-size:1.05rem;line-height:2;color:rgba(255,255,255,.85);text-align:center}
+/* ========== Mindset (dark) ========== */
+.mindset-section{padding:80px 20px}
+.mindset-title{font-size:1.8rem;font-weight:900;color:#fff;text-align:center;margin-bottom:40px;line-height:1.5}
+.mindset-title .m-accent{color:var(--accent)}
+.mindset-text{max-width:700px;margin:0 auto;font-size:1.05rem;line-height:2.2;color:rgba(255,255,255,.85);text-align:center}
 .mindset-text strong{color:var(--accent);font-weight:700}
 
 /* ========== Pain Points (3 icons) ========== */
-.pain-grid{display:flex;justify-content:center;gap:30px;flex-wrap:wrap}
+.pain-grid{display:flex;justify-content:center;gap:30px;flex-wrap:wrap;max-width:960px;margin:0 auto}
 .pain-card{width:280px;text-align:center;padding:1.5rem}
 .pain-icon{width:90px;height:90px;background:#f0f7ff;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.2rem;font-size:2.2rem}
 .pain-card h3{font-size:1.05rem;font-weight:700;margin-bottom:.6rem;color:var(--dark)}
@@ -90,7 +87,7 @@ body{font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Helvetica Neue",san
 
 /* ========== Speaker / Authority ========== */
 .speaker-wrap{display:flex;gap:2.5rem;align-items:center;max-width:750px;margin:0 auto;background:#fff;border-radius:var(--radius);padding:2rem 2.5rem;box-shadow:0 4px 20px rgba(0,0,0,.06)}
-.speaker-photo{width:160px;height:160px;border-radius:50%;overflow:hidden;flex-shrink:0;background:var(--bg-gray);display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var(--text-sub)}
+.speaker-photo{width:160px;height:160px;border-radius:50%;overflow:hidden;flex-shrink:0;background:var(--bg-gray)}
 .speaker-photo img{width:100%;height:100%;object-fit:cover}
 .speaker-detail h3{font-size:1.2rem;font-weight:900;margin:0 0 .3rem}
 .speaker-detail .role{font-size:.85rem;color:var(--accent);font-weight:700;margin-bottom:.8rem}
@@ -102,7 +99,7 @@ body{font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Helvetica Neue",san
 .ba-wrap{max-width:750px;margin:0 auto}
 .ba-row{display:flex;align-items:stretch;gap:0;margin-bottom:2rem;border-radius:var(--radius);overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.06)}
 .ba-before,.ba-after{flex:1;padding:1.5rem 1.8rem}
-.ba-before{background:#fff5f5;border-right:none}
+.ba-before{background:#fff5f5}
 .ba-after{background:#f0fff4}
 .ba-arrow{display:flex;align-items:center;justify-content:center;width:60px;background:linear-gradient(180deg,#fff5f5,#f0fff4);font-size:1.5rem;font-weight:900;color:var(--accent);flex-shrink:0}
 .ba-label{font-size:.72rem;font-weight:700;letter-spacing:.1em;margin-bottom:.5rem;text-transform:uppercase}
@@ -124,7 +121,7 @@ body{font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Helvetica Neue",san
 
 /* ========== Testimonials ========== */
 .testimonial-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;max-width:880px;margin:0 auto}
-.testimonial-card{background:#f7f9fc;border-radius:var(--radius);padding:1.5rem 1.5rem 1.5rem 1.8rem;border-left:4px solid var(--blue);position:relative}
+.testimonial-card{background:#f7f9fc;border-radius:var(--radius);padding:1.5rem 1.5rem 1.5rem 1.8rem;border-left:4px solid var(--blue)}
 .testimonial-tag{display:inline-block;background:var(--blue);color:#fff;padding:.15rem .6rem;border-radius:4px;font-size:.7rem;font-weight:700;margin-bottom:.8rem}
 .testimonial-card blockquote{font-size:.88rem;color:var(--text);line-height:1.8;margin:0;font-style:normal}
 .testimonial-card .t-author{margin-top:.8rem;font-size:.78rem;color:var(--text-sub);font-weight:700}
@@ -156,7 +153,7 @@ body{font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Helvetica Neue",san
 
 /* ========== Footer CTA ========== */
 .footer-cta{background:var(--dark);color:#fff;padding:60px 20px;text-align:center}
-.footer-cta h2{font-size:1.8rem;font-weight:900;margin-bottom:.8rem}
+.footer-cta h2{font-size:1.8rem;font-weight:900;margin-bottom:.8rem;line-height:1.5}
 .footer-cta p{color:rgba(255,255,255,.6);font-size:.95rem;margin-bottom:2rem}
 
 /* ========== Footer ========== */
@@ -166,13 +163,13 @@ body{font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Helvetica Neue",san
 
 /* ========== Responsive ========== */
 @media(max-width:768px){
-  .lp-hero{padding:3rem 1.2rem 2.5rem}
-  .lp-hero h1{font-size:1.6rem}
-  .hero-meta{gap:1.2rem}
-  .hero-meta-item .val{font-size:1.2rem}
+  .lp-hero{min-height:85vh}
+  .lp-hero-content{padding:2rem 1.5rem;max-width:100%}
+  .lp-hero-content h1{font-size:1.5rem}
   .lp-section{padding:50px 15px}
+  .mindset-section{padding:50px 15px}
   .section-title{font-size:1.5rem;margin-bottom:40px}
-  .section-lead{margin-top:-25px;margin-bottom:35px}
+  .mindset-title{font-size:1.3rem}
   .pain-grid{flex-direction:column;align-items:center}
   .pain-card{width:100%;max-width:340px}
   .speaker-wrap{flex-direction:column;text-align:center;padding:1.5rem}
@@ -192,83 +189,71 @@ body{font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Helvetica Neue",san
 </head>
 <body>
 
-<!-- ========== ヘッダー ========== -->
+<!-- ========== ヘッダー（固定） ========== -->
 <header class="lp-header">
   <a href="https://fc.horiemon.ai/kaigo" class="lp-header-logo">ホリエモンAI学校 介護校</a>
   <a href="#form" class="lp-header-cta">無料で参加する &gt;</a>
 </header>
 
-<!-- ========== ヒーロー ========== -->
+<!-- ========== ヒーロー（フルスクリーン背景画像 + 右下テキスト） ========== -->
 <section class="lp-hero">
-  <div class="lp-hero-badge">参加費無料 ／ オンライン開催 ／ 録画配信あり</div>
-  {% module "hero_title" path="@hubspot/rich_text", label="ヒーロータイトル",
-    html="<h1>介護現場の<span class='hero-accent'>AI活用</span>最前線<br>— 記録業務を<span class='hero-accent'>半分</span>にする方法</h1>" %}
-  {% module "hero_subtitle" path="@hubspot/rich_text", label="ヒーローサブタイトル",
-    html="<p class='lp-hero-sub'>介護事業所の経営者・施設長・管理者のための無料ウェビナー。<br>助成金を活用したAI研修の導入方法を、実演デモ付きでご紹介します。</p>" %}
-  <div class="hero-meta">
-    <div class="hero-meta-item">
-      <span class="val">3/13（木）</span>
-      <span class="lbl">開催日</span>
+  {% module "hero_bg_image" path="@hubspot/image", label="ヒーロー背景画像",
+    alt="介護現場のイメージ",
+    img_class="lp-hero-bg",
+    override_inherited_src=true %}
+  <div class="lp-hero-content">
+    <div class="hero-badge-row">
+      <span class="hero-badge-item">参加費無料</span>
+      <span class="hero-badge-item">Zoom開催</span>
+      <span class="hero-badge-item">録画配信あり</span>
     </div>
-    <div class="hero-meta-item">
-      <span class="val">14:00〜</span>
-      <span class="lbl">開始時刻</span>
+    {% module "hero_title" path="@hubspot/rich_text", label="ヒーロータイトル",
+      html="<h1>その介護記録、<span class='hero-accent'>まだ手書き</span>ですか？<br>介護業界の「明日から使える」<br><span class='hero-accent'>AI活用</span>の全手法</h1>" %}
+    {% module "hero_subtitle" path="@hubspot/rich_text", label="ヒーローサブテキスト",
+      html="<p class='lp-hero-sub'>法人向けAI研修No.1が実践している<br>「現場の生事例」を包み隠さず完全公開します</p>" %}
+    <div class="hero-cta">
+      <a href="#form" class="cta-btn">無料でセミナーに参加する &gt;</a>
+      <span class="cta-note">※新規開催につき先着100社限定</span>
     </div>
-    <div class="hero-meta-item">
-      <span class="val">60分</span>
-      <span class="lbl">所要時間</span>
-    </div>
-    <div class="hero-meta-item">
-      <span class="val">無料</span>
-      <span class="lbl">参加費</span>
-    </div>
-    <div class="hero-meta-item">
-      <span class="val">Zoom</span>
-      <span class="lbl">オンライン</span>
-    </div>
-  </div>
-  <div class="hero-cta">
-    <a href="#form" class="cta-btn">無料でセミナーに参加する &gt;</a>
-    <span class="cta-note">※ 先着100名限定・録画配信あり</span>
   </div>
 </section>
 
-<!-- ========== 問題提起（ダーク） ========== -->
-<section class="lp-section bg-dark">
-  <div class="section-title">今、<span class="highlight">介護業界</span>に何が起きているか</div>
-  {% module "mindset_text" path="@hubspot/rich_text", label="問題提起テキスト",
+<!-- ========== マインドセット（ダーク） ========== -->
+<section class="lp-section bg-dark mindset-section">
+  <div class="mindset-title">AIは「<span class="m-accent">魔法の杖</span>」ではありません。<br>介護現場の「<span class="m-accent">即戦力</span>」です。</div>
+  {% module "mindset_text" path="@hubspot/rich_text", label="マインドセットテキスト",
     html="<div class='mindset-text'>
-      <p>2025年、介護業界の人手不足は<strong>約32万人</strong>に達しました。<br>
-      一方で、AIを業務に活用している介護事業所は<strong>わずか3%未満</strong>。</p>
-      <p style='margin-top:1.5rem'>記録業務に1日2時間、シフト作成に月8時間——<br>
-      この時間を<strong>AIで半分にできる</strong>としたら、あなたの施設は何が変わりますか？</p>
+      <p>「AIを入れれば何でも解決する」——そんな話ではありません。</p>
+      <p style='margin-top:1.2rem'>介護記録の作成に<strong>1日2時間</strong>。シフト調整に<strong>月8時間</strong>。家族への連絡文書に<strong>1件30分</strong>。</p>
+      <p style='margin-top:1.2rem'>この「毎日の当たり前」を、AIで<strong>半分にできる</strong>。<br>それだけで、年間<strong>約480時間</strong>の余裕が生まれます。</p>
+      <p style='margin-top:1.2rem'>その時間を、利用者と向き合う時間に変えませんか。</p>
     </div>" %}
 </section>
 
 <!-- ========== 痛点（3カラム） ========== -->
 <section class="lp-section bg-white">
-  <div class="section-title">こんな<span class="highlight">お悩み</span>ありませんか？</div>
+  <div class="section-title">こんな<span class="highlight">お悩み</span>、ありませんか？</div>
   {% module "pain_points" path="@hubspot/rich_text", label="お悩み3項目",
     html="<div class='pain-grid'>
       <div class='pain-card'>
         <div class='pain-icon'>📝</div>
-        <h3>記録業務に追われている</h3>
-        <p>手書き→PC転記の二度手間。残業の原因になり、職員の離職リスクにもつながっている</p>
+        <h3>記録が終わらない。残業が終わらない。</h3>
+        <p>手書きメモ→PC転記→確認→修正。1人あたり30分以上。これが毎日、全職員に発生している</p>
       </div>
       <div class='pain-card'>
-        <div class='pain-icon'>🤔</div>
-        <h3>AIの始め方がわからない</h3>
-        <p>「AIが便利らしい」とは聞くが、介護現場で何にどう使えるのか具体的なイメージが湧かない</p>
+        <div class='pain-icon'>🤷</div>
+        <h3>「AI」と聞いても、何から始めればいいかわからない</h3>
+        <p>ChatGPTの名前は知っている。でも介護現場で具体的に何に使えるのか、イメージが湧かない</p>
       </div>
       <div class='pain-card'>
-        <div class='pain-icon'>💸</div>
-        <h3>研修コストが心配</h3>
-        <p>AI研修は高額なイメージ。助成金が使えるらしいが、申請の仕方も対象条件もわからない</p>
+        <div class='pain-icon'>💰</div>
+        <h3>研修を入れたいが、31万円/人は高い</h3>
+        <p>助成金で75%OFFになるらしい。でも申請方法も対象条件もわからない。社労士って何をしてくれるの？</p>
       </div>
     </div>" %}
 </section>
 
-<!-- ========== CTA（中間） ========== -->
+<!-- ========== CTA（中間①） ========== -->
 <div class="cta-block" style="background:var(--bg-gray)">
   <a href="#form" class="cta-btn">無料でセミナーに参加する &gt;</a>
   <span class="cta-note">お申し込みは30秒で完了します</span>
@@ -284,22 +269,22 @@ body{font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Helvetica Neue",san
           <div class='ba-label'>BEFORE</div>
           <h4>介護記録の作成</h4>
           <div class='ba-time'>1日 2時間</div>
-          <p>手書きメモ→PCに転記→確認→修正。1人あたり30分以上かかり、残業の原因に</p>
+          <p>手書きメモ→PCに転記→確認→修正。職員ごとに書き方がバラバラで、読み返しても意味が取れない</p>
         </div>
         <div class='ba-arrow'>→</div>
         <div class='ba-after'>
           <div class='ba-label'>AFTER</div>
           <h4>AIで介護記録を作成</h4>
           <div class='ba-time'>1日 45分</div>
-          <p>音声入力→AIが文章を自動生成→確認・微修正のみ。記録の質も向上</p>
+          <p>音声で話すだけ→AIが文章を自動生成→確認して微修正。記録の質も統一される</p>
         </div>
       </div>
       <div class='ba-row'>
         <div class='ba-before'>
           <div class='ba-label'>BEFORE</div>
-          <h4>ケアプラン作成</h4>
+          <h4>ケアプラン原案の作成</h4>
           <div class='ba-time'>1件 3時間</div>
-          <p>アセスメント→課題分析→目標設定→サービス内容の記載。すべて手作業で属人的</p>
+          <p>アセスメント→課題分析→目標設定→サービス内容、すべて手作業。ベテランに属人化しがち</p>
         </div>
         <div class='ba-arrow'>→</div>
         <div class='ba-after'>
@@ -307,6 +292,21 @@ body{font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Helvetica Neue",san
           <h4>AIがケアプラン原案を生成</h4>
           <div class='ba-time'>1件 1時間</div>
           <p>AIがアセスメント情報から原案を生成。ケアマネは確認・調整に集中できる</p>
+        </div>
+      </div>
+      <div class='ba-row'>
+        <div class='ba-before'>
+          <div class='ba-label'>BEFORE</div>
+          <h4>家族への状況報告文書</h4>
+          <div class='ba-time'>1件 30分</div>
+          <p>何を書けばいいか悩む。敬語の使い方に迷う。1件ずつ手打ち</p>
+        </div>
+        <div class='ba-arrow'>→</div>
+        <div class='ba-after'>
+          <div class='ba-label'>AFTER</div>
+          <h4>AIで報告文書を作成</h4>
+          <div class='ba-time'>1件 5分</div>
+          <p>要点を箇条書きで入力→AIが丁寧な文章に変換。敬語も自然</p>
         </div>
       </div>
     </div>" %}
@@ -319,18 +319,18 @@ body{font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Helvetica Neue",san
     html="<div class='benefit-grid'>
       <div class='benefit-card'>
         <div class='benefit-num'>01</div>
-        <h3>介護記録のAI活用法を実演で理解</h3>
-        <p>ChatGPTを使った介護記録・申し送り・ケアプランの作成を、実際の画面を見ながらデモ。「うちでもできそう」と実感できます</p>
+        <h3>「うちでもできる」と確信できる実演デモ</h3>
+        <p>ChatGPTで介護記録・申し送り・ケアプランを作成する画面をリアルタイムでお見せします。専門知識ゼロの職員でも使えることを、あなたの目で確認してください</p>
       </div>
       <div class='benefit-card'>
         <div class='benefit-num'>02</div>
-        <h3>助成金で75%OFFにする具体的手順</h3>
-        <p>人材開発支援助成金の申請条件・対象範囲・社労士サポートの流れを解説。実質月5,833円/人で導入する方法がわかります</p>
+        <h3>助成金で75%OFFにする、具体的な3ステップ</h3>
+        <p>人材開発支援助成金の申請条件・手順・社労士サポートの流れを解説。31万円→実質7万円にする方法がわかります。「うちの施設は対象？」もその場でお答えします</p>
       </div>
       <div class='benefit-card'>
         <div class='benefit-num'>03</div>
         <h3>明日から始められるアクションプラン</h3>
-        <p>ウェビナー終了後すぐに始められる「3ステップ導入プラン」をお渡し。まず何からやればいいか迷いません</p>
+        <p>ウェビナー終了後、参加者全員に「3ステップ導入プラン」をお渡しします。まず何からやるか——もう迷いません</p>
       </div>
     </div>" %}
 </section>
@@ -353,6 +353,7 @@ body{font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Helvetica Neue",san
             <span class='speaker-badge'>法人向けAI研修 No.1 4冠</span>
             <span class='speaker-badge'>240講座以上</span>
             <span class='speaker-badge'>堀江貴文プロデュース</span>
+            <span class='speaker-badge'>受講者の95%がAI未経験から</span>
           </div>" %}
     </div>
   </div>
@@ -365,26 +366,26 @@ body{font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Helvetica Neue",san
     html="<div class='testimonial-grid'>
       <div class='testimonial-card'>
         <span class='testimonial-tag'>特養 施設長</span>
-        <blockquote>「AIと聞いて難しそうだと思っていましたが、介護記録の実演を見て『これならうちの職員でもできる』と確信しました。助成金の仕組みも初めて知りました。」</blockquote>
+        <blockquote>「正直、AIと聞いて"うちの職員には無理だろう"と思っていました。でも実演を見て考えが変わりました。音声で話すだけで記録ができるなら、60代のベテラン職員でも使えます。参加してよかった。」</blockquote>
         <div class='t-author'>— 東京都 特別養護老人ホーム 施設長</div>
       </div>
       <div class='testimonial-card'>
         <span class='testimonial-tag'>訪問介護 管理者</span>
-        <blockquote>「訪問先での記録に毎日苦労していたので、音声入力→AI文章生成のデモは目からウロコでした。すぐに無料相談を申し込みました。」</blockquote>
+        <blockquote>「訪問先から戻って記録を書くのが一番の苦痛でした。移動中に音声メモ→AIで文章化のデモを見た瞬間、"これだ"と。ウェビナー翌日に無料相談を申し込みました。」</blockquote>
         <div class='t-author'>— 大阪府 訪問介護事業所 管理者</div>
       </div>
       <div class='testimonial-card'>
         <span class='testimonial-tag'>社会福祉法人 理事</span>
-        <blockquote>「法人全体で50名の受講を検討しています。助成金で実質負担が大幅に下がることがわかり、理事会での承認も通りやすくなりました。」</blockquote>
+        <blockquote>「法人全体で50名の受講を検討しています。31万円/人だと1,550万円ですが、助成金で実質387万円。理事会で"この投資対効果なら"と一発で承認が通りました。」</blockquote>
         <div class='t-author'>— 埼玉県 社会福祉法人 理事</div>
       </div>
     </div>" %}
 </section>
 
-<!-- ========== CTA（中間） ========== -->
+<!-- ========== CTA（中間②） ========== -->
 <div class="cta-block" style="background:#fff">
   <a href="#form" class="cta-btn">無料でセミナーに参加する &gt;</a>
-  <span class="cta-note">先着100名限定・お申し込みは30秒で完了</span>
+  <span class="cta-note">先着100社限定・お申し込みは30秒で完了</span>
 </div>
 
 <!-- ========== プログラム ========== -->
@@ -395,10 +396,10 @@ body{font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Helvetica Neue",san
       <div class='details-box'>
         <div class='details-header'>当日のプログラム（約60分）</div>
         <div class='details-body'>
-          <div class='details-row'><span class='details-label'>14:00〜14:10</span><span class='details-value'><strong>介護業界のAI活用トレンド</strong><br>2026年の最新動向。導入が進む施設と遅れる施設の差</span></div>
-          <div class='details-row'><span class='details-label'>14:10〜14:30</span><span class='details-value'><strong>介護記録をAIで効率化 — 実演デモ</strong><br>ChatGPTで介護記録・ケアプランを作成する実際の画面をお見せします</span></div>
-          <div class='details-row'><span class='details-label'>14:30〜14:45</span><span class='details-value'><strong>助成金で75%OFF — 導入ステップ解説</strong><br>申請条件・手順・社労士サポートの流れを具体的に解説</span></div>
-          <div class='details-row'><span class='details-label'>14:45〜15:00</span><span class='details-value'><strong>質疑応答</strong><br>参加者からのご質問にリアルタイムでお答えします</span></div>
+          <div class='details-row'><span class='details-label'>14:00〜14:10</span><span class='details-value'><strong>介護×AIの最新動向</strong><br>2026年、導入が進む施設と遅れる施設の決定的な差</span></div>
+          <div class='details-row'><span class='details-label'>14:10〜14:30</span><span class='details-value'><strong>介護記録をAIで作成 — 実演デモ</strong><br>ChatGPTで介護記録・ケアプランを作る画面をリアルタイムでお見せします</span></div>
+          <div class='details-row'><span class='details-label'>14:30〜14:45</span><span class='details-value'><strong>助成金で75%OFF — 導入3ステップ</strong><br>申請条件・手順・社労士サポートの具体的な流れ</span></div>
+          <div class='details-row'><span class='details-label'>14:45〜15:00</span><span class='details-value'><strong>質疑応答</strong><br>「うちの施設でも使える？」「助成金の対象？」何でもお答えします</span></div>
         </div>
       </div>
     </div>" %}
@@ -416,7 +417,7 @@ body{font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Helvetica Neue",san
         <div class='details-row'><span class='details-label'>形式</span><span class='details-value'>Zoom ウェビナー（オンライン）</span></div>
         <div class='details-row'><span class='details-label'>参加費</span><span class='details-value'><strong style='color:var(--accent);font-size:1.1rem'>無料</strong></span></div>
         <div class='details-row'><span class='details-label'>対象</span><span class='details-value'>介護事業所の経営者・施設長・管理者・DX推進担当の方</span></div>
-        <div class='details-row'><span class='details-label'>定員</span><span class='details-value'>100名（先着順）</span></div>
+        <div class='details-row'><span class='details-label'>定員</span><span class='details-value'>100社（先着順）</span></div>
         <div class='details-row'><span class='details-label'>参加方法</span><span class='details-value'>お申し込み後、開催前日にZoomリンクをメールでお送りします</span></div>
         <div class='details-row'><span class='details-label'>録画配信</span><span class='details-value'>参加者全員に録画を配信します（当日参加できない方もぜひお申し込みください）</span></div>" %}
     </div>
@@ -444,31 +445,31 @@ body{font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Helvetica Neue",san
     {% module "faq_content" path="@hubspot/rich_text", label="FAQ",
       html="<div class='faq-item'>
         <div class='faq-q'>参加費は本当に無料ですか？</div>
-        <div class='faq-a'>はい、完全無料です。ウェビナー内での営業行為もありません。AI活用のヒントをお持ち帰りいただくことが目的です。</div>
+        <div class='faq-a'>はい、完全無料です。ウェビナー後の営業電話もいたしません。AI活用のヒントを持ち帰っていただくことが目的です。</div>
       </div>
       <div class='faq-item'>
-        <div class='faq-q'>当日参加できない場合はどうなりますか？</div>
-        <div class='faq-a'>お申し込みいただいた方全員に録画を配信いたします。当日ご参加いただけなくてもお気軽にお申し込みください。</div>
+        <div class='faq-q'>当日参加できない場合は？</div>
+        <div class='faq-a'>お申し込みいただいた方全員に録画を配信します。当日ご参加いただけなくてもお気軽にお申し込みください。</div>
       </div>
       <div class='faq-item'>
-        <div class='faq-q'>ITやAIの知識がなくても理解できますか？</div>
-        <div class='faq-a'>はい。受講者の95%がAI未経験者です。専門用語を使わず、介護現場に即した具体例で解説しますのでご安心ください。</div>
+        <div class='faq-q'>パソコンが苦手な職員でも理解できますか？</div>
+        <div class='faq-a'>はい。受講者の95%がAI未経験者です。専門用語を使わず、介護現場の具体例で解説します。「音声で話すだけ」で使える方法もご紹介します。</div>
       </div>
       <div class='faq-item'>
         <div class='faq-q'>助成金は本当に使えますか？</div>
-        <div class='faq-a'>人材開発支援助成金（事業展開等リスキリング支援コース）の対象です。申請条件や手順はウェビナー内で詳しく解説します。社労士によるサポートも無料でご案内しています。</div>
+        <div class='faq-a'>人材開発支援助成金（事業展開等リスキリング支援コース）の対象です。申請条件はウェビナー内で詳しく解説します。社労士によるサポートも無料でご案内しています。</div>
       </div>
       <div class='faq-item'>
-        <div class='faq-q'>スマートフォンからでも参加できますか？</div>
-        <div class='faq-a'>はい、Zoomアプリをインストールしていただければスマートフォンからもご参加いただけます。PCでの参加を推奨しますが、スマホ・タブレットでも問題ありません。</div>
+        <div class='faq-q'>1法人から複数名で参加できますか？</div>
+        <div class='faq-a'>はい、大歓迎です。施設長だけでなく、現場のリーダー職の方にもご参加いただくと、導入がスムーズに進みます。お一人ずつお申し込みください。</div>
       </div>" %}
   </div>
 </section>
 
 <!-- ========== フッターCTA ========== -->
 <section class="footer-cta">
-  <h2>介護現場のAI活用を<br>始めませんか？</h2>
-  <p>参加無料・オンライン開催・録画配信あり。お気軽にお申し込みください。</p>
+  <h2>その介護記録、<br>まだ手書きで続けますか？</h2>
+  <p>参加無料・オンライン開催・録画配信あり。まずは60分、ご覧ください。</p>
   <a href="#form" class="cta-btn" style="background:var(--gradient);color:#fff;padding:18px 45px;border-radius:50px;box-shadow:0 10px 25px rgba(121,40,202,.3)">無料でセミナーに参加する &gt;</a>
 </section>
 
