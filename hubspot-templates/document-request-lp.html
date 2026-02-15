@@ -1,0 +1,373 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: 資料請求専用LP - 介護校
+  screenshotPath: ../images/document-request-lp-preview.png
+-->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ content.html_title }}</title>
+{{ standard_header_includes }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+/* ========== Reset & Variables ========== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gradient:linear-gradient(135deg,#FF0080,#7928CA);
+  --accent:#FF0080;
+  --purple:#7928CA;
+  --blue:#0070F3;
+  --green:#10B981;
+  --dark:#1a202c;
+  --bg-gray:#f5f7fa;
+  --text:#333;
+  --text-sub:#4a5568;
+  --border:#e2e8f0;
+  --radius:12px;
+}
+html{scroll-behavior:smooth;font-size:15px}
+body{font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Helvetica Neue",sans-serif;color:var(--text);background:#fff;line-height:1.8;margin:0}
+
+/* ========== Utility ========== */
+.highlight{background:linear-gradient(transparent 70%,#ffe4f1 70%);padding:0 .15em;font-weight:900}
+.accent-text{color:var(--accent);font-weight:700}
+
+/* ========== Header ========== */
+.lp-header{background:rgba(26,32,44,.95);padding:.8rem 2rem;display:flex;align-items:center;justify-content:space-between;position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(8px);box-shadow:0 2px 10px rgba(0,0,0,.2)}
+.lp-header-logo{color:#fff;font-size:.9rem;font-weight:700;text-decoration:none;letter-spacing:.05em}
+.lp-header-cta{background:var(--gradient);color:#fff;padding:.5rem 1.5rem;border-radius:50px;font-size:.8rem;font-weight:700;text-decoration:none;transition:.2s;box-shadow:0 4px 15px rgba(121,40,202,.3)}
+.lp-header-cta:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(121,40,202,.4)}
+
+/* ========== Hero — 2カラム構成 ========== */
+.lp-hero{padding:100px 20px 60px;background:linear-gradient(180deg,#f8fafc 0%,#fff 100%);min-height:auto}
+.hero-container{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.hero-text{padding-right:20px}
+.hero-badge-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}
+.hero-badge-item{background:rgba(255,0,128,.08);border:1px solid rgba(255,0,128,.25);color:var(--accent);padding:.25rem .7rem;border-radius:50px;font-size:.7rem;font-weight:700}
+.hero-title{font-size:2rem;font-weight:900;color:var(--dark);line-height:1.5;margin-bottom:1rem}
+.hero-title .price-highlight{display:inline-block;background:linear-gradient(135deg,#fef3c7,#fde68a);padding:.1rem .6rem;border-radius:6px;color:#92400e;font-size:1.1em}
+.hero-sub{font-size:1rem;color:var(--text-sub);line-height:1.9;margin-bottom:1.5rem}
+.hero-points{list-style:none;margin-bottom:1.5rem}
+.hero-points li{display:flex;align-items:flex-start;gap:.6rem;margin-bottom:.6rem;font-size:.9rem}
+.hero-points li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;margin-top:.1rem}
+
+/* ========== Document Preview ========== */
+.doc-preview{position:relative;background:#fff;border-radius:var(--radius);box-shadow:0 20px 60px rgba(0,0,0,.12);padding:20px;transform:rotate(2deg)}
+.doc-preview::before{content:'📄 無料ダウンロード';position:absolute;top:-12px;left:20px;background:var(--gradient);color:#fff;padding:.4rem 1rem;border-radius:50px;font-size:.75rem;font-weight:700}
+.doc-preview-inner{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);border-radius:8px;padding:30px 25px;color:#fff;text-align:center}
+.doc-preview-label{font-size:.75rem;opacity:.8;margin-bottom:.5rem}
+.doc-preview-title{font-size:1.3rem;font-weight:900;line-height:1.4;margin-bottom:1rem}
+.doc-preview-pages{display:flex;justify-content:center;gap:8px;margin-top:1rem}
+.doc-page{width:50px;height:70px;background:rgba(255,255,255,.15);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700}
+.doc-page.active{background:rgba(255,255,255,.9);color:var(--purple)}
+
+/* ========== What You'll Learn ========== */
+.learn-section{padding:60px 20px;background:var(--bg-gray)}
+.section-title{font-size:1.8rem;font-weight:900;text-align:center;margin-bottom:50px;letter-spacing:.03em;line-height:1.4}
+.learn-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:900px;margin:0 auto}
+.learn-card{background:#fff;border-radius:var(--radius);padding:1.8rem 1.5rem;text-align:center;box-shadow:0 4px 15px rgba(0,0,0,.05);transition:.2s;border-top:3px solid transparent;position:relative}
+.learn-card:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,.1);border-top-color:var(--accent)}
+.learn-num{position:absolute;top:12px;right:15px;font-size:2.5rem;font-weight:900;color:rgba(121,40,202,.08);line-height:1}
+.learn-icon{font-size:2.5rem;margin-bottom:1rem}
+.learn-card h3{font-size:1rem;font-weight:700;margin-bottom:.5rem;color:var(--dark)}
+.learn-card p{font-size:.85rem;color:var(--text-sub);line-height:1.7;margin:0}
+
+/* ========== Trust Badges ========== */
+.trust-section{padding:50px 20px;background:#fff}
+.trust-inner{max-width:800px;margin:0 auto;text-align:center}
+.trust-label{font-size:.8rem;color:var(--text-sub);margin-bottom:1rem;font-weight:600}
+.trust-badges{display:flex;justify-content:center;gap:20px;flex-wrap:wrap}
+.trust-badge{background:linear-gradient(135deg,#fef9c3,#fef3c7);border:2px solid #fbbf24;border-radius:var(--radius);padding:1rem 1.5rem;text-align:center;min-width:140px}
+.trust-badge-label{font-size:.65rem;color:#92400e;font-weight:600;margin-bottom:.2rem}
+.trust-badge-value{font-size:1.1rem;font-weight:900;color:#78350f}
+
+/* ========== Form Section ========== */
+.form-section{background:var(--gradient);padding:70px 20px;text-align:center;position:relative}
+.form-section::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 70% 30%,rgba(255,255,255,.08) 0%,transparent 50%);pointer-events:none}
+.form-section .section-title{color:#fff;margin-bottom:8px;font-size:1.6rem}
+.form-lead{color:rgba(255,255,255,.85);font-size:1rem;margin-bottom:25px}
+.form-wrapper{max-width:480px;margin:0 auto;background:#fff;border-radius:var(--radius);padding:2rem 1.8rem;box-shadow:0 15px 50px rgba(0,0,0,.25);position:relative;z-index:1}
+.form-wrapper-title{font-size:1.1rem;font-weight:700;color:var(--dark);margin-bottom:1.2rem;text-align:center}
+.form-benefits{display:flex;justify-content:center;gap:1rem;margin-bottom:1rem;flex-wrap:wrap}
+.form-benefit{display:flex;align-items:center;gap:.3rem;font-size:.75rem;color:var(--text-sub)}
+.form-benefit::before{content:'✓';color:var(--green);font-weight:700}
+.form-note{color:rgba(255,255,255,.6);font-size:.72rem;margin-top:1rem}
+
+/* ========== Price Appeal ========== */
+.price-section{padding:60px 20px;background:#fff}
+.price-box{max-width:700px;margin:0 auto;background:linear-gradient(135deg,#1e3a8a,#3730a3);border-radius:var(--radius);padding:2.5rem 2rem;color:#fff;text-align:center;position:relative;overflow:hidden}
+.price-box::before{content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;background:radial-gradient(circle,rgba(255,255,255,.1) 0%,transparent 60%);pointer-events:none}
+.price-label{font-size:.85rem;opacity:.8;margin-bottom:.5rem}
+.price-flow{display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;margin:1rem 0}
+.price-item{text-align:center}
+.price-item-label{font-size:.7rem;opacity:.7}
+.price-item-value{font-size:1.5rem;font-weight:900}
+.price-item-value.original{text-decoration:line-through;opacity:.6}
+.price-item-value.final{color:#fde047;font-size:2rem}
+.price-arrow{font-size:1.5rem;opacity:.6}
+.price-note{font-size:.8rem;opacity:.7;margin-top:1rem}
+.price-cta{margin-top:1.5rem}
+.price-cta .cta-btn{display:inline-block;background:#fff;color:var(--purple);padding:14px 40px;border-radius:50px;font-size:1rem;font-weight:700;text-decoration:none;transition:.2s;box-shadow:0 6px 20px rgba(0,0,0,.2)}
+.price-cta .cta-btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,0,0,.3)}
+
+/* ========== Features Mini ========== */
+.features-section{padding:50px 20px;background:var(--bg-gray)}
+.features-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:900px;margin:0 auto}
+.feature-item{background:#fff;border-radius:var(--radius);padding:1.2rem 1rem;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,.04)}
+.feature-icon{font-size:1.8rem;margin-bottom:.5rem}
+.feature-item h4{font-size:.85rem;font-weight:700;color:var(--dark);margin-bottom:.3rem}
+.feature-item p{font-size:.75rem;color:var(--text-sub);margin:0;line-height:1.5}
+
+/* ========== FAQ Mini ========== */
+.faq-section{padding:50px 20px;background:#fff}
+.faq-list{max-width:650px;margin:0 auto}
+.faq-item{margin:.5rem 0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.faq-q{padding:.9rem 1rem .9rem 2.5rem;font-weight:700;font-size:.9rem;background:#fff;position:relative}
+.faq-q::before{content:'Q';position:absolute;left:.9rem;top:50%;transform:translateY(-50%);width:22px;height:22px;background:var(--gradient);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700}
+.faq-a{padding:.7rem 1rem .7rem 2.5rem;font-size:.85rem;color:var(--text-sub);background:#fafafa;border-top:1px solid var(--border);line-height:1.7}
+
+/* ========== Footer CTA ========== */
+.footer-cta{background:var(--dark);color:#fff;padding:50px 20px;text-align:center}
+.footer-cta h2{font-size:1.5rem;font-weight:900;margin-bottom:.6rem;line-height:1.5}
+.footer-cta p{color:rgba(255,255,255,.6);font-size:.9rem;margin-bottom:1.5rem}
+.footer-cta .cta-btn{display:inline-block;background:var(--gradient);color:#fff;padding:16px 40px;border-radius:50px;font-size:1rem;font-weight:700;text-decoration:none;transition:.2s;box-shadow:0 10px 25px rgba(121,40,202,.3)}
+.footer-cta .cta-btn:hover{transform:translateY(-2px);box-shadow:0 14px 35px rgba(121,40,202,.4)}
+
+/* ========== Footer ========== */
+.lp-footer{background:#0f0c29;color:rgba(255,255,255,.4);padding:1.5rem 2rem;text-align:center;font-size:.75rem}
+.lp-footer a{color:rgba(255,255,255,.5);text-decoration:none}
+.lp-footer a:hover{color:#fff}
+
+/* ========== Responsive ========== */
+@media(max-width:900px){
+  .hero-container{grid-template-columns:1fr;gap:30px}
+  .hero-text{padding-right:0;text-align:center}
+  .hero-badge-row{justify-content:center}
+  .doc-preview{transform:rotate(0);max-width:350px;margin:0 auto}
+  .learn-grid{grid-template-columns:1fr}
+  .features-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  .lp-hero{padding:80px 15px 40px}
+  .hero-title{font-size:1.5rem}
+  .section-title{font-size:1.4rem;margin-bottom:35px}
+  .learn-section,.form-section,.price-section,.features-section,.faq-section{padding:40px 15px}
+  .form-wrapper{padding:1.5rem 1.2rem}
+  .price-flow{flex-direction:column;gap:.5rem}
+  .price-arrow{transform:rotate(90deg)}
+  .features-grid{grid-template-columns:1fr}
+  .trust-badges{flex-direction:column;align-items:center}
+  .lp-header{padding:.6rem 1rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ========== ヘッダー（固定） ========== -->
+<header class="lp-header">
+  <a href="https://fc.horiemon.ai/kaigo" class="lp-header-logo">ホリエモンAI学校 介護校</a>
+  <a href="#form" class="lp-header-cta">無料で資料をもらう &gt;</a>
+</header>
+
+<!-- ========== ヒーロー（2カラム） ========== -->
+<section class="lp-hero">
+  <div class="hero-container">
+    <div class="hero-text">
+      <div class="hero-badge-row">
+        <span class="hero-badge-item">法人向けAI研修 No.1</span>
+        <span class="hero-badge-item">助成金75%OFF</span>
+        <span class="hero-badge-item">30秒で完了</span>
+      </div>
+      {% module "hero_title" path="@hubspot/rich_text", label="ヒーロータイトル",
+        html="<h1 class='hero-title'>介護現場の<span class='highlight'>AI活用</span>がわかる<br>無料ガイドブック<br><span class='price-highlight'>実質 月5,833円/人〜</span></h1>" %}
+      {% module "hero_subtitle" path="@hubspot/rich_text", label="ヒーローサブテキスト",
+        html="<p class='hero-sub'>「AIって難しそう」「うちの職員でも使える？」「助成金ってどうやって申請する？」——そんな疑問をすべて解決する資料を<strong>無料</strong>でお届けします。</p>" %}
+      <ul class="hero-points">
+        <li>介護記録・ケアプランのAI活用事例がわかる</li>
+        <li>助成金（75%OFF）の申請条件・手順がわかる</li>
+        <li>AI未経験でも安心のカリキュラム詳細がわかる</li>
+      </ul>
+    </div>
+    <div class="doc-preview">
+      <div class="doc-preview-inner">
+        <div class="doc-preview-label">ホリエモンAI学校 介護校</div>
+        {% module "doc_title" path="@hubspot/rich_text", label="資料タイトル",
+          html="<div class='doc-preview-title'>介護×AI<br>導入ガイドブック<br>＆ 助成金活用マニュアル</div>" %}
+        <div class="doc-preview-pages">
+          <div class="doc-page active">表紙</div>
+          <div class="doc-page">AI事例</div>
+          <div class="doc-page">助成金</div>
+          <div class="doc-page">料金</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== この資料でわかること ========== -->
+<section class="learn-section">
+  <div class="section-title">この資料で<span class="highlight">わかること</span></div>
+  {% module "learn_content" path="@hubspot/rich_text", label="資料でわかること",
+    html="<div class='learn-grid'>
+      <div class='learn-card'>
+        <div class='learn-num'>01</div>
+        <div class='learn-icon'>📝</div>
+        <h3>介護現場のAI活用事例</h3>
+        <p>介護記録、ケアプラン、シフト作成、家族への報告文書——明日から使える具体的な活用法を紹介</p>
+      </div>
+      <div class='learn-card'>
+        <div class='learn-num'>02</div>
+        <div class='learn-icon'>💰</div>
+        <h3>助成金で75%OFFにする方法</h3>
+        <p>人材開発支援助成金の対象条件、申請手順、社労士サポートの流れを図解で解説</p>
+      </div>
+      <div class='learn-card'>
+        <div class='learn-num'>03</div>
+        <h3>受講料・カリキュラム詳細</h3>
+        <div class='learn-icon'>📚</div>
+        <p>240講座以上のカリキュラム内容、人数別料金シミュレーション、導入までの流れ</p>
+      </div>
+    </div>" %}
+</section>
+
+<!-- ========== 信頼バッジ ========== -->
+<section class="trust-section">
+  <div class="trust-inner">
+    <div class="trust-label">法人向け生成AI研修サービス 市場調査</div>
+    {% module "trust_badges" path="@hubspot/rich_text", label="No.1バッジ",
+      html="<div class='trust-badges'>
+        <div class='trust-badge'>
+          <div class='trust-badge-label'>実績社数 伸び率</div>
+          <div class='trust-badge-value'>No.1</div>
+        </div>
+        <div class='trust-badge'>
+          <div class='trust-badge-label'>講義のわかりやすさ</div>
+          <div class='trust-badge-value'>No.1</div>
+        </div>
+        <div class='trust-badge'>
+          <div class='trust-badge-label'>信頼度（総合）</div>
+          <div class='trust-badge-value'>No.1</div>
+        </div>
+        <div class='trust-badge'>
+          <div class='trust-badge-label'>満足度</div>
+          <div class='trust-badge-value'>No.1</div>
+        </div>
+      </div>" %}
+  </div>
+</section>
+
+<!-- ========== 申込みフォーム ========== -->
+<section class="form-section" id="form">
+  <div class="section-title" style="color:#fff">無料で<span style="background:linear-gradient(transparent 70%,rgba(255,255,255,.3) 70%)">資料をダウンロード</span></div>
+  <p class="form-lead">30秒で完了。営業電話は一切いたしません。</p>
+  <div class="form-wrapper">
+    <div class="form-wrapper-title">資料請求フォーム</div>
+    <div class="form-benefits">
+      <span class="form-benefit">すぐにメールで届く</span>
+      <span class="form-benefit">営業電話なし</span>
+    </div>
+    {% module "document_form" path="@hubspot/form", label="資料請求フォーム",
+      form={
+        "response_type": "inline",
+        "message": "ありがとうございます！<br>ご登録いただいたメールアドレスに、資料をお送りしました。<br>届かない場合は迷惑メールフォルダをご確認ください。"
+      } %}
+  </div>
+  <p class="form-note">※ 個人情報はプライバシーポリシーに基づき適切に管理いたします</p>
+</section>
+
+<!-- ========== 料金訴求 ========== -->
+<section class="price-section">
+  {% module "price_content" path="@hubspot/rich_text", label="料金訴求",
+    html="<div class='price-box'>
+      <div class='price-label'>人材開発支援助成金（事業展開等リスキリング支援コース）適用で</div>
+      <div class='price-flow'>
+        <div class='price-item'>
+          <div class='price-item-label'>年間受講料</div>
+          <div class='price-item-value original'>31万円/人</div>
+        </div>
+        <div class='price-arrow'>→</div>
+        <div class='price-item'>
+          <div class='price-item-label'>助成金（最大75%）</div>
+          <div class='price-item-value'>-23万円</div>
+        </div>
+        <div class='price-arrow'>→</div>
+        <div class='price-item'>
+          <div class='price-item-label'>実質負担</div>
+          <div class='price-item-value final'>7万円/人/年</div>
+        </div>
+      </div>
+      <div class='price-note'>月額換算 約5,833円/人 ｜ 4名以上の受講で社労士サポート無料</div>
+      <div class='price-cta'>
+        <a href='#form' class='cta-btn'>詳しい料金表を見る（資料に掲載）</a>
+      </div>
+    </div>" %}
+</section>
+
+<!-- ========== 特徴ミニ ========== -->
+<section class="features-section">
+  <div class="section-title">選ばれる<span class="highlight">4つの理由</span></div>
+  {% module "features_content" path="@hubspot/rich_text", label="4つの特徴",
+    html="<div class='features-grid'>
+      <div class='feature-item'>
+        <div class='feature-icon'>🎓</div>
+        <h4>AI未経験者95%</h4>
+        <p>PC操作ができれば大丈夫。初心者専門のカリキュラム</p>
+      </div>
+      <div class='feature-item'>
+        <div class='feature-icon'>📹</div>
+        <h4>240講座以上</h4>
+        <p>介護・在宅医療で実際に使える動画講義を見放題</p>
+      </div>
+      <div class='feature-item'>
+        <div class='feature-icon'>💬</div>
+        <h4>チャットサポート</h4>
+        <p>わからないことはいつでも講師に質問できる</p>
+      </div>
+      <div class='feature-item'>
+        <div class='feature-icon'>🤝</div>
+        <h4>毎月の伴走MTG</h4>
+        <p>月1回のミーティングで課題解決をサポート</p>
+      </div>
+    </div>" %}
+</section>
+
+<!-- ========== FAQ ミニ ========== -->
+<section class="faq-section">
+  <div class="section-title">よくある<span class="highlight">質問</span></div>
+  <div class="faq-list">
+    {% module "faq_content" path="@hubspot/rich_text", label="FAQ",
+      html="<div class='faq-item'>
+        <div class='faq-q'>資料請求後に営業電話はありますか？</div>
+        <div class='faq-a'>いいえ、営業電話は一切いたしません。資料をご覧いただき、ご興味がありましたらお気軽にお問い合わせください。</div>
+      </div>
+      <div class='faq-item'>
+        <div class='faq-q'>助成金は本当に使えますか？</div>
+        <div class='faq-a'>人材開発支援助成金（事業展開等リスキリング支援コース）の対象です。雇用保険加入の従業員が対象となります。詳しい条件は資料に記載しています。</div>
+      </div>
+      <div class='faq-item'>
+        <div class='faq-q'>資料だけ見て検討しても大丈夫ですか？</div>
+        <div class='faq-a'>もちろんです。まずは資料で内容をご確認いただき、ご検討ください。ご不明点があれば無料相談も承っております。</div>
+      </div>" %}
+  </div>
+</section>
+
+<!-- ========== フッターCTA ========== -->
+<section class="footer-cta">
+  <h2>介護現場のAI活用、<br>まずは資料でご確認ください</h2>
+  <p>無料ダウンロード・営業電話なし・30秒で完了</p>
+  <a href="#form" class="cta-btn">無料で資料をダウンロードする &gt;</a>
+</section>
+
+<!-- ========== フッター ========== -->
+<footer class="lp-footer">
+  {% module "footer_text" path="@hubspot/rich_text", label="フッター",
+    html="<p>© 2026 ホリエモンAI学校 介護校 ｜ <a href='https://fc.horiemon.ai/kaigo'>ホーム</a> ｜ <a href='#'>プライバシーポリシー</a></p>" %}
+</footer>
+
+{{ standard_footer_includes }}
+</body>
+</html>
