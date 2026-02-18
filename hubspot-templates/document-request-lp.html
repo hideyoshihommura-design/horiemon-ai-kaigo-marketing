@@ -73,7 +73,7 @@ a {
 
 /* ========== Hero Section ========== */
 .lp-hero {
-  background: linear-gradient(135deg, #1a1a2e 0%, #302b63 50%, #24243e 100%);
+  background: #fff;
   padding: 100px 20px 60px;
   min-height: 100vh;
 }
@@ -84,78 +84,89 @@ a {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 40px;
+  gap: 50px;
 }
 
 .hero-text {
   flex: 1;
   min-width: 300px;
-  color: #fff;
+  color: #1a202c;
 }
 
 .hero-badges {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 20px;
+  gap: 10px;
+  margin-bottom: 24px;
 }
 
 .hero-badge {
-  background: rgba(255,255,255,0.15);
-  border: 1px solid rgba(255,255,255,0.3);
-  color: #fff;
-  padding: 6px 14px;
+  background: #f0f4f8;
+  border: 1px solid #e2e8f0;
+  color: #4a5568;
+  padding: 8px 16px;
   border-radius: 30px;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
 }
 
 .hero-badge.primary {
   background: linear-gradient(135deg, #FF0080, #7928CA);
   border: none;
+  color: #fff;
+}
+
+.hero-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: #7928CA;
+  margin-bottom: 12px;
+  letter-spacing: 0.05em;
 }
 
 .hero-title {
-  font-size: 32px;
+  font-size: 42px;
   font-weight: 900;
-  line-height: 1.4;
-  margin-bottom: 16px;
+  line-height: 1.3;
+  margin-bottom: 8px;
+  color: #1a202c;
 }
 
 .hero-title .highlight {
-  background: linear-gradient(transparent 60%, rgba(255,0,128,0.4) 60%);
+  background: linear-gradient(transparent 60%, #ffe4f1 60%);
 }
 
 .hero-price-tag {
   display: inline-block;
   background: linear-gradient(135deg, #fef3c7, #fde68a);
   color: #92400e;
-  padding: 6px 16px;
+  padding: 10px 20px;
   border-radius: 8px;
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 900;
-  margin-top: 12px;
+  margin-top: 16px;
 }
 
 .hero-desc {
-  font-size: 15px;
-  color: rgba(255,255,255,0.85);
-  line-height: 1.9;
-  margin: 20px 0;
+  font-size: 16px;
+  color: #4a5568;
+  line-height: 2;
+  margin: 24px 0;
 }
 
 .hero-points {
   list-style: none;
-  margin: 24px 0;
+  margin: 28px 0;
 }
 
 .hero-points li {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
-  font-size: 14px;
-  color: rgba(255,255,255,0.9);
+  gap: 12px;
+  margin-bottom: 14px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #2d3748;
 }
 
 .hero-points li::before {
@@ -163,12 +174,12 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   background: #10B981;
   color: #fff;
   border-radius: 50%;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   flex-shrink: 0;
 }
@@ -176,38 +187,50 @@ a {
 .hero-cta-buttons {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 28px;
+  gap: 14px;
+  margin-top: 32px;
 }
 
 .btn-primary {
   display: inline-block;
   background: linear-gradient(135deg, #FF0080, #7928CA);
   color: #fff;
-  padding: 16px 32px;
+  padding: 18px 36px;
   border-radius: 30px;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 700;
-  box-shadow: 0 8px 30px rgba(255,0,128,0.4);
+  box-shadow: 0 8px 30px rgba(255,0,128,0.3);
+  transition: 0.2s;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(255,0,128,0.4);
 }
 
 .btn-secondary {
   display: inline-block;
-  background: transparent;
-  color: #fff;
-  padding: 16px 28px;
+  background: #fff;
+  color: #7928CA;
+  padding: 18px 32px;
   border-radius: 30px;
-  font-size: 15px;
-  font-weight: 600;
-  border: 2px solid rgba(255,255,255,0.4);
+  font-size: 16px;
+  font-weight: 700;
+  border: 2px solid #7928CA;
+  transition: 0.2s;
+}
+
+.btn-secondary:hover {
+  background: #7928CA;
+  color: #fff;
 }
 
 .hero-stats {
   display: flex;
-  gap: 30px;
-  margin-top: 32px;
-  padding-top: 24px;
-  border-top: 1px solid rgba(255,255,255,0.15);
+  gap: 36px;
+  margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px solid #e2e8f0;
 }
 
 .hero-stat {
@@ -215,26 +238,28 @@ a {
 }
 
 .hero-stat-value {
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 900;
-  color: #fff;
+  color: #7928CA;
 }
 
 .hero-stat-label {
-  font-size: 11px;
-  color: rgba(255,255,255,0.6);
+  font-size: 12px;
+  font-weight: 600;
+  color: #718096;
+  margin-top: 4px;
 }
 
 /* ========== Document Card ========== */
 .hero-card {
-  flex: 0 0 340px;
+  flex: 0 0 360px;
 }
 
 .doc-card {
   background: #fff;
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 10px 40px rgba(121,40,202,0.15), 0 0 0 1px rgba(121,40,202,0.1);
   position: relative;
 }
 
@@ -663,15 +688,25 @@ a {
 
   .hero-card {
     flex: 0 0 100%;
-    max-width: 340px;
+    max-width: 360px;
   }
 
   .hero-title {
-    font-size: 24px;
+    font-size: 28px;
+  }
+
+  .hero-price-tag {
+    font-size: 18px;
+    padding: 8px 16px;
   }
 
   .hero-stats {
     justify-content: center;
+    gap: 24px;
+  }
+
+  .hero-stat-value {
+    font-size: 26px;
   }
 
   .hero-cta-buttons {
@@ -721,7 +756,7 @@ a {
       </div>
 
       {% module "hero_title" path="@hubspot/rich_text", label="ヒーロータイトル",
-        html="<h1 class='hero-title'>介護現場の<span class='highlight'>AI活用</span>がわかる<br>無料ガイドブック</h1><span class='hero-price-tag'>実質 月5,833円/人〜</span>" %}
+        html="<div class='hero-label'>▼ 無料ダウンロード資料</div><h1 class='hero-title'>介護現場の<span class='highlight'>AI活用</span>がわかる<br>無料ガイドブック</h1><span class='hero-price-tag'>実質 月5,833円/人〜</span>" %}
 
       {% module "hero_subtitle" path="@hubspot/rich_text", label="ヒーローサブテキスト",
         html="<p class='hero-desc'>「AIって難しそう」「うちの職員でも使える？」「助成金ってどうやって申請する？」<br>そんな疑問をすべて解決する資料を<strong>無料</strong>でお届けします。</p>" %}
