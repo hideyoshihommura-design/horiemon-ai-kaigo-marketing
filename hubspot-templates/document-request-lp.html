@@ -374,47 +374,6 @@ a {
   line-height: 1.7;
 }
 
-/* ========== Trust Section ========== */
-.trust-section {
-  padding: 50px 20px;
-  background: #fff;
-}
-
-.trust-label {
-  text-align: center;
-  font-size: 13px;
-  color: #666;
-  margin-bottom: 16px;
-}
-
-.trust-badges {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 16px;
-}
-
-.trust-badge {
-  background: linear-gradient(135deg, #fef9c3, #fef3c7);
-  border: 2px solid #fbbf24;
-  border-radius: 12px;
-  padding: 14px 24px;
-  text-align: center;
-  min-width: 130px;
-}
-
-.trust-badge-label {
-  font-size: 10px;
-  color: #92400e;
-  font-weight: 600;
-}
-
-.trust-badge-value {
-  font-size: 18px;
-  font-weight: 900;
-  color: #78350f;
-}
-
 /* ========== Form Section ========== */
 .form-section {
   background: linear-gradient(135deg, #FF0080, #7928CA);
@@ -741,11 +700,6 @@ a {
   .price-arrow {
     transform: rotate(90deg);
   }
-
-  .trust-badges {
-    flex-direction: column;
-    align-items: center;
-  }
 }
 </style>
 </head>
@@ -762,8 +716,7 @@ a {
   <div class="hero-inner">
     <div class="hero-text">
       <div class="hero-badges">
-        <span class="hero-badge primary">4冠 No.1 獲得</span>
-        <span class="hero-badge">助成金で75%OFF</span>
+        <span class="hero-badge primary">助成金で75%OFF</span>
         <span class="hero-badge">30秒で完了</span>
       </div>
 
@@ -843,30 +796,6 @@ a {
         <div class='learn-icon'>📚</div>
         <h3>受講料・カリキュラム詳細</h3>
         <p>240講座以上のカリキュラム内容、人数別料金シミュレーション、導入までの流れ</p>
-      </div>
-    </div>" %}
-</section>
-
-<!-- ========== 信頼バッジ ========== -->
-<section class="trust-section">
-  <div class="trust-label">法人向け生成AI研修サービス 市場調査</div>
-  {% module "trust_badges" path="@hubspot/rich_text", label="No.1バッジ",
-    html="<div class='trust-badges'>
-      <div class='trust-badge'>
-        <div class='trust-badge-label'>実績社数 伸び率</div>
-        <div class='trust-badge-value'>No.1</div>
-      </div>
-      <div class='trust-badge'>
-        <div class='trust-badge-label'>講義のわかりやすさ</div>
-        <div class='trust-badge-value'>No.1</div>
-      </div>
-      <div class='trust-badge'>
-        <div class='trust-badge-label'>信頼度（総合）</div>
-        <div class='trust-badge-value'>No.1</div>
-      </div>
-      <div class='trust-badge'>
-        <div class='trust-badge-label'>満足度</div>
-        <div class='trust-badge-value'>No.1</div>
       </div>
     </div>" %}
 </section>
