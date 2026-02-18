@@ -42,28 +42,50 @@ body{font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Helvetica Neue",san
 .lp-header-cta{background:var(--gradient);color:#fff;padding:.5rem 1.5rem;border-radius:50px;font-size:.8rem;font-weight:700;text-decoration:none;transition:.2s;box-shadow:0 4px 15px rgba(121,40,202,.3)}
 .lp-header-cta:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(121,40,202,.4)}
 
-/* ========== Hero — 2カラム構成 ========== */
-.lp-hero{padding:100px 20px 60px;background:linear-gradient(180deg,#f8fafc 0%,#fff 100%);min-height:auto}
-.hero-container{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
-.hero-text{padding-right:20px}
-.hero-badge-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}
-.hero-badge-item{background:rgba(255,0,128,.08);border:1px solid rgba(255,0,128,.25);color:var(--accent);padding:.25rem .7rem;border-radius:50px;font-size:.7rem;font-weight:700}
-.hero-title{font-size:2rem;font-weight:900;color:var(--dark);line-height:1.5;margin-bottom:1rem}
-.hero-title .price-highlight{display:inline-block;background:linear-gradient(135deg,#fef3c7,#fde68a);padding:.1rem .6rem;border-radius:6px;color:#92400e;font-size:1.1em}
-.hero-sub{font-size:1rem;color:var(--text-sub);line-height:1.9;margin-bottom:1.5rem}
-.hero-points{list-style:none;margin-bottom:1.5rem}
-.hero-points li{display:flex;align-items:flex-start;gap:.6rem;margin-bottom:.6rem;font-size:.9rem}
-.hero-points li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;margin-top:.1rem}
+/* ========== Hero — フルワイド背景 ========== */
+.lp-hero{padding:120px 20px 80px;background:linear-gradient(135deg,#0f0c29 0%,#302b63 50%,#24243e 100%);min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden}
+.lp-hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");pointer-events:none}
+.lp-hero::after{content:'';position:absolute;top:-50%;right:-20%;width:80%;height:200%;background:radial-gradient(circle,rgba(121,40,202,.3) 0%,transparent 50%);pointer-events:none}
+.hero-container{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.2fr 1fr;gap:50px;align-items:center;position:relative;z-index:1}
+.hero-text{color:#fff}
+.hero-badge-row{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.hero-badge-item{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;padding:.4rem 1rem;border-radius:50px;font-size:.75rem;font-weight:700;backdrop-filter:blur(4px)}
+.hero-badge-item.highlight{background:linear-gradient(135deg,#FF0080,#7928CA);border:none}
+.hero-title{font-size:2.6rem;font-weight:900;color:#fff;line-height:1.4;margin-bottom:1.2rem;text-shadow:0 2px 20px rgba(0,0,0,.3)}
+.hero-title .highlight{background:linear-gradient(transparent 60%,rgba(255,0,128,.4) 60%);padding:0 .1em}
+.hero-title .price-highlight{display:block;margin-top:.8rem;background:linear-gradient(135deg,#fef3c7,#fde68a);padding:.3rem .8rem;border-radius:8px;color:#92400e;font-size:.9em;width:fit-content}
+.hero-sub{font-size:1.1rem;color:rgba(255,255,255,.8);line-height:1.9;margin-bottom:1.8rem}
+.hero-points{list-style:none;margin-bottom:2rem}
+.hero-points li{display:flex;align-items:center;gap:.8rem;margin-bottom:.8rem;font-size:1rem;color:rgba(255,255,255,.9)}
+.hero-points li::before{content:'✓';background:var(--green);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0}
+.hero-cta{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem}
+.hero-cta-primary{display:inline-flex;align-items:center;gap:.5rem;background:var(--gradient);color:#fff;padding:18px 36px;border-radius:50px;font-size:1.1rem;font-weight:700;text-decoration:none;transition:.3s;box-shadow:0 10px 40px rgba(255,0,128,.4);animation:pulse 2s infinite}
+.hero-cta-primary:hover{transform:translateY(-3px);box-shadow:0 15px 50px rgba(255,0,128,.5)}
+@keyframes pulse{0%,100%{box-shadow:0 10px 40px rgba(255,0,128,.4)}50%{box-shadow:0 10px 50px rgba(255,0,128,.6)}}
+.hero-cta-secondary{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:#fff;padding:18px 30px;border-radius:50px;font-size:1rem;font-weight:600;text-decoration:none;border:2px solid rgba(255,255,255,.3);transition:.3s}
+.hero-cta-secondary:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.5)}
+.hero-trust{display:flex;align-items:center;gap:1.5rem;margin-top:2.5rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.1)}
+.hero-trust-item{text-align:center}
+.hero-trust-value{font-size:1.8rem;font-weight:900;color:#fff}
+.hero-trust-label{font-size:.7rem;color:rgba(255,255,255,.5)}
 
-/* ========== Document Preview ========== */
-.doc-preview{position:relative;background:#fff;border-radius:var(--radius);box-shadow:0 20px 60px rgba(0,0,0,.12);padding:20px;transform:rotate(2deg)}
-.doc-preview::before{content:'📄 無料ダウンロード';position:absolute;top:-12px;left:20px;background:var(--gradient);color:#fff;padding:.4rem 1rem;border-radius:50px;font-size:.75rem;font-weight:700}
-.doc-preview-inner{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);border-radius:8px;padding:30px 25px;color:#fff;text-align:center}
-.doc-preview-label{font-size:.75rem;opacity:.8;margin-bottom:.5rem}
-.doc-preview-title{font-size:1.3rem;font-weight:900;line-height:1.4;margin-bottom:1rem}
-.doc-preview-pages{display:flex;justify-content:center;gap:8px;margin-top:1rem}
-.doc-page{width:50px;height:70px;background:rgba(255,255,255,.15);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700}
-.doc-page.active{background:rgba(255,255,255,.9);color:var(--purple)}
+/* ========== Document Preview — 3Dカード ========== */
+.doc-preview{position:relative;perspective:1000px}
+.doc-preview-card{background:linear-gradient(145deg,#fff 0%,#f8fafc 100%);border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.1);padding:24px;transform:rotateY(-5deg) rotateX(5deg);transition:.4s;animation:float 6s ease-in-out infinite}
+.doc-preview:hover .doc-preview-card{transform:rotateY(0) rotateX(0)}
+@keyframes float{0%,100%{transform:rotateY(-5deg) rotateX(5deg) translateY(0)}50%{transform:rotateY(-5deg) rotateX(5deg) translateY(-10px)}}
+.doc-preview-badge{position:absolute;top:-15px;left:20px;background:var(--gradient);color:#fff;padding:.5rem 1.2rem;border-radius:50px;font-size:.8rem;font-weight:700;box-shadow:0 4px 15px rgba(255,0,128,.4);z-index:2}
+.doc-preview-inner{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);border-radius:12px;padding:35px 30px;color:#fff;text-align:center;position:relative;overflow:hidden}
+.doc-preview-inner::before{content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;background:radial-gradient(circle,rgba(255,255,255,.15) 0%,transparent 60%);pointer-events:none}
+.doc-preview-label{font-size:.8rem;opacity:.7;margin-bottom:.6rem;letter-spacing:.1em}
+.doc-preview-title{font-size:1.5rem;font-weight:900;line-height:1.4;margin-bottom:1.2rem}
+.doc-preview-pages{display:flex;justify-content:center;gap:10px;margin-top:1.2rem}
+.doc-page{width:55px;height:75px;background:rgba(255,255,255,.12);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;transition:.2s;border:1px solid rgba(255,255,255,.1)}
+.doc-page:hover{transform:translateY(-3px);background:rgba(255,255,255,.2)}
+.doc-page.active{background:rgba(255,255,255,.95);color:var(--purple);box-shadow:0 5px 15px rgba(0,0,0,.2)}
+.doc-preview-meta{display:flex;justify-content:center;gap:1.5rem;margin-top:1.5rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.15)}
+.doc-meta-item{font-size:.75rem;color:rgba(255,255,255,.7)}
+.doc-meta-item strong{color:#fff}
 
 /* ========== What You'll Learn ========== */
 .learn-section{padding:60px 20px;background:var(--bg-gray)}
@@ -144,16 +166,30 @@ body{font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Helvetica Neue",san
 
 /* ========== Responsive ========== */
 @media(max-width:900px){
-  .hero-container{grid-template-columns:1fr;gap:30px}
-  .hero-text{padding-right:0;text-align:center}
+  .lp-hero{min-height:auto;padding:100px 20px 60px}
+  .hero-container{grid-template-columns:1fr;gap:40px}
+  .hero-text{text-align:center}
   .hero-badge-row{justify-content:center}
-  .doc-preview{transform:rotate(0);max-width:350px;margin:0 auto}
+  .hero-title{font-size:2rem}
+  .hero-cta{justify-content:center}
+  .hero-trust{justify-content:center}
+  .doc-preview-card{transform:none;animation:none}
+  .doc-preview{max-width:380px;margin:0 auto}
   .learn-grid{grid-template-columns:1fr}
   .features-grid{grid-template-columns:1fr 1fr}
 }
 @media(max-width:600px){
-  .lp-hero{padding:80px 15px 40px}
-  .hero-title{font-size:1.5rem}
+  .lp-hero{padding:90px 15px 50px}
+  .hero-title{font-size:1.6rem}
+  .hero-title .price-highlight{font-size:.85em;margin:1rem auto 0}
+  .hero-sub{font-size:1rem}
+  .hero-points li{font-size:.9rem}
+  .hero-cta{flex-direction:column;align-items:center}
+  .hero-cta-primary,.hero-cta-secondary{width:100%;justify-content:center}
+  .hero-trust{flex-direction:column;gap:1rem}
+  .doc-preview-title{font-size:1.2rem}
+  .doc-preview-pages{gap:6px}
+  .doc-page{width:45px;height:60px;font-size:.6rem}
   .section-title{font-size:1.4rem;margin-bottom:35px}
   .learn-section,.form-section,.price-section,.features-section,.faq-section{padding:40px 15px}
   .form-wrapper{padding:1.5rem 1.2rem}
@@ -173,35 +209,61 @@ body{font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Helvetica Neue",san
   <a href="#form" class="lp-header-cta">無料で資料をもらう &gt;</a>
 </header>
 
-<!-- ========== ヒーロー（2カラム） ========== -->
+<!-- ========== ヒーロー（フルワイド・ダーク） ========== -->
 <section class="lp-hero">
   <div class="hero-container">
     <div class="hero-text">
       <div class="hero-badge-row">
-        <span class="hero-badge-item">法人向けAI研修 No.1</span>
-        <span class="hero-badge-item">助成金75%OFF</span>
+        <span class="hero-badge-item highlight">4冠 No.1 獲得</span>
+        <span class="hero-badge-item">助成金で75%OFF</span>
         <span class="hero-badge-item">30秒で完了</span>
       </div>
       {% module "hero_title" path="@hubspot/rich_text", label="ヒーロータイトル",
-        html="<h1 class='hero-title'>介護現場の<span class='highlight'>AI活用</span>がわかる<br>無料ガイドブック<br><span class='price-highlight'>実質 月5,833円/人〜</span></h1>" %}
+        html="<h1 class='hero-title'>介護現場の<span class='highlight'>AI活用</span>がわかる<br>無料ガイドブック<span class='price-highlight'>実質 月5,833円/人〜</span></h1>" %}
       {% module "hero_subtitle" path="@hubspot/rich_text", label="ヒーローサブテキスト",
-        html="<p class='hero-sub'>「AIって難しそう」「うちの職員でも使える？」「助成金ってどうやって申請する？」——そんな疑問をすべて解決する資料を<strong>無料</strong>でお届けします。</p>" %}
+        html="<p class='hero-sub'>「AIって難しそう」「うちの職員でも使える？」「助成金ってどうやって申請する？」<br>そんな疑問をすべて解決する資料を<strong>無料</strong>でお届けします。</p>" %}
       <ul class="hero-points">
         <li>介護記録・ケアプランのAI活用事例がわかる</li>
         <li>助成金（75%OFF）の申請条件・手順がわかる</li>
         <li>AI未経験でも安心のカリキュラム詳細がわかる</li>
       </ul>
+      <div class="hero-cta">
+        <a href="#form" class="hero-cta-primary">今すぐ無料でダウンロード →</a>
+        <a href="#learn" class="hero-cta-secondary">資料の内容を見る</a>
+      </div>
+      <div class="hero-trust">
+        <div class="hero-trust-item">
+          <div class="hero-trust-value">240+</div>
+          <div class="hero-trust-label">講座数</div>
+        </div>
+        <div class="hero-trust-item">
+          <div class="hero-trust-value">95%</div>
+          <div class="hero-trust-label">AI未経験者</div>
+        </div>
+        <div class="hero-trust-item">
+          <div class="hero-trust-value">75%</div>
+          <div class="hero-trust-label">助成金還元</div>
+        </div>
+      </div>
     </div>
     <div class="doc-preview">
-      <div class="doc-preview-inner">
-        <div class="doc-preview-label">ホリエモンAI学校 介護校</div>
-        {% module "doc_title" path="@hubspot/rich_text", label="資料タイトル",
-          html="<div class='doc-preview-title'>介護×AI<br>導入ガイドブック<br>＆ 助成金活用マニュアル</div>" %}
-        <div class="doc-preview-pages">
-          <div class="doc-page active">表紙</div>
-          <div class="doc-page">AI事例</div>
-          <div class="doc-page">助成金</div>
-          <div class="doc-page">料金</div>
+      <span class="doc-preview-badge">📄 無料ダウンロード</span>
+      <div class="doc-preview-card">
+        <div class="doc-preview-inner">
+          <div class="doc-preview-label">ホリエモンAI学校 介護校</div>
+          {% module "doc_title" path="@hubspot/rich_text", label="資料タイトル",
+            html="<div class='doc-preview-title'>介護×AI<br>導入ガイドブック<br>＆ 助成金活用マニュアル</div>" %}
+          <div class="doc-preview-pages">
+            <div class="doc-page active">表紙</div>
+            <div class="doc-page">AI事例</div>
+            <div class="doc-page">助成金</div>
+            <div class="doc-page">料金</div>
+          </div>
+          <div class="doc-preview-meta">
+            <span class="doc-meta-item"><strong>20</strong>ページ</span>
+            <span class="doc-meta-item"><strong>PDF</strong>形式</span>
+            <span class="doc-meta-item"><strong>即時</strong>送付</span>
+          </div>
         </div>
       </div>
     </div>
@@ -209,7 +271,7 @@ body{font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Helvetica Neue",san
 </section>
 
 <!-- ========== この資料でわかること ========== -->
-<section class="learn-section">
+<section class="learn-section" id="learn">
   <div class="section-title">この資料で<span class="highlight">わかること</span></div>
   {% module "learn_content" path="@hubspot/rich_text", label="資料でわかること",
     html="<div class='learn-grid'>
