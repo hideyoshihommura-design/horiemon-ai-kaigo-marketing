@@ -46,6 +46,7 @@
 <div class="nav-header">LP改修ガイド</div>
 <ul>
 <li><a href="#basics" class="active">基本操作</a></li>
+<li><a href="#typography">フォント・文字サイズ</a></li>
 <li><a href="#structure">全体構成</a></li>
 <li><a href="#sec1">1. ファーストビュー</a></li>
 <li><a href="#sec2">2. 私たちの想い</a></li>
@@ -150,6 +151,96 @@
 
 <div class="callout callout-warning">
 <strong>編集時の注意:</strong> こまめに「保存」する ／ 変更後は「プレビュー」で確認 ／ スマホ表示も確認する（介護現場はスマホ閲覧が多い）／ すべて完了してから「公開」
+</div>
+</section>
+
+<!-- フォント・文字サイズ -->
+<section id="typography">
+<h2><span class="section-num">STEP 0.5</span>フォント・文字サイズの設定</h2>
+<p>読みやすさとメリハリを出すために、フォントと文字サイズを統一します。</p>
+
+<h3>推奨フォント</h3>
+<div class="table-scroll">
+<table>
+<thead><tr><th>優先度</th><th>フォント名</th><th>特徴</th></tr></thead>
+<tbody>
+<tr><td><strong>第1候補</strong></td><td>Noto Sans JP</td><td>Google提供。読みやすく、モダンな印象。Web表示に最適</td></tr>
+<tr><td>第2候補</td><td>ヒラギノ角ゴシック</td><td>Mac/iPhone標準。高級感があり、プロフェッショナルな印象</td></tr>
+<tr><td>第3候補</td><td>メイリオ / 游ゴシック</td><td>Windows標準。幅広い環境で表示可能</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="callout callout-info">
+<strong>ペライチでの設定:</strong> 「ページ設定」→「デザイン設定」→「フォント」から選択。「ゴシック体」を選ぶと Noto Sans JP が適用されます。
+</div>
+
+<h3>文字サイズのメリハリ（重要）</h3>
+<p>文字の大きさに差をつけることで、読者の視線を誘導し、重要な情報を強調します。</p>
+
+<div class="table-scroll">
+<table>
+<thead><tr><th>要素</th><th>PC表示</th><th>スマホ表示</th><th>太さ</th><th>用途</th></tr></thead>
+<tbody>
+<tr class="row-highlight"><td><strong>メインコピー</strong></td><td><strong>40〜48px</strong></td><td><strong>28〜32px</strong></td><td>極太（900/Black）</td><td>ファーストビューの見出し</td></tr>
+<tr><td>セクション見出し</td><td>28〜32px</td><td>22〜26px</td><td>太字（700/Bold）</td><td>各セクションのタイトル</td></tr>
+<tr><td>サブ見出し</td><td>20〜24px</td><td>18〜20px</td><td>太字（700/Bold）</td><td>セクション内の小見出し</td></tr>
+<tr><td>本文</td><td>16〜18px</td><td>15〜16px</td><td>標準（400/Regular）</td><td>説明文、リスト</td></tr>
+<tr><td>補足・注釈</td><td>12〜14px</td><td>11〜13px</td><td>標準（400/Regular）</td><td>※印の注意書きなど</td></tr>
+<tr class="row-highlight"><td><strong>数字（強調）</strong></td><td><strong>36〜48px</strong></td><td><strong>28〜36px</strong></td><td>極太（900/Black）</td><td>「95%」「240+」など</td></tr>
+<tr><td>ラベル・バッジ</td><td>12〜14px</td><td>11〜13px</td><td>太字（700/Bold）</td><td>「助成金で75%OFF」など</td></tr>
+<tr class="row-highlight"><td><strong>CTAボタン</strong></td><td><strong>16〜18px</strong></td><td><strong>15〜17px</strong></td><td>太字（700/Bold）</td><td>ボタン内のテキスト</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>メリハリをつけるポイント</h3>
+<div class="card">
+<ol>
+<li><strong>サイズ差は1.5倍以上</strong>：メインコピー（48px）と本文（16px）の差は3倍。差が小さいと単調に見える</li>
+<li><strong>太さを変える</strong>：見出しは「太字」or「極太」、本文は「標準」。同じサイズでも太さで差がつく</li>
+<li><strong>数字は大きく</strong>：「95%」「240+」「5,833円」など、数字はインパクトを出すため大きめに</li>
+<li><strong>余白も重要</strong>：文字の周りに余白を取ると、より大きく・読みやすく見える</li>
+</ol>
+</div>
+
+<h3>ファーストビューの文字サイズ例</h3>
+<div class="diagram">┌─────────────────────────────────────────────────────────────┐
+│                                                             │
+│  [介護を知る私たちが]  ← ラベル: 14px / 太字 / 紫色         │
+│                                                             │
+│  現場で本当に使える                                          │
+│  AI活用法を教えます     ← メインコピー: 48px / 極太         │
+│                                                             │
+│  堀江貴文プロデュース   ← 補足: 16px / 標準                 │
+│  介護記録・ケアプラン・シフト作成など、                      │
+│  240以上の実践講義で...                                     │
+│                                                             │
+│  ┌──────────────┐  ┌──────────────┐                        │
+│  │ 月5,833円〜   │  │  95%        │  ← 数字: 36px / 極太   │
+│  │ 助成金で実質  │  │ AI未経験    │  ← ラベル: 12px       │
+│  └──────────────┘  └──────────────┘                        │
+│                                                             │
+│  [無料ウェビナーに申し込む]  ← ボタン: 17px / 太字          │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘</div>
+
+<h3>ペライチでの文字サイズ変更方法</h3>
+<div class="card">
+<ol>
+<li>変更したいテキストをクリック</li>
+<li>テキスト編集画面が開く</li>
+<li>「文字サイズ」のプルダウンから選択（S / M / L / XL など）</li>
+<li>「太字」ボタン（B）で太さを変更</li>
+<li>プレビューで確認し、スマホ表示もチェック</li>
+</ol>
+</div>
+
+<div class="warn-box">
+<strong>⚠️ スマホ表示の注意</strong><br>
+・PC用に大きくしすぎると、スマホで文字が画面をはみ出すことがある<br>
+・必ずスマホプレビューで確認する（介護現場はスマホ閲覧が約60%）<br>
+・ペライチは自動でレスポンシブ対応するが、極端に大きい文字は手動調整が必要な場合も
 </div>
 </section>
 
@@ -1112,6 +1203,16 @@ src="https://www.facebook.com/tr?id=XXXXXXXXXXXXXXXX&amp;ev=PageView&amp;noscrip
 <li>フォームの項目が3つ以内に収まっている</li>
 <li>フォームの送信テスト済み（自分のメールで送信してみる）</li>
 <li>フォーム送信後の確認メッセージが表示される</li>
+</ul>
+
+<h3>フォント・文字サイズチェック</h3>
+<ul class="checklist-final">
+<li>フォントが「ゴシック体（Noto Sans JP）」に設定されている</li>
+<li>ファーストビューのメインコピーが大きく目立っている（PC: 40px以上）</li>
+<li>数字（95%、240+など）が大きく強調されている</li>
+<li>見出しと本文のサイズ差が1.5倍以上ある</li>
+<li>CTAボタンの文字が読みやすいサイズになっている</li>
+<li>スマホ表示で文字が小さすぎない・大きすぎない</li>
 </ul>
 
 <h3>表示チェック</h3>
