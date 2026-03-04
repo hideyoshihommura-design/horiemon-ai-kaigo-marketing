@@ -33,6 +33,20 @@ body {
 /* ========== Print ========== */
 @media print {
   body { font-size: 9.5px; line-height: 1.5; }
+  /* 背景色・背景画像を印刷時にも出力する */
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+  /* 濃い背景の要素でテキスト色を明示的に指定 */
+  .cover, .cover * { color: #fff !important; }
+  .cover h1 span { color: #fbbf24 !important; }
+  .cover-sub { color: rgba(255,255,255,.7) !important; }
+  .cover-badge { color: rgba(255,255,255,.9) !important; }
+  .summary-box, .summary-box * { color: #fff !important; }
+  .summary-table .num { color: #fbbf24 !important; }
+  .summary-table th { color: rgba(255,255,255,.6) !important; }
+  .prompt-box, .prompt-box * { color: #e2e8f0 !important; }
+  .prompt-label { color: #fbbf24 !important; }
+  .effect-table th { color: #fff !important; }
+  .steps li::before { color: #fff !important; }
   .page-break { page-break-before: always; }
   /* 活用例1は「はじめに」と同じページに流す（1ページ節約） */
   #usecase1 { page-break-before: auto; }
