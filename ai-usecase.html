@@ -32,11 +32,27 @@ body {
 
 /* ========== Print ========== */
 @media print {
-  body { font-size: 11px; }
+  body { font-size: 10.5px; line-height: 1.7; }
   .page-break { page-break-before: always; }
   .cover { page-break-after: always; }
   .no-print { display: none; }
-  section { padding: 1.5rem 2rem; }
+  section { padding: 1.2rem 2rem; }
+  /* 見出しの直後でページが切れないようにする */
+  h2, h3, h4, .usecase-title, .usecase-subtitle { page-break-after: avoid; }
+  /* 表・プロンプト・カードが途中で切れないようにする */
+  .effect-table, .prompt-box, .ba-grid, .callout,
+  .scene-card, .tool-intro, .summary-box, .feature-grid,
+  .steps, .problems { page-break-inside: avoid; }
+  /* Before/Afterを1カラムにして切れを防止 */
+  .ba-grid { grid-template-columns: 1fr; }
+  /* まとめセクションのレイアウト調整 */
+  .feature-grid { grid-template-columns: 1fr 1fr; }
+  .summary-box { page-break-inside: avoid; }
+  /* 余白を詰めて効率よく配置 */
+  .container { padding: 0 1.5rem; }
+  .ba-box { padding: .8rem 1rem; font-size: .85rem; }
+  .prompt-box { font-size: .75rem; padding: .8rem 1rem; }
+  .steps li { font-size: .85rem; padding: .4rem .8rem .4rem 0; }
 }
 
 /* ========== Layout ========== */
