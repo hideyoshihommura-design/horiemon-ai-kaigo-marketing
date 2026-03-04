@@ -32,11 +32,13 @@ body {
 
 /* ========== Print ========== */
 @media print {
-  body { font-size: 10px; line-height: 1.6; }
+  body { font-size: 9.5px; line-height: 1.5; }
   .page-break { page-break-before: always; }
+  /* 活用例1は「はじめに」と同じページに流す（1ページ節約） */
+  #usecase1 { page-break-before: auto; }
   .cover { page-break-after: always; }
   .no-print { display: none; }
-  section { padding: 1rem 1.5rem; }
+  section { padding: .8rem 1.5rem; }
   /* 見出しの直後でページが切れないようにする */
   h2, h3, h4, .usecase-title, .usecase-subtitle { page-break-after: avoid; }
   /* 表・プロンプト・カードが途中で切れないようにする */
@@ -47,30 +49,40 @@ body {
   .ba-grid { grid-template-columns: 1fr; }
   /* まとめセクションを1ページに収める */
   .feature-grid { grid-template-columns: 1fr 1fr; }
-  .summary-box { page-break-inside: avoid; padding: 1rem; }
-  .summary-box h3 { margin: 0 0 .5rem; font-size: 1rem; }
-  .summary-table td, .summary-table th { padding: .3rem .5rem; font-size: .8rem; }
-  .feature-item { padding: .6rem .8rem; }
-  .feature-item h4 { font-size: .85rem; margin: 0 0 .2rem; }
-  .feature-item p { font-size: .8rem; }
-  .callout { padding: .6rem .8rem; margin: .8rem 0; font-size: .85rem; }
+  .summary-box { page-break-inside: avoid; padding: .8rem; }
+  .summary-box h3 { margin: 0 0 .4rem; font-size: .95rem; }
+  .summary-table td, .summary-table th { padding: .25rem .5rem; font-size: .78rem; }
+  .feature-item { padding: .5rem .7rem; }
+  .feature-item h4 { font-size: .82rem; margin: 0 0 .2rem; }
+  .feature-item p { font-size: .78rem; }
+  .callout { padding: .5rem .8rem; margin: .6rem 0; font-size: .82rem; }
   /* フッター */
-  .footer { padding: 1rem; }
+  .footer { padding: .8rem; }
   /* 余白を詰めて効率よく配置 */
   .container { padding: 0 1.5rem; }
-  h2 { font-size: 1.3rem; margin-bottom: 1rem; }
-  h3 { margin: 1.2rem 0 .5rem; font-size: 1rem; }
-  .usecase-title { font-size: 1.3rem; }
-  .ba-box { padding: .6rem .8rem; font-size: .82rem; line-height: 1.6; }
-  .prompt-box { font-size: .72rem; padding: .6rem .8rem; line-height: 1.5; }
-  .steps li { font-size: .82rem; padding: .3rem .6rem .3rem 0; margin-bottom: .3rem; }
-  .steps li::before { font-size: .6rem; padding: .2rem .4rem; }
-  .effect-table { font-size: .82rem; }
-  .effect-table th, .effect-table td { padding: .4rem .5rem; }
-  .problems { padding: .8rem 1rem; }
-  .problems li { font-size: .82rem; margin-bottom: .2rem; }
-  .scene-card { padding: .8rem 1rem; margin: .5rem 0; }
-  .tool-intro { padding: 1rem; }
+  h2 { font-size: 1.2rem; margin-bottom: .8rem; }
+  h3 { margin: .8rem 0 .4rem; font-size: .95rem; }
+  .usecase-title { font-size: 1.2rem; }
+  .usecase-subtitle { margin-bottom: .8rem; }
+  .ba-box { padding: .5rem .8rem; font-size: .8rem; line-height: 1.5; }
+  .ba-grid { gap: .5rem; margin: .6rem 0; }
+  .prompt-box { font-size: .7rem; padding: .5rem .8rem; line-height: 1.4; }
+  .steps { margin: .6rem 0; }
+  .steps li { font-size: .8rem; padding: .25rem .5rem .25rem 0; margin-bottom: .2rem; }
+  .steps li::before { font-size: .58rem; padding: .15rem .35rem; }
+  .effect-table { font-size: .8rem; margin: .6rem 0; }
+  .effect-table th, .effect-table td { padding: .3rem .5rem; }
+  .problems { padding: .6rem .8rem; margin: .6rem 0; }
+  .problems li { font-size: .8rem; margin-bottom: .15rem; }
+  .scene-card { padding: .6rem .8rem; margin: .4rem 0; }
+  .scene-q, .scene-a { padding: .4rem .8rem; margin: .3rem 0; font-size: .78rem; }
+  .scene-a { line-height: 1.4; }
+  .tool-intro { padding: .8rem; margin: .6rem 0; }
+  .tool-intro h4 { font-size: .95rem; }
+  .tool-intro p { font-size: .8rem; }
+  .tool-features li { font-size: .8rem; padding: .2rem 0 .2rem 1.3rem; }
+  p { margin-bottom: .5rem; }
+  section + section { border-top: none; }
 }
 
 /* ========== Layout ========== */
@@ -520,7 +532,7 @@ p { margin-bottom: .8rem; }
 </section>
 
 <!-- ========== 活用例 1 ========== -->
-<section class="page-break">
+<section class="page-break" id="usecase1">
 <div class="usecase-title"><span class="usecase-num">1</span>介護記録の作成</div>
 <p class="usecase-subtitle">音声で喋るだけで介護記録が完成</p>
 
