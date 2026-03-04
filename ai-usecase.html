@@ -202,22 +202,27 @@ p { margin-bottom: .8rem; }
 }
 .steps li {
   counter-increment: step;
-  padding: .8rem 1rem .8rem 3.5rem;
-  position: relative;
+  padding: .6rem 1rem .6rem 0;
   margin-bottom: .5rem;
   background: var(--c-primary-light);
   border-radius: var(--radius);
   font-size: .95rem;
+  display: flex;
+  align-items: baseline;
+  gap: .5rem;
 }
 .steps li::before {
   content: 'STEP ' counter(step);
-  position: absolute;
-  left: .8rem;
-  top: .8rem;
   font-size: .7rem;
   font-weight: 800;
-  color: var(--c-primary);
+  color: #fff;
+  background: var(--c-primary);
+  padding: .3rem .6rem;
+  border-radius: 4px;
   letter-spacing: .05em;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: .8rem;
 }
 
 /* ========== Prompt Box ========== */
