@@ -18,26 +18,40 @@ KAIGO_FEEDS = {
     "福祉新聞": "https://www.fukushishimbun.co.jp/feed",
 }
 
-# 生成AI・AIビジネス専門のRSSフィード
+# 生成AI・AIツール専門のRSSフィード
 GENAI_FEEDS = {
     "AIsmiley": "https://aismiley.co.jp/feed/",
     "AINOW": "https://ainow.ai/feed/",
+    "Ledge.ai": "https://ledge.ai/feed/",
     "ITmedia AI+": "https://rss.itmedia.co.jp/rss/2.0/aiplus.xml",
+    "ITmedia NEWS": "https://rss.itmedia.co.jp/rss/2.0/news_bursts.xml",
     "TechCrunch日本版": "https://jp.techcrunch.com/feed/",
     "日経テクノロジー": "https://xtech.nikkei.com/rss/index.rdf",
+    "ZDNet Japan": "https://japan.zdnet.com/rss/news.rdf",
+    "ASCII.jp AI": "https://ascii.jp/rss.xml",
 }
 
-# 介護×AIに関連するキーワード（フィルタリング用）
+# 介護・福祉に関連するキーワード（フィルタリング用）
 KAIGO_KEYWORDS = [
     "介護", "在宅医療", "訪問介護", "デイサービス", "特養", "老人ホーム",
     "ケアマネ", "介護士", "介護職", "高齢者", "認知症", "福祉", "介護保険",
-    "人材不足", "離職率", "介護記録", "シフト", "介護DX",
+    "人材不足", "離職率", "介護記録", "シフト", "介護DX", "介護施設",
+    "サービス提供責任者", "施設長", "ケアプラン", "介護報酬",
 ]
 
+# 生成AIツール・活用に関連するキーワード（フィルタリング用）
 GENAI_KEYWORDS = [
-    "生成AI", "ChatGPT", "Claude", "Gemini", "Copilot", "LLM",
-    "AI活用", "AI業務", "AI研修", "DX", "自動化", "業務効率",
-    "プロンプト", "AIツール", "人工知能", "AIリスキリング",
+    # ツール名
+    "生成AI", "ChatGPT", "GPT-4", "GPT-4o", "Claude", "Gemini",
+    "Copilot", "NotebookLM", "Perplexity", "Grok", "Suno", "Midjourney",
+    "Stable Diffusion", "Whisper", "Sora", "Dify", "n8n",
+    # 活用・機能キーワード
+    "LLM", "AI活用", "AI業務", "AI研修", "AI導入", "AI自動化",
+    "プロンプト", "AIツール", "AIアシスタント", "AIエージェント",
+    "AIリスキリング", "業務効率化", "文章生成", "画像生成", "音声AI",
+    # 動向キーワード
+    "DX推進", "生成AI活用", "AI新機能", "AIアップデート", "AI最新",
+    "OpenAI", "Anthropic", "Google AI", "Microsoft AI",
 ]
 
 
