@@ -148,6 +148,15 @@ body{font-family:"Noto Sans JP",sans-serif;color:var(--text);background:#fff;lin
 .cta-btn-large:hover{transform:translateY(-4px);box-shadow:0 15px 50px rgba(66,133,244,.4)}
 .cta-note{display:block;margin-top:.75rem;font-size:.8rem;color:var(--text-muted)}
 
+/* ========== Speaker ========== */
+.speaker-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;max-width:800px;margin:0 auto}
+.speaker-card{background:#fff;border-radius:var(--radius);padding:2rem;box-shadow:0 4px 20px rgba(0,0,0,.06);display:flex;flex-direction:column;align-items:center;text-align:center}
+.speaker-photo{width:120px;height:120px;border-radius:50%;background:var(--bg-gray);border:3px solid var(--border);margin-bottom:1.25rem;object-fit:cover;display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:var(--text-muted);overflow:hidden}
+.speaker-photo img{width:100%;height:100%;object-fit:cover}
+.speaker-name{font-size:1.2rem;font-weight:900;color:var(--dark);margin-bottom:.25rem}
+.speaker-title{font-size:.85rem;color:var(--accent);font-weight:700;margin-bottom:.75rem}
+.speaker-bio{font-size:.875rem;color:var(--text-sub);line-height:1.8;text-align:left}
+
 /* ========== Footer CTA ========== */
 .footer-cta{background:var(--dark);color:#fff;padding:80px 20px;text-align:center}
 .footer-cta .text-large{margin-bottom:1rem}
@@ -390,6 +399,30 @@ body{font-family:"Noto Sans JP",sans-serif;color:var(--text);background:#fff;lin
         <div class='details-row'><span class='details-label'>対象</span><span class='details-value'>介護事業者（経営者・施設長・管理者）</span></div>
         <div class='details-row'><span class='details-label'>録画</span><span class='details-value'>参加者全員に配信</span></div>" %}
     </div>
+  </div>
+</section>
+
+<!-- ========== 登壇者 ========== -->
+<section class="section bg-gray">
+  <div class="section-inner">
+    <div class="section-header">
+      <h2 class="text-large section-title">登壇者<span class="highlight">紹介</span></h2>
+    </div>
+    {% module "speakers" path="@hubspot/rich_text", label="登壇者",
+      html="<div class='speaker-grid'>
+        <div class='speaker-card'>
+          <div class='speaker-photo'>👤</div>
+          <div class='speaker-name'>お名前</div>
+          <div class='speaker-title'>肩書き・所属</div>
+          <p class='speaker-bio'>プロフィールテキストが入ります。経歴や専門領域、実績などを2〜3文でご記入ください。</p>
+        </div>
+        <div class='speaker-card'>
+          <div class='speaker-photo'>👤</div>
+          <div class='speaker-name'>お名前</div>
+          <div class='speaker-title'>肩書き・所属</div>
+          <p class='speaker-bio'>プロフィールテキストが入ります。経歴や専門領域、実績などを2〜3文でご記入ください。</p>
+        </div>
+      </div>" %}
   </div>
 </section>
 
