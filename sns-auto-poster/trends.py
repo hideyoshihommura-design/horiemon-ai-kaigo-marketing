@@ -5,7 +5,7 @@
 
 import re
 import feedparser
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional
 
 
@@ -186,5 +186,5 @@ def fetch_trending_topics(theme: Optional[str] = None) -> dict:
     return {
         "google_trends": google_trends,
         "news_articles": selected,
-        "fetched_at": datetime.now().isoformat(),
+        "fetched_at": datetime.now(timezone.utc).isoformat(),
     }
