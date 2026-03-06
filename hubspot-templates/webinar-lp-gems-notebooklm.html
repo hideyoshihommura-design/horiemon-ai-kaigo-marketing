@@ -58,19 +58,24 @@ body{font-family:"Noto Sans JP",sans-serif;color:var(--text);background:#fff;lin
 .hero-orb3{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(255,255,255,.06) 0%,transparent 60%);border-radius:50%;pointer-events:none}
 @keyframes floatA{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(25px,-18px) scale(1.08)}}
 @keyframes floatB{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-18px,25px) scale(1.06)}}
-.hero-content{position:relative;z-index:2;max-width:900px;text-align:center;color:#fff}
-.hero-eyebrow{font-size:.75rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:1.25rem}
-.hero-badge{display:inline-flex;gap:.5rem;margin-bottom:1.5rem;flex-wrap:wrap;justify-content:center}
-.hero-badge span{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.45);color:#fff;padding:.4rem 1.1rem;border-radius:50px;font-size:.78rem;font-weight:700;backdrop-filter:blur(6px)}
-.hero-title{margin-bottom:1rem;text-shadow:0 4px 24px rgba(0,0,0,.18)}
-.hero-divider{width:56px;height:3px;background:rgba(255,255,255,.55);margin:.5rem auto 1.5rem;border-radius:2px}
-.hero-sub{font-size:1.15rem;color:rgba(255,255,255,.92);margin-bottom:2.5rem;text-shadow:0 2px 10px rgba(0,0,0,.12)}
+.hero-content{position:relative;z-index:2;max-width:960px;text-align:center;color:#fff}
+/* ブランド名：しっかり大きく・目立つ */
+.hero-eyebrow{font-size:1.15rem;font-weight:900;letter-spacing:.04em;color:#fff;margin-bottom:1.5rem;opacity:.95}
+/* バッジ：小さく控えめに補足情報 */
+.hero-badge{display:inline-flex;gap:.5rem;margin-bottom:1.75rem;flex-wrap:wrap;justify-content:center}
+.hero-badge span{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);color:rgba(255,255,255,.85);padding:.35rem 1rem;border-radius:50px;font-size:.72rem;font-weight:700;backdrop-filter:blur(6px)}
+/* メインタイトル：圧倒的に大きく・最重要要素 */
+.hero-title{margin-bottom:.75rem;text-shadow:0 4px 30px rgba(0,0,0,.2);font-size:clamp(3.2rem,8vw,6rem) !important;font-weight:900;line-height:1.1;letter-spacing:-.03em}
+.hero-divider{width:56px;height:3px;background:rgba(255,255,255,.5);margin:.25rem auto 1.5rem;border-radius:2px}
+/* サブテキスト：タイトルの1/4以下のサイズで明確な差をつける */
+.hero-sub{font-size:1rem;color:rgba(255,255,255,.85);margin-bottom:2.5rem;line-height:1.9;text-shadow:0 2px 10px rgba(0,0,0,.12)}
 .hero-cta{display:flex;flex-direction:column;align-items:center;gap:.75rem}
-.hero-cta .cta-btn{display:inline-flex;align-items:center;gap:.6rem;background:#fff;color:var(--purple);padding:1.25rem 2.75rem;border-radius:50px;font-size:1.1rem;font-weight:700;text-decoration:none;transition:.3s;box-shadow:0 12px 40px rgba(0,0,0,.25)}
-.hero-cta .cta-btn::after{content:'→';font-size:1.1rem;transition:.3s}
+.hero-cta .cta-btn{display:inline-flex;align-items:center;gap:.6rem;background:#fff;color:var(--purple);padding:1.25rem 2.75rem;border-radius:50px;font-size:1.05rem;font-weight:700;text-decoration:none;transition:.3s;box-shadow:0 12px 40px rgba(0,0,0,.25)}
+.hero-cta .cta-btn::after{content:'→';font-size:1.05rem;transition:.3s}
 .hero-cta .cta-btn:hover{transform:translateY(-4px);box-shadow:0 22px 55px rgba(0,0,0,.3);background:rgba(255,255,255,.95)}
 .hero-cta .cta-btn:hover::after{transform:translateX(4px)}
-.hero-note{font-size:.8rem;color:rgba(255,255,255,.68)}
+/* 注記：最小サイズで存在感を抑える */
+.hero-note{font-size:.75rem;color:rgba(255,255,255,.55)}
 /* スクロールインジケーター */
 .hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;color:rgba(255,255,255,.5);font-size:.65rem;letter-spacing:.08em;animation:scrollBounce 2.2s ease-in-out infinite;z-index:2;text-decoration:none}
 .hero-scroll::after{content:'';display:block;width:1px;height:32px;background:linear-gradient(to bottom,rgba(255,255,255,.45),transparent)}
@@ -212,7 +217,7 @@ body{font-family:"Noto Sans JP",sans-serif;color:var(--text);background:#fff;lin
   <div class="hero-orb2"></div>
   <div class="hero-orb3"></div>
   <div class="hero-content">
-    <p class="hero-eyebrow">Horiemon AI School × 介護校</p>
+    <p class="hero-eyebrow">ホリエモンAI学校介護校</p>
     <div class="hero-badge">
       <span>✦ 参加無料</span>
       <span>🎥 Zoom開催</span>
