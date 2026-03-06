@@ -207,10 +207,10 @@ def fetch_trending_topics(theme: Optional[str] = None) -> dict:
     all_articles = kaigo_articles + genai_articles
     all_articles.sort(key=lambda x: x["score"], reverse=True)
 
-    # 介護・生成AIそれぞれ最低2件ずつ確保しながら上位8件を選択
-    top_kaigo = [a for a in all_articles if a["category"] == "介護"][:3]
+    # 生成AIを優先しつつ介護も確保（genai3件 + kaigo2件）
     top_genai = [a for a in all_articles if a["category"] == "生成AI"][:3]
-    selected = top_kaigo + top_genai
+    top_kaigo = [a for a in all_articles if a["category"] == "介護"][:2]
+    selected = top_genai + top_kaigo
 
     # 残りをスコア順で補完（最大8件）
     selected_titles = {a["title"] for a in selected}
