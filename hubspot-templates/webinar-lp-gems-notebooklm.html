@@ -123,7 +123,7 @@ body{font-family:"Noto Sans JP",sans-serif;color:var(--text);background:#fff;lin
 .usecase-demo .demo-a{color:var(--text)}
 
 /* ========== Benefits ========== */
-.benefit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.benefit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .benefit-card{background:#fff;border-radius:var(--radius);padding:2rem;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.05);transition:.2s}
 .benefit-card:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,.1)}
 .benefit-icon{font-size:2.5rem;margin-bottom:1rem}
@@ -224,9 +224,9 @@ body{font-family:"Noto Sans JP",sans-serif;color:var(--text);background:#fff;lin
       <span>🖥 ライブデモあり</span>
     </div>
     {% module "hero_title" path="@hubspot/rich_text", label="ヒーロータイトル",
-      html="<h1 class='text-huge hero-title'>介護現場のAIを<br>もっとシンプルに。</h1>" %}
+      html="<h1 class='text-huge hero-title'>「自分専用AIアシスタント」を<br>無料で作る方法</h1>" %}
     <div class="hero-divider"></div>
-    <p class="hero-sub">Gems × NotebookLMで社内規定を活用する<br>介護×生成AI 実践ウェビナー</p>
+    <p class="hero-sub">Gems × NotebookLM連携で業務効率が劇的に変わる<br>介護×生成AI 実践ウェビナー</p>
     <div class="hero-cta">
       <a href="#form" class="cta-btn">無料ウェビナーに申し込む</a>
       <p class="hero-note">※ 介護事業者の方限定・お申し込み30秒</p>
@@ -244,19 +244,19 @@ body{font-family:"Noto Sans JP",sans-serif;color:var(--text);background:#fff;lin
     {% module "problems" path="@hubspot/rich_text", label="問題カード",
       html="<div class='problem-grid'>
         <div class='problem-card'>
-          <div class='problem-icon'>📚</div>
-          <h3>規定集、誰も開かない</h3>
-          <p>分厚いマニュアルがあっても、忙しい現場では確認されない</p>
+          <div class='problem-icon'>🔁</div>
+          <h3>毎回同じプロンプトを書いている</h3>
+          <p>ChatGPTやGeminiを使うたびに長い説明を入力し直す手間が続いている</p>
         </div>
         <div class='problem-card'>
-          <div class='problem-icon'>🔄</div>
-          <h3>同じ質問を何度も受ける</h3>
-          <p>「この場合どうするんでしたっけ？」が毎日繰り返される</p>
+          <div class='problem-icon'>😟</div>
+          <h3>AIが「嘘」をつかないか不安</h3>
+          <p>ハルシネーション（でたらめな回答）が怖くて業務に使いきれていない</p>
         </div>
         <div class='problem-card'>
-          <div class='problem-icon'>👶</div>
-          <h3>新人教育に時間がかかる</h3>
-          <p>規定・指針を覚えるまで戦力にならない</p>
+          <div class='problem-icon'>📂</div>
+          <h3>社内資料をAIに活かせていない</h3>
+          <p>マニュアルや議事録があっても、AIに読ませると精度がバラついてしまう</p>
         </div>
       </div>" %}
   </div>
@@ -273,26 +273,29 @@ body{font-family:"Noto Sans JP",sans-serif;color:var(--text);background:#fff;lin
       html="<div class='whatis-container'>
         <div class='whatis-card'>
           <h3>📘 NotebookLM</h3>
-          <p>ドキュメントをアップロードすると、その内容だけを元に回答するAI</p>
+          <p>「あなたの資料だけを知っているAI」。アップロードした資料のみを参照して回答するため、ハルシネーションを防ぎ、出典（ページ・箇所）を明示してくれる。</p>
           <ul>
-            <li>社内規定PDFをアップロード</li>
-            <li>ソース限定で正確な回答</li>
-            <li>出典を明示してくれる</li>
+            <li>PDF・Googleドキュメント・スライドに対応</li>
+            <li>ウェブサイトURL・YouTube動画もソースに追加可能</li>
+            <li>Audio Overview（ポッドキャスト風音声）生成</li>
+            <li>スライド自動生成（PPTX出力対応）</li>
+            <li>データテーブルで複数資料を構造化</li>
           </ul>
         </div>
         <div class='whatis-card'>
           <h3>💎 Gems</h3>
-          <p>カスタム指示を設定できる「自分専用のGemini」</p>
+          <p>「自分専用のGemini」を作る機能。Geminiに役割と指示を一度設定すれば、毎回プロンプトを書かなくてOK。URLで共有してチーム全員で使える。</p>
           <ul>
-            <li>役割を設定（例：介護規定アドバイザー）</li>
-            <li>回答スタイルをカスタマイズ</li>
-            <li>繰り返し使える</li>
+            <li>役割・指示をカスタマイズ設定</li>
+            <li>毎回のプロンプト入力が不要に</li>
+            <li>URLを共有するだけでチーム展開</li>
+            <li>知識（Knowledge）にNotebookLMを追加可能</li>
           </ul>
         </div>
       </div>
       <div class='synergy-box'>
-        <h3>🔗 組み合わせると…</h3>
-        <p>「社内規定に基づいて、わかりやすく回答する専用AIアシスタント」が完成</p>
+        <h3>🔗「役割」×「知識ベース」= 最強の専用AIアシスタント</h3>
+        <p>2025年12月のアップデートでGems の「知識」にNotebookLMを連携可能に。社内資料を理解した上で、設定した役割で回答するAIが完成します。</p>
       </div>" %}
   </div>
 </section>
@@ -309,33 +312,44 @@ body{font-family:"Noto Sans JP",sans-serif;color:var(--text);background:#fff;lin
         <div class='usecase-card'>
           <div class='usecase-num'>01</div>
           <div class='usecase-content'>
-            <h3>夜勤スタッフの緊急対応</h3>
-            <p>深夜に判断を迫られる場面で、規定をすぐに確認できる</p>
+            <h3>社内ヘルプデスクの自動化</h3>
+            <p>総務・人事への問い合わせ対応が多く、時間を取られている事業所に。就業規則や各種規定をNotebookLMにアップロードし、Gemsで「社内規定アドバイザー」を作成。</p>
             <div class='usecase-demo'>
-              <div class='demo-q'>👤「利用者が転倒しました。報告手順を教えてください」</div>
-              <div class='demo-a'>🤖「事故報告書の作成手順は以下の通りです。まず…」（規定p.23より）</div>
+              <div class='demo-q'>👤「慶弔休暇は何日取れますか？結婚の場合です。」</div>
+              <div class='demo-a'>🤖「就業規則第○条によると、本人が結婚する場合は5日間の特別休暇を取得できます。」（出典：就業規則 p.23）</div>
             </div>
           </div>
         </div>
         <div class='usecase-card'>
           <div class='usecase-num'>02</div>
           <div class='usecase-content'>
-            <h3>新人教育の効率化</h3>
-            <p>先輩に聞きにくいことも、AIなら気軽に質問できる</p>
+            <h3>営業チームの提案力強化</h3>
+            <p>商品知識の習得に時間がかかり、提案書の質にばらつきが出る問題に。製品カタログ・FAQ・成功事例をNotebookLMに登録し、Gemsで「営業サポートAI」を作成。</p>
             <div class='usecase-demo'>
-              <div class='demo-q'>👤「入浴介助の基本手順と注意点を教えて」</div>
-              <div class='demo-a'>🤖「入浴介助マニュアルに基づくと、以下の5ステップで…」（指針p.45より）</div>
+              <div class='demo-q'>👤「製造業向けにソリューションAを提案したい。ポイントは？」</div>
+              <div class='demo-a'>🤖「製造業向けの訴求ポイントは①稼働率15%向上（B社実績）②既存ERPとの連携③導入3ヶ月でROI達成の3点です。」（出典：成功事例集 p.45-48）</div>
             </div>
           </div>
         </div>
         <div class='usecase-card'>
           <div class='usecase-num'>03</div>
           <div class='usecase-content'>
-            <h3>監査対応の準備</h3>
-            <p>規定の要約や資料作成をAIがサポート</p>
+            <h3>会議・プロジェクト管理の効率化</h3>
+            <p>過去の会議内容を把握するのに時間がかかり、新メンバーのキャッチアップが遅い問題に。議事録・プロジェクト資料をNotebookLMに蓄積し、Gemsで「プロジェクトアシスタント」を作成。</p>
             <div class='usecase-demo'>
-              <div class='demo-q'>👤「身体拘束に関する規定を要約して」</div>
-              <div class='demo-a'>🤖「身体拘束廃止に関する規定の要点は以下の3点です…」（規定p.78-82より）</div>
+              <div class='demo-q'>👤「前回の会議で決まったことと、未決事項を教えて」</div>
+              <div class='demo-a'>🤖「【決定事項】リリース日4/15・デザインA案 【未決事項】価格設定・マーケ予算配分」（出典：第5回定例MTG議事録）</div>
+            </div>
+          </div>
+        </div>
+        <div class='usecase-card'>
+          <div class='usecase-num'>04</div>
+          <div class='usecase-content'>
+            <h3>研修・教育コンテンツの自動化</h3>
+            <p>新入社員からの同じ質問に毎回対応する負担を解消。研修資料・マニュアルをNotebookLMに登録し、Audio Overview（音声教材）やVideo Overviewsも自動生成。</p>
+            <div class='usecase-demo'>
+              <div class='demo-q'>👤「新人向けに研修スライドを作って」</div>
+              <div class='demo-a'>🤖「マニュアルから研修スライドを生成しました。PPTXでダウンロードできます。」（出典：新人研修マニュアル）</div>
             </div>
           </div>
         </div>
@@ -358,19 +372,34 @@ body{font-family:"Noto Sans JP",sans-serif;color:var(--text);background:#fff;lin
     {% module "benefits" path="@hubspot/rich_text", label="ベネフィット",
       html="<div class='benefit-grid'>
         <div class='benefit-card'>
-          <div class='benefit-icon'>🎯</div>
-          <h3>Gems × NotebookLMの基本</h3>
-          <p>2つのツールの違いと連携方法をゼロから解説</p>
+          <div class='benefit-icon'>🤖</div>
+          <h3>連携の仕組みがわかる</h3>
+          <p>Gems × NotebookLMの「役割×知識ベース」アーキテクチャをゼロから丁寧に解説</p>
         </div>
         <div class='benefit-card'>
           <div class='benefit-icon'>🎬</div>
-          <h3>介護現場での実演デモ</h3>
-          <p>実際の規定を使ったAI活用を画面共有で見られる</p>
+          <h3>ライブデモを見られる</h3>
+          <p>実際の資料を使った質問応答・スライド生成・Audio Overview生成を画面共有で実演</p>
         </div>
         <div class='benefit-card'>
-          <div class='benefit-icon'>📋</div>
-          <h3>明日から始める設定手順</h3>
-          <p>難しい設定は不要。すぐに試せる方法をお伝えします</p>
+          <div class='benefit-icon'>🏢</div>
+          <h3>4つの業務活用事例</h3>
+          <p>社内ヘルプデスク・営業・プロジェクト管理・研修、すぐ使えるケースを具体的に紹介</p>
+        </div>
+        <div class='benefit-card'>
+          <div class='benefit-icon'>🚀</div>
+          <h3>2026年最新機能を先取り</h3>
+          <p>スライド自動生成（PPTX出力）・Video Overviews・データテーブルなど最新アップデートを解説</p>
+        </div>
+        <div class='benefit-card'>
+          <div class='benefit-icon'>👣</div>
+          <h3>今日から始めるステップがわかる</h3>
+          <p>Googleアカウントがあればすぐ始められる。4ステップの導入手順を丁寧に説明</p>
+        </div>
+        <div class='benefit-card'>
+          <div class='benefit-icon'>🎁</div>
+          <h3>参加特典3つプレゼント</h3>
+          <p>スライド資料PDF・Gems設定テンプレート集・NotebookLM活用チェックリストを全員に配布</p>
         </div>
       </div>" %}
   </div>
@@ -386,23 +415,23 @@ body{font-family:"Noto Sans JP",sans-serif;color:var(--text);background:#fff;lin
       html="<div class='steps-container'>
         <div class='step-card'>
           <div class='step-num'>1</div>
-          <h3>規定をPDF化</h3>
-          <p>既存の規定・指針をPDFにまとめる</p>
+          <h3>Googleアカウントを準備</h3>
+          <p>活用したい資料（PDF・ドキュメント等）を選定する（約5分）</p>
         </div>
         <div class='step-card'>
           <div class='step-num'>2</div>
-          <h3>NotebookLMに登録</h3>
-          <p>PDFをアップロードするだけ</p>
+          <h3>NotebookLMに資料を登録</h3>
+          <p>notebooklm.google.com でノートブックを作成し資料をアップロード（約10分）</p>
         </div>
         <div class='step-card'>
           <div class='step-num'>3</div>
-          <h3>Gemsを設定</h3>
-          <p>「介護規定アドバイザー」として指示を設定</p>
+          <h3>Gemsで専用AIを作成</h3>
+          <p>gemini.google.com の「Gemマネージャー」から役割・指示を設定（約5分）</p>
         </div>
         <div class='step-card'>
           <div class='step-num'>4</div>
-          <h3>スタッフに共有</h3>
-          <p>URLを共有すれば全員が使える</p>
+          <h3>チームへ展開</h3>
+          <p>URLを共有するだけ。Google Workspaceなら組織全体で管理可能</p>
         </div>
       </div>" %}
   </div>
@@ -417,14 +446,44 @@ body{font-family:"Noto Sans JP",sans-serif;color:var(--text);background:#fff;lin
     <div class="details-box">
       <div class="details-header">ウェビナー詳細</div>
       {% module "event_details" path="@hubspot/rich_text", label="開催概要",
-        html="<div class='details-row'><span class='details-label'>テーマ</span><span class='details-value'>介護×生成AI 実践ウェビナー</span></div>
-        <div class='details-row'><span class='details-label'>内容</span><span class='details-value'>Gems × NotebookLMで社内規定を活用する方法</span></div>
-        <div class='details-row'><span class='details-label'>日時</span><span class='details-value'>※決定次第ご案内します</span></div>
-        <div class='details-row'><span class='details-label'>形式</span><span class='details-value'>Zoom（オンライン）</span></div>
+        html="<div class='details-row'><span class='details-label'>テーマ</span><span class='details-value'>「自分専用AIアシスタント」を無料で作る方法</span></div>
+        <div class='details-row'><span class='details-label'>内容</span><span class='details-value'>Gems × NotebookLM連携で業務効率が劇的に変わる</span></div>
+        <div class='details-row'><span class='details-label'>日時</span><span class='details-value'>※お申し込み後、決定次第メールでご案内します</span></div>
+        <div class='details-row'><span class='details-label'>所要時間</span><span class='details-value'>60分（質疑応答含む）</span></div>
+        <div class='details-row'><span class='details-label'>形式</span><span class='details-value'>Zoomウェビナー（オンライン）</span></div>
         <div class='details-row'><span class='details-label'>参加費</span><span class='details-value'><span class='price'>無料</span></span></div>
-        <div class='details-row'><span class='details-label'>対象</span><span class='details-value'>介護事業者（経営者・施設長・管理者）</span></div>
-        <div class='details-row'><span class='details-label'>録画</span><span class='details-value'>参加者全員に配信</span></div>" %}
+        <div class='details-row'><span class='details-label'>対象</span><span class='details-value'>生成AIを業務活用したい方・DX推進担当者・経営者・管理職</span></div>
+        <div class='details-row'><span class='details-label'>録画</span><span class='details-value'>参加者全員に後日配信</span></div>
+        <div class='details-row'><span class='details-label'>特典</span><span class='details-value'>スライド資料PDF・Gems設定テンプレート集・NotebookLM活用チェックリスト</span></div>" %}
     </div>
+  </div>
+</section>
+
+<!-- ========== 参加特典 ========== -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-header">
+      <h2 class="text-large section-title">参加者全員に<span class="highlight">特典3つ</span>プレゼント</h2>
+      <p class="section-lead">お申し込みいただいた方全員に、ウェビナー終了後に送付します</p>
+    </div>
+    {% module "benefits_gift" path="@hubspot/rich_text", label="参加特典",
+      html="<div class='benefit-grid' style='grid-template-columns:repeat(3,1fr)'>
+        <div class='benefit-card'>
+          <div class='benefit-icon'>📄</div>
+          <h3>スライド資料（PDF）</h3>
+          <p>当日使用したスライドをそのままPDF形式でお届け。社内共有や振り返りに</p>
+        </div>
+        <div class='benefit-card'>
+          <div class='benefit-icon'>💎</div>
+          <h3>Gems設定テンプレート集</h3>
+          <p>社内ヘルプデスク用・営業サポート用・プロジェクト管理用の3種類をすぐ使える形式で</p>
+        </div>
+        <div class='benefit-card'>
+          <div class='benefit-icon'>✅</div>
+          <h3>NotebookLM活用チェックリスト</h3>
+          <p>導入時に確認すべき項目を一覧化。設定ミスなくスムーズに始められる</p>
+        </div>
+      </div>" %}
   </div>
 </section>
 
@@ -478,19 +537,27 @@ body{font-family:"Noto Sans JP",sans-serif;color:var(--text);background:#fff;lin
       {% module "faq_content" path="@hubspot/rich_text", label="FAQ",
         html="<div class='faq-item'>
           <div class='faq-q'>NotebookLMやGemsは無料で使えますか？</div>
-          <div class='faq-a'>はい、どちらもGoogleアカウントがあれば無料で利用できます。</div>
+          <div class='faq-a'>はい、どちらもGoogleアカウントがあれば無料で利用できます。より高度な機能はGoogle Workspaceの有料プランで利用可能です。</div>
         </div>
         <div class='faq-item'>
-          <div class='faq-q'>ITに詳しくなくても大丈夫ですか？</div>
-          <div class='faq-a'>大丈夫です。ウェビナーでは画面を見せながら丁寧に解説します。</div>
+          <div class='faq-q'>社内資料をアップロードしてセキュリティは大丈夫ですか？</div>
+          <div class='faq-a'>NotebookLMはGoogleのエンタープライズセキュリティ基準に準拠しており、アップロードしたデータはAIの学習には使用されません。Google Workspaceをご利用の場合、組織の管理ポリシーを適用できます。</div>
         </div>
         <div class='faq-item'>
-          <div class='faq-q'>当日参加できません。</div>
-          <div class='faq-a'>録画を配信します。お申し込みだけでもどうぞ。</div>
+          <div class='faq-q'>日本語に対応していますか？</div>
+          <div class='faq-a'>はい、完全対応しています。Audio OverviewやVideo Overviewsも日本語で生成可能です。</div>
         </div>
         <div class='faq-item'>
-          <div class='faq-q'>社内規定をアップロードしてセキュリティは大丈夫？</div>
-          <div class='faq-a'>NotebookLMはGoogleのセキュリティ基準に準拠しています。詳しくはウェビナーで解説します。</div>
+          <div class='faq-q'>どのような資料形式に対応していますか？</div>
+          <div class='faq-a'>PDF、Googleドキュメント・スライド・スプレッドシート、ウェブサイトURL、YouTube動画、テキストファイルなど多数に対応しています。</div>
+        </div>
+        <div class='faq-item'>
+          <div class='faq-q'>当日参加できない場合はどうなりますか？</div>
+          <div class='faq-a'>録画を後日配信します。お申し込みいただければ、参加特典（スライド資料・テンプレート集・チェックリスト）もお受け取りいただけます。</div>
+        </div>
+        <div class='faq-item'>
+          <div class='faq-q'>スマートフォンでも使えますか？</div>
+          <div class='faq-a'>はい。2026年1月からiOS/Androidアプリも提供開始されており、Video Overviewsのカスタマイズもスマホから可能です。</div>
         </div>" %}
     </div>
   </div>
@@ -498,8 +565,8 @@ body{font-family:"Noto Sans JP",sans-serif;color:var(--text);background:#fff;lin
 
 <!-- ========== フッターCTA ========== -->
 <section class="footer-cta">
-  <h2 class="text-large">規定は<span class="text-accent">読むもの</span>から<br><span class="text-green">聞くもの</span>へ</h2>
-  <p class="text-body">参加無料・録画配信あり</p>
+  <h2 class="text-large">社内ナレッジが<span class="text-accent">24時間</span><br>答えてくれる時代へ</h2>
+  <p class="text-body">参加無料・録画配信あり・特典3点プレゼント</p>
   <a href="#form" class="cta-btn-large">無料ウェビナーに申し込む</a>
 </section>
 
