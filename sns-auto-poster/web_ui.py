@@ -414,7 +414,7 @@ DASHBOARD_HTML = """
 
         function renderTrends(data) {
             const container = document.getElementById("trends-content");
-            // /api/trends は直接 {google_trends, news_articles} を返す
+            // /api/trends は直接 {google_trends, news_articles, fetched_at} を返す
             // /api/today 経由は data.trending_data の下に入っている
             const trends_data = (data && data.google_trends !== undefined) ? data : (data && data.trending_data ? data.trending_data : null);
             if (!trends_data) {
@@ -424,8 +424,19 @@ DASHBOARD_HTML = """
 
             const trends = trends_data.google_trends || [];
             const news = trends_data.news_articles || [];
+            const fetchedAt = trends_data.fetched_at
+                ? new Date(trends_data.fetched_at).toLocaleString("ja-JP")
+                : null;
 
-            let html = "";
+            let html = `<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+                <span style="font-size:0.82rem;color:#94a3b8;">
+                    ${fetchedAt ? "取得時刻: " + fetchedAt : ""}
+                </span>
+                <button onclick="loadTrends()" style="padding:5px 14px;border-radius:8px;border:1.5px solid #667eea;background:transparent;color:#667eea;font-size:0.82rem;font-weight:600;cursor:pointer;">
+                    ↻ 再取得
+                </button>
+            </div>`;
+
             if (trends.length > 0) {
                 html += `<h2>Googleトレンドキーワード</h2>
                     <div class="trend-tags">
@@ -435,16 +446,23 @@ DASHBOARD_HTML = """
             if (news.length > 0) {
                 html += `<h2>参照したニュース</h2>
                     <ul class="news-list">
-                        ${news.map(a => `
+                        ${news.map(a => {
+                            let pubStr = "";
+                            if (a.published) {
+                                try {
+                                    pubStr = new Date(a.published).toLocaleDateString("ja-JP");
+                                } catch(e) { pubStr = a.published; }
+                            }
+                            return `
                             <li class="news-item">
-                                <div class="news-source">${escapeHtml(a.source)}</div>
+                                <div class="news-source">${escapeHtml(a.source)}${pubStr ? " &nbsp;·&nbsp; " + pubStr : ""}</div>
                                 <div class="news-title">${escapeHtml(a.title)}</div>
-                            </li>
-                        `).join("")}
+                            </li>`;
+                        }).join("")}
                     </ul>`;
             }
-            if (!html) {
-                html = '<div class="empty-state"><p>トレンドデータがありません</p></div>';
+            if (trends.length === 0 && news.length === 0) {
+                html += '<div class="empty-state"><p>トレンドデータがありません</p></div>';
             }
             container.innerHTML = html;
         }
