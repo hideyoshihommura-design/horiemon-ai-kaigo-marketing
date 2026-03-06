@@ -342,10 +342,24 @@ a {
   text-align: center;
   margin-bottom: 40px;
   line-height: 1.4;
+  position: relative;
+  padding-bottom: 18px;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 4px;
+  background: linear-gradient(135deg, #FF0080, #7928CA);
+  border-radius: 2px;
 }
 
 .section-title .highlight {
-  background: linear-gradient(transparent 70%, #ffe4f1 70%);
+  color: #7928CA;
 }
 
 /* ========== Learn Section ========== */
@@ -408,6 +422,10 @@ a {
 
 .form-section .section-title {
   color: #fff;
+}
+
+.form-section .section-title::after {
+  background: rgba(255,255,255,0.6);
 }
 
 .form-lead {
