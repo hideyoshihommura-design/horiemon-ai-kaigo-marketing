@@ -338,6 +338,7 @@ DASHBOARD_HTML = """
                 el.classList.toggle("active", ["tab-today", "tab-trends", "tab-history"][i] === `tab-${tab}`);
             });
             if (tab === "history") loadHistory();
+            if (tab === "trends") loadTrends();
         }
 
         function copyToClipboard(text, btn) {
@@ -399,15 +400,30 @@ DASHBOARD_HTML = """
                 "最終生成: " + new Date(data.generated_at).toLocaleString("ja-JP");
         }
 
+        async function loadTrends() {
+            const container = document.getElementById("trends-content");
+            container.innerHTML = '<div class="loading show"><div class="spinner"></div><div>トレンド情報を取得中...</div></div>';
+            try {
+                const res = await fetch("/api/trends");
+                const data = await res.json();
+                renderTrends(data);
+            } catch (e) {
+                container.innerHTML = '<div class="empty-state"><p>トレンド取得に失敗しました: ' + escapeHtml(e.message) + '</p></div>';
+            }
+        }
+
         function renderTrends(data) {
             const container = document.getElementById("trends-content");
-            if (!data || !data.trending_data) {
+            // /api/trends は直接 {google_trends, news_articles} を返す
+            // /api/today 経由は data.trending_data の下に入っている
+            const trends_data = (data && data.google_trends !== undefined) ? data : (data && data.trending_data ? data.trending_data : null);
+            if (!trends_data) {
                 container.innerHTML = '<div class="empty-state"><p>トレンドデータがありません</p></div>';
                 return;
             }
 
-            const trends = data.trending_data.google_trends || [];
-            const news = data.trending_data.news_articles || [];
+            const trends = trends_data.google_trends || [];
+            const news = trends_data.news_articles || [];
 
             let html = "";
             if (trends.length > 0) {
@@ -573,6 +589,16 @@ def create_app() -> Flask:
         from storage import load_today
         data = load_today()
         return jsonify(data or {})
+
+    @app.route("/api/trends")
+    @_require_auth
+    def api_trends():
+        from trends import fetch_trending_topics
+        try:
+            data = fetch_trending_topics()
+            return jsonify(data)
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
 
     @app.route("/api/history")
     @_require_auth
