@@ -58,12 +58,16 @@ body{font-family:"Noto Sans JP",sans-serif;color:var(--text);background:#fff;lin
 .hero-content{position:relative;z-index:2;max-width:960px;text-align:center;color:#fff}
 .hero-eyebrow{font-size:1rem;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.7);margin-bottom:1.5rem;text-transform:uppercase;border:1px solid rgba(255,255,255,.3);display:inline-block;padding:.3rem 1rem;border-radius:50px;backdrop-filter:blur(4px)}
 .hero-badge{display:inline-flex;gap:.5rem;margin-bottom:1.75rem;flex-wrap:wrap;justify-content:center}
-.hero-badge span{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);color:rgba(255,255,255,.85);padding:.35rem 1rem;border-radius:50px;font-size:.72rem;font-weight:700;backdrop-filter:blur(6px)}
+.hero-badge span{padding:.35rem 1rem;border-radius:50px;font-size:.72rem;font-weight:700;backdrop-filter:blur(6px)}
+.hero-badge .badge-free{background:rgba(34,197,94,.25);border:1px solid rgba(34,197,94,.6);color:#a7f3c0}
+.hero-badge .badge-zoom{background:rgba(59,130,246,.25);border:1px solid rgba(59,130,246,.6);color:#bfdbfe}
+.hero-badge .badge-demo{background:rgba(251,146,60,.25);border:1px solid rgba(251,146,60,.6);color:#fed7aa}
 .hero-title{margin-bottom:.75rem;text-shadow:0 4px 30px rgba(0,0,0,.2);font-size:clamp(1.5rem,4.5vw,3.8rem) !important;font-weight:900;line-height:1.1;letter-spacing:-.03em}
-.hero-divider{width:56px;height:3px;background:rgba(255,255,255,.5);margin:.25rem auto 1.5rem;border-radius:2px}
+.hero-divider{width:80px;height:3px;background:linear-gradient(90deg,#FFE566,#ff80c0,#a78bfa);margin:.25rem auto 1.5rem;border-radius:2px}
 .hero-sub{font-size:1rem;color:rgba(255,255,255,.85);margin-bottom:2.5rem;line-height:1.9;text-shadow:0 2px 10px rgba(0,0,0,.12)}
 .hero-target{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;margin-bottom:2rem}
-.hero-target span{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.9);padding:.4rem 1rem;border-radius:50px;font-size:.8rem}
+.hero-target span{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.9);padding:.4rem 1rem;border-radius:50px;font-size:.8rem}
+.hero-target span::before{content:'▶ ';font-size:.6em;color:#FFE566;vertical-align:middle}
 .hero-cta{display:flex;flex-direction:column;align-items:center;gap:.75rem}
 .hero-cta .cta-btn{display:inline-flex;align-items:center;gap:.6rem;background:#fff;color:var(--purple);padding:1.25rem 2.75rem;border-radius:50px;font-size:1.05rem;font-weight:700;text-decoration:none;transition:.3s;box-shadow:0 12px 40px rgba(0,0,0,.25)}
 .hero-cta .cta-btn::after{content:'→';font-size:1.05rem;transition:.3s}
@@ -252,9 +256,9 @@ body{font-family:"Noto Sans JP",sans-serif;color:var(--text);background:#fff;lin
   <div class="hero-content">
     <p class="hero-eyebrow">ホリエモンAI学校介護校</p>
     <div class="hero-badge">
-      <span>✦ 参加無料</span>
-      <span>🎥 Zoom開催</span>
-      <span>🖥 ライブデモあり</span>
+      <span class="badge-free">✦ 参加無料</span>
+      <span class="badge-zoom">🎥 Zoom開催</span>
+      <span class="badge-demo">🖥 ライブデモあり</span>
     </div>
     {% module "hero_title" path="@hubspot/rich_text", label="ヒーロータイトル",
       html="<h1 class='text-huge hero-title'>緊急時対応アプリを<br><span class='hero-accent'>5分</span>で作成！<br><span style='font-size:.6em;font-weight:700;opacity:.95'>〜1人夜勤もこれで安心〜</span></h1>" %}
