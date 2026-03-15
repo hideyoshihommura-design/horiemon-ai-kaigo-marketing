@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACG SNS自動投稿システム 構成図</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Hiragino Sans', 'Yu Gothic', sans-serif;
+    background: #0f172a;
+    color: #e2e8f0;
+    min-height: 100vh;
+    padding: 40px 24px;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  header h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #38bdf8;
+    margin-bottom: 8px;
+  }
+  header p {
+    color: #94a3b8;
+    font-size: 0.95rem;
+  }
+  .card {
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 32px;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .card h2 {
+    font-size: 1.1rem;
+    color: #7dd3fc;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #334155;
+  }
+  .mermaid {
+    display: flex;
+    justify-content: center;
+  }
+  .legend {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .legend-item {
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .legend-item h3 {
+    font-size: 0.85rem;
+    color: #7dd3fc;
+    margin-bottom: 8px;
+  }
+  .legend-item p {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    line-height: 1.6;
+  }
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .tag-gcp { background: #1d4ed8; color: #bfdbfe; }
+  .tag-hubspot { background: #b45309; color: #fef3c7; }
+  .tag-sns { background: #065f46; color: #a7f3d0; }
+  .tag-ai { background: #6d28d9; color: #ede9fe; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>ACG SNS自動投稿システム 構成図</h1>
+  <p>あおぞらケアグループ | aozora-cg.com → X / Instagram / Facebook / TikTok</p>
+</header>
+
+<!-- メインフロー図 -->
+<div class="card">
+  <h2>システム全体フロー</h2>
+  <div class="mermaid">
+flowchart TD
+    A["🕐 Cloud Scheduler\n30分ごとに起動"] --> B
+
+    B["☁️ Cloud Run\nacg-sns-auto-poster"] --> C
+
+    C["🔍 scraper.py\naozora-cg.com/news/\nをスクレイピング"] --> D
+
+    D{{"📋 Firestore\n処理済みチェック"}}
+
+    D -->|新着あり| E
+    D -->|処理済み| Z["⏭️ スキップ"]
+
+    E["🤖 generator.py\nVertex AI Gemini\nSNS別投稿文生成"]
+
+    E --> F["📝 X用投稿文\n140〜200字\nハッシュタグ3〜5個"]
+    E --> G["📸 Instagram用投稿文\n200〜300字\nハッシュタグ10〜15個"]
+    E --> H["👥 Facebook用投稿文\n300〜450字\nハッシュタグ3〜5個"]
+    E --> I["🎬 TikTok用\nスライドテキスト\n3〜5枚分"]
+
+    F --> J["🟠 hubspot_poster.py\nHubSpot Social API\n下書き作成"]
+    G --> J
+    H --> J
+
+    I --> K["🎥 tiktok_poster.py\nmoviepy\nスライド動画生成"]
+    K --> L["📤 TikTok API\n動画アップロード"]
+
+    J --> M["✅ HubSpotダッシュボード\n担当者が確認・承認\n→ X/Instagram/Facebook 公開"]
+
+    J --> N["💾 Firestore\n処理済みとして保存"]
+    L --> N
+
+    M --> O["📊 HubSpot CRM\n効果測定・\nエンゲージメント管理"]
+
+    style A fill:#1d4ed8,color:#fff,stroke:#3b82f6
+    style B fill:#1d4ed8,color:#fff,stroke:#3b82f6
+    style C fill:#1e40af,color:#fff,stroke:#3b82f6
+    style D fill:#374151,color:#fff,stroke:#6b7280
+    style E fill:#6d28d9,color:#fff,stroke:#8b5cf6
+    style F fill:#065f46,color:#fff,stroke:#10b981
+    style G fill:#065f46,color:#fff,stroke:#10b981
+    style H fill:#065f46,color:#fff,stroke:#10b981
+    style I fill:#065f46,color:#fff,stroke:#10b981
+    style J fill:#b45309,color:#fff,stroke:#f59e0b
+    style K fill:#1e40af,color:#fff,stroke:#3b82f6
+    style L fill:#065f46,color:#fff,stroke:#10b981
+    style M fill:#b45309,color:#fff,stroke:#f59e0b
+    style N fill:#374151,color:#fff,stroke:#6b7280
+    style O fill:#b45309,color:#fff,stroke:#f59e0b
+    style Z fill:#374151,color:#aaa,stroke:#6b7280
+  </div>
+</div>
+
+<!-- インフラ構成図 -->
+<div class="card">
+  <h2>インフラ構成</h2>
+  <div class="mermaid">
+flowchart LR
+    subgraph WP["WordPress（aozora-cg.com）"]
+        W1["お知らせページ\n/news/"]
+    end
+
+    subgraph GCP["Google Cloud Platform"]
+        G1["Cloud Scheduler\n*/30 * * * *"]
+        G2["Cloud Run\nacg-sns-auto-poster"]
+        G3["Firestore\n処理済み記事DB"]
+        G4["Vertex AI\nGemini 2.0 Flash"]
+        G5["Secret Manager\nAPI認証情報"]
+        G6["Artifact Registry\nDockerイメージ"]
+    end
+
+    subgraph HS["HubSpot"]
+        H1["Social API\n下書き作成"]
+        H2["ダッシュボード\n承認・公開"]
+        H3["CRM\n効果測定"]
+    end
+
+    subgraph SNS["SNS"]
+        S1["X（Twitter）"]
+        S2["Instagram"]
+        S3["Facebook"]
+        S4["TikTok"]
+    end
+
+    G1 -->|HTTP POST /run| G2
+    G2 -->|スクレイピング| W1
+    G2 <-->|読み書き| G3
+    G2 -->|投稿文生成| G4
+    G2 <-->|認証情報取得| G5
+    G2 -->|下書き作成| H1
+    H1 --> H2
+    H2 -->|公開| S1
+    H2 -->|公開| S2
+    H2 -->|公開| S3
+    G2 -->|動画投稿| S4
+    H2 --> H3
+
+    style GCP fill:#0f2a4a,stroke:#3b82f6,color:#e2e8f0
+    style WP fill:#1a2a1a,stroke:#10b981,color:#e2e8f0
+    style HS fill:#2a1a0a,stroke:#f59e0b,color:#e2e8f0
+    style SNS fill:#1a0a2a,stroke:#8b5cf6,color:#e2e8f0
+  </div>
+</div>
+
+<!-- ファイル構成 -->
+<div class="card">
+  <h2>ファイル構成</h2>
+  <div class="mermaid">
+flowchart TD
+    ROOT["📁 sns-auto-poster/"]
+
+    ROOT --> A["🐍 main.py\nFlask / Cloud Run エントリーポイント\nGET /health　POST /run"]
+    ROOT --> B["🔍 scraper.py\naozora-cg.com/news/ スクレイピング\nBeautifulSoup4"]
+    ROOT --> C["🤖 generator.py\nVertex AI Gemini\nSNS別プロンプト生成"]
+    ROOT --> D["🟠 hubspot_poster.py\nHubSpot Social API\nX/Instagram/Facebook 下書き"]
+    ROOT --> E["🎬 tiktok_poster.py\nmoviepy + Pillow\nスライド動画生成・TikTok投稿"]
+    ROOT --> F["💾 storage.py\nFirestore\n処理済み記事管理"]
+    ROOT --> G["🐳 Dockerfile\nPython 3.11\nffmpeg + 日本語フォント"]
+    ROOT --> H["⚙️ cloudbuild.yaml\nGCPデプロイ設定"]
+    ROOT --> I["🕐 scheduler-setup.sh\nCloud Scheduler設定"]
+    ROOT --> J["📋 .env.example\n環境変数テンプレート"]
+
+    style ROOT fill:#1e293b,stroke:#7dd3fc,color:#e2e8f0
+    style A fill:#1e3a5f,stroke:#3b82f6,color:#e2e8f0
+    style B fill:#1e3a5f,stroke:#3b82f6,color:#e2e8f0
+    style C fill:#3b1f6e,stroke:#8b5cf6,color:#e2e8f0
+    style D fill:#4a2a05,stroke:#f59e0b,color:#e2e8f0
+    style E fill:#1e3a5f,stroke:#3b82f6,color:#e2e8f0
+    style F fill:#1e3a5f,stroke:#3b82f6,color:#e2e8f0
+    style G fill:#1a2a1a,stroke:#10b981,color:#e2e8f0
+    style H fill:#1a2a1a,stroke:#10b981,color:#e2e8f0
+    style I fill:#1a2a1a,stroke:#10b981,color:#e2e8f0
+    style J fill:#374151,stroke:#6b7280,color:#e2e8f0
+  </div>
+</div>
+
+<!-- 凡例 -->
+<div class="legend">
+  <div class="legend-item">
+    <span class="tag tag-gcp">GCP</span>
+    <h3>Google Cloud Platform</h3>
+    <p>Cloud Run・Cloud Scheduler・Vertex AI・Firestore・Secret Managerを使用。サーバーレスで低コスト運用。</p>
+  </div>
+  <div class="legend-item">
+    <span class="tag tag-ai">AI</span>
+    <h3>Vertex AI（Gemini）</h3>
+    <p>記事本文をSNSごとに最適化された投稿文に変換。ACGのブランドトーンを維持した文章を自動生成。</p>
+  </div>
+  <div class="legend-item">
+    <span class="tag tag-hubspot">HubSpot</span>
+    <h3>HubSpot Social</h3>
+    <p>X・Instagram・Facebookへの投稿を一元管理。担当者がダッシュボードで確認・承認後に公開。効果測定もHubSpotで完結。</p>
+  </div>
+  <div class="legend-item">
+    <span class="tag tag-sns">SNS</span>
+    <h3>TikTok（直接投稿）</h3>
+    <p>HubSpot非対応のため、moviepy＋Pillowでスライド動画を自動生成し、TikTok APIで直接投稿。</p>
+  </div>
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'dark',
+    themeVariables: {
+      primaryColor: '#1e40af',
+      primaryTextColor: '#e2e8f0',
+      primaryBorderColor: '#3b82f6',
+      lineColor: '#64748b',
+      secondaryColor: '#374151',
+      tertiaryColor: '#1e293b',
+      background: '#0f172a',
+      mainBkg: '#1e293b',
+      nodeBorder: '#475569',
+      clusterBkg: '#0f2a4a',
+      titleColor: '#7dd3fc',
+      edgeLabelBackground: '#1e293b',
+      attributeBackgroundColorEven: '#1e293b',
+      attributeBackgroundColorOdd: '#0f172a',
+    },
+    flowchart: {
+      curve: 'basis',
+      padding: 20,
+    }
+  });
+</script>
+
+</body>
+</html>
