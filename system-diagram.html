@@ -121,12 +121,11 @@ flowchart TD
     H --> J
 
     I --> K["🎥 tiktok_poster.py\nmoviepy\nスライド動画生成"]
-    K --> L["📤 TikTok API\n動画アップロード"]
+    K --> J
 
-    J --> M["✅ HubSpotダッシュボード\n担当者が確認・承認\n→ X/Instagram/Facebook 公開"]
+    J --> M["✅ HubSpotダッシュボード\n担当者が確認・承認\n→ X/Instagram/Facebook/TikTok 公開"]
 
     J --> N["💾 Firestore\n処理済みとして保存"]
-    L --> N
 
     M --> O["📊 HubSpot CRM\n効果測定・\nエンゲージメント管理"]
 
@@ -250,9 +249,9 @@ flowchart TD
     <p>X・Instagram・Facebookへの投稿を一元管理。担当者がダッシュボードで確認・承認後に公開。効果測定もHubSpotで完結。</p>
   </div>
   <div class="legend-item">
-    <span class="tag tag-sns">SNS</span>
-    <h3>TikTok（直接投稿）</h3>
-    <p>HubSpot非対応のため、moviepy＋Pillowでスライド動画を自動生成し、TikTok APIで直接投稿。</p>
+    <span class="tag tag-hubspot">HubSpot</span>
+    <h3>TikTok（HubSpot経由）</h3>
+    <p>moviepy＋Pillowでスライド動画を生成後、HubSpotファイルマネージャーにアップロードし、HubSpot Social API経由でTikTokに投稿。全SNSをHubSpotで一元管理。</p>
   </div>
 </div>
 

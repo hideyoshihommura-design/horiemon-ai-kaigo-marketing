@@ -8,7 +8,7 @@ from flask import Flask, jsonify
 from scraper import fetch_latest_articles
 from generator import generate_posts
 from hubspot_poster import create_all_drafts
-from tiktok_poster import post_to_tiktok
+from tiktok_poster import generate_tiktok_video
 from storage import is_posted, mark_as_posted, save_generated_posts
 
 app = Flask(__name__)
@@ -35,31 +35,28 @@ def run():
             generated = generate_posts(article)
             save_generated_posts(article.id, generated)
 
-            # HubSpot に下書き作成（X・Instagram・Facebook）
-            hubspot_result = create_all_drafts(article, generated)
-
-            # TikTok 投稿
-            tiktok_result = {}
+            # TikTok用スライド動画を生成
+            tiktok_video_path = None
             if "tiktok" in generated:
-                tiktok_result = post_to_tiktok(
-                    article.title,
+                tiktok_video_path = generate_tiktok_video(
                     generated["tiktok"]["content"],
                     article.image_url,
                 )
+
+            # HubSpot に下書き作成（X・Instagram・Facebook・TikTok）
+            hubspot_result = create_all_drafts(article, generated, tiktok_video_path)
 
             # 処理済みとしてマーク
             mark_as_posted(article.id, {
                 "title": article.title,
                 "url": article.url,
                 "hubspot": hubspot_result,
-                "tiktok": tiktok_result,
             })
 
             results.append({
                 "title": article.title,
                 "url": article.url,
                 "hubspot": hubspot_result,
-                "tiktok": tiktok_result,
             })
             print(f"[main] 処理完了: {article.title}")
 

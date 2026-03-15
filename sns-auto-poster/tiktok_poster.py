@@ -1,13 +1,12 @@
 """
-TikTok用スライド動画生成・投稿モジュール
+TikTok用スライド動画生成モジュール
+投稿はHubSpot Social API経由で行う
 """
 
-import os
 import re
 import textwrap
 import requests
 import tempfile
-from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 import moviepy.editor as mp
 import numpy as np
@@ -90,64 +89,7 @@ def create_slide_video(slides: list[str], image_url: str = None) -> str:
     return output_path
 
 
-def upload_to_tiktok(video_path: str, caption: str) -> dict:
-    """TikTok Content Posting APIで動画をアップロードする"""
-    access_token = os.getenv("TIKTOK_ACCESS_TOKEN")
-
-    # Step 1: アップロード初期化
-    init_res = requests.post(
-        "https://open.tiktokapis.com/v2/post/publish/video/init/",
-        headers={
-            "Authorization": f"Bearer {access_token}",
-            "Content-Type": "application/json",
-        },
-        json={
-            "post_info": {
-                "title": caption[:150],
-                "privacy_level": "PUBLIC_TO_EVERYONE",
-                "disable_duet": False,
-                "disable_comment": False,
-                "disable_stitch": False,
-            },
-            "source_info": {
-                "source": "FILE_UPLOAD",
-                "video_size": Path(video_path).stat().st_size,
-                "chunk_size": Path(video_path).stat().st_size,
-                "total_chunk_count": 1,
-            },
-        },
-        timeout=30,
-    )
-    init_res.raise_for_status()
-    init_data = init_res.json()["data"]
-    upload_url = init_data["upload_url"]
-    publish_id = init_data["publish_id"]
-
-    # Step 2: 動画ファイルをアップロード
-    file_size = Path(video_path).stat().st_size
-    with open(video_path, "rb") as f:
-        upload_res = requests.put(
-            upload_url,
-            headers={
-                "Content-Range": f"bytes 0-{file_size - 1}/{file_size}",
-                "Content-Type": "video/mp4",
-            },
-            data=f,
-            timeout=120,
-        )
-    upload_res.raise_for_status()
-
-    return {"status": "ok", "publish_id": publish_id}
-
-
-def post_to_tiktok(article_title: str, tiktok_content: str, image_url: str = None) -> dict:
-    """TikTok投稿のメイン処理"""
-    try:
-        slides = parse_slides(tiktok_content)
-        video_path = create_slide_video(slides, image_url)
-        result = upload_to_tiktok(video_path, article_title)
-        Path(video_path).unlink(missing_ok=True)
-        return result
-    except Exception as e:
-        print(f"[tiktok] 投稿エラー: {e}")
-        return {"status": "error", "error": str(e)}
+def generate_tiktok_video(tiktok_content: str, image_url: str = None) -> str:
+    """スライド動画を生成してファイルパスを返す（HubSpot経由で投稿）"""
+    slides = parse_slides(tiktok_content)
+    return create_slide_video(slides, image_url)
