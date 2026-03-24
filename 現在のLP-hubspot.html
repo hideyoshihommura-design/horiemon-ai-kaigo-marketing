@@ -271,11 +271,12 @@ _hsp.push(['addPrivacyConsentListener', function(consent){
   /* ========== Speaker ========== */
   .speaker-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;max-width:800px;margin:0 auto}
   .speaker-card{background:#fff;border-radius:var(--radius);padding:2rem;box-shadow:0 4px 20px rgba(0,0,0,.06);display:flex;flex-direction:column;align-items:center;text-align:center}
-  .speaker-photo{width:120px;height:120px;border-radius:50%;background:var(--bg-gray);border:3px solid var(--border);margin-bottom:1.25rem;display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:var(--text-muted);overflow:hidden}
+  .speaker-photo{width:180px;height:180px;border-radius:50%;background:var(--bg-gray);border:3px solid var(--border);margin-bottom:1.25rem;display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:var(--text-muted);overflow:hidden}
   .speaker-photo img{width:100%;height:100%;object-fit:cover}
   .speaker-name{font-size:1.25rem;font-weight:900;color:var(--dark);margin-bottom:.25rem}
   .speaker-title{font-size:.95rem;color:var(--purple);font-weight:700;margin-bottom:.75rem}
   .speaker-bio{font-size:.97rem;color:var(--text-sub);line-height:1.85;text-align:left}
+  .speaker-bio strong{color:var(--dark)}
 
   /* ========== Footer CTA ========== */
   .footer-cta{background:var(--dark);color:#fff;padding:80px 20px;text-align:center}
@@ -340,7 +341,7 @@ _hsp.push(['addPrivacyConsentListener', function(consent){
       </div>
       <div class="hero-cta">
         <a href="#form" class="cta-btn">無料ウェビナーに申し込む</a>
-        <p class="hero-note">※ お申し込み30秒 ｜ 3月26日（木）13:30〜14:00</p>
+        <p class="hero-note">※ お申し込み30秒 ｜ 4月9日（水）13:30〜14:00</p>
       </div>
       <div class="hero-target" style="margin-top:1.75rem">
         <span>介護施設の施設長・管理者</span>
@@ -352,28 +353,28 @@ _hsp.push(['addPrivacyConsentListener', function(consent){
     <a href="#about" class="hero-scroll">SCROLL</a>
   </section>
 
-  <!-- ========== 問題提起 ========== -->
+  <!-- ========== たった5分でできること ========== -->
   <section class="section bg-gray" id="about">
     <div class="section-inner">
       <div class="section-header">
-        <h2 class="text-large section-title">こんな<span class="highlight">課題</span>ありませんか？</h2>
-        <p class="section-lead">介護現場の情報管理「3つの悩み」</p>
+        <h2 class="text-large section-title">たった<span class="highlight">5分</span>でできること</h2>
+        <p class="section-lead">既存AIツールで、緊急時対応アプリを作成できます</p>
       </div>
       <div id="hs_cos_wrapper_problems" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module widget-type-rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module"><span id="hs_cos_wrapper_problems_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text"><div class="problem-grid">
-          <div class="problem-card">
+          <div class="problem-card" style="border-left-color:#7928CA">
+            <div class="problem-icon">⚡</div>
+            <h3>たった5分で緊急時対応アプリを作成</h3>
+            <p>既存のAIツールを活用するだけ。特別なスキルや環境は一切不要。今すぐ現場で使えるアプリが5分で完成します</p>
+          </div>
+          <div class="problem-card" style="border-left-color:#7928CA">
             <div class="problem-icon">📋</div>
-            <h3>マニュアルが古い・どれが最新か分からない</h3>
-            <p>更新するたびにスタッフから「これ最新版ですか？」と聞かれる日々。管理しきれず古い情報が現場に残り続けている</p>
+            <h3>社内マニュアル読み込み → プロンプト作成のみ</h3>
+            <p>手順はシンプル2ステップ。社内マニュアルをAIに読み込ませて、プロンプトを作成するだけ。プログラミングの知識は不要です</p>
           </div>
-          <div class="problem-card">
-            <div class="problem-icon">🔄</div>
-            <h3>AIの知識更新が手間すぎる</h3>
-            <p>ファイルを削除して再アップロード…どれを入れ替えたか管理しきれない。更新のたびに一から設定し直す手間が続いている</p>
-          </div>
-          <div class="problem-card">
-            <div class="problem-icon">🚨</div>
-            <h3>緊急時に手順書を探す時間がない</h3>
-            <p>転倒・誤嚥・体調急変の緊急場面でマニュアルを探し回るロスが現場の不安につながっている</p>
+          <div class="problem-card" style="border-left-color:#FF0080">
+            <div class="problem-icon">🎥</div>
+            <h3>ウェビナーで作成方法まで公開！</h3>
+            <p>今回のウェビナーでは、実際の作成手順をライブデモでお見せします。見ながらその場で一緒に作れます</p>
           </div>
         </div></span></div>
     </div>
@@ -706,7 +707,7 @@ _hsp.push(['addPrivacyConsentListener', function(consent){
         <div class="details-header">ウェビナー詳細</div>
         <div id="hs_cos_wrapper_event_details" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module widget-type-rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module"><span id="hs_cos_wrapper_event_details_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text"><div class="details-row"><span class="details-label">テーマ</span><span class="details-value">NotebookLM最新活用術〜「修正できない」「管理が大変」を卒業する30分〜</span></div>
           <div class="details-row"><span class="details-label">内容</span><span class="details-value">Gems × NotebookLM 介護版完全活用ガイド（対談形式）</span></div>
-          <div class="details-row"><span class="details-label">日時</span><span class="details-value">3月26日（木）13:30 - 14:00</span></div>
+          <div class="details-row"><span class="details-label">日時</span><span class="details-value">4月9日（水）13:30 - 14:00</span></div>
           <div class="details-row"><span class="details-label">所要時間</span><span class="details-value">30分（質疑応答含む）</span></div>
           <div class="details-row"><span class="details-label">形式</span><span class="details-value">Zoomウェビナー（オンライン）</span></div>
           <div class="details-row"><span class="details-label">参加費</span><span class="details-value"><span class="price">無料</span></span></div>
@@ -724,16 +725,16 @@ _hsp.push(['addPrivacyConsentListener', function(consent){
       </div>
       <div id="hs_cos_wrapper_speakers" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module widget-type-rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module"><span id="hs_cos_wrapper_speakers_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text"><div class="speaker-grid">
           <div class="speaker-card">
-            <div class="speaker-photo">👤</div>
-            <div class="speaker-name">お名前</div>
-            <div class="speaker-title">肩書き・所属</div>
-            <p class="speaker-bio">プロフィールテキストが入ります。経歴や専門領域、実績などを2〜3文でご記入ください。</p>
+            <div class="speaker-photo"><img src="https://243875500.fs1.hubspotusercontent-na2.net/hubfs/243875500/IMG_5034.jpg" alt="本村 知子"></div>
+            <div class="speaker-name">本村 知子</div>
+            <div class="speaker-title">ホリエモンAI学校 介護校 校長</div>
+            <p class="speaker-bio"><strong>元介護職 × 業務改善 × AI活用支援</strong><br>各事業所の業務を細かく分解し、15年にわたる介護現場での経験をベースに、業務フロー分析を得意とするAI活用支援者。「どこをAIに置き換えられるか」を具体的に設計。現場目線で、事業所ごとにフィットする、"リアルに使えるAI活用"をお届けします。</p>
           </div>
           <div class="speaker-card">
-            <div class="speaker-photo">👤</div>
-            <div class="speaker-name">お名前</div>
-            <div class="speaker-title">肩書き・所属</div>
-            <p class="speaker-bio">プロフィールテキストが入ります。経歴や専門領域、実績などを2〜3文でご記入ください。</p>
+            <div class="speaker-photo"><img src="https://243875500.fs1.hubspotusercontent-na2.net/hubfs/243875500/IMG_5037.jpg" alt="本村 英誉"></div>
+            <div class="speaker-name">本村 英誉</div>
+            <div class="speaker-title">ホリエモンAI学校 介護校 副校長</div>
+            <p class="speaker-bio"><strong>テクノロジー初心者だからこそ、"つまずき"が分かる存在。</strong><br>専門用語や難しい説明に戸惑ってきた経験を活かし、"分からないを分かるに変える役割"を担います。さらに、現場で実際に使えるレベルまで理解を引き上げるサポートを行います。</p>
           </div>
         </div></span></div>
     </div>
@@ -743,7 +744,7 @@ _hsp.push(['addPrivacyConsentListener', function(consent){
   <section class="form-section" id="form">
     <div class="section-header">
       <h2 class="text-large section-title">今すぐ<span style="background:linear-gradient(transparent 60%,rgba(255,255,255,.3) 60%)">申し込む</span></h2>
-      <p class="section-lead">3月26日（木）13:30〜14:00（30分）</p>
+      <p class="section-lead">4月9日（水）13:30〜14:00（30分）</p>
     </div>
     <div class="form-wrapper">
       <script src="https://js-na2.hsforms.net/forms/embed/243875500.js" defer></script>
@@ -776,7 +777,7 @@ _hsp.push(['addPrivacyConsentListener', function(consent){
 </div>
 <div class="faq-item">
 <div class="faq-q">当日参加できない場合はどうなりますか？</div>
-<div class="faq-a">録画を後日配信します。お申し込みいただければ、参加特典（スライド資料・テンプレート集・チェックリスト）もお受け取りいただけます。</div>
+<div class="faq-a">お申込いただいていれば、録画を後日配信します。</div>
 </div>
 <div class="faq-item">
 <div class="faq-q">スマートフォンでも使えますか？</div>
