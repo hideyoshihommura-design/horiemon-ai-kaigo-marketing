@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>広告運用 網羅監査チェックリスト｜株式会社ACG</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gradient:linear-gradient(135deg,#FF0080,#7928CA);
+  --gradient-soft:linear-gradient(135deg,rgba(255,0,128,.08),rgba(121,40,202,.08));
+  --accent:#FF0080;
+  --purple:#7928CA;
+  --dark:#1a202c;
+  --bg:#fafbff;
+  --bg-card:#fff;
+  --bg-gray:#f5f7fa;
+  --text:#2d3748;
+  --text-sub:#4a5568;
+  --text-muted:#718096;
+  --border:#e2e8f0;
+  --radius:18px;
+  --shadow-sm:0 4px 14px rgba(15,23,42,.06);
+  --shadow-md:0 12px 32px rgba(15,23,42,.08);
+  --critical:#dc2626;
+  --warning:#f59e0b;
+  --info:#3b82f6;
+  --ok:#22c55e;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:"Noto Sans JP",sans-serif;color:var(--text);background:var(--bg);line-height:1.85;-webkit-font-smoothing:antialiased}
+code{font-family:"JetBrains Mono",monospace;background:var(--bg-gray);padding:.1rem .4rem;border-radius:5px;font-size:.85em;color:var(--purple)}
+
+/* ===== ヘッダー ===== */
+.hero{padding:80px 24px 60px;background:linear-gradient(135deg,#fff 0%,#fdfbff 50%,#fff5fa 100%);border-bottom:1px solid var(--border);text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-200px;left:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(255,0,128,.10) 0%,transparent 65%);border-radius:50%}
+.hero::after{content:'';position:absolute;bottom:-200px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(121,40,202,.10) 0%,transparent 65%);border-radius:50%}
+.hero-inner{position:relative;z-index:2;max-width:920px;margin:0 auto}
+.hero-eyebrow{display:inline-block;font-size:.78rem;font-weight:800;letter-spacing:.12em;color:#fff;background:var(--gradient);padding:.45rem 1.2rem;border-radius:50px;margin-bottom:1.5rem;text-transform:uppercase}
+.hero h1{font-size:clamp(2rem,5vw,3.4rem);font-weight:900;line-height:1.2;letter-spacing:-.03em;color:var(--dark);margin-bottom:1rem}
+.hero h1 .grad{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:clamp(1rem,1.6vw,1.15rem);color:var(--text-sub);line-height:1.95;max-width:680px;margin:0 auto 2rem}
+
+/* ===== サマリーバー ===== */
+.score-bar{display:flex;gap:1rem;max-width:920px;margin:2rem auto 0;flex-wrap:wrap;justify-content:center}
+.score-pill{background:#fff;border:2px solid var(--border);padding:.8rem 1.5rem;border-radius:50px;font-size:.85rem;font-weight:700;color:var(--text-sub);display:flex;align-items:center;gap:.6rem}
+.score-pill .dot{width:12px;height:12px;border-radius:50%;display:inline-block}
+.score-pill.critical .dot{background:var(--critical)}
+.score-pill.warning .dot{background:var(--warning)}
+.score-pill.info .dot{background:var(--info)}
+.score-pill .num{font-weight:900;color:var(--dark);font-size:1.05rem}
+
+/* ===== ナビ ===== */
+.toc{background:#fff;padding:1rem 24px;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;backdrop-filter:blur(10px);background:rgba(255,255,255,.92)}
+.toc-inner{max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center}
+.toc a{font-size:.74rem;color:var(--text-sub);text-decoration:none;padding:.35rem .8rem;border-radius:50px;border:1px solid var(--border);background:#fff;transition:.2s;white-space:nowrap;font-weight:700}
+.toc a:hover{background:var(--gradient);color:#fff;border-color:transparent;transform:translateY(-2px)}
+
+/* ===== 凡例 ===== */
+.legend-section{padding:50px 24px;max-width:1100px;margin:0 auto}
+.legend-card{background:#fff;border-radius:var(--radius);padding:2rem;box-shadow:var(--shadow-sm)}
+.legend-card h3{font-size:1.05rem;font-weight:900;color:var(--dark);margin-bottom:1rem}
+.legend-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:1rem}
+.legend-item{display:flex;gap:.7rem;align-items:flex-start;padding:.85rem 1rem;background:var(--bg-gray);border-radius:10px}
+.legend-item .badge{flex-shrink:0;padding:.2rem .6rem;border-radius:50px;font-size:.7rem;font-weight:800;color:#fff;line-height:1.4;white-space:nowrap}
+.legend-item .badge.critical{background:var(--critical)}
+.legend-item .badge.warning{background:var(--warning)}
+.legend-item .badge.info{background:var(--info)}
+.legend-item .desc{font-size:.82rem;color:var(--text-sub);line-height:1.65}
+.legend-item .desc strong{color:var(--dark)}
+
+/* ===== カテゴリセクション ===== */
+.section{padding:60px 24px;max-width:1100px;margin:0 auto}
+.cat-header{margin-bottom:30px;display:flex;align-items:center;gap:1.5rem;padding-bottom:1.5rem;border-bottom:2px solid var(--border)}
+.cat-icon{width:64px;height:64px;background:var(--gradient);border-radius:14px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:1.5rem;flex-shrink:0;box-shadow:0 8px 20px rgba(255,0,128,.20)}
+.cat-meta{flex:1}
+.cat-label{font-size:.72rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:.3rem}
+.cat-title{font-size:1.5rem;font-weight:900;color:var(--dark);letter-spacing:-.01em;line-height:1.3}
+.cat-count{font-size:.78rem;color:var(--text-muted);font-weight:700;margin-top:.3rem}
+
+/* ===== チェックリスト項目 ===== */
+.check-list{display:flex;flex-direction:column;gap:12px}
+.check{background:#fff;border-radius:14px;padding:1.2rem 1.4rem 1.2rem 3.2rem;box-shadow:var(--shadow-sm);position:relative;transition:.2s;border-left:4px solid var(--info)}
+.check:hover{box-shadow:var(--shadow-md);transform:translateX(2px)}
+.check.critical{border-left-color:var(--critical)}
+.check.warning{border-left-color:var(--warning)}
+.check.info{border-left-color:var(--info)}
+.check input[type="checkbox"]{position:absolute;left:1.1rem;top:1.4rem;width:20px;height:20px;cursor:pointer;accent-color:var(--purple)}
+.check input[type="checkbox"]:checked + .check-body{opacity:.55}
+.check input[type="checkbox"]:checked + .check-body .ct{text-decoration:line-through}
+.check-body .ct{font-size:.96rem;font-weight:800;color:var(--dark);margin-bottom:.3rem;line-height:1.55;display:flex;flex-wrap:wrap;align-items:center;gap:.6rem}
+.check-body .severity{font-size:.62rem;font-weight:800;color:#fff;padding:.18rem .55rem;border-radius:50px;letter-spacing:.05em;text-transform:uppercase;line-height:1.4;flex-shrink:0}
+.check.critical .severity{background:var(--critical)}
+.check.warning .severity{background:var(--warning)}
+.check.info .severity{background:var(--info)}
+.check-body .platforms{display:inline-flex;gap:.3rem;flex-wrap:wrap}
+.check-body .platforms span{font-size:.62rem;font-weight:700;padding:.15rem .5rem;border-radius:4px;background:var(--bg-gray);color:var(--dark);letter-spacing:.02em}
+.check-body .platforms .gads{background:#e8f0fe;color:#4285F4}
+.check-body .platforms .meta{background:#e7f0ff;color:#1877F2}
+.check-body .platforms .line{background:#e8f8ec;color:#06C755}
+.check-body .platforms .yda{background:#fef0e0;color:#FF0033}
+.check-body .platforms .all{background:linear-gradient(135deg,rgba(255,0,128,.15),rgba(121,40,202,.15));color:var(--purple)}
+.check-body .desc{font-size:.84rem;color:var(--text-sub);line-height:1.75;margin-top:.3rem}
+.check-body .where{display:inline-block;font-size:.74rem;color:var(--text-muted);margin-top:.4rem;font-style:italic;background:var(--bg-gray);padding:.25rem .65rem;border-radius:5px}
+
+/* ===== プラットフォーム別早見表 ===== */
+.matrix-wrap{background:#fff;border-radius:var(--radius);padding:2rem;box-shadow:var(--shadow-sm);overflow-x:auto;margin-top:30px}
+.matrix{width:100%;border-collapse:collapse;font-size:.85rem;min-width:780px}
+.matrix th,.matrix td{padding:.85rem 1rem;text-align:left;border-bottom:1px solid var(--border)}
+.matrix th{background:linear-gradient(180deg,#fdfbff,#fff);font-weight:900;color:var(--dark);font-size:.82rem;letter-spacing:.02em;position:sticky;top:0}
+.matrix td.platform{font-weight:900;color:var(--dark)}
+.matrix .yes{color:var(--ok);font-weight:900}
+.matrix .no{color:var(--critical);font-weight:900}
+.matrix .partial{color:var(--warning);font-weight:900}
+
+/* ===== 介護FC 固有 ===== */
+.caregiver-section{background:linear-gradient(135deg,#fff5fa,#fdfbff);border-radius:var(--radius);padding:2rem;border:2px dashed var(--purple);margin-top:30px}
+.caregiver-section h3{font-size:1.05rem;font-weight:900;color:var(--purple);margin-bottom:.5rem;display:flex;align-items:center;gap:.6rem}
+.caregiver-section h3::before{content:'⚠️'}
+.caregiver-section p{font-size:.92rem;color:var(--text-sub);line-height:1.85;margin-bottom:.5rem}
+
+/* ===== サマリー ===== */
+.summary-final{background:var(--dark);color:#fff;border-radius:var(--radius);padding:3rem 2rem;margin-top:40px;position:relative;overflow:hidden}
+.summary-final::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:var(--gradient)}
+.summary-final h2{font-size:1.7rem;font-weight:900;margin-bottom:.5rem;color:#fff;text-align:center;letter-spacing:-.02em}
+.summary-final .sub{text-align:center;color:rgba(255,255,255,.6);font-size:.95rem;margin-bottom:2rem}
+.scorecard{max-width:680px;margin:0 auto;background:rgba(255,255,255,.05);border-radius:14px;padding:1.5rem;backdrop-filter:blur(10px)}
+.scorecard-row{display:grid;grid-template-columns:1fr auto;padding:.7rem 0;border-bottom:1px solid rgba(255,255,255,.1);font-size:.88rem;color:rgba(255,255,255,.85)}
+.scorecard-row:last-child{border-bottom:none}
+.scorecard-row .v{font-weight:900;color:#fff}
+
+footer{text-align:center;padding:3rem 1.5rem;color:var(--text-muted);font-size:.85rem;background:var(--bg-gray);border-top:1px solid var(--border)}
+footer a{color:var(--purple);text-decoration:none;font-weight:700}
+
+@media (max-width:768px){
+  .section{padding:40px 16px}
+  .legend-section{padding:30px 16px}
+  .toc{padding:.7rem 12px}
+  .toc a{font-size:.7rem;padding:.3rem .6rem}
+  .cat-header{flex-wrap:wrap}
+  .cat-icon{width:48px;height:48px;font-size:1.2rem}
+}
+
+@media print{
+  .toc{position:static}
+  .check{break-inside:avoid}
+  body{background:#fff}
+}
+</style>
+</head>
+<body>
+
+<!-- ========== ヒーロー ========== -->
+<header class="hero">
+  <div class="hero-inner">
+    <span class="hero-eyebrow">広告運用 監査チェックリスト</span>
+    <h1>現状の広告設定を<br><span class="grad">網羅的に検証する</span>監査シート</h1>
+    <p>Google Ads / Meta広告 / LINE広告 / YDA を横断する11カテゴリ・約100項目のチェックリスト。チェックボックスは実際に押せます。</p>
+    <div class="score-bar">
+      <div class="score-pill critical"><span class="dot"></span><span class="num" id="cnt-c">--</span> 重要</div>
+      <div class="score-pill warning"><span class="dot"></span><span class="num" id="cnt-w">--</span> 推奨</div>
+      <div class="score-pill info"><span class="dot"></span><span class="num" id="cnt-i">--</span> 任意</div>
+    </div>
+  </div>
+</header>
+
+<!-- ========== ナビ ========== -->
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#legend">凡例</a>
+    <a href="#A">A. アカウント基盤</a>
+    <a href="#B">B. CV計測</a>
+    <a href="#C">C. キャンペーン構造</a>
+    <a href="#D">D. 入札・予算</a>
+    <a href="#E">E. ターゲティング</a>
+    <a href="#F">F. クリエイティブ</a>
+    <a href="#G">G. LP整合性</a>
+    <a href="#H">H. 除外設定</a>
+    <a href="#I">I. URL・パラメータ</a>
+    <a href="#J">J. ブランド保護</a>
+    <a href="#K">K. 介護FC固有</a>
+    <a href="#matrix">早見表</a>
+  </div>
+</nav>
+
+<!-- ========== 凡例 ========== -->
+<section class="legend-section" id="legend">
+  <div class="legend-card">
+    <h3>📖 このチェックリストの使い方</h3>
+    <p style="font-size:.92rem;color:var(--text-sub);line-height:1.85">各項目は<strong>重要度</strong>と<strong>対象プラットフォーム</strong>でラベル付けされています。チェックボックスをクリックすると進捗が記録されます（同じブラウザでのみ）。重要(赤)項目から先に潰してください。</p>
+
+    <div class="legend-grid">
+      <div class="legend-item">
+        <span class="badge critical">重要</span>
+        <div class="desc"><strong>放置不可</strong>。配信を止めてでも今すぐ修正すべき項目。CV計測の根幹・予算暴走防止など</div>
+      </div>
+      <div class="legend-item">
+        <span class="badge warning">推奨</span>
+        <div class="desc"><strong>1週間以内に対応</strong>。最適化精度・配信効率に直結する設定</div>
+      </div>
+      <div class="legend-item">
+        <span class="badge info">任意</span>
+        <div class="desc"><strong>余裕がある時に</strong>。+α の改善で長期的に効いてくる項目</div>
+      </div>
+      <div class="legend-item">
+        <span class="badge" style="background:linear-gradient(135deg,rgba(255,0,128,.15),rgba(121,40,202,.15));color:var(--purple)">対象</span>
+        <div class="desc">右側のバッジは対象プラットフォーム。<strong>全</strong>=全社共通、<strong>Google</strong>等=特定プラットフォーム</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================================== -->
+<!-- A. アカウント基盤・組織設定 -->
+<!-- ========================================================================== -->
+<section class="section" id="A">
+  <div class="cat-header">
+    <div class="cat-icon">A</div>
+    <div class="cat-meta">
+      <div class="cat-label">CATEGORY A</div>
+      <div class="cat-title">アカウント基盤・組織設定</div>
+      <div class="cat-count">8項目</div>
+    </div>
+  </div>
+
+  <div class="check-list">
+    <label class="check critical">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">2段階認証が有効になっている <span class="severity">重要</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">広告アカウント乗っ取り→不正出稿は実害が大きい。SMSではなく認証アプリ（Google Authenticator・Authy）推奨</div>
+        <div class="where">📍 各管理画面のセキュリティ設定</div>
+      </div>
+    </label>
+
+    <label class="check critical">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">請求アラート・予算上限が設定されている <span class="severity">重要</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">設定ミス・キャンペーン暴走時に課金が際限なく行かないよう、月間支出上限を設定。アラートメールも有効化</div>
+        <div class="where">📍 請求とお支払い → 予算管理</div>
+      </div>
+    </label>
+
+    <label class="check critical">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">支払い方法（クレカ等）の有効期限・残高がOK <span class="severity">重要</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">期限切れ・残高不足での配信停止は数日のチャンスロスに。月次で確認</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">ユーザー権限が最小権限の原則で付与されている <span class="severity">推奨</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">退職者・元代理店アカウントが残っていないか。閲覧者・編集者・管理者の使い分け</div>
+        <div class="where">📍 ユーザー管理 / アクセス管理</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">アカウント間連携が正しい <span class="severity">推奨</span><span class="platforms"><span class="gads">Google</span><span class="meta">Meta</span></span></div>
+        <div class="desc">GA4 ↔ Google Ads、Meta Pixel ↔ Business Manager、Catalog ↔ Pixel など。連携漏れで最適化精度が低下</div>
+        <div class="where">📍 各管理画面の「リンクされたアカウント」</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">業種・自己申告カテゴリーが正確 <span class="severity">任意</span><span class="platforms"><span class="gads">Google</span><span class="meta">Meta</span></span></div>
+        <div class="desc">「教育」「BtoBサービス」など。AIの初期ターゲティング判定に影響</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">タイムゾーン・通貨設定が正しい <span class="severity">任意</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">Asia/Tokyo・日本円。アカウント作成時のミスで他通貨になっていると修正不可</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">通知設定が運用責任者に届く <span class="severity">任意</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">広告審査落ち・ポリシー違反通知が見逃されない</div>
+      </div>
+    </label>
+  </div>
+</section>
+
+<!-- ========================================================================== -->
+<!-- B. コンバージョン計測の健全性 -->
+<!-- ========================================================================== -->
+<section class="section" id="B" style="background:var(--bg-gray);border-radius:var(--radius)">
+  <div class="cat-header">
+    <div class="cat-icon">B</div>
+    <div class="cat-meta">
+      <div class="cat-label">CATEGORY B</div>
+      <div class="cat-title">コンバージョン計測の健全性</div>
+      <div class="cat-count">12項目</div>
+    </div>
+  </div>
+
+  <div class="check-list">
+    <label class="check critical">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">CVタグが実際に発火している（テスト送信で確認済み） <span class="severity">重要</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">テストイベント / Pixel Helper / GA4リアルタイム等で「受信あり」を目視確認。「設定したけど発火していない」が最悪パターン</div>
+      </div>
+    </label>
+
+    <label class="check critical">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">CV定義のURLが正しい <span class="severity">重要</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">サンクスページURL（例: <code>/thanks-document-request</code>）と各社CV定義のURLが完全一致しているか</div>
+      </div>
+    </label>
+
+    <label class="check critical">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">過去30日のCV数が0でない <span class="severity">重要</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">配信中なのにCV0なら、計測壊れているか配信に問題あり。ゼロ更新には必ず気づける運用に</div>
+      </div>
+    </label>
+
+    <label class="check critical">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">CVが二重カウントされていない <span class="severity">重要</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">タグ重複設置・ページリロード・複数フォームで同じCVが2回飛んでいないか。Pixel Helperで重複検知</div>
+      </div>
+    </label>
+
+    <label class="check critical">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">主要CV（重視するCV）が指定されている <span class="severity">重要</span><span class="platforms"><span class="gads">Google</span></span></div>
+        <div class="desc">複数のCVアクションがある場合、AI最適化の対象は「主要コンバージョン」のみ。誤って「主要から外れている」と入札最適化が走らない</div>
+        <div class="where">📍 Google Ads → 目標 → コンバージョン</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">CVのカウント方法が用途と一致 <span class="severity">推奨</span><span class="platforms"><span class="gads">Google</span><span class="meta">Meta</span></span></div>
+        <div class="desc">資料請求は「1回」設定。同じ人が複数回送っても1件と数える（ECは「すべて」）</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">CVの計測期間（アトリビューションウィンドウ）が業種に合っている <span class="severity">推奨</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">クリック後7日 or 30日。BtoBの介護研修は検討期間が長いので30日推奨</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">CV値（金額換算）が設定されている <span class="severity">推奨</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">「資料請求1件=5,000円相当」など仮置きでも値を入れると、AIが「価値の高いCV」を学習しやすい</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">Conversions API / Enhanced Conversion が有効 <span class="severity">推奨</span><span class="platforms"><span class="meta">Meta</span><span class="gads">Google</span></span></div>
+        <div class="desc">ブラウザCookieのみではiOS等で計測漏れが20-30%発生。サーバー間連携で精度補強</div>
+        <div class="where">📍 Events Manager / Google Ads コンバージョン詳細</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">マイクロCV（補助CV）が設定されている <span class="severity">任意</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">フォーム入力開始・スクロール75%到達など。本CV量が少ない時の初期学習データとして有効</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">アトリビューションモデルが選択されている <span class="severity">任意</span><span class="platforms"><span class="gads">Google</span></span></div>
+        <div class="desc">Google Adsは「データドリブン」が推奨。データ量不足時は「ラストクリック」</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">同意モード（Consent Mode）が実装されている <span class="severity">任意</span><span class="platforms"><span class="gads">Google</span><span class="meta">Meta</span></span></div>
+        <div class="desc">改正個人情報保護法・GDPR配慮。同意なしユーザーの計測も統計的に補正できる</div>
+      </div>
+    </label>
+  </div>
+</section>
+
+<!-- ========================================================================== -->
+<!-- C. キャンペーン構造・命名規則 -->
+<!-- ========================================================================== -->
+<section class="section" id="C">
+  <div class="cat-header">
+    <div class="cat-icon">C</div>
+    <div class="cat-meta">
+      <div class="cat-label">CATEGORY C</div>
+      <div class="cat-title">キャンペーン構造・命名規則</div>
+      <div class="cat-count">7項目</div>
+    </div>
+  </div>
+
+  <div class="check-list">
+    <label class="check critical">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">キャンペーン目的（Objective）がビジネス目的と一致 <span class="severity">重要</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">資料請求LP→「リード/コンバージョン」一択。「リーチ」「トラフィック」を選ぶとCVが集まらない</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">キャンペーン命名規則が統一されている <span class="severity">推奨</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">例: <code>事業名_媒体_配信タイプ_オーディエンス_開始月</code>。レポート集計時の整理が劇的に楽になる</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">広告グループ/セットが意味ある単位で分かれている <span class="severity">推奨</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">テーマ別・オーディエンス別・LP別で分割。「全部1つ」だと改善判断ができない</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">キャンペーンタイプの選択根拠がある <span class="severity">推奨</span><span class="platforms"><span class="gads">Google</span></span></div>
+        <div class="desc">P-MAX vs 検索 vs ディスプレイ vs 動画。資料請求リード獲得なら検索＋P-MAXの併用が定石</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">A/Bテスト構造が組まれている <span class="severity">任意</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">同条件で1要素だけ変える対照キャンペーン。「クリエイティブだけ違う」「LPだけ違う」など</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">学習中・最適化済みのフラグが管理されている <span class="severity">任意</span><span class="platforms"><span class="meta">Meta</span><span class="gads">Google</span></span></div>
+        <div class="desc">学習期間中のキャンペーンは触らない原則。命名やラベルで識別できると判断ミスが減る</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">運用停止中の旧キャンペーンが整理されている <span class="severity">任意</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">「アーカイブ」or「停止」で現役と区別。レポート画面の視認性向上</div>
+      </div>
+    </label>
+  </div>
+</section>
+
+<!-- ========================================================================== -->
+<!-- D. 入札・予算 -->
+<!-- ========================================================================== -->
+<section class="section" id="D" style="background:var(--bg-gray);border-radius:var(--radius)">
+  <div class="cat-header">
+    <div class="cat-icon">D</div>
+    <div class="cat-meta">
+      <div class="cat-label">CATEGORY D</div>
+      <div class="cat-title">入札戦略・予算</div>
+      <div class="cat-count">9項目</div>
+    </div>
+  </div>
+
+  <div class="check-list">
+    <label class="check critical">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">日予算の合計が月予算を超えていない <span class="severity">重要</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">日予算 × 30.4 = 月予算想定。気づくと月予算の倍以上に膨らんでいるアカウントは少なくない</div>
+      </div>
+    </label>
+
+    <label class="check critical">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">入札戦略がCV取得段階に合っている <span class="severity">重要</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">CV0〜49件: 「コンバージョン数最大化」/ CV50件以上: 「目標CPA」or「目標ROAS」</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">目標CPA / 目標ROASが現実的な値 <span class="severity">推奨</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">過去CPAの ±20% 程度に設定。極端な値だと配信量が極端に変動</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">学習期間中（過去2週間以内）に大きな変更を加えていない <span class="severity">推奨</span><span class="platforms"><span class="meta">Meta</span><span class="gads">Google</span></span></div>
+        <div class="desc">予算20%超変更・入札変更・CV変更で学習リセット。連続変更は厳禁</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">学習中のキャンペーンが「学習中」表示で止まっていない <span class="severity">推奨</span><span class="platforms"><span class="meta">Meta</span></span></div>
+        <div class="desc">7日以内に50CV未達で学習未完了。CV要件を下げる or 入札戦略変更を検討</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">入札タイプの自動入札 vs 手動入札の判断ができている <span class="severity">任意</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">基本は自動入札。CVデータ少なくAIが学習しない局面のみ手動入札を検討</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">予算分配がパフォーマンスに応じて再配分されている <span class="severity">任意</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">月次でCPA・CVRが良いキャンペーンに予算を寄せる</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">予算ペーシング設定（標準 / 加速）が意図通り <span class="severity">任意</span><span class="platforms"><span class="gads">Google</span></span></div>
+        <div class="desc">通常は「標準ペーシング」。早朝に予算消化したい等の特殊要件以外は触らない</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">広告グループ単位の上限入札額が極端に低くない <span class="severity">任意</span><span class="platforms"><span class="gads">Google</span></span></div>
+        <div class="desc">手動入札時、低すぎると配信が出ない。「上限CPC」が業界平均より極端に低くないか</div>
+      </div>
+    </label>
+  </div>
+</section>
+
+<!-- ========================================================================== -->
+<!-- E. ターゲティング -->
+<!-- ========================================================================== -->
+<section class="section" id="E">
+  <div class="cat-header">
+    <div class="cat-icon">E</div>
+    <div class="cat-meta">
+      <div class="cat-label">CATEGORY E</div>
+      <div class="cat-title">ターゲティング設定</div>
+      <div class="cat-count">11項目</div>
+    </div>
+  </div>
+
+  <div class="check-list">
+    <label class="check critical">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">地域ターゲティングが日本国内に限定されている <span class="severity">重要</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">デフォルト設定だと海外配信されるケースあり。「日本に住んでいる/最近滞在した」を選択</div>
+        <div class="where">📍 各キャンペーン → 地域設定</div>
+      </div>
+    </label>
+
+    <label class="check critical">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">地域は「居住地」設定（「対象地に関心がある」ではない） <span class="severity">重要</span><span class="platforms"><span class="gads">Google</span></span></div>
+        <div class="desc">「対象地に関心」だと「東京」検索した世界中のユーザーに配信される。「対象地に居住」が原則</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">年齢層がビジネスに合っている <span class="severity">推奨</span><span class="platforms"><span class="meta">Meta</span><span class="line">LINE</span><span class="yda">YDA</span></span></div>
+        <div class="desc">介護研修なら経営者・管理者層が中心 → 30-60代。18-24歳除外推奨</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">配信プラットフォーム/プレースメントが意図通り <span class="severity">推奨</span><span class="platforms"><span class="meta">Meta</span></span></div>
+        <div class="desc">Audience Network除外で品質向上することが多い。Facebook Feed・Instagram Feed・Stories の組合せが基本</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">カスタムオーディエンス（既存顧客・サイト訪問者）が活用されている <span class="severity">推奨</span><span class="platforms"><span class="meta">Meta</span><span class="gads">Google</span><span class="line">LINE</span></span></div>
+        <div class="desc">サイト訪問者リストでリターゲ、CV済みリストの除外、類似オーディエンス作成の元データ</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">類似（Lookalike）オーディエンスが活用されている <span class="severity">推奨</span><span class="platforms"><span class="meta">Meta</span><span class="gads">Google</span></span></div>
+        <div class="desc">既存CVリストの「似た人」を新規開拓。リターゲ→類似→新規探索の3段構成が王道</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">配信曜日・時間帯（Dayparting）が意図的に設定されている <span class="severity">任意</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">BtoBは平日昼間が反応高い傾向。深夜帯のCV率が極端に低ければ除外検討</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">デバイス別の入札調整が確認されている <span class="severity">任意</span><span class="platforms"><span class="gads">Google</span></span></div>
+        <div class="desc">モバイル・PC・タブレットでCVRが異なる場合、入札調整で効率化</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">検索パートナー / ディスプレイネットワーク拡張の選択が意図的 <span class="severity">任意</span><span class="platforms"><span class="gads">Google</span></span></div>
+        <div class="desc">検索キャンペーンで「ディスプレイネットワークを含める」がONになっていないか確認</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">興味関心・行動ターゲティングがビジネスと整合 <span class="severity">任意</span><span class="platforms"><span class="meta">Meta</span><span class="line">LINE</span></span></div>
+        <div class="desc">「介護」「経営者」「事業承継」などの興味関心。広すぎると無駄配信、狭すぎると配信量不足</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">広告セットの「規模」がほどよい <span class="severity">任意</span><span class="platforms"><span class="meta">Meta</span></span></div>
+        <div class="desc">Meta推奨は100万〜1,000万人。狭すぎ（10万人未満）は学習困難・広すぎは無駄配信</div>
+      </div>
+    </label>
+  </div>
+</section>
+
+<!-- ========================================================================== -->
+<!-- F. クリエイティブ -->
+<!-- ========================================================================== -->
+<section class="section" id="F" style="background:var(--bg-gray);border-radius:var(--radius)">
+  <div class="cat-header">
+    <div class="cat-icon">F</div>
+    <div class="cat-meta">
+      <div class="cat-label">CATEGORY F</div>
+      <div class="cat-title">クリエイティブ・広告文</div>
+      <div class="cat-count">10項目</div>
+    </div>
+  </div>
+
+  <div class="check-list">
+    <label class="check critical">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">広告の審査ステータスが「承認済み」 <span class="severity">重要</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">「制限付き」「不承認」は実質配信されていない。週次で確認</div>
+      </div>
+    </label>
+
+    <label class="check critical">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">広告と遷移先LPの内容が整合している <span class="severity">重要</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">「無料で◯◯」と謳いLPで有料は審査落ち。広告とLPで言ってることが一致している</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">広告文に薬機法・景品表示法違反がない <span class="severity">推奨</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">「最高」「No.1」「絶対」など根拠なき断定表現は審査落ち</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">複数バリエーション（最低3〜5本）が配信されている <span class="severity">推奨</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">1本だけだとAIが最適化できない。Metaは2-6本、Googleレスポンシブは見出し10/説明文5</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">画像・動画の解像度・縦横比が要件を満たす <span class="severity">推奨</span><span class="platforms"><span class="meta">Meta</span><span class="line">LINE</span><span class="yda">YDA</span></span></div>
+        <div class="desc">Storiesは縦9:16、Feedは1:1、リールは9:16。低解像度は配信品質スコアが下がる</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">画像内のテキスト比率が高すぎない <span class="severity">推奨</span><span class="platforms"><span class="meta">Meta</span></span></div>
+        <div class="desc">Metaは「20%ルール」廃止だが、テキスト多い画像は配信量が落ちる傾向</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">CTA（コール・トゥ・アクション）ボタンが文脈と合っている <span class="severity">任意</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">資料請求LPなら「詳しくはこちら」より「資料を受け取る」</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">広告アセットの利用権が確認されている <span class="severity">任意</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">フォト素材・モデル・ロゴ等の利用権限。後日の権利者からの指摘リスクをゼロに</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">広告表示オプション（サイトリンク等）が活用されている <span class="severity">任意</span><span class="platforms"><span class="gads">Google</span></span></div>
+        <div class="desc">検索広告のサイトリンク・コールアウト・構造化スニペット。CTRが平均10-30%向上</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">動画広告のフックが冒頭3秒以内 <span class="severity">任意</span><span class="platforms"><span class="meta">Meta</span><span class="line">LINE</span></span></div>
+        <div class="desc">音なしでも理解できる字幕、冒頭3秒で訴求点提示</div>
+      </div>
+    </label>
+  </div>
+</section>
+
+<!-- ========================================================================== -->
+<!-- G. ランディングページ整合性 -->
+<!-- ========================================================================== -->
+<section class="section" id="G">
+  <div class="cat-header">
+    <div class="cat-icon">G</div>
+    <div class="cat-meta">
+      <div class="cat-label">CATEGORY G</div>
+      <div class="cat-title">ランディングページ整合性</div>
+      <div class="cat-count">8項目</div>
+    </div>
+  </div>
+
+  <div class="check-list">
+    <label class="check critical">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">LP表示速度（Core Web Vitals）が合格レベル <span class="severity">重要</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">LCP &lt; 2.5秒、CLS &lt; 0.1。PageSpeed Insightsで測定し、Performance 70点以上</div>
+        <div class="where">📍 <code>pagespeed.web.dev</code></div>
+      </div>
+    </label>
+
+    <label class="check critical">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">モバイル表示が崩れていない <span class="severity">重要</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">配信の70-90%がモバイル。実機（iPhone・Android）で全セクションを表示確認</div>
+      </div>
+    </label>
+
+    <label class="check critical">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">フォーム送信が正常に動作する <span class="severity">重要</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">実際に送信→サンクスページ到達→確認メール受信を月1で実施</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">HTTPS化されている <span class="severity">推奨</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">https://から始まる。SSL証明書の有効期限切れもチェック</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">404・503エラーが出ていない <span class="severity">推奨</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">広告のリンク先URLが活きているか定期確認。サンクスページもチェック対象</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">LP上の電話番号・問合せ先が最新 <span class="severity">推奨</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">転居・担当変更時の更新漏れ。コールトラッキング使用時は計測URLも</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">LP内の見出し・訴求が広告と一致 <span class="severity">任意</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">広告「最大75%助成」→ LPファーストビューに同じメッセージがある</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">CTAボタンがファーストビュー内にある <span class="severity">任意</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">スクロールしないと申込導線が見えないLPはCVR低下</div>
+      </div>
+    </label>
+  </div>
+</section>
+
+<!-- ========================================================================== -->
+<!-- H. 除外設定 -->
+<!-- ========================================================================== -->
+<section class="section" id="H" style="background:var(--bg-gray);border-radius:var(--radius)">
+  <div class="cat-header">
+    <div class="cat-icon">H</div>
+    <div class="cat-meta">
+      <div class="cat-label">CATEGORY H</div>
+      <div class="cat-title">除外設定（ネガティブ）</div>
+      <div class="cat-count">7項目</div>
+    </div>
+  </div>
+
+  <div class="check-list">
+    <label class="check critical">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">既存CV済みユーザーを除外配信している <span class="severity">重要</span><span class="platforms"><span class="meta">Meta</span><span class="gads">Google</span><span class="line">LINE</span></span></div>
+        <div class="desc">資料請求済みの人に資料請求広告を出し続けない。リスト除外設定必須</div>
+      </div>
+    </label>
+
+    <label class="check critical">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">除外キーワードが整備されている <span class="severity">重要</span><span class="platforms"><span class="gads">Google</span></span></div>
+        <div class="desc">「無料」「求人」「アルバイト」「中古」など、ビジネスと無関係な検索を除外。月次で追加</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">不要なプレースメントを除外している <span class="severity">推奨</span><span class="platforms"><span class="gads">Google</span><span class="meta">Meta</span></span></div>
+        <div class="desc">Googleディスプレイの無関係アプリ・低品質サイト。Audience Networkの低品質枠</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">ブランド毀損防止：ニュース・センシティブカテゴリ除外 <span class="severity">推奨</span><span class="platforms"><span class="gads">Google</span><span class="meta">Meta</span></span></div>
+        <div class="desc">事故・災害・政治系コンテンツに広告が並ばないよう「コンテンツ除外」を設定</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">特定IPアドレスからの除外 <span class="severity">任意</span><span class="platforms"><span class="gads">Google</span></span></div>
+        <div class="desc">自社・代理店オフィスIPを除外で内部クリック計上を防止</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">不正クリックフィルタが有効 <span class="severity">任意</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">各社の不正クリック検知は自動だが、極端なクリック多発時は専用ツール（CHEQ等）導入検討</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">類似オーディエンスの元リストから「離脱者」を除外している <span class="severity">任意</span><span class="platforms"><span class="meta">Meta</span></span></div>
+        <div class="desc">CV済みリストではなく、CV直前で離脱した人の類似はLPの欠陥学習につながる</div>
+      </div>
+    </label>
+  </div>
+</section>
+
+<!-- ========================================================================== -->
+<!-- I. URL・トラッキングパラメータ -->
+<!-- ========================================================================== -->
+<section class="section" id="I">
+  <div class="cat-header">
+    <div class="cat-icon">I</div>
+    <div class="cat-meta">
+      <div class="cat-label">CATEGORY I</div>
+      <div class="cat-title">URL・トラッキングパラメータ</div>
+      <div class="cat-count">6項目</div>
+    </div>
+  </div>
+
+  <div class="check-list">
+    <label class="check critical">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">自動タグ設定がONになっている <span class="severity">重要</span><span class="platforms"><span class="gads">Google</span></span></div>
+        <div class="desc">Google Adsの自動タグ（gclid付与）がOFFだとGA4側で広告流入が識別できない</div>
+        <div class="where">📍 設定 → アカウント設定 → 自動タグ設定</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">UTMパラメータが命名規則通り <span class="severity">推奨</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc"><code>utm_source</code>=媒体、<code>utm_medium</code>=cpc/email等、<code>utm_campaign</code>=キャンペーン名。表記揺れ厳禁</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">最終リンク先URLが意図したLP <span class="severity">推奨</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">古いLPやテストページに飛んでいないか。リダイレクト先までクリック追跡</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">URLパラメータが多すぎない <span class="severity">任意</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">URLが長すぎると見栄えが悪く、SNSシェア時に切れる。必要最小限のパラメータに</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">パラメータの大文字小文字統一 <span class="severity">任意</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc"><code>Google</code>と<code>google</code>はレポート上別物として集計される。小文字統一推奨</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">クロスドメイン計測が設定されている（複数ドメイン運用時） <span class="severity">任意</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">LP→決済ページ等で別ドメインに遷移する場合、GA4で「クロスドメイン計測」を設定</div>
+      </div>
+    </label>
+  </div>
+</section>
+
+<!-- ========================================================================== -->
+<!-- J. ブランド保護 -->
+<!-- ========================================================================== -->
+<section class="section" id="J" style="background:var(--bg-gray);border-radius:var(--radius)">
+  <div class="cat-header">
+    <div class="cat-icon">J</div>
+    <div class="cat-meta">
+      <div class="cat-label">CATEGORY J</div>
+      <div class="cat-title">ブランド保護・競合対策</div>
+      <div class="cat-count">5項目</div>
+    </div>
+  </div>
+
+  <div class="check-list">
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">自社ブランド名で検索広告を出稿している <span class="severity">推奨</span><span class="platforms"><span class="gads">Google</span></span></div>
+        <div class="desc">競合の自社ブランドハイジャック対策。自社名検索のオーガニックを補強</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">商標登録された自社名・商品名の保護設定 <span class="severity">推奨</span><span class="platforms"><span class="gads">Google</span><span class="meta">Meta</span></span></div>
+        <div class="desc">商標申請の証跡を各広告プラットフォームに提出し、競合の不正使用ブロックを依頼可能</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">競合ブランドキーワードでの出稿可否を判断済み <span class="severity">任意</span><span class="platforms"><span class="gads">Google</span></span></div>
+        <div class="desc">出稿は合法だが業界慣行・関係性で判断。出稿する場合は競合社名を広告文に使わない</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">クチコミ・口コミ計測仕組み <span class="severity">任意</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">広告経由でないオーガニックの問合せ（紹介・口コミ）も別経路で計測</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">広告主表記が法令準拠 <span class="severity">任意</span><span class="platforms"><span class="gads">Google</span></span></div>
+        <div class="desc">Google Adsの「広告主の本人確認」プログラム認証。BtoBは2024年以降必須化</div>
+      </div>
+    </label>
+  </div>
+</section>
+
+<!-- ========================================================================== -->
+<!-- K. 介護FC固有 -->
+<!-- ========================================================================== -->
+<section class="section" id="K">
+  <div class="cat-header">
+    <div class="cat-icon">K</div>
+    <div class="cat-meta">
+      <div class="cat-label">CATEGORY K</div>
+      <div class="cat-title">介護FC・教育事業 固有チェック</div>
+      <div class="cat-count">7項目</div>
+    </div>
+  </div>
+
+  <div class="caregiver-section">
+    <h3>業界固有：絶対外せない視点</h3>
+    <p>介護現場・経営者向けの訴求では、ITスタートアップ的な訴求は逆効果。主語は常に「介護現場」。「シリコンバレー」「Anthropic社製AI」等のIT権威付けは避けます。</p>
+  </div>
+
+  <div class="check-list" style="margin-top:24px">
+    <label class="check critical">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">広告訴求が「介護現場の課題解決」起点になっている <span class="severity">重要</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">「シフト作成が大変」「記録が手書きで重い」など具体的な現場課題から入る。AI技術ありきの訴求は刺さらない</div>
+      </div>
+    </label>
+
+    <label class="check critical">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">IT文脈・横文字・権威付け表現を使っていない <span class="severity">重要</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">「シリコンバレー」「Anthropic社」「最先端AI」等は介護経営者層には響かない or 逆に警戒感を生む</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">助成金訴求の根拠（厚労省名称・支給率）が正確 <span class="severity">推奨</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">「人材開発支援助成金」等の正式名称、「最大75%」等の上限値の根拠条文。誤情報は信頼失墜</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">薬機法・景表法に抵触する訴求がない <span class="severity">推奨</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">「介護負担が必ず減ります」「業務時間半減を保証」等の効果保証は要注意</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">「介護FC加盟者」と「介護事業者向け研修」の訴求が混在していない <span class="severity">推奨</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">FC加盟募集と既存事業者向け研修販売は別オーディエンス。同キャンペーン内で混在しない</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">介護現場の画像・モデルが業界に違和感ない <span class="severity">任意</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">外国人スタッフ・若年スタッフのみの画像は実態と乖離。利用者・スタッフのバランス表現</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">フランチャイズ本部表記・特商法表記がLPに明記 <span class="severity">任意</span><span class="platforms"><span class="all">全</span></span></div>
+        <div class="desc">FCモデルの場合、加盟金・ロイヤリティの記載義務あり。本部所在地・代表者名も</div>
+      </div>
+    </label>
+  </div>
+</section>
+
+<!-- ========================================================================== -->
+<!-- 早見表 -->
+<!-- ========================================================================== -->
+<section class="section" id="matrix">
+  <div class="cat-header">
+    <div class="cat-icon">★</div>
+    <div class="cat-meta">
+      <div class="cat-label">QUICK MATRIX</div>
+      <div class="cat-title">プラットフォーム別 機能・設定有無マトリクス</div>
+      <div class="cat-count">参考表</div>
+    </div>
+  </div>
+
+  <div class="matrix-wrap">
+    <table class="matrix">
+      <thead>
+        <tr>
+          <th>機能 / 設定</th>
+          <th>Google Ads</th>
+          <th>Meta広告</th>
+          <th>LINE広告</th>
+          <th>YDA</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="platform">CV計測タグ</td><td class="yes">○ gtag</td><td class="yes">○ Pixel</td><td class="yes">○ LINE Tag</td><td class="yes">○ サイトリタゲタグ</td></tr>
+        <tr><td class="platform">サーバー連携</td><td class="yes">○ Enhanced Conv</td><td class="yes">○ CAPI</td><td class="partial">△ 限定</td><td class="partial">△ 限定</td></tr>
+        <tr><td class="platform">類似オーディエンス</td><td class="yes">○ 類似ユーザー</td><td class="yes">○ Lookalike</td><td class="yes">○ オーディエンス類似</td><td class="yes">○ 類似配信</td></tr>
+        <tr><td class="platform">リターゲティング</td><td class="yes">○</td><td class="yes">○</td><td class="yes">○</td><td class="yes">○</td></tr>
+        <tr><td class="platform">動的広告</td><td class="yes">○ DSA</td><td class="yes">○ DPA</td><td class="partial">△</td><td class="yes">○</td></tr>
+        <tr><td class="platform">P-MAX / Advantage+</td><td class="yes">○ P-MAX</td><td class="yes">○ Advantage+ Shopping</td><td class="no">×</td><td class="no">×</td></tr>
+        <tr><td class="platform">動画広告</td><td class="yes">○ YouTube</td><td class="yes">○ Reels/Stories</td><td class="yes">○ VOOM等</td><td class="yes">○ ブランドパネル</td></tr>
+        <tr><td class="platform">商標保護申請</td><td class="yes">○</td><td class="yes">○</td><td class="partial">△</td><td class="partial">△</td></tr>
+        <tr><td class="platform">時間帯ターゲ</td><td class="yes">○</td><td class="yes">○</td><td class="yes">○</td><td class="yes">○</td></tr>
+        <tr><td class="platform">広告表示オプション</td><td class="yes">○ 豊富</td><td class="partial">△ CTA程度</td><td class="partial">△</td><td class="partial">△</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ========================================================================== -->
+<!-- 最終スコアシート -->
+<!-- ========================================================================== -->
+<section class="section">
+  <div class="summary-final">
+    <h2>監査<span style="background:linear-gradient(135deg,#FF0080,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">サマリー</span></h2>
+    <p class="sub">11カテゴリ・約90項目の確認が終わったら、以下のスコアシートで現状把握</p>
+
+    <div class="scorecard">
+      <div class="scorecard-row"><div>A. アカウント基盤</div><div class="v" id="sA">0/8</div></div>
+      <div class="scorecard-row"><div>B. CV計測の健全性</div><div class="v" id="sB">0/12</div></div>
+      <div class="scorecard-row"><div>C. キャンペーン構造</div><div class="v" id="sC">0/7</div></div>
+      <div class="scorecard-row"><div>D. 入札・予算</div><div class="v" id="sD">0/9</div></div>
+      <div class="scorecard-row"><div>E. ターゲティング</div><div class="v" id="sE">0/11</div></div>
+      <div class="scorecard-row"><div>F. クリエイティブ</div><div class="v" id="sF">0/10</div></div>
+      <div class="scorecard-row"><div>G. LP整合性</div><div class="v" id="sG">0/8</div></div>
+      <div class="scorecard-row"><div>H. 除外設定</div><div class="v" id="sH">0/7</div></div>
+      <div class="scorecard-row"><div>I. URL・パラメータ</div><div class="v" id="sI">0/6</div></div>
+      <div class="scorecard-row"><div>J. ブランド保護</div><div class="v" id="sJ">0/5</div></div>
+      <div class="scorecard-row"><div>K. 介護FC固有</div><div class="v" id="sK">0/7</div></div>
+      <div class="scorecard-row" style="border-top:2px solid rgba(255,255,255,.3);margin-top:.5rem;padding-top:1rem;font-size:1rem"><div>合計</div><div class="v" id="sAll">0/90</div></div>
+    </div>
+
+    <p style="text-align:center;color:rgba(255,255,255,.6);font-size:.85rem;margin-top:2rem;line-height:1.85">
+    重要項目（赤）すべて＋推奨項目の80%以上クリアで健全。<br>
+    重要項目に未チェックが残っている場合は最優先で対処してください。
+    </p>
+  </div>
+</section>
+
+<footer>
+  <p>広告運用 網羅監査チェックリスト｜株式会社ACG マーケティング部</p>
+  <p style="margin-top:.5rem;font-size:.75rem;opacity:.7">関連資料：<a href="tracking-overview.html">全体像の学習資料</a>　<a href="tracking-setup-guide.html">実践セットアップガイド</a></p>
+</footer>
+
+<script>
+// チェック状態をlocalStorageに保存
+(function(){
+  const cats = ['A','B','C','D','E','F','G','H','I','J','K'];
+  const counts = {A:8,B:12,C:7,D:9,E:11,F:10,G:8,H:7,I:6,J:5,K:7};
+
+  document.querySelectorAll('.check').forEach((el, i) => {
+    const cb = el.querySelector('input[type="checkbox"]');
+    const key = 'audit_chk_' + i;
+    if (localStorage.getItem(key) === '1') cb.checked = true;
+    cb.addEventListener('change', () => {
+      localStorage.setItem(key, cb.checked ? '1' : '0');
+      updateScores();
+    });
+  });
+
+  function updateScores(){
+    let total = {critical:0,warning:0,info:0,all:0};
+    let perCat = {};
+    cats.forEach(c => perCat[c] = 0);
+
+    document.querySelectorAll('section[id]').forEach(sec => {
+      const id = sec.id;
+      if (!cats.includes(id)) return;
+      const checks = sec.querySelectorAll('.check input[type="checkbox"]:checked');
+      perCat[id] = checks.length;
+      checks.forEach(cb => {
+        const card = cb.closest('.check');
+        if (card.classList.contains('critical')) total.critical++;
+        else if (card.classList.contains('warning')) total.warning++;
+        else if (card.classList.contains('info')) total.info++;
+        total.all++;
+      });
+    });
+
+    cats.forEach(c => {
+      const el = document.getElementById('s'+c);
+      if (el) el.textContent = perCat[c] + '/' + counts[c];
+    });
+
+    const totalAll = Object.values(counts).reduce((a,b)=>a+b,0);
+    document.getElementById('sAll').textContent = total.all + '/' + totalAll;
+
+    // 重要度別カウント（全体合計）
+    let totalCritical = 0, totalWarning = 0, totalInfo = 0;
+    document.querySelectorAll('.check').forEach(card => {
+      if (card.classList.contains('critical')) totalCritical++;
+      else if (card.classList.contains('warning')) totalWarning++;
+      else if (card.classList.contains('info')) totalInfo++;
+    });
+
+    document.getElementById('cnt-c').textContent = total.critical + '/' + totalCritical;
+    document.getElementById('cnt-w').textContent = total.warning + '/' + totalWarning;
+    document.getElementById('cnt-i').textContent = total.info + '/' + totalInfo;
+  }
+
+  updateScores();
+})();
+</script>
+
+</body>
+</html>
