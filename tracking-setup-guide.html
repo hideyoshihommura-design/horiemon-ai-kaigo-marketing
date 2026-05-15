@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>計測トラッキング 実践セットアップガイド｜株式会社ACG</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gradient:linear-gradient(135deg,#FF0080,#7928CA);
+  --gradient-soft:linear-gradient(135deg,rgba(255,0,128,.08),rgba(121,40,202,.08));
+  --accent:#FF0080;
+  --purple:#7928CA;
+  --dark:#1a202c;
+  --bg:#fafbff;
+  --bg-card:#fff;
+  --bg-gray:#f5f7fa;
+  --text:#2d3748;
+  --text-sub:#4a5568;
+  --text-muted:#718096;
+  --border:#e2e8f0;
+  --radius:18px;
+  --shadow-sm:0 4px 14px rgba(15,23,42,.06);
+  --shadow-md:0 12px 32px rgba(15,23,42,.08);
+  --shadow-lg:0 24px 50px rgba(15,23,42,.10);
+  --green:#22c55e;
+  --blue:#3b82f6;
+  --orange:#f59e0b;
+  --red:#ef4444;
+  --code-bg:#0f0c29;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:"Noto Sans JP",sans-serif;color:var(--text);background:var(--bg);line-height:1.85;-webkit-font-smoothing:antialiased}
+code,pre{font-family:"JetBrains Mono","Consolas",monospace}
+
+/* ===== ヘッダー ===== */
+.hero{padding:80px 24px 60px;background:linear-gradient(135deg,#fff 0%,#fdfbff 50%,#fff5fa 100%);border-bottom:1px solid var(--border);text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-200px;left:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(255,0,128,.10) 0%,transparent 65%);border-radius:50%}
+.hero::after{content:'';position:absolute;bottom:-200px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(121,40,202,.10) 0%,transparent 65%);border-radius:50%}
+.hero-inner{position:relative;z-index:2;max-width:900px;margin:0 auto}
+.hero-eyebrow{display:inline-block;font-size:.78rem;font-weight:800;letter-spacing:.12em;color:#fff;background:var(--gradient);padding:.45rem 1.2rem;border-radius:50px;margin-bottom:1.5rem;text-transform:uppercase}
+.hero h1{font-size:clamp(2rem,5vw,3.4rem);font-weight:900;line-height:1.2;letter-spacing:-.03em;color:var(--dark);margin-bottom:1rem}
+.hero h1 .grad{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:clamp(1rem,1.6vw,1.15rem);color:var(--text-sub);line-height:1.95;max-width:680px;margin:0 auto 2rem}
+.hero .companion{display:inline-flex;align-items:center;gap:.6rem;background:#fff;border:2px solid rgba(121,40,202,.15);padding:.85rem 1.4rem;border-radius:14px;font-size:.88rem;color:var(--text-sub);box-shadow:var(--shadow-sm);text-decoration:none;transition:.2s}
+.hero .companion:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:var(--purple)}
+.hero .companion .ic{width:32px;height:32px;background:var(--gradient);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:.85rem}
+.hero .companion strong{color:var(--dark);font-weight:800}
+
+/* ===== ナビ ===== */
+.toc{background:#fff;padding:1.2rem 24px;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;backdrop-filter:blur(10px);background:rgba(255,255,255,.92)}
+.toc-inner{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center}
+.toc a{font-size:.78rem;color:var(--text-sub);text-decoration:none;padding:.4rem .85rem;border-radius:50px;border:1px solid var(--border);background:#fff;transition:.2s;white-space:nowrap;font-weight:700}
+.toc a:hover{background:var(--gradient);color:#fff;border-color:transparent;transform:translateY(-2px)}
+
+/* ===== セクション共通 ===== */
+.section{padding:80px 24px;max-width:1100px;margin:0 auto}
+.section-header{margin-bottom:50px;text-align:center}
+.section-num{display:inline-block;font-size:.75rem;font-weight:800;letter-spacing:.15em;color:var(--accent);margin-bottom:.75rem}
+.section-title{font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:900;line-height:1.3;letter-spacing:-.02em;color:var(--dark);margin-bottom:.75rem}
+.section-title .grad{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.section-lead{font-size:1.02rem;color:var(--text-sub);line-height:1.95;max-width:720px;margin:0 auto}
+
+/* ===== ロードマップ ===== */
+.roadmap{margin-top:30px;display:flex;flex-direction:column;gap:18px}
+.phase{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-sm);overflow:hidden;border-left:6px solid;display:grid;grid-template-columns:120px 1fr auto;align-items:center;gap:1.5rem;padding:1.5rem 2rem;transition:.2s}
+.phase:hover{transform:translateX(4px);box-shadow:var(--shadow-md)}
+.phase.p1{border-color:#FF0080}
+.phase.p2{border-color:#7928CA}
+.phase.p3{border-color:#3b82f6}
+.phase.p4{border-color:#22c55e}
+.phase.p5{border-color:#f59e0b}
+.phase.p6{border-color:#1a202c}
+.phase-num{font-size:2.5rem;font-weight:900;line-height:1;color:var(--dark);font-family:"Helvetica Neue",sans-serif;letter-spacing:-.04em;opacity:.15}
+.phase-body h3{font-size:1.15rem;font-weight:900;color:var(--dark);margin-bottom:.3rem;letter-spacing:-.01em}
+.phase-body p{font-size:.88rem;color:var(--text-sub);line-height:1.7;margin:0}
+.phase-time{font-size:.82rem;font-weight:800;color:#fff;background:var(--gradient);padding:.4rem .9rem;border-radius:50px;white-space:nowrap}
+
+/* ===== セットアップカード ===== */
+.tool-section{margin-top:30px;display:flex;flex-direction:column;gap:30px}
+.setup-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-sm);overflow:hidden;border-top:5px solid var(--accent)}
+.setup-card.ga4{border-top-color:#FF6F00}
+.setup-card.gads{border-top-color:#4285F4}
+.setup-card.meta{border-top-color:#1877F2}
+.setup-card.line{border-top-color:#06C755}
+.setup-card.clarity{border-top-color:#FFB900}
+.setup-head{padding:1.5rem 2rem;display:flex;align-items:center;gap:1rem;border-bottom:1px solid var(--border);background:linear-gradient(180deg,#fff,#fafbff)}
+.setup-head .logo{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:1.1rem;flex-shrink:0}
+.setup-head .ga4 .logo,.setup-card.ga4 .logo{background:#FF6F00}
+.setup-card.gads .logo{background:#4285F4}
+.setup-card.meta .logo{background:#1877F2}
+.setup-card.line .logo{background:#06C755}
+.setup-card.clarity .logo{background:#FFB900;color:#1a202c}
+.setup-head .name{font-size:1.25rem;font-weight:900;color:var(--dark);letter-spacing:-.01em;margin:0}
+.setup-head .role{font-size:.82rem;color:var(--text-sub);margin-top:.15rem}
+.setup-head .badge{margin-left:auto;font-size:.7rem;font-weight:800;background:var(--bg-gray);color:var(--text-sub);padding:.35rem .75rem;border-radius:50px}
+.setup-body{padding:2rem}
+.setup-steps{list-style:none;padding:0;margin:0;counter-reset:step}
+.setup-steps > li{counter-increment:step;padding:1rem 0 1rem 3.25rem;position:relative;border-bottom:1px dashed var(--border)}
+.setup-steps > li:last-child{border-bottom:none}
+.setup-steps > li::before{content:counter(step);position:absolute;left:0;top:1.1rem;width:32px;height:32px;background:var(--gradient);color:#fff;font-weight:900;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem}
+.setup-steps li h4{font-size:1rem;font-weight:900;color:var(--dark);margin-bottom:.4rem;letter-spacing:-.005em}
+.setup-steps li p{font-size:.9rem;color:var(--text-sub);line-height:1.8;margin-bottom:.5rem}
+.setup-steps li p:last-child{margin-bottom:0}
+.setup-steps li a{color:var(--purple);font-weight:700;text-decoration:none;border-bottom:1px dashed var(--purple)}
+.setup-steps li a:hover{color:var(--accent);border-bottom-color:var(--accent)}
+.setup-steps .arrow{color:var(--text-muted);font-weight:900}
+.code{display:inline-block;background:var(--code-bg);color:#fff;padding:.15rem .55rem;border-radius:6px;font-family:"JetBrains Mono",monospace;font-size:.82rem;letter-spacing:.02em}
+.code-block{display:block;background:var(--code-bg);color:#fff;padding:1rem 1.25rem;border-radius:10px;font-family:"JetBrains Mono",monospace;font-size:.78rem;line-height:1.7;margin-top:.6rem;overflow-x:auto;border-left:3px solid var(--accent)}
+.kbd{display:inline-block;background:var(--bg-gray);border:1px solid var(--border);border-bottom-width:2px;border-radius:5px;padding:.1rem .5rem;font-size:.78rem;font-weight:700;color:var(--dark);font-family:"JetBrains Mono",monospace}
+.notice{background:var(--gradient-soft);border-left:4px solid var(--accent);padding:1rem 1.2rem;border-radius:8px;font-size:.86rem;line-height:1.75;color:var(--dark);margin-top:.7rem}
+.notice strong{color:var(--accent)}
+
+/* ===== HTML差し替え図 ===== */
+.html-replace{margin-top:30px;background:#0f0c29;color:#fff;border-radius:var(--radius);padding:2.5rem 2rem;box-shadow:var(--shadow-md);position:relative;overflow:hidden}
+.html-replace::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:var(--gradient)}
+.html-replace h3{font-size:1.2rem;font-weight:900;color:#fff;margin-bottom:1rem}
+.replace-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:1.5rem;align-items:stretch;margin-top:1.25rem}
+.replace-box{background:rgba(255,255,255,.05);border-radius:10px;padding:1.25rem;border:1px solid rgba(255,255,255,.12)}
+.replace-box h5{font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.6rem}
+.replace-box.before h5{color:#ff6b9d}
+.replace-box.after h5{color:#7ee787}
+.replace-box pre{font-size:.72rem;line-height:1.7;color:rgba(255,255,255,.9);white-space:pre-wrap;word-break:break-all}
+.replace-box pre .hl{background:rgba(255,235,59,.25);padding:0 .15rem;border-radius:3px;color:#fff;font-weight:700}
+.replace-arrow{display:flex;align-items:center;color:var(--accent);font-size:2rem;font-weight:900}
+
+/* ===== 動作確認カード ===== */
+.verify-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:30px}
+.verify-card{background:#fff;border-radius:var(--radius);padding:1.75rem;box-shadow:var(--shadow-sm);border-top:4px solid var(--accent)}
+.verify-card.ga4{border-top-color:#FF6F00}
+.verify-card.gads{border-top-color:#4285F4}
+.verify-card.meta{border-top-color:#1877F2}
+.verify-card.line{border-top-color:#06C755}
+.verify-card.clarity{border-top-color:#FFB900}
+.verify-card h4{font-size:1rem;font-weight:900;color:var(--dark);margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem}
+.verify-card h4 .dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;background:var(--accent)}
+.verify-card.ga4 h4 .dot{background:#FF6F00}
+.verify-card.gads h4 .dot{background:#4285F4}
+.verify-card.meta h4 .dot{background:#1877F2}
+.verify-card.line h4 .dot{background:#06C755}
+.verify-card.clarity h4 .dot{background:#FFB900}
+.verify-card .where{font-size:.82rem;color:var(--text-sub);line-height:1.8;margin-bottom:.6rem}
+.verify-card .what{font-size:.82rem;color:var(--text-sub);line-height:1.8}
+.verify-card .what strong{color:var(--dark)}
+
+/* ===== 運用フェーズ ===== */
+.ops-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:24px}
+.ops-card{background:#fff;border-radius:14px;padding:1.4rem;box-shadow:var(--shadow-sm);transition:.2s}
+.ops-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px)}
+.ops-card .freq{font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--gradient);padding:.3rem .8rem;border-radius:50px;display:inline-block;margin-bottom:.75rem}
+.ops-card h4{font-size:1.02rem;font-weight:900;color:var(--dark);margin-bottom:.5rem}
+.ops-card ul{padding:0;list-style:none}
+.ops-card li{font-size:.85rem;color:var(--text-sub);padding-left:1rem;position:relative;margin-bottom:.4rem;line-height:1.65}
+.ops-card li::before{content:'›';position:absolute;left:0;color:var(--purple);font-weight:900}
+
+/* ===== トラブルシュート ===== */
+.tshoot{margin-top:30px;display:flex;flex-direction:column;gap:14px}
+.ts-item{background:#fff;border-radius:14px;box-shadow:var(--shadow-sm);overflow:hidden;border-left:4px solid var(--orange)}
+.ts-q{padding:1.2rem 1.5rem;background:linear-gradient(90deg,rgba(245,158,11,.06),transparent);font-weight:900;color:var(--dark);font-size:.98rem;display:flex;align-items:center;gap:.7rem}
+.ts-q::before{content:'?';width:26px;height:26px;background:var(--orange);color:#fff;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0}
+.ts-a{padding:0 1.5rem 1.2rem 3.5rem;font-size:.86rem;color:var(--text-sub);line-height:1.85}
+.ts-a strong{color:var(--dark)}
+
+/* ===== サマリー ===== */
+.summary{background:var(--dark);color:#fff;border-radius:var(--radius);padding:3rem 2rem;margin-top:40px;position:relative;overflow:hidden}
+.summary::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:var(--gradient)}
+.summary h2{font-size:1.7rem;font-weight:900;margin-bottom:.5rem;color:#fff;text-align:center;letter-spacing:-.02em}
+.summary .sub{text-align:center;color:rgba(255,255,255,.6);font-size:.95rem;margin-bottom:2.5rem}
+.checklist{max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:.7rem}
+.checklist li{background:rgba(255,255,255,.05);border-radius:10px;padding:.85rem 1.2rem .85rem 3rem;position:relative;color:rgba(255,255,255,.85);font-size:.88rem;backdrop-filter:blur(10px)}
+.checklist li::before{content:'';position:absolute;left:1rem;top:50%;transform:translateY(-50%);width:22px;height:22px;border:2px solid var(--accent);border-radius:50%}
+.checklist li strong{color:#fff;font-weight:800}
+
+footer{text-align:center;padding:3rem 1.5rem;color:var(--text-muted);font-size:.85rem;background:var(--bg-gray);border-top:1px solid var(--border)}
+
+@media (max-width:768px){
+  .section{padding:60px 16px}
+  .phase{grid-template-columns:1fr;gap:.5rem;padding:1.5rem;text-align:left}
+  .phase-num{font-size:1.5rem;display:none}
+  .phase-time{justify-self:start}
+  .replace-grid{grid-template-columns:1fr;gap:1rem}
+  .replace-arrow{transform:rotate(90deg);justify-self:center}
+  .setup-body{padding:1.5rem}
+  .setup-head{padding:1.25rem 1.5rem;flex-wrap:wrap}
+  .toc{padding:1rem 12px}
+  .toc a{font-size:.7rem;padding:.3rem .6rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ========== ヒーロー ========== -->
+<header class="hero">
+  <div class="hero-inner">
+    <span class="hero-eyebrow">実践セットアップガイド</span>
+    <h1>計測トラッキングを<br><span class="grad">実際にどう組み立てるか</span></h1>
+    <p>「全体像」を理解したあと、実際に何を、どの順番で、どこで設定するのか。<br>介護研修LPを例にした<strong>実装手順書</strong>です。</p>
+    <a href="tracking-overview.html" class="companion">
+      <span class="ic">📖</span>
+      <span>先に <strong>全体像の学習資料</strong> から読むことをお勧めします</span>
+    </a>
+  </div>
+</header>
+
+<!-- ========== ナビ ========== -->
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#roadmap">セットアップロードマップ</a>
+    <a href="#prep">事前準備</a>
+    <a href="#tools">各ツールのセットアップ</a>
+    <a href="#install">タグ埋込</a>
+    <a href="#verify">動作確認</a>
+    <a href="#campaign">広告キャンペーン側</a>
+    <a href="#ops">運用</a>
+    <a href="#trouble">トラブルシュート</a>
+    <a href="#checklist">チェックリスト</a>
+  </div>
+</nav>
+
+<!-- ========== 1. ロードマップ ========== -->
+<section class="section" id="roadmap">
+  <div class="section-header">
+    <div class="section-num">PHASE OVERVIEW</div>
+    <h2 class="section-title">セットアップ<span class="grad">ロードマップ</span></h2>
+    <p class="section-lead">合計で初回約4〜6時間。一度組み立てれば、以降は月1〜2時間のメンテナンスで運用できます。</p>
+  </div>
+
+  <div class="roadmap">
+    <div class="phase p1">
+      <div class="phase-num">01</div>
+      <div class="phase-body">
+        <h3>事前準備</h3>
+        <p>使うアカウント・LP・GitHub Pages公開URLなど、これから設定する対象を確定させる</p>
+      </div>
+      <div class="phase-time">30分</div>
+    </div>
+    <div class="phase p2">
+      <div class="phase-num">02</div>
+      <div class="phase-body">
+        <h3>各ツールのアカウント開設・ID取得</h3>
+        <p>GA4 / Google Ads / Meta Pixel / LINE Tag / Microsoft Clarity の5つを、それぞれ管理画面で作成しID発行</p>
+      </div>
+      <div class="phase-time">1〜2時間</div>
+    </div>
+    <div class="phase p3">
+      <div class="phase-num">03</div>
+      <div class="phase-body">
+        <h3>LP・サンクスページにタグを埋め込む</h3>
+        <p>取得したIDを HTML のプレースホルダー（XXXXX）に差し替え、HubSpotで更新</p>
+      </div>
+      <div class="phase-time">30分</div>
+    </div>
+    <div class="phase p4">
+      <div class="phase-num">04</div>
+      <div class="phase-body">
+        <h3>動作確認（テストイベント）</h3>
+        <p>実際にLPを開きフォーム送信→サンクスページに飛ぶ流れを通し、各社のテスト画面で受信を確認</p>
+      </div>
+      <div class="phase-time">30分</div>
+    </div>
+    <div class="phase p5">
+      <div class="phase-num">05</div>
+      <div class="phase-body">
+        <h3>広告キャンペーン側で目標として登録</h3>
+        <p>計測されたCVを「最適化の目標」として各広告マネージャに設定。これがないとAIが学習しない</p>
+      </div>
+      <div class="phase-time">30分</div>
+    </div>
+    <div class="phase p6">
+      <div class="phase-num">06</div>
+      <div class="phase-body">
+        <h3>運用フェーズ（継続）</h3>
+        <p>週次・月次で見るべき指標と意思決定の流れ。LP改善 → 配信改善のループ</p>
+      </div>
+      <div class="phase-time">毎週30分</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 2. 事前準備 ========== -->
+<section class="section" id="prep" style="background:var(--bg-gray);border-radius:var(--radius)">
+  <div class="section-header">
+    <div class="section-num">PHASE 01</div>
+    <h2 class="section-title">事前準備：<span class="grad">対象を確定</span>させる</h2>
+    <p class="section-lead">先に「何を計測対象とするのか」を1枚にまとめてから動くと、設定時の迷子を防げます。</p>
+  </div>
+
+  <div style="background:#fff;border-radius:var(--radius);padding:2rem;box-shadow:var(--shadow-sm);max-width:780px;margin:0 auto">
+    <h3 style="font-size:1.05rem;font-weight:900;color:var(--dark);margin-bottom:1rem">📋 この案件の計測対象</h3>
+    <table style="width:100%;border-collapse:collapse;font-size:.88rem">
+      <tr style="background:var(--bg-gray)">
+        <td style="padding:.7rem 1rem;font-weight:800;width:35%">サイトドメイン</td>
+        <td style="padding:.7rem 1rem">HubSpot公開ドメイン（後で確認: <span class="code">Settings > Website > Domains</span>）</td>
+      </tr>
+      <tr style="border-top:1px solid var(--border)">
+        <td style="padding:.7rem 1rem;font-weight:800">対象LP</td>
+        <td style="padding:.7rem 1rem"><span class="code">kaigo-subsidy-claude-lp.html</span><br>介護事業者向けClaude Code研修 資料請求LP</td>
+      </tr>
+      <tr style="background:var(--bg-gray)">
+        <td style="padding:.7rem 1rem;font-weight:800">CV発火地点</td>
+        <td style="padding:.7rem 1rem"><span class="code">thanks-kaigo-subsidy-acg.html</span><br>URL: <span class="code">/thanks-document-request</span></td>
+      </tr>
+      <tr style="border-top:1px solid var(--border)">
+        <td style="padding:.7rem 1rem;font-weight:800">CVの定義</td>
+        <td style="padding:.7rem 1rem">「資料請求フォーム送信完了」=「サンクスページ到達」</td>
+      </tr>
+      <tr style="background:var(--bg-gray)">
+        <td style="padding:.7rem 1rem;font-weight:800">広告チャネル（予定）</td>
+        <td style="padding:.7rem 1rem">Google検索広告・Meta（FB/IG）広告・LINE広告</td>
+      </tr>
+      <tr style="border-top:1px solid var(--border)">
+        <td style="padding:.7rem 1rem;font-weight:800">目標CPA</td>
+        <td style="padding:.7rem 1rem">1件の資料請求あたり ◯◯◯◯円（未確定なら後ほど決める）</td>
+      </tr>
+    </table>
+    <div class="notice" style="margin-top:1.25rem"><strong>💡 ポイント:</strong> 「何を1件のCVとカウントするか」をここでハッキリさせるのが最重要。あとから変えるとデータが連続しなくなります。</div>
+  </div>
+</section>
+
+<!-- ========== 3. 各ツールのセットアップ ========== -->
+<section class="section" id="tools">
+  <div class="section-header">
+    <div class="section-num">PHASE 02</div>
+    <h2 class="section-title">各ツールの<span class="grad">アカウント開設＆ID取得</span></h2>
+    <p class="section-lead">5つのツールを開設してIDを集めます。ここがいちばん時間がかかる工程です。</p>
+  </div>
+
+  <div class="tool-section">
+
+    <!-- GA4 -->
+    <div class="setup-card ga4">
+      <div class="setup-head">
+        <div class="logo">GA4</div>
+        <div>
+          <div class="name">Google Analytics 4</div>
+          <div class="role">サイトの全体動向を解析。広告に依存しない</div>
+        </div>
+        <div class="badge">取得するもの: 測定ID</div>
+      </div>
+      <div class="setup-body">
+        <ol class="setup-steps">
+          <li>
+            <h4>Googleアカウントでログイン</h4>
+            <p><a href="https://analytics.google.com/" target="_blank">analytics.google.com</a> を開く</p>
+          </li>
+          <li>
+            <h4>新規プロパティを作成</h4>
+            <p>「管理」（左下歯車）<span class="arrow">→</span>「プロパティを作成」</p>
+            <p>プロパティ名: <span class="code">介護研修LP</span>　タイムゾーン: 日本　通貨: 日本円</p>
+          </li>
+          <li>
+            <h4>業種・ビジネス情報を入力</h4>
+            <p>業種: 教育　ビジネス規模: 中小企業</p>
+          </li>
+          <li>
+            <h4>データストリームを作成</h4>
+            <p>プラットフォーム: <strong>ウェブ</strong>を選択</p>
+            <p>ウェブサイトのURL: HubSpot公開ドメイン　ストリーム名: <span class="code">介護研修LP - Web</span></p>
+          </li>
+          <li>
+            <h4>測定IDをコピー</h4>
+            <p>表示される <span class="code">G-XXXXXXXXXX</span> 形式のIDをコピーしてメモ</p>
+            <div class="notice"><strong>後で使う:</strong> HTMLの <span class="code">G-XXXXXXXXXX</span> プレースホルダー2箇所をこのIDで置き換えます</div>
+          </li>
+          <li>
+            <h4>拡張計測機能をONに（既定でON）</h4>
+            <p>同じデータストリーム画面の「拡張計測機能」が有効になっていることを確認。スクロール・外部リンククリック・サイト内検索・動画視聴・ファイルDLが自動計測されます</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Google Ads -->
+    <div class="setup-card gads">
+      <div class="setup-head">
+        <div class="logo">Ads</div>
+        <div>
+          <div class="name">Google Ads コンバージョン</div>
+          <div class="role">Google検索・YouTube広告の効果を測定し、最適化AIに学習させる</div>
+        </div>
+        <div class="badge">取得するもの: 変換ID＋ラベル</div>
+      </div>
+      <div class="setup-body">
+        <ol class="setup-steps">
+          <li>
+            <h4>Google Adsにログイン</h4>
+            <p><a href="https://ads.google.com/" target="_blank">ads.google.com</a> を開く（広告アカウント未作成なら先に開設）</p>
+          </li>
+          <li>
+            <h4>コンバージョン管理画面へ</h4>
+            <p>右上「目標」<span class="arrow">→</span>「コンバージョン」<span class="arrow">→</span>「概要」</p>
+          </li>
+          <li>
+            <h4>「+ 新しいコンバージョンアクション」をクリック</h4>
+            <p>種類: <strong>ウェブサイト</strong>を選択</p>
+          </li>
+          <li>
+            <h4>ドメインをスキャン or 手動設定</h4>
+            <p>「手動でコンバージョンアクションを作成」を選択</p>
+          </li>
+          <li>
+            <h4>コンバージョンの詳細を入力</h4>
+            <p>カテゴリ: <strong>見込み顧客（リード）の発掘</strong>　名前: <span class="code">介護研修_資料請求</span></p>
+            <p>値: 任意（例: 5,000円相当）　カウント方法: 1回　計測期間: 30日</p>
+          </li>
+          <li>
+            <h4>タグの設定を選ぶ</h4>
+            <p>「Googleタグを自分で追加またはマネージャーを使用」を選択</p>
+            <p>表示される <span class="code">AW-XXXXXXXXXX</span> と <span class="code">XXXXXXXXX</span>（ラベル）の2つをコピーしてメモ</p>
+            <div class="notice"><strong>2つで1セット:</strong> 変換IDだけでなく、必ずラベルもセットで控える。サンクスページHTMLに両方入れます</div>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Meta Pixel -->
+    <div class="setup-card meta">
+      <div class="setup-head">
+        <div class="logo">Meta</div>
+        <div>
+          <div class="name">Meta Pixel（Facebook / Instagram広告）</div>
+          <div class="role">FB/IG広告の効果を測定し、配信最適化に使う</div>
+        </div>
+        <div class="badge">取得するもの: Pixel ID</div>
+      </div>
+      <div class="setup-body">
+        <ol class="setup-steps">
+          <li>
+            <h4>Meta Business Suite にログイン</h4>
+            <p><a href="https://business.facebook.com/events_manager2" target="_blank">business.facebook.com/events_manager2</a> を開く</p>
+            <p>未開設なら、先にビジネスマネージャーアカウントを作る</p>
+          </li>
+          <li>
+            <h4>「データソースを接続」をクリック</h4>
+            <p>左メニュー「データソース」<span class="arrow">→</span>「+ データソースを接続」</p>
+          </li>
+          <li>
+            <h4>「ウェブ」を選択 → 「Meta Pixel」を選択</h4>
+            <p>名前: <span class="code">介護研修LP Pixel</span>　ウェブサイトURL: HubSpot公開ドメイン</p>
+          </li>
+          <li>
+            <h4>Pixel IDをコピー</h4>
+            <p>発行された <strong>16桁の数字</strong>（例: <span class="code">1234567890123456</span>）をメモ</p>
+            <div class="notice"><strong>後で使う:</strong> HTMLの <span class="code">XXXXXXXXXXXXXXXX</span>（16桁分）プレースホルダー2箇所をこのIDで置き換えます</div>
+          </li>
+          <li>
+            <h4>設定方法を選択</h4>
+            <p>「コードを手動でインストール」を選択（HubSpotで管理しているため）</p>
+            <p>表示されるコードはすでにHTMLに入っているのでコピー不要。確認だけしてスキップ</p>
+          </li>
+          <li>
+            <h4>Conversion API（CAPI）は今は未設定でOK</h4>
+            <p>後で設定すれば計測精度が上がりますが、初回はPixelだけで十分</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- LINE Tag -->
+    <div class="setup-card line">
+      <div class="setup-head">
+        <div class="logo">LINE</div>
+        <div>
+          <div class="name">LINE Tag（LINE広告）</div>
+          <div class="role">LINE広告の効果を測定。LINE主体の配信を行うなら必須</div>
+        </div>
+        <div class="badge">取得するもの: タグID</div>
+      </div>
+      <div class="setup-body">
+        <ol class="setup-steps">
+          <li>
+            <h4>LINE広告マネージャーにログイン</h4>
+            <p><a href="https://admanager.line.biz/" target="_blank">admanager.line.biz</a> を開く（広告アカウント未開設なら先に申請）</p>
+          </li>
+          <li>
+            <h4>「共有ライブラリ」 → 「LINEタグ」</h4>
+            <p>左メニュー下部の「共有ライブラリ」を展開</p>
+          </li>
+          <li>
+            <h4>「LINEタグを新規発行」</h4>
+            <p>タグ名: <span class="code">介護研修LP</span></p>
+          </li>
+          <li>
+            <h4>タグIDをコピー</h4>
+            <p>10桁の数字IDをメモ</p>
+          </li>
+          <li>
+            <h4>コンバージョンを作成</h4>
+            <p>「コンバージョン」タブ <span class="arrow">→</span>「新規作成」　タイプ: <strong>WebサイトCV</strong>　計測方法: <strong>URL</strong></p>
+            <p>URLルール: <strong>含む</strong>　URL: <span class="code">thanks-document-request</span></p>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Clarity -->
+    <div class="setup-card clarity">
+      <div class="setup-head">
+        <div class="logo">UX</div>
+        <div>
+          <div class="name">Microsoft Clarity</div>
+          <div class="role">ヒートマップとセッション録画。「料金部分で何秒止まったか」が一発で見える</div>
+        </div>
+        <div class="badge">取得するもの: プロジェクトID（無料）</div>
+      </div>
+      <div class="setup-body">
+        <ol class="setup-steps">
+          <li>
+            <h4>Microsoft Clarityにログイン</h4>
+            <p><a href="https://clarity.microsoft.com/" target="_blank">clarity.microsoft.com</a> を Microsoft アカウントで開く</p>
+            <p>※Microsoftアカウント無料発行可</p>
+          </li>
+          <li>
+            <h4>「+ 新しいプロジェクト」</h4>
+            <p>プロジェクト名: <span class="code">介護研修LP</span>　サイトURL: HubSpot公開ドメイン　カテゴリ: 教育</p>
+          </li>
+          <li>
+            <h4>セットアップ方法 → 「手動でインストール」</h4>
+            <p>10行程度のscriptタグが発行されるのでまるごとコピー</p>
+            <div class="notice"><strong>このタグは、現状HTMLには未挿入。</strong> 後で <strong>LPの&lt;head&gt;内</strong>に追加する必要があります</div>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========== 4. HTMLにタグを埋め込む ========== -->
+<section class="section" id="install">
+  <div class="section-header">
+    <div class="section-num">PHASE 03</div>
+    <h2 class="section-title">取得したIDを<span class="grad">HTMLに差し替える</span></h2>
+    <p class="section-lead">サンクスページHTMLの「XXXXX」プレースホルダーを実際のIDで埋めます。GA4/Google Ads/Meta Pixel/LINEの4種類です。</p>
+  </div>
+
+  <div class="html-replace">
+    <h3>差し替えイメージ</h3>
+    <p style="color:rgba(255,255,255,.7);font-size:.86rem;margin-bottom:.5rem">サンクスページHTML（thanks-kaigo-subsidy-acg.html）の以下のような行を変換します。</p>
+
+    <div class="replace-grid">
+      <div class="replace-box before">
+        <h5>Before（プレースホルダー）</h5>
+<pre>fbq('init', '<span class="hl">XXXXXXXXXXXXXXXX</span>');
+fbq('track', 'Lead', {
+  content_name: 'kaigo-subsidy-document',
+  currency: 'JPY',
+  value: 1.0
+});</pre>
+      </div>
+      <div class="replace-arrow">→</div>
+      <div class="replace-box after">
+        <h5>After（実IDに置換）</h5>
+<pre>fbq('init', '<span class="hl">1234567890123456</span>');
+fbq('track', 'Lead', {
+  content_name: 'kaigo-subsidy-document',
+  currency: 'JPY',
+  value: 1.0
+});</pre>
+      </div>
+    </div>
+
+    <p style="color:rgba(255,255,255,.7);font-size:.86rem;margin-top:1.5rem;line-height:1.85">同じ要領で:</p>
+    <ul style="color:rgba(255,255,255,.85);font-size:.85rem;list-style:none;padding-left:0;margin-top:.5rem;line-height:1.95">
+      <li>📌 <span class="code">G-XXXXXXXXXX</span> → GA4測定ID（2箇所）</li>
+      <li>📌 <span class="code">AW-XXXXXXXXXX</span> → Google Ads変換ID（2箇所）</li>
+      <li>📌 <span class="code">AW-XXXXXXXXXX/XXXXXXXXX</span> → 変換ID+ラベル（1箇所、スラッシュ区切り）</li>
+      <li>📌 <span class="code">XXXXXXXXXXXXXXXX</span>（16桁） → Meta Pixel ID（2箇所）</li>
+      <li>📌 <span class="code">XXXXXXXXXX</span>（10桁） → LINEタグID（複数箇所）</li>
+    </ul>
+
+    <div class="notice" style="background:rgba(255,0,128,.15);margin-top:1.5rem"><strong>HubSpot反映の手順:</strong> 差し替えたHTMLをHubSpot Design Manager &gt; Coded files の該当ファイルに貼り直す → 公開 / Update</div>
+  </div>
+
+  <div style="margin-top:30px;background:#fff;border-radius:var(--radius);padding:2rem;box-shadow:var(--shadow-sm)">
+    <h3 style="font-size:1.1rem;font-weight:900;color:var(--dark);margin-bottom:1rem">📍 LP側にも追加で入れるもの</h3>
+    <p style="font-size:.92rem;color:var(--text-sub);line-height:1.85">サンクスページにはタグが入っていますが、<strong>LP側はまだ素のHTML</strong>です。LP側に最低限以下を追加することで、リターゲ広告や精度の高い最適化が可能になります:</p>
+    <ul style="list-style:none;padding:0;margin-top:1rem">
+      <li style="padding:.5rem 0;font-size:.88rem;color:var(--text-sub)"><span style="color:var(--accent);font-weight:900">●</span>　GA4測定タグ（PageView計測 ＋ 拡張計測の発火元）</li>
+      <li style="padding:.5rem 0;font-size:.88rem;color:var(--text-sub)"><span style="color:var(--accent);font-weight:900">●</span>　Meta Pixel base code（PageView ＋ ViewContent。CV発火は無し）</li>
+      <li style="padding:.5rem 0;font-size:.88rem;color:var(--text-sub)"><span style="color:var(--accent);font-weight:900">●</span>　LINE Tag base code（PageView。CV発火は無し）</li>
+      <li style="padding:.5rem 0;font-size:.88rem;color:var(--text-sub)"><span style="color:var(--accent);font-weight:900">●</span>　Microsoft Clarity tracking code（必須）</li>
+    </ul>
+    <div class="notice" style="margin-top:1.25rem"><strong>原則:</strong> LPには「閲覧計測」、サンクスページには「CV計測」を入れる。役割分担です。</div>
+  </div>
+</section>
+
+<!-- ========== 5. 動作確認 ========== -->
+<section class="section" id="verify" style="background:var(--bg-gray);border-radius:var(--radius)">
+  <div class="section-header">
+    <div class="section-num">PHASE 04</div>
+    <h2 class="section-title">動作確認：<span class="grad">テストイベント</span>を打つ</h2>
+    <p class="section-lead">タグを入れた直後は必ずテスト。自分のスマホ・PCで実際にLP→フォーム送信→サンクスページの流れを通してみて、各社の管理画面で受信を確認します。</p>
+  </div>
+
+  <div class="verify-grid">
+    <div class="verify-card ga4">
+      <h4><span class="dot"></span>GA4</h4>
+      <div class="where">📍 確認場所:<br>左メニュー「レポート」<span class="arrow">→</span>「リアルタイム」</div>
+      <div class="what">⚡ <strong>見るべき指標:</strong><br>過去30分のアクティブユーザーが1（自分）になっているか、page_locationが期待のURLになっているか。<strong>generate_lead</strong> イベントが発火しているか</div>
+    </div>
+    <div class="verify-card gads">
+      <h4><span class="dot"></span>Google Ads</h4>
+      <div class="where">📍 確認場所:<br>「目標」<span class="arrow">→</span>「コンバージョン」<span class="arrow">→</span>該当アクション</div>
+      <div class="what">⚡ <strong>見るべき指標:</strong><br>「タグの確認」セクションで「最近のアクション: 検出されました」と表示されればOK。最大24時間ラグあり</div>
+    </div>
+    <div class="verify-card meta">
+      <h4><span class="dot"></span>Meta Pixel</h4>
+      <div class="where">📍 確認場所:<br>Events Manager<span class="arrow">→</span>該当Pixel<span class="arrow">→</span>「テストイベント」タブ</div>
+      <div class="what">⚡ <strong>見るべき指標:</strong><br>「テスト用ブラウザ」でURLを開くと、その場で <strong>PageView</strong> <strong>Lead</strong> イベントの受信がリアルタイム表示される</div>
+    </div>
+    <div class="verify-card line">
+      <h4><span class="dot"></span>LINE Tag</h4>
+      <div class="where">📍 確認場所:<br>「共有ライブラリ」<span class="arrow">→</span>「LINEタグ」<span class="arrow">→</span>該当タグ</div>
+      <div class="what">⚡ <strong>見るべき指標:</strong><br>「タグ送信履歴」「テストモード」でPV/CVが受信されているか確認</div>
+    </div>
+    <div class="verify-card clarity">
+      <h4><span class="dot"></span>Clarity</h4>
+      <div class="where">📍 確認場所:<br>プロジェクトダッシュボード（インストール後すぐ）</div>
+      <div class="what">⚡ <strong>見るべき指標:</strong><br>右上に「インストール完了」表示。翌日にはヒートマップとセッション録画が自動で溜まり始める</div>
+    </div>
+  </div>
+
+  <div class="notice" style="margin-top:30px;max-width:780px;margin-left:auto;margin-right:auto"><strong>ブラウザ拡張で便利チェック:</strong> Chromeに「Meta Pixel Helper」「Tag Assistant Legacy（Google Ads/GA4）」を入れると、ページを開いた瞬間に「どのタグが発火したか」が拡張機能アイコンで一目で確認できます</div>
+</section>
+
+<!-- ========== 6. 広告キャンペーン側 ========== -->
+<section class="section" id="campaign">
+  <div class="section-header">
+    <div class="section-num">PHASE 05</div>
+    <h2 class="section-title">計測したCVを<span class="grad">広告の目標</span>として登録する</h2>
+    <p class="section-lead">CVが計測できるだけでは不十分。各広告マネージャに「これが目標」と教え込むことで、AIが「同じような人を連れて来る」最適化を始めます。</p>
+  </div>
+
+  <div class="tool-section">
+    <div class="setup-card gads">
+      <div class="setup-head">
+        <div class="logo">Ads</div>
+        <div>
+          <div class="name">Google Ads キャンペーン設定</div>
+          <div class="role">作成したコンバージョンを「主要コンバージョン」として登録</div>
+        </div>
+      </div>
+      <div class="setup-body">
+        <ol class="setup-steps">
+          <li>
+            <h4>キャンペーン作成時に「コンバージョンを取得」を選択</h4>
+            <p>「リード獲得」または「ウェブサイトのトラフィック」目標で開始</p>
+          </li>
+          <li>
+            <h4>コンバージョン目標を選択</h4>
+            <p>先に作成した「介護研修_資料請求」を「アカウントのデフォルトとして使用」にチェック</p>
+          </li>
+          <li>
+            <h4>入札戦略を選ぶ</h4>
+            <p>初期: <strong>コンバージョン数の最大化</strong>　CVが50件/月貯まったら: <strong>目標CPA</strong> に切り替え</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="setup-card meta">
+      <div class="setup-head">
+        <div class="logo">Meta</div>
+        <div>
+          <div class="name">Meta広告マネージャ設定</div>
+          <div class="role">PixelのLeadイベントを最適化目標として指定</div>
+        </div>
+      </div>
+      <div class="setup-body">
+        <ol class="setup-steps">
+          <li>
+            <h4>キャンペーン目的: 「リード」を選択</h4>
+            <p>広告セットレベルで「コンバージョン場所: ウェブサイト」を選択</p>
+          </li>
+          <li>
+            <h4>Pixel & コンバージョンイベント選択</h4>
+            <p>該当のMeta Pixelを選択　パフォーマンスゴール: <strong>「Leadの数を最大化」</strong></p>
+          </li>
+          <li>
+            <h4>カスタムコンバージョン（より精密に）</h4>
+            <p>Events Manager<span class="arrow">→</span>「カスタムコンバージョン」<span class="arrow">→</span>新規作成</p>
+            <p>ルール: URL に <span class="code">thanks-document-request</span> を含む　標準イベント: Lead　名前: <span class="code">介護研修_資料請求CV</span></p>
+            <p>これを広告セットの最適化対象にすると、より正確</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="setup-card line">
+      <div class="setup-head">
+        <div class="logo">LINE</div>
+        <div>
+          <div class="name">LINE広告マネージャ設定</div>
+          <div class="role">作成したCVをキャンペーンの最適化目標に設定</div>
+        </div>
+      </div>
+      <div class="setup-body">
+        <ol class="setup-steps">
+          <li>
+            <h4>キャンペーン目的: 「ウェブサイトコンバージョン」</h4>
+            <p>新規キャンペーン作成時に選択</p>
+          </li>
+          <li>
+            <h4>コンバージョン地点を選択</h4>
+            <p>先に作成した「介護研修_資料請求」CVを選択</p>
+          </li>
+          <li>
+            <h4>入札方法を選ぶ</h4>
+            <p>初期: <strong>自動入札（コンバージョン数最大化）</strong>　CVデータが溜まったら目標CPAに移行</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 7. 運用フェーズ ========== -->
+<section class="section" id="ops">
+  <div class="section-header">
+    <div class="section-num">PHASE 06</div>
+    <h2 class="section-title">運用：<span class="grad">何を、いつ、どう見るか</span></h2>
+    <p class="section-lead">配信開始後は「数字を見て、判断し、施策に反映する」サイクルを回します。頻度ごとに見るべき指標を分けて運用すると迷子になりません。</p>
+  </div>
+
+  <div class="ops-grid">
+    <div class="ops-card">
+      <span class="freq">毎日 5分</span>
+      <h4>異常検知のみ</h4>
+      <ul>
+        <li>広告が止まっていないか（配信ステータス）</li>
+        <li>CPAが前日の3倍など異常値出ていないか</li>
+        <li>予算上限到達していないか</li>
+      </ul>
+    </div>
+    <div class="ops-card">
+      <span class="freq">毎週 30分</span>
+      <h4>パフォーマンスレビュー</h4>
+      <ul>
+        <li>CV数・CPA・CTR・CVR の推移</li>
+        <li>チャネル別の効率比較</li>
+        <li>クリエイティブ別の成果</li>
+        <li>勝ち広告に予算寄せ、負け広告停止</li>
+      </ul>
+    </div>
+    <div class="ops-card">
+      <span class="freq">隔週 1時間</span>
+      <h4>LP改善のヒント収集</h4>
+      <ul>
+        <li>Clarityでヒートマップ確認</li>
+        <li>離脱多発ポイントを特定</li>
+        <li>セッション録画で5本見る</li>
+        <li>仮説<span class="arrow">→</span>次のABテスト計画</li>
+      </ul>
+    </div>
+    <div class="ops-card">
+      <span class="freq">毎月 2時間</span>
+      <h4>戦略レビュー</h4>
+      <ul>
+        <li>チャネル予算配分の最適化</li>
+        <li>ROI（受講料売上 ÷ 広告費）算出</li>
+        <li>LTV分析（リード→受講者率）</li>
+        <li>翌月の目標CV/予算設定</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 8. トラブルシュート ========== -->
+<section class="section" id="trouble" style="background:var(--bg-gray);border-radius:var(--radius)">
+  <div class="section-header">
+    <div class="section-num">TROUBLESHOOTING</div>
+    <h2 class="section-title">よくある<span class="grad">トラブル</span>と対処法</h2>
+    <p class="section-lead">初回セットアップ後によく起きる問題と、確認すべきポイントを整理しました。</p>
+  </div>
+
+  <div class="tshoot">
+    <div class="ts-item">
+      <div class="ts-q">CVが1件も計測されない</div>
+      <div class="ts-a">
+        ① <strong>HTMLのID差し替え漏れ</strong> — ブラウザでサンクスページを開きF12で「コンソール」を確認、scriptエラーがないか<br>
+        ② <strong>HubSpot反映漏れ</strong> — Design Managerでコード更新後「公開」または「Update」ボタンを押し忘れていないか<br>
+        ③ <strong>URLが違う</strong> — 各社CV定義のURLとサンクスページの実URLが完全一致しているか
+      </div>
+    </div>
+    <div class="ts-item">
+      <div class="ts-q">各社の管理画面でCV数が違う</div>
+      <div class="ts-a">
+        これは <strong>正常な動作</strong>です。アトリビューション（手柄配分）のルールが各社で違うため、同じ1件のCVを複数社が「自社経由」と主張します。<br>
+        →<strong>真の総CV数は HubSpot側のフォーム送信数</strong>で見るのが正解。広告側のCV数は「最適化AIへの学習データ」と割り切る
+      </div>
+    </div>
+    <div class="ts-item">
+      <div class="ts-q">サンクスページに飛ばずインライン表示になる</div>
+      <div class="ts-a">
+        HubSpotフォーム設定の「送信時」が <strong>「段落」</strong> のまま。<strong>「リダイレクト」</strong> に切替えてURLを指定する必要あり<br>
+        ・場所: フォーム編集画面<span class="arrow">→</span>「コンテンツ」<span class="arrow">→</span>「送信時」プルダウン
+      </div>
+    </div>
+    <div class="ts-item">
+      <div class="ts-q">iPhoneユーザーからのCVが少ない</div>
+      <div class="ts-a">
+        iOS 14以降の <strong>ATT（App Tracking Transparency）</strong>でブラウザ追跡が制限されているため、特にMeta広告でiOSユーザーのCV検知率が下がります。<br>
+        →対策: <strong>Conversions API（CAPI）</strong> の導入。HubSpotにはMeta連携機能があるので、これでブラウザCookie経由でなくサーバー間連携でCV送信できる
+      </div>
+    </div>
+    <div class="ts-item">
+      <div class="ts-q">Clarityでヒートマップが見られない</div>
+      <div class="ts-a">
+        ① <strong>データが溜まっていない</strong> — 設置から24時間以上、最低100セッション必要<br>
+        ② <strong>タグの設置場所が間違い</strong> — &lt;body&gt;内ではなく &lt;head&gt;内に設置されているか確認<br>
+        ③ <strong>プロジェクトURLとアクセス先URLが違う</strong> — Clarity側で設定したサイトURLと、実際にアクセスしているURLが一致しているか
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 9. チェックリスト ========== -->
+<section class="section" id="checklist">
+  <div class="summary">
+    <h2>セットアップ<span style="background:linear-gradient(135deg,#FF0080,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">完了チェックリスト</span></h2>
+    <p class="sub">すべてにチェックが入れば、計測の土台は完成です</p>
+
+    <ul class="checklist" style="list-style:none">
+      <li><strong>Phase 1.</strong> 計測対象（LP・サンクスページ・CV定義）を1枚にまとめた</li>
+      <li><strong>Phase 2-1.</strong> GA4測定ID（G-XXXXXXXXXX）を取得した</li>
+      <li><strong>Phase 2-2.</strong> Google Ads変換ID + ラベルを取得した</li>
+      <li><strong>Phase 2-3.</strong> Meta Pixel ID（16桁）を取得した</li>
+      <li><strong>Phase 2-4.</strong> LINEタグIDを取得した</li>
+      <li><strong>Phase 2-5.</strong> Microsoft Clarity プロジェクトを作成した</li>
+      <li><strong>Phase 3-1.</strong> サンクスページHTMLのプレースホルダーを全て実IDに置換</li>
+      <li><strong>Phase 3-2.</strong> LP側にもPageView用base codeを追加</li>
+      <li><strong>Phase 3-3.</strong> Clarityタグを LP &lt;head&gt; に挿入</li>
+      <li><strong>Phase 3-4.</strong> HubSpotで両ページを Publish / Update</li>
+      <li><strong>Phase 4-1.</strong> 自分でテスト送信し、各社管理画面で受信を確認</li>
+      <li><strong>Phase 4-2.</strong> Chrome拡張（Pixel Helper等）でタグ発火を確認</li>
+      <li><strong>Phase 5-1.</strong> Google Adsキャンペーンで主要CVに登録</li>
+      <li><strong>Phase 5-2.</strong> Metaキャンペーンの最適化目標をLeadに設定</li>
+      <li><strong>Phase 5-3.</strong> LINEキャンペーンのCV地点を設定</li>
+      <li><strong>Phase 6.</strong> 週次レビュー会議体を予定に組み込んだ</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <p>計測トラッキング 実践セットアップガイド｜株式会社ACG マーケティング部</p>
+  <p style="margin-top:.5rem;font-size:.75rem;opacity:.7">関連資料：<a href="tracking-overview.html" style="color:var(--purple)">全体像の学習資料</a></p>
+</footer>
+
+</body>
+</html>
