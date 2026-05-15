@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>トラッキング設定 詳細チェックリスト｜株式会社ACG</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gradient:linear-gradient(135deg,#FF0080,#7928CA);
+  --accent:#FF0080;
+  --purple:#7928CA;
+  --dark:#1a202c;
+  --bg:#fafbff;
+  --bg-card:#fff;
+  --bg-gray:#f5f7fa;
+  --text:#2d3748;
+  --text-sub:#4a5568;
+  --text-muted:#718096;
+  --border:#e2e8f0;
+  --radius:18px;
+  --shadow-sm:0 4px 14px rgba(15,23,42,.06);
+  --shadow-md:0 12px 32px rgba(15,23,42,.08);
+  --critical:#dc2626;
+  --warning:#f59e0b;
+  --info:#3b82f6;
+  --ok:#22c55e;
+  --code-bg:#0f0c29;
+  --ga4:#FF6F00;
+  --gads:#4285F4;
+  --meta:#1877F2;
+  --line:#06C755;
+  --gtm:#246FDB;
+  --clarity:#FFB900;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:"Noto Sans JP",sans-serif;color:var(--text);background:var(--bg);line-height:1.85;-webkit-font-smoothing:antialiased}
+code{font-family:"JetBrains Mono",monospace;background:var(--bg-gray);padding:.1rem .4rem;border-radius:5px;font-size:.85em;color:var(--purple)}
+pre{font-family:"JetBrains Mono",monospace;background:var(--code-bg);color:#fff;padding:1rem 1.2rem;border-radius:10px;font-size:.78rem;line-height:1.7;overflow-x:auto;margin-top:.6rem;border-left:3px solid var(--accent)}
+
+.hero{padding:80px 24px 60px;background:linear-gradient(135deg,#fff 0%,#fdfbff 50%,#fff5fa 100%);border-bottom:1px solid var(--border);text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-200px;left:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(255,0,128,.10) 0%,transparent 65%);border-radius:50%}
+.hero::after{content:'';position:absolute;bottom:-200px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(121,40,202,.10) 0%,transparent 65%);border-radius:50%}
+.hero-inner{position:relative;z-index:2;max-width:920px;margin:0 auto}
+.hero-eyebrow{display:inline-block;font-size:.78rem;font-weight:800;letter-spacing:.12em;color:#fff;background:var(--gradient);padding:.45rem 1.2rem;border-radius:50px;margin-bottom:1.5rem;text-transform:uppercase}
+.hero h1{font-size:clamp(2rem,5vw,3.4rem);font-weight:900;line-height:1.2;letter-spacing:-.03em;color:var(--dark);margin-bottom:1rem}
+.hero h1 .grad{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:clamp(1rem,1.6vw,1.15rem);color:var(--text-sub);line-height:1.95;max-width:680px;margin:0 auto 2rem}
+.hero .score-bar{display:flex;gap:1rem;max-width:920px;margin:2rem auto 0;flex-wrap:wrap;justify-content:center}
+.score-pill{background:#fff;border:2px solid var(--border);padding:.8rem 1.5rem;border-radius:50px;font-size:.85rem;font-weight:700;color:var(--text-sub);display:flex;align-items:center;gap:.6rem}
+.score-pill .dot{width:12px;height:12px;border-radius:50%}
+.score-pill.critical .dot{background:var(--critical)}
+.score-pill.warning .dot{background:var(--warning)}
+.score-pill.info .dot{background:var(--info)}
+.score-pill .num{font-weight:900;color:var(--dark);font-size:1.05rem}
+
+.toc{background:#fff;padding:1rem 24px;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;backdrop-filter:blur(10px);background:rgba(255,255,255,.92)}
+.toc-inner{max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center}
+.toc a{font-size:.74rem;color:var(--text-sub);text-decoration:none;padding:.35rem .8rem;border-radius:50px;border:1px solid var(--border);background:#fff;transition:.2s;white-space:nowrap;font-weight:700}
+.toc a:hover{background:var(--gradient);color:#fff;border-color:transparent}
+
+.section{padding:60px 24px;max-width:1100px;margin:0 auto}
+.cat-header{margin-bottom:30px;display:flex;align-items:center;gap:1.5rem;padding-bottom:1.5rem;border-bottom:2px solid var(--border)}
+.cat-icon{width:64px;height:64px;border-radius:14px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:.95rem;flex-shrink:0;box-shadow:0 8px 20px rgba(0,0,0,.10);text-align:center;line-height:1.2}
+.cat-icon.ga4{background:var(--ga4)}
+.cat-icon.gads{background:var(--gads)}
+.cat-icon.meta{background:var(--meta)}
+.cat-icon.line{background:var(--line)}
+.cat-icon.gtm{background:var(--gtm)}
+.cat-icon.clarity{background:var(--clarity);color:#1a202c}
+.cat-icon.universal{background:var(--gradient)}
+.cat-meta{flex:1}
+.cat-label{font-size:.72rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:.3rem}
+.cat-title{font-size:1.4rem;font-weight:900;color:var(--dark);letter-spacing:-.01em;line-height:1.3}
+.cat-count{font-size:.78rem;color:var(--text-muted);font-weight:700;margin-top:.3rem}
+
+.subsection{margin-top:36px}
+.subsection-h{font-size:1.05rem;font-weight:900;color:var(--dark);margin-bottom:.75rem;padding:.7rem 1rem;background:linear-gradient(90deg,rgba(255,0,128,.08),transparent);border-left:4px solid var(--accent);border-radius:0 8px 8px 0}
+
+.check-list{display:flex;flex-direction:column;gap:10px}
+.check{background:#fff;border-radius:12px;padding:1rem 1.2rem 1rem 3rem;box-shadow:var(--shadow-sm);position:relative;border-left:4px solid var(--info);transition:.2s}
+.check:hover{box-shadow:var(--shadow-md)}
+.check.critical{border-left-color:var(--critical)}
+.check.warning{border-left-color:var(--warning)}
+.check.info{border-left-color:var(--info)}
+.check input[type="checkbox"]{position:absolute;left:1rem;top:1.2rem;width:18px;height:18px;cursor:pointer;accent-color:var(--purple)}
+.check input[type="checkbox"]:checked + .check-body{opacity:.55}
+.check input[type="checkbox"]:checked + .check-body .ct{text-decoration:line-through}
+.check-body .ct{font-size:.94rem;font-weight:800;color:var(--dark);margin-bottom:.3rem;line-height:1.55;display:flex;flex-wrap:wrap;align-items:center;gap:.5rem}
+.check-body .severity{font-size:.6rem;font-weight:800;color:#fff;padding:.15rem .5rem;border-radius:50px;letter-spacing:.05em;text-transform:uppercase;line-height:1.4}
+.check.critical .severity{background:var(--critical)}
+.check.warning .severity{background:var(--warning)}
+.check.info .severity{background:var(--info)}
+.check-body .desc{font-size:.83rem;color:var(--text-sub);line-height:1.75;margin-top:.3rem}
+.check-body .where{display:inline-block;font-size:.72rem;color:var(--text-muted);margin-top:.4rem;font-style:italic;background:var(--bg-gray);padding:.2rem .55rem;border-radius:5px;margin-right:.3rem}
+.check-body .good{display:block;background:rgba(34,197,94,.08);border-left:3px solid var(--ok);padding:.55rem .75rem;border-radius:0 6px 6px 0;font-size:.78rem;color:var(--text);margin-top:.5rem;line-height:1.7}
+.check-body .good::before{content:'✓ ';color:var(--ok);font-weight:900}
+.check-body .bad{display:block;background:rgba(220,38,38,.06);border-left:3px solid var(--critical);padding:.55rem .75rem;border-radius:0 6px 6px 0;font-size:.78rem;color:var(--text);margin-top:.4rem;line-height:1.7}
+.check-body .bad::before{content:'✗ ';color:var(--critical);font-weight:900}
+.check-body .code-snippet{display:block;background:var(--code-bg);color:#fff;padding:.6rem .9rem;border-radius:6px;font-family:"JetBrains Mono",monospace;font-size:.74rem;line-height:1.7;margin-top:.5rem;overflow-x:auto}
+
+/* 検証ツール一覧 */
+.verify-tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:30px}
+.vt{background:#fff;border-radius:14px;padding:1.3rem;box-shadow:var(--shadow-sm);border-top:4px solid var(--info);transition:.2s}
+.vt:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.vt.ga4{border-top-color:var(--ga4)}
+.vt.gads{border-top-color:var(--gads)}
+.vt.meta{border-top-color:var(--meta)}
+.vt.line{border-top-color:var(--line)}
+.vt.gtm{border-top-color:var(--gtm)}
+.vt h4{font-size:.95rem;font-weight:900;color:var(--dark);margin-bottom:.4rem;display:flex;align-items:center;gap:.5rem}
+.vt h4 .dot{width:10px;height:10px;border-radius:50%;background:var(--accent)}
+.vt.ga4 h4 .dot{background:var(--ga4)}
+.vt.gads h4 .dot{background:var(--gads)}
+.vt.meta h4 .dot{background:var(--meta)}
+.vt.line h4 .dot{background:var(--line)}
+.vt.gtm h4 .dot{background:var(--gtm)}
+.vt .tname{font-size:.82rem;font-weight:800;color:var(--purple);margin-bottom:.2rem}
+.vt p{font-size:.78rem;color:var(--text-sub);line-height:1.7;margin-top:.4rem}
+.vt .url{font-size:.7rem;color:var(--text-muted);font-family:"JetBrains Mono",monospace;background:var(--bg-gray);padding:.2rem .5rem;border-radius:4px;display:inline-block;margin-top:.4rem;word-break:break-all}
+
+/* 整合性チェック */
+.consistency-table{width:100%;border-collapse:collapse;font-size:.85rem;background:#fff;border-radius:12px;overflow:hidden;box-shadow:var(--shadow-sm);margin-top:20px}
+.consistency-table th,.consistency-table td{padding:.85rem 1rem;text-align:left;border-bottom:1px solid var(--border)}
+.consistency-table th{background:linear-gradient(180deg,#fdfbff,#fff);font-weight:900;color:var(--dark);font-size:.82rem}
+.consistency-table td.label{font-weight:800;color:var(--dark);width:25%}
+.consistency-table td.val{font-family:"JetBrains Mono",monospace;font-size:.78rem}
+.consistency-table tr.must td{background:rgba(220,38,38,.04)}
+
+/* スコアカード */
+.summary-final{background:var(--dark);color:#fff;border-radius:var(--radius);padding:3rem 2rem;margin-top:40px;position:relative;overflow:hidden}
+.summary-final::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:var(--gradient)}
+.summary-final h2{font-size:1.7rem;font-weight:900;margin-bottom:.5rem;color:#fff;text-align:center;letter-spacing:-.02em}
+.summary-final .sub{text-align:center;color:rgba(255,255,255,.6);font-size:.95rem;margin-bottom:2rem}
+.scorecard{max-width:680px;margin:0 auto;background:rgba(255,255,255,.05);border-radius:14px;padding:1.5rem;backdrop-filter:blur(10px)}
+.scorecard-row{display:grid;grid-template-columns:1fr auto;padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,.1);font-size:.86rem;color:rgba(255,255,255,.85)}
+.scorecard-row:last-child{border-bottom:none}
+.scorecard-row .v{font-weight:900;color:#fff}
+
+footer{text-align:center;padding:3rem 1.5rem;color:var(--text-muted);font-size:.85rem;background:var(--bg-gray);border-top:1px solid var(--border)}
+footer a{color:var(--purple);text-decoration:none;font-weight:700}
+
+@media (max-width:768px){
+  .section{padding:40px 16px}
+  .toc{padding:.7rem 12px}
+  .toc a{font-size:.7rem;padding:.3rem .6rem}
+  .cat-header{flex-wrap:wrap}
+  .cat-icon{width:48px;height:48px;font-size:.8rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ========== ヒーロー ========== -->
+<header class="hero">
+  <div class="hero-inner">
+    <span class="hero-eyebrow">Tracking Setup Detail Checklist</span>
+    <h1>トラッキング設定<br><span class="grad">技術詳細チェックリスト</span></h1>
+    <p>計測まわりだけに絞った深掘り版。GA4 / Google Ads / Meta Pixel / LINE Tag / GTM / Clarity の各設定を、項目ごとに「正しい状態」と「よくある間違い」まで踏み込みます。</p>
+    <div class="score-bar">
+      <div class="score-pill critical"><span class="dot"></span><span class="num" id="cnt-c">--</span> 重要</div>
+      <div class="score-pill warning"><span class="dot"></span><span class="num" id="cnt-w">--</span> 推奨</div>
+      <div class="score-pill info"><span class="dot"></span><span class="num" id="cnt-i">--</span> 任意</div>
+    </div>
+  </div>
+</header>
+
+<!-- ========== ナビ ========== -->
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#ga4">GA4</a>
+    <a href="#gads">Google Ads</a>
+    <a href="#meta">Meta Pixel</a>
+    <a href="#line">LINE Tag</a>
+    <a href="#gtm">GTM</a>
+    <a href="#clarity">Clarity</a>
+    <a href="#consistency">整合性</a>
+    <a href="#privacy">プライバシー</a>
+    <a href="#verify">検証ツール</a>
+  </div>
+</nav>
+
+<!-- ========================================================================== -->
+<!-- 1. GA4 -->
+<!-- ========================================================================== -->
+<section class="section" id="ga4">
+  <div class="cat-header">
+    <div class="cat-icon ga4">GA4</div>
+    <div class="cat-meta">
+      <div class="cat-label">Section 1</div>
+      <div class="cat-title">Google Analytics 4 詳細設定</div>
+      <div class="cat-count">28項目</div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-h">1-A. プロパティ・データストリーム</h3>
+    <div class="check-list">
+
+      <label class="check critical">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">プロパティのタイムゾーンが <code>Asia/Tokyo</code> <span class="severity">重要</span></div>
+          <div class="desc">日次レポートの日付境界・「今日」の集計範囲に直結。作成時のミスで他タイムゾーンになっていると以降修正してもデータの一貫性が崩れる</div>
+          <div class="where">📍 管理 → プロパティ設定 → プロパティの詳細</div>
+          <div class="bad">「(GMT+00:00) GMT」のままになっている（よくあるミス）</div>
+        </div>
+      </label>
+
+      <label class="check critical">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">通貨が <code>JPY</code> <span class="severity">重要</span></div>
+          <div class="desc">CV値・eコマース計上時にUSD等になっていると数字が無意味に</div>
+          <div class="where">📍 管理 → プロパティ設定 → 通貨表示</div>
+        </div>
+      </label>
+
+      <label class="check critical">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">業種カテゴリが「教育」または該当業界 <span class="severity">重要</span></div>
+          <div class="desc">業種別ベンチマーク比較・GoogleのAI判定に影響</div>
+        </div>
+      </label>
+
+      <label class="check critical">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">データストリームURLが本番ドメインのみ <span class="severity">重要</span></div>
+          <div class="desc">テスト用ドメイン・staging環境のURLが入っていると、本番と混在計測される</div>
+        </div>
+      </label>
+
+      <label class="check warning">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">データ保持期間が「14ヶ月」に設定されている <span class="severity">推奨</span></div>
+          <div class="desc">デフォルトは2ヶ月。年次比較ができないので必ず14ヶ月に変更</div>
+          <div class="where">📍 管理 → データ設定 → データ保持</div>
+          <div class="good">「ユーザーデータとイベントデータの保持期間：14ヶ月」+ 「新しいアクティビティのリセット：ON」</div>
+        </div>
+      </label>
+
+      <label class="check warning">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">Google シグナルがONになっている <span class="severity">推奨</span></div>
+          <div class="desc">クロスデバイス・人口統計データの取得に必要。ただしプライバシー要件次第で判断</div>
+          <div class="where">📍 管理 → データ設定 → データ収集</div>
+        </div>
+      </label>
+
+      <label class="check warning">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">セッションタイムアウトが業種に合っている <span class="severity">推奨</span></div>
+          <div class="desc">デフォルト30分。BtoB長期検討商材は60分が望ましいことも</div>
+          <div class="where">📍 管理 → データストリーム → タグ設定 → セッションのタイムアウトを調整</div>
+        </div>
+      </label>
+
+      <label class="check info">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">「エンゲージメント時間」の定義が10秒以上を維持 <span class="severity">任意</span></div>
+          <div class="desc">デフォルト10秒。LP特性に応じて調整可</div>
+        </div>
+      </label>
+
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-h">1-B. 拡張計測（Enhanced Measurement）</h3>
+    <div class="check-list">
+
+      <label class="check critical">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">拡張計測機能が有効になっている <span class="severity">重要</span></div>
+          <div class="desc">PV以外のクリック・スクロール・動画視聴等を自動取得する基盤機能</div>
+          <div class="where">📍 データストリーム → 拡張計測機能（スライダー）</div>
+        </div>
+      </label>
+
+      <label class="check warning">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">スクロール計測が有効 <span class="severity">推奨</span></div>
+          <div class="desc">90%到達で<code>scroll</code>イベント発火。LP改善判断のキー指標</div>
+        </div>
+      </label>
+
+      <label class="check warning">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">離脱クリック（外部リンク）計測が有効 <span class="severity">推奨</span></div>
+          <div class="desc">外部リンクへの遷移を<code>click</code>イベントで取得</div>
+        </div>
+      </label>
+
+      <label class="check warning">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">サイト内検索計測が有効（検索機能あるサイトの場合） <span class="severity">推奨</span></div>
+          <div class="desc">URLクエリパラメータから検索ワードを取得。<code>q</code> <code>s</code> <code>search</code> がデフォルト</div>
+        </div>
+      </label>
+
+      <label class="check warning">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">動画エンゲージメント計測が有効（動画あるサイト） <span class="severity">推奨</span></div>
+          <div class="desc">YouTube埋込動画の再生・進捗・完了を自動計測</div>
+        </div>
+      </label>
+
+      <label class="check warning">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">ファイルダウンロード計測が有効 <span class="severity">推奨</span></div>
+          <div class="desc">PDF・Word・Excel等のクリックを<code>file_download</code>イベントで取得</div>
+        </div>
+      </label>
+
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-h">1-C. イベント・コンバージョン</h3>
+    <div class="check-list">
+
+      <label class="check critical">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">資料請求CVイベントが<code>generate_lead</code>として登録 <span class="severity">重要</span></div>
+          <div class="desc">GA4の推奨イベント名を使うことで他レポートと整合性が取れる。自作名にすると後で混乱</div>
+          <div class="good">推奨イベント名：<code>generate_lead</code>（リード獲得） / <code>sign_up</code>（登録） / <code>purchase</code>（購入）</div>
+          <div class="bad">独自命名：<code>document_request</code> <code>form_submit_v2</code> 等</div>
+        </div>
+      </label>
+
+      <label class="check critical">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">該当イベントが「コンバージョン」として指定済み <span class="severity">重要</span></div>
+          <div class="desc">イベントが発火していてもCV指定しないと「主要な指標」レポートに出ない</div>
+          <div class="where">📍 管理 → イベント → 該当イベントの「コンバージョンとしてマークを付ける」をON</div>
+        </div>
+      </label>
+
+      <label class="check warning">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">CVイベントに「価値（value）」パラメータが付与 <span class="severity">推奨</span></div>
+          <div class="desc">資料請求1件＝5,000円相当など仮値でも入れると、Google Adsの「目標ROAS」最適化に使える</div>
+          <div class="code-snippet">gtag('event', 'generate_lead', { value: 5000, currency: 'JPY' });</div>
+        </div>
+      </label>
+
+      <label class="check warning">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">通貨パラメータ（currency）が付いている <span class="severity">推奨</span></div>
+          <div class="desc">valueとセット。<code>currency: 'JPY'</code></div>
+        </div>
+      </label>
+
+      <label class="check warning">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">不要な自動発火CVが「コンバージョン指定」されていない <span class="severity">推奨</span></div>
+          <div class="desc"><code>scroll</code> <code>click</code>等を誤ってCV化していないか。CV数が異常に膨らむ</div>
+        </div>
+      </label>
+
+      <label class="check info">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">カスタムディメンションが必要に応じて作成済み <span class="severity">任意</span></div>
+          <div class="desc">フォーム種別・LP種別など分析軸に使う独自項目</div>
+          <div class="where">📍 管理 → カスタム定義</div>
+        </div>
+      </label>
+
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-h">1-D. データフィルター・除外</h3>
+    <div class="check-list">
+
+      <label class="check critical">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">社内・テストトラフィックの除外フィルタ設定済み <span class="severity">重要</span></div>
+          <div class="desc">自分のIP・代理店IPをテストデータとして除外しないと、正確な数字にならない</div>
+          <div class="where">📍 管理 → データストリーム → タグ設定 → 内部トラフィックの定義</div>
+        </div>
+      </label>
+
+      <label class="check critical">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">参照元除外リストにHubSpotドメインが入っている <span class="severity">重要</span></div>
+          <div class="desc">フォーム埋込のリダイレクト等で同一遷移が「外部参照」とカウントされるのを防ぐ</div>
+          <div class="where">📍 管理 → データストリーム → タグ設定 → 除外する参照のリスト</div>
+        </div>
+      </label>
+
+      <label class="check warning">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">不要なボットトラフィックを除外 <span class="severity">推奨</span></div>
+          <div class="desc">既知のボットフィルタはデフォルトON。それ以外は手動除外</div>
+        </div>
+      </label>
+
+      <label class="check warning">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">サブドメイン横断時のクロスドメイン計測設定 <span class="severity">推奨</span></div>
+          <div class="desc">LP→決済等で別ドメインに遷移する場合に必要。設定しないとセッションが切れる</div>
+          <div class="where">📍 タグ設定 → ドメインを構成する</div>
+        </div>
+      </label>
+
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-h">1-E. オーディエンス・連携</h3>
+    <div class="check-list">
+
+      <label class="check warning">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">Google Adsとリンク済み <span class="severity">推奨</span></div>
+          <div class="desc">GA4のオーディエンス・CVをGoogle Adsで利用可能に。リターゲ用にも必須</div>
+          <div class="where">📍 管理 → 製品リンク → Google Adsのリンク</div>
+        </div>
+      </label>
+
+      <label class="check warning">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">CV情報をGoogle Adsへインポートする設定が有効 <span class="severity">推奨</span></div>
+          <div class="desc">GA4側で計測したCVをGoogle Adsで使う。GoogleAds側で再設定不要に</div>
+        </div>
+      </label>
+
+      <label class="check warning">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">Search Console と連携済み <span class="severity">推奨</span></div>
+          <div class="desc">オーガニック検索キーワード分析に必要</div>
+        </div>
+      </label>
+
+      <label class="check info">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">BigQuery エクスポートが必要に応じて有効 <span class="severity">任意</span></div>
+          <div class="desc">高度な分析・データウェアハウス連携時に。介護FCの初期段階では不要</div>
+        </div>
+      </label>
+
+      <label class="check info">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">主要オーディエンスが定義されている <span class="severity">任意</span></div>
+          <div class="desc">CV済みユーザー、料金セクション到達者、特定LP訪問者などをオーディエンス化してリターゲ広告に使う</div>
+        </div>
+      </label>
+
+      <label class="check info">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">アトリビューションモデルが「データドリブン」 <span class="severity">任意</span></div>
+          <div class="desc">CV数が月に数百以上ある場合に有効。少ない時は「ラストクリック」</div>
+          <div class="where">📍 管理 → アトリビューション設定</div>
+        </div>
+      </label>
+
+      <label class="check info">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">レポート用識別子が「ハイブリッド」 <span class="severity">任意</span></div>
+          <div class="desc">User ID + デバイスID + Googleシグナルを統合してクロスデバイス計測</div>
+        </div>
+      </label>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================================== -->
+<!-- 2. Google Ads -->
+<!-- ========================================================================== -->
+<section class="section" id="gads" style="background:var(--bg-gray);border-radius:var(--radius)">
+  <div class="cat-header">
+    <div class="cat-icon gads">Google<br>Ads</div>
+    <div class="cat-meta">
+      <div class="cat-label">Section 2</div>
+      <div class="cat-title">Google Ads コンバージョン計測</div>
+      <div class="cat-count">18項目</div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-h">2-A. コンバージョンアクションの基本設定</h3>
+    <div class="check-list">
+
+      <label class="check critical">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">カテゴリが「リード」になっている <span class="severity">重要</span></div>
+          <div class="desc">資料請求は「ウェブサイトのリード（見込み顧客）」カテゴリ。「販売」「申込」などにすると最適化ロジックが変わる</div>
+          <div class="where">📍 目標 → コンバージョン → アクション編集</div>
+        </div>
+      </label>
+
+      <label class="check critical">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">主要なコンバージョンに指定されている <span class="severity">重要</span></div>
+          <div class="desc">「主要」マークがない＝AIが入札最適化の対象としていない。複数CVある場合は本命だけを「主要」に</div>
+        </div>
+      </label>
+
+      <label class="check critical">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">カウント方法が「1回」 <span class="severity">重要</span></div>
+          <div class="desc">資料請求は同一人物が複数回送っても1件カウント。「すべて」だと水増し</div>
+        </div>
+      </label>
+
+      <label class="check critical">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">クリック後の計測期間が30日以上 <span class="severity">重要</span></div>
+          <div class="desc">BtoB資料請求は検討期間長め。デフォルト30日でOK、最長90日まで設定可</div>
+        </div>
+      </label>
+
+      <label class="check warning">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">ビュースルーCV計測期間が1日 <span class="severity">推奨</span></div>
+          <div class="desc">広告を見ただけ（クリックなし）の人がCVした場合の帰属。長すぎると過大評価</div>
+        </div>
+      </label>
+
+      <label class="check warning">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">アトリビューションが「データドリブン」 <span class="severity">推奨</span></div>
+          <div class="desc">2023年からデフォルト。ラストクリックよりCV帰属精度が高い</div>
+        </div>
+      </label>
+
+      <label class="check warning">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">コンバージョン値が設定されている <span class="severity">推奨</span></div>
+          <div class="desc">「同じ値を使用」で5,000円など。「コンバージョンごとに異なる値を使用」も可</div>
+        </div>
+      </label>
+
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-h">2-B. Enhanced Conversions（拡張コンバージョン）</h3>
+    <div class="check-list">
+
+      <label class="check critical">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">Enhanced Conversions が有効化されている <span class="severity">重要</span></div>
+          <div class="desc">フォーム入力したメアド等のハッシュをサーバー間連携し、Cookie制限環境でも計測精度を保つ</div>
+          <div class="where">📍 コンバージョンアクション → 拡張コンバージョン → ウェブの設定</div>
+        </div>
+      </label>
+
+      <label class="check warning">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">実装方法が「Google タグ」または「GTM」 <span class="severity">推奨</span></div>
+          <div class="desc">API実装も可能だが、ウェブ完結の場合タグ実装が簡単</div>
+        </div>
+      </label>
+
+      <label class="check warning">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">フォーム送信時の値マッピングが正しい <span class="severity">推奨</span></div>
+          <div class="desc">email、phone、name等を適切にマッピング。ハッシュ化はGoogle側で自動</div>
+        </div>
+      </label>
+
+      <label class="check warning">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">Enhanced Conversions の診断ステータスが「OK」 <span class="severity">推奨</span></div>
+          <div class="desc">設定後7日以内にコンバージョン数件発生してから診断結果が出る</div>
+        </div>
+      </label>
+
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-h">2-C. タグ・gtag・GTM</h3>
+    <div class="check-list">
+
+      <label class="check critical">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">自動タグ設定が有効 <span class="severity">重要</span></div>
+          <div class="desc">クリックURLに<code>gclid</code>が自動付与される。これがOFFだとGA4で広告流入認識できない</div>
+          <div class="where">📍 設定 → アカウント設定 → 自動タグ設定</div>
+        </div>
+      </label>
+
+      <label class="check critical">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">Google タグが両ページ（LP・サンクス）に設置されている <span class="severity">重要</span></div>
+          <div class="desc">LPだけだとリマケ用、サンクスだけだとCV用。両方必要</div>
+        </div>
+      </label>
+
+      <label class="check warning">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">Google タグの重複設置がない <span class="severity">推奨</span></div>
+          <div class="desc">GTMとgtag直書きで重複していないか。Tag AssistantでGoogleタグの数を確認</div>
+        </div>
+      </label>
+
+      <label class="check warning">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">変換ID・ラベルが正しい <span class="severity">推奨</span></div>
+          <div class="desc"><code>AW-XXXXXXXXXX</code>と<code>XXXXXXXXX</code>（ラベル）の組合せ。プレースホルダーのままになっていないか</div>
+        </div>
+      </label>
+
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-h">2-D. オーディエンス・リスト</h3>
+    <div class="check-list">
+
+      <label class="check warning">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">サイト訪問者リストが作成されている <span class="severity">推奨</span></div>
+          <div class="desc">LP訪問者を対象にした検索/ディスプレイのリターゲ広告で必須</div>
+          <div class="where">📍 ツールと設定 → オーディエンスマネージャー</div>
+        </div>
+      </label>
+
+      <label class="check warning">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">CV済みリストが作成されている <span class="severity">推奨</span></div>
+          <div class="desc">既に資料請求した人を「除外」するため。同じ広告を出し続けない</div>
+        </div>
+      </label>
+
+      <label class="check info">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">Customer Match リストがアップロードされている <span class="severity">任意</span></div>
+          <div class="desc">CRM内の見込み客メアド・電話番号を暗号化してアップロード。リターゲ精度向上</div>
+        </div>
+      </label>
+
+      <label class="check info">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">類似ユーザー機能の活用検討 <span class="severity">任意</span></div>
+          <div class="desc">2023年から「類似ユーザー」は廃止。代わりに「最適化されたターゲティング」を使用</div>
+        </div>
+      </label>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================================== -->
+<!-- 3. Meta Pixel -->
+<!-- ========================================================================== -->
+<section class="section" id="meta">
+  <div class="cat-header">
+    <div class="cat-icon meta">Meta<br>Pixel</div>
+    <div class="cat-meta">
+      <div class="cat-label">Section 3</div>
+      <div class="cat-title">Meta Pixel・Conversions API</div>
+      <div class="cat-count">22項目</div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-h">3-A. Pixel基本設置</h3>
+    <div class="check-list">
+
+      <label class="check critical">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">Pixelベースコードが全ページに設置 <span class="severity">重要</span></div>
+          <div class="desc"><code>fbq('init', PIXEL_ID)</code>と<code>fbq('track', 'PageView')</code>がLPにも入っているか</div>
+        </div>
+      </label>
+
+      <label class="check critical">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">Pixel IDが正しい16桁の数値 <span class="severity">重要</span></div>
+          <div class="desc">プレースホルダー<code>XXXXXXXXXXXXXXXX</code>のままなら計測は0件のまま</div>
+          <div class="bad">init('XXXXXXXXXXXXXXXX') ← 修正必須</div>
+          <div class="good">init('1234567890123456') ← 実際のID</div>
+        </div>
+      </label>
+
+      <label class="check critical">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">Pixelが1ドメイン1個になっている <span class="severity">重要</span></div>
+          <div class="desc">複数Pixel同居は学習データを分散させる。例外を除き1つに統一</div>
+        </div>
+      </label>
+
+      <label class="check warning">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">noscriptタグも併設されている <span class="severity">推奨</span></div>
+          <div class="desc">JavaScript無効ユーザー向けのフォールバック</div>
+          <div class="code-snippet">&lt;noscript&gt;&lt;img height="1" width="1" src="https://www.facebook.com/tr?id=PIXEL_ID&ev=PageView&noscript=1"/&gt;&lt;/noscript&gt;</div>
+        </div>
+      </label>
+
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-h">3-B. 標準イベント（Standard Events）</h3>
+    <div class="check-list">
+
+      <label class="check critical">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">サンクスページで<code>Lead</code>イベントが発火 <span class="severity">重要</span></div>
+          <div class="desc">資料請求の標準イベントは<code>Lead</code>。カスタム名でなく標準イベントを使うとMeta側の機械学習が効きやすい</div>
+          <div class="code-snippet">fbq('track', 'Lead', { content_name: 'kaigo-subsidy-document', value: 5000, currency: 'JPY' });</div>
+        </div>
+      </label>
+
+      <label class="check warning">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">LPで<code>ViewContent</code>イベントを発火 <span class="severity">推奨</span></div>
+          <div class="desc">LP閲覧を意味のあるアクションとして記録。リターゲ精度に効く</div>
+        </div>
+      </label>
+
+      <label class="check warning">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">フォーム入力開始で<code>InitiateCheckout</code>または<code>AddPaymentInfo</code>発火 <span class="severity">推奨</span></div>
+          <div class="desc">マイクロCV。CV予備軍として広告最適化に使える</div>
+        </div>
+      </label>
+
+      <label class="check warning">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct"><code>value</code>と<code>currency</code>パラメータ付き <span class="severity">推奨</span></div>
+          <div class="desc">通貨は必ず<code>JPY</code>。valueとセット指定で最適化精度向上</div>
+        </div>
+      </label>
+
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-h">3-C. Conversions API（CAPI）— サーバー連携</h3>
+    <div class="check-list">
+
+      <label class="check critical">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">CAPIが有効化されている <span class="severity">重要</span></div>
+          <div class="desc">iOS 14+ ATT・3rd Party Cookie廃止に対応する最重要設定。ブラウザのみでは20-30%のCVを見逃す</div>
+          <div class="where">📍 Events Manager → データソース → 該当Pixel → 設定 → CAPI</div>
+        </div>
+      </label>
+
+      <label class="check critical">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">PixelとCAPIで<code>event_id</code>による重複排除 <span class="severity">重要</span></div>
+          <div class="desc">同じイベントがPixel経由とCAPI経由で2回送られる。event_idを同じにすればMetaが重複排除</div>
+        </div>
+      </label>
+
+      <label class="check warning">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">HubSpot経由のCAPI連携が稼働中 <span class="severity">推奨</span></div>
+          <div class="desc">HubSpot Operations Hub等のMeta連携機能を使えばコード書かずに済む</div>
+        </div>
+      </label>
+
+      <label class="check warning">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">Event Match Quality (EMQ) スコアが「グッド」以上 <span class="severity">推奨</span></div>
+          <div class="desc">Events Manager上のEMQ指標が「不十分」だとMetaの最適化が効きにくい。メアド・電話・名前など顧客情報の送信パラメータ多いほど高い</div>
+          <div class="where">📍 Events Manager → イベントの概要 → イベントマッチクオリティ</div>
+        </div>
+      </label>
+
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3 class="subsection-h">3-D. ドメイン検証・AEM・iOS14対応</h3>
+    <div class="check-list">
+
+      <label class="check critical">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">ドメイン検証が完了している <span class="severity">重要</span></div>
+          <div class="desc">未検証だとiOS 14+ユーザーへの広告配信・最適化が大幅制限される</div>
+          <div class="where">📍 Business Manager → ブランドセーフティ → ドメイン</div>
+        </div>
+      </label>
+
+      <label class="check critical">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">Aggregated Event Measurement (AEM) で優先イベントを設定 <span class="severity">重要</span></div>
+          <div class="desc">iOS 14+ユーザーで使えるイベントは1ドメインあたり8つまで。最重要のものを上位優先度に</div>
+          <div class="where">📍 Events Manager → 集約イベント測定 → 該当ドメイン</div>
+          <div class="good">優先度1: Lead（=資料請求CV、これが最重要）　優先度2: ViewContent</div>
+        </div>
+      </label>
+
+      <label class="check warning">
+        <input type="checkbox">
+        <div class="check-body">
+          <div class="ct">カスタムコンバージョン（URLベース）が作成されている <span class="severity">推奨</span></div>
+          <div class="desc">サンクスページURL含む条件でCV定義。Lead標準イベントに加えてさらに厳密化</div>
+        </div>
+      </label>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================================== -->
+<!-- 4. LINE Tag -->
+<!-- ========================================================================== -->
+<section class="section" id="line" style="background:var(--bg-gray);border-radius:var(--radius)">
+  <div class="cat-header">
+    <div class="cat-icon line">LINE<br>Tag</div>
+    <div class="cat-meta">
+      <div class="cat-label">Section 4</div>
+      <div class="cat-title">LINE Tag 設定</div>
+      <div class="cat-count">10項目</div>
+    </div>
+  </div>
+
+  <div class="check-list">
+
+    <label class="check critical">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">LINEベースタグが全ページに設置 <span class="severity">重要</span></div>
+        <div class="desc">LP・サンクスページ両方の<code>&lt;head&gt;</code>内に設置</div>
+      </div>
+    </label>
+
+    <label class="check critical">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">タグIDが正しい10桁の数値 <span class="severity">重要</span></div>
+        <div class="desc"><code>_lt('init', { tagId: 'XXXXXXXXXX' })</code>のXXXX部分が実IDになっているか</div>
+      </div>
+    </label>
+
+    <label class="check critical">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">サンクスページでConversionイベント発火 <span class="severity">重要</span></div>
+        <div class="desc"><code>_lt('send', 'cv', {type: 'Conversion'}, ['TAG_ID'])</code></div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">customerTypeが正しい <span class="severity">推奨</span></div>
+        <div class="desc"><code>lap</code>=LINE広告プラットフォーム、運用型LINE広告アカウントは通常lap</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">noscriptタグも併設 <span class="severity">推奨</span></div>
+        <div class="desc">JS無効環境のフォールバック</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">CVが「URLルール」で定義されている <span class="severity">推奨</span></div>
+        <div class="desc">LINE広告マネージャでCVを「URL：含む thanks-document-request」で定義</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">PageView系のカスタムイベントが追加 <span class="severity">任意</span></div>
+        <div class="desc">特定セクション閲覧などをイベント化</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">LINE公式アカウントとの連携 <span class="severity">任意</span></div>
+        <div class="desc">広告→LINE友だち追加導線がある場合、CV計測の選択肢が広がる</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">LINE Tagダッシュボードでステータス「正常」 <span class="severity">任意</span></div>
+        <div class="desc">タグ送信履歴で過去24h以内に送信があるか</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">タグ送信履歴のテストモード活用 <span class="severity">任意</span></div>
+        <div class="desc">設定変更時はテストモードで動作確認</div>
+      </div>
+    </label>
+
+  </div>
+</section>
+
+<!-- ========================================================================== -->
+<!-- 5. GTM -->
+<!-- ========================================================================== -->
+<section class="section" id="gtm">
+  <div class="cat-header">
+    <div class="cat-icon gtm">GTM</div>
+    <div class="cat-meta">
+      <div class="cat-label">Section 5</div>
+      <div class="cat-title">Google Tag Manager（任意）</div>
+      <div class="cat-count">12項目</div>
+    </div>
+  </div>
+
+  <p style="font-size:.9rem;color:var(--text-sub);line-height:1.85;margin-bottom:20px;background:rgba(36,111,219,.08);padding:1rem 1.2rem;border-radius:8px;border-left:4px solid var(--gtm)">
+    <strong>📌 GTMは必須ではありません。</strong>タグが3〜4種類なら直接HTMLに書いてOK。GTM導入は「タグが10種類超」「コードを触らず管理したい」「複雑なトリガー条件が必要」になってから検討すれば十分です。
+  </p>
+
+  <div class="check-list">
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">GTMコンテナが本番ドメインに対して1つ <span class="severity">推奨</span></div>
+        <div class="desc">同じサイトに複数コンテナが入っていると競合・重複発生</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">プレビューモードで動作確認できる <span class="severity">推奨</span></div>
+        <div class="desc">変更を公開前にプレビューでテストするフローが確立</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">バージョン履歴に説明が記入されている <span class="severity">推奨</span></div>
+        <div class="desc">何のための変更か後で追えるよう、各バージョンに「説明」を残す</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">ユーザー権限が最小権限の原則 <span class="severity">推奨</span></div>
+        <div class="desc">退職者・外部代理店の権限が残っていないか</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">データレイヤーが構造化されている <span class="severity">任意</span></div>
+        <div class="desc">window.dataLayerでイベント・ユーザー情報を体系的に管理</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">公開ワークスペースとテスト用が分離 <span class="severity">任意</span></div>
+        <div class="desc">本番にいきなり変更が反映されないワークフロー</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">タグ・トリガー・変数の命名規則が統一 <span class="severity">任意</span></div>
+        <div class="desc">例：「GA4 - PageView - All Pages」など機能とスコープが分かる名前</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">不要なタグが整理されている <span class="severity">任意</span></div>
+        <div class="desc">使っていないタグが残っているとパフォーマンス・可読性が落ちる</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">サーバーサイドGTMの検討 <span class="severity">任意</span></div>
+        <div class="desc">大規模・厳密な計測精度が必要になったらサーバーサイドGTM導入を検討</div>
+      </div>
+    </label>
+
+  </div>
+</section>
+
+<!-- ========================================================================== -->
+<!-- 6. Microsoft Clarity -->
+<!-- ========================================================================== -->
+<section class="section" id="clarity" style="background:var(--bg-gray);border-radius:var(--radius)">
+  <div class="cat-header">
+    <div class="cat-icon clarity">Cla<br>rity</div>
+    <div class="cat-meta">
+      <div class="cat-label">Section 6</div>
+      <div class="cat-title">Microsoft Clarity（UX分析）</div>
+      <div class="cat-count">8項目</div>
+    </div>
+  </div>
+
+  <div class="check-list">
+
+    <label class="check critical">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">Clarityタグが全LPに設置されている <span class="severity">重要</span></div>
+        <div class="desc">無料・無制限なので導入しない理由がない。料金セクション含む各セクションの可視化に必須</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">GA4と連携済み <span class="severity">推奨</span></div>
+        <div class="desc">ClarityとGA4を連携するとセッションとイベントが横断分析可能</div>
+        <div class="where">📍 Clarity設定 → 統合 → Google Analytics</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">マスキング設定が適切 <span class="severity">推奨</span></div>
+        <div class="desc">フォームの個人情報はデフォルトでマスキング。「ストリクト」モードでさらに保護強化可</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">セッション収集が稼働中 <span class="severity">推奨</span></div>
+        <div class="desc">ダッシュボードに過去24h以内のセッション数が表示されているか</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">カスタムタグでセグメント分析 <span class="severity">任意</span></div>
+        <div class="desc">広告流入・自然流入別の動きの違いを見たい時など</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">Cookie同意連携 <span class="severity">任意</span></div>
+        <div class="desc">同意していないユーザーには発火しない設定が可能</div>
+      </div>
+    </label>
+
+  </div>
+</section>
+
+<!-- ========================================================================== -->
+<!-- 7. 整合性 -->
+<!-- ========================================================================== -->
+<section class="section" id="consistency">
+  <div class="cat-header">
+    <div class="cat-icon universal">整合</div>
+    <div class="cat-meta">
+      <div class="cat-label">Section 7</div>
+      <div class="cat-title">プラットフォーム横断 整合性チェック</div>
+      <div class="cat-count">10項目</div>
+    </div>
+  </div>
+
+  <p style="font-size:.9rem;color:var(--text-sub);line-height:1.85;margin-bottom:24px">同じ「資料請求CV」が各社で別々の定義になっていると、レポート比較が無意味になります。以下の値が全社で揃っているか確認してください。</p>
+
+  <table class="consistency-table">
+    <thead>
+      <tr><th>項目</th><th>GA4</th><th>Google Ads</th><th>Meta Pixel</th><th>LINE</th></tr>
+    </thead>
+    <tbody>
+      <tr class="must">
+        <td class="label">CV定義URL</td>
+        <td class="val" colspan="4">全て <code>thanks-document-request</code> で統一</td>
+      </tr>
+      <tr class="must">
+        <td class="label">CVカウント方法</td>
+        <td class="val" colspan="4">「1回」（重複排除）で統一</td>
+      </tr>
+      <tr>
+        <td class="label">CV値（円）</td>
+        <td class="val" colspan="4">5,000円など同じ仮値で統一</td>
+      </tr>
+      <tr>
+        <td class="label">通貨</td>
+        <td class="val" colspan="4">JPY</td>
+      </tr>
+      <tr>
+        <td class="label">クリック計測期間</td>
+        <td class="val">7日</td>
+        <td class="val">30日</td>
+        <td class="val">7日（標準）</td>
+        <td class="val">30日（標準）</td>
+      </tr>
+      <tr>
+        <td class="label">ビュー計測期間</td>
+        <td class="val">--</td>
+        <td class="val">1日</td>
+        <td class="val">1日</td>
+        <td class="val">1日</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="check-list" style="margin-top:30px">
+
+    <label class="check critical">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">CV定義URLが全プラットフォームで一致 <span class="severity">重要</span></div>
+        <div class="desc">URLが1文字でも違うと別CVと認識される</div>
+      </div>
+    </label>
+
+    <label class="check critical">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">CVイベント名が標準イベントを使用 <span class="severity">重要</span></div>
+        <div class="desc">GA4: <code>generate_lead</code> / Meta: <code>Lead</code> / Google Ads: 「リード」カテゴリ</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">CV値が全社で同じ <span class="severity">推奨</span></div>
+        <div class="desc">バラバラだとROAS最適化が機能しない</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">HubSpotのフォーム送信数と各社CV数の比較 <span class="severity">推奨</span></div>
+        <div class="desc">HubSpotの送信数を「真の総CV数」とし、各社CV数が大きく乖離していないかチェック（±20%以内が健全）</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">アトリビューションの違いを理解している <span class="severity">推奨</span></div>
+        <div class="desc">GA4=データドリブン、Meta=ラストクリック、Google Ads=データドリブン、それぞれ算出ロジックが違うのは正常</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">月次レポートで各社CV数を集約 <span class="severity">任意</span></div>
+        <div class="desc">Looker Studio等のBIで各社数値を並べて見られると判断が早い</div>
+      </div>
+    </label>
+
+  </div>
+</section>
+
+<!-- ========================================================================== -->
+<!-- 8. プライバシー -->
+<!-- ========================================================================== -->
+<section class="section" id="privacy" style="background:var(--bg-gray);border-radius:var(--radius)">
+  <div class="cat-header">
+    <div class="cat-icon universal">プラ</div>
+    <div class="cat-meta">
+      <div class="cat-label">Section 8</div>
+      <div class="cat-title">プライバシー・同意管理</div>
+      <div class="cat-count">8項目</div>
+    </div>
+  </div>
+
+  <div class="check-list">
+
+    <label class="check critical">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">プライバシーポリシーがLPに掲載 <span class="severity">重要</span></div>
+        <div class="desc">改正個人情報保護法でCookie等の利用について明示が必須。フッターからアクセス可能に</div>
+      </div>
+    </label>
+
+    <label class="check critical">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">利用規約・特商法表記がLPに掲載 <span class="severity">重要</span></div>
+        <div class="desc">特に有料サービス・FCの場合は必須項目あり</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">Cookie同意バナーが実装されている <span class="severity">推奨</span></div>
+        <div class="desc">EU圏ユーザー対応必須。日本市場でも将来必要になる可能性</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">Consent Mode v2 が実装されている <span class="severity">推奨</span></div>
+        <div class="desc">同意なしユーザーも統計的に補正計測。Google Ads/GA4で機能</div>
+      </div>
+    </label>
+
+    <label class="check warning">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">プライバシーポリシーに広告クッキー利用が明記 <span class="severity">推奨</span></div>
+        <div class="desc">Google Ads・Meta・LINE等の利用を明記。「あなたの行動データを分析しています」</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">オプトアウト導線がある <span class="severity">任意</span></div>
+        <div class="desc">「広告計測停止」ボタンをプライバシーポリシー内に</div>
+      </div>
+    </label>
+
+    <label class="check info">
+      <input type="checkbox">
+      <div class="check-body">
+        <div class="ct">同意ステータスのログ保持 <span class="severity">任意</span></div>
+        <div class="desc">誰がいつ何に同意したか、後で証跡を出せる仕組み</div>
+      </div>
+    </label>
+
+  </div>
+</section>
+
+<!-- ========================================================================== -->
+<!-- 9. 検証ツール -->
+<!-- ========================================================================== -->
+<section class="section" id="verify">
+  <div class="cat-header">
+    <div class="cat-icon universal">検証</div>
+    <div class="cat-meta">
+      <div class="cat-label">Section 9</div>
+      <div class="cat-title">動作検証ツール一覧</div>
+      <div class="cat-count">参考リスト</div>
+    </div>
+  </div>
+
+  <p style="font-size:.9rem;color:var(--text-sub);line-height:1.85;margin-bottom:24px">タグが本当に発火しているかは、これらのツールで「目で見て」確認します。設定変更後・本番反映後に必ずチェックしてください。</p>
+
+  <div class="verify-tools">
+
+    <div class="vt ga4">
+      <h4><span class="dot"></span>GA4 リアルタイムレポート</h4>
+      <div class="tname">GA4 公式</div>
+      <p>直近30分間のアクセス・イベントをリアルタイムで表示。自分でLPを開いて、ちゃんとイベントが届くか確認</p>
+      <div class="url">analytics.google.com → レポート → リアルタイム</div>
+    </div>
+
+    <div class="vt ga4">
+      <h4><span class="dot"></span>GA4 DebugView</h4>
+      <div class="tname">GA4 公式</div>
+      <p>自分のブラウザだけのデバッグ環境。GA Debugger拡張機能と組合せで詳細イベント解析</p>
+      <div class="url">管理 → DebugView</div>
+    </div>
+
+    <div class="vt gads">
+      <h4><span class="dot"></span>Google Tag Assistant</h4>
+      <div class="tname">Chrome拡張</div>
+      <p>ページにあるGoogleタグ（GA4・Google Ads・GTM）を全部検出して発火状況を表示</p>
+      <div class="url">tagassistant.google.com</div>
+    </div>
+
+    <div class="vt meta">
+      <h4><span class="dot"></span>Meta Pixel Helper</h4>
+      <div class="tname">Chrome拡張</div>
+      <p>MetaのPixelをページから検出。発火イベント・パラメータが一覧表示</p>
+      <div class="url">Chromeウェブストアで「Meta Pixel Helper」検索</div>
+    </div>
+
+    <div class="vt meta">
+      <h4><span class="dot"></span>Meta Events Manager テスト</h4>
+      <div class="tname">Meta 公式</div>
+      <p>テストブラウザIDを発行し、特定ブラウザのイベントだけリアルタイム監視</p>
+      <div class="url">Events Manager → テストイベント</div>
+    </div>
+
+    <div class="vt line">
+      <h4><span class="dot"></span>LINE Tagダッシュボード</h4>
+      <div class="tname">LINE 公式</div>
+      <p>送信履歴・テストモードでタグ動作確認</p>
+      <div class="url">admanager.line.biz → 共有ライブラリ</div>
+    </div>
+
+    <div class="vt gtm">
+      <h4><span class="dot"></span>GTMプレビューモード</h4>
+      <div class="tname">GTM 公式</div>
+      <p>公開前の変更がどう動くか自ブラウザでテスト。タグ発火順序・データレイヤー値を確認</p>
+      <div class="url">tagmanager.google.com → プレビュー</div>
+    </div>
+
+    <div class="vt info">
+      <h4><span class="dot"></span>Chrome DevTools Network</h4>
+      <div class="tname">ブラウザ内蔵</div>
+      <p>F12 → Network → 「fbevents」「collect」「google-analytics」等で検索し送信内容を直接確認</p>
+      <div class="url">どのブラウザでも F12</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========================================================================== -->
+<!-- スコアサマリー -->
+<!-- ========================================================================== -->
+<section class="section">
+  <div class="summary-final">
+    <h2>計測設定<span style="background:linear-gradient(135deg,#FF0080,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">スコアサマリー</span></h2>
+    <p class="sub">9セクション・約120項目の確認進捗</p>
+
+    <div class="scorecard">
+      <div class="scorecard-row"><div>1. GA4</div><div class="v" id="s-ga4">0/28</div></div>
+      <div class="scorecard-row"><div>2. Google Ads</div><div class="v" id="s-gads">0/18</div></div>
+      <div class="scorecard-row"><div>3. Meta Pixel</div><div class="v" id="s-meta">0/22</div></div>
+      <div class="scorecard-row"><div>4. LINE Tag</div><div class="v" id="s-line">0/10</div></div>
+      <div class="scorecard-row"><div>5. GTM（任意）</div><div class="v" id="s-gtm">0/9</div></div>
+      <div class="scorecard-row"><div>6. Clarity</div><div class="v" id="s-clarity">0/6</div></div>
+      <div class="scorecard-row"><div>7. 整合性</div><div class="v" id="s-consistency">0/6</div></div>
+      <div class="scorecard-row"><div>8. プライバシー</div><div class="v" id="s-privacy">0/7</div></div>
+      <div class="scorecard-row" style="border-top:2px solid rgba(255,255,255,.3);margin-top:.5rem;padding-top:1rem;font-size:1rem"><div>合計</div><div class="v" id="s-all">0/106</div></div>
+    </div>
+
+    <p style="text-align:center;color:rgba(255,255,255,.6);font-size:.85rem;margin-top:2rem;line-height:1.85">
+    重要項目（赤）が全部チェックできれば、計測の土台は最低限OK。<br>
+    推奨項目（橙）も80%超えで本格運用OK。<br>
+    任意項目（青）は余裕がある時に。
+    </p>
+  </div>
+</section>
+
+<footer>
+  <p>トラッキング設定 詳細チェックリスト｜株式会社ACG マーケティング部</p>
+  <p style="margin-top:.5rem;font-size:.75rem;opacity:.7">関連資料：<a href="tracking-overview.html">全体像 学習資料</a>　<a href="tracking-setup-guide.html">実践セットアップガイド</a>　<a href="ad-audit-checklist.html">広告監査チェックリスト</a></p>
+</footer>
+
+<script>
+(function(){
+  const sectionsConf = {
+    'ga4': 28, 'gads': 18, 'meta': 22, 'line': 10, 'gtm': 9, 'clarity': 6,
+    'consistency': 6, 'privacy': 7
+  };
+
+  document.querySelectorAll('.check').forEach((el, i) => {
+    const cb = el.querySelector('input[type="checkbox"]');
+    const key = 'tr_detail_chk_' + i;
+    if (localStorage.getItem(key) === '1') cb.checked = true;
+    cb.addEventListener('change', () => {
+      localStorage.setItem(key, cb.checked ? '1' : '0');
+      updateScores();
+    });
+  });
+
+  function updateScores(){
+    let total = {critical:0,warning:0,info:0,all:0};
+    let perSec = {};
+    Object.keys(sectionsConf).forEach(s => perSec[s] = 0);
+
+    document.querySelectorAll('section[id]').forEach(sec => {
+      const id = sec.id;
+      if (!Object.keys(sectionsConf).includes(id)) return;
+      const checks = sec.querySelectorAll('.check input[type="checkbox"]:checked');
+      perSec[id] = checks.length;
+      checks.forEach(cb => {
+        const card = cb.closest('.check');
+        if (card.classList.contains('critical')) total.critical++;
+        else if (card.classList.contains('warning')) total.warning++;
+        else if (card.classList.contains('info')) total.info++;
+        total.all++;
+      });
+    });
+
+    Object.keys(sectionsConf).forEach(s => {
+      const el = document.getElementById('s-'+s);
+      if (el) el.textContent = perSec[s] + '/' + sectionsConf[s];
+    });
+
+    const totalAll = Object.values(sectionsConf).reduce((a,b)=>a+b,0);
+    document.getElementById('s-all').textContent = total.all + '/' + totalAll;
+
+    let totalCritical = 0, totalWarning = 0, totalInfo = 0;
+    document.querySelectorAll('.check').forEach(card => {
+      if (card.classList.contains('critical')) totalCritical++;
+      else if (card.classList.contains('warning')) totalWarning++;
+      else if (card.classList.contains('info')) totalInfo++;
+    });
+    document.getElementById('cnt-c').textContent = total.critical + '/' + totalCritical;
+    document.getElementById('cnt-w').textContent = total.warning + '/' + totalWarning;
+    document.getElementById('cnt-i').textContent = total.info + '/' + totalInfo;
+  }
+
+  updateScores();
+})();
+</script>
+
+</body>
+</html>
