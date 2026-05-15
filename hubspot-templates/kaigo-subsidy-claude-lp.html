@@ -1,3 +1,8 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: ACG介護研修LP
+-->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -8,6 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+{{ standard_header_includes }}
 <style>
 /* ========== Reset & Variables ========== */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -53,16 +59,16 @@ img{max-width:100%;display:block}
 @keyframes floatB{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-18px,25px) scale(1.06)}}
 .hero-inner{position:relative;z-index:2;max-width:1200px;width:100%;display:grid;grid-template-columns:1fr 440px;gap:56px;align-items:start}
 .hero-content{color:var(--dark);text-align:left}
-.hero-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:800;letter-spacing:.08em;color:#fff;margin-bottom:1.5rem;background:var(--gradient);padding:.45rem 1.1rem;border-radius:50px;box-shadow:0 8px 20px rgba(255,0,128,.22)}
-.hero-eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:#fff;box-shadow:0 0 0 4px rgba(255,255,255,.35)}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:800;letter-spacing:.08em;color:#fff !important;margin-bottom:1.5rem;background:var(--gradient);padding:.45rem 1.1rem;border-radius:50px;box-shadow:0 8px 20px rgba(255,0,128,.22)}
+.hero-eyebrow .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#fff;box-shadow:0 0 0 4px rgba(255,255,255,.35);flex-shrink:0}
 .hero-title{font-size:clamp(2.2rem,5.2vw,4rem) !important;font-weight:900;line-height:1.12;letter-spacing:-.035em;margin-bottom:0;color:var(--dark)}
-.hero-title .accent{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block}
+.hero-title .accent{background:var(--gradient) !important;-webkit-background-clip:text !important;-webkit-text-fill-color:transparent !important;background-clip:text !important;color:transparent !important;display:inline-block}
 .hero-divider{width:64px;height:4px;background:var(--gradient);margin:1.5rem 0 1.5rem;border-radius:2px}
 .hero-sub{font-size:clamp(1rem,1.6vw,1.15rem);color:#475569;margin-bottom:1.75rem;line-height:1.95;font-weight:500}
 .hero-sub strong{color:var(--dark);font-weight:800}
 .hero-badges{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:0}
 .hero-badges span{display:inline-flex;align-items:center;gap:.45rem;background:#fff;border:1.5px solid rgba(121,40,202,.35);color:var(--dark);padding:.6rem 1.05rem .6rem .9rem;border-radius:50px;font-size:.86rem;font-weight:800;box-shadow:0 6px 18px rgba(121,40,202,.12);white-space:nowrap}
-.hero-badges span::before{content:'✓';width:20px;height:20px;border-radius:50%;background:var(--gradient);color:#fff;font-size:.72rem;font-weight:900;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;line-height:1;box-shadow:0 2px 6px rgba(255,0,128,.3)}
+.hero-badges .check{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--gradient);color:#fff;font-size:.72rem;font-weight:900;flex-shrink:0;line-height:1;box-shadow:0 2px 6px rgba(255,0,128,.3);font-family:-apple-system,"Segoe UI Symbol","Apple Color Emoji",sans-serif}
 .hero-visual{position:relative;margin:2rem 0 0;border-radius:20px;overflow:hidden;box-shadow:0 24px 60px rgba(121,40,202,.18),0 6px 20px rgba(255,0,128,.08)}
 .hero-visual img{width:100%;height:auto;display:block}
 /* フォームパネル */
@@ -83,11 +89,12 @@ img{max-width:100%;display:block}
 
 /* ========== 資料でわかること（doc-list） ========== */
 .doc-list{max-width:760px;margin:0 auto;display:grid;gap:14px;padding:0;list-style:none}
-.doc-list li{background:#fff;border-radius:var(--radius);padding:1.2rem 1.5rem 1.2rem 4.25rem;box-shadow:0 6px 20px rgba(15,23,42,.06);border:1px solid rgba(121,40,202,.08);position:relative;transition:.2s}
+.doc-list li{background:#fff;border-radius:var(--radius);padding:1.2rem 1.5rem;box-shadow:0 6px 20px rgba(15,23,42,.06);border:1px solid rgba(121,40,202,.08);transition:.2s;display:flex;align-items:center;gap:1.1rem}
 .doc-list li:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(121,40,202,.12)}
-.doc-list li::before{content:'✓';position:absolute;left:1.2rem;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;background:var(--gradient);color:#fff;font-weight:900;font-size:1rem;display:flex;align-items:center;justify-content:center;line-height:1;box-shadow:0 4px 12px rgba(255,0,128,.25)}
+.doc-list .check{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--gradient);color:#fff;font-weight:900;font-size:1rem;flex-shrink:0;line-height:1;box-shadow:0 4px 12px rgba(255,0,128,.25);font-family:-apple-system,"Segoe UI Symbol","Apple Color Emoji",sans-serif}
+.doc-list .doc-text{flex:1}
 .doc-list li strong{display:block;font-size:1.05rem;font-weight:900;color:var(--dark);margin-bottom:.2rem;letter-spacing:-.01em}
-.doc-list li span{display:block;font-size:.88rem;color:var(--text-sub);line-height:1.7;font-weight:500}
+.doc-list li .doc-text > span{display:block;font-size:.88rem;color:var(--text-sub);line-height:1.7;font-weight:500}
 
 /* ========== Problem ========== */
 .problem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
@@ -116,7 +123,7 @@ img{max-width:100%;display:block}
 .price-box{background:#fff;border-radius:var(--radius);padding:2rem 1.5rem;text-align:center;box-shadow:0 6px 30px rgba(0,0,0,.07)}
 .price-box.before{border:2px solid var(--border)}
 .price-box.after{border:2px solid var(--accent);background:linear-gradient(135deg,#fff 0%,#fff5f9 100%);position:relative}
-.price-box.after::before{content:'助成金適用後';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gradient);color:#fff;font-size:.7rem;font-weight:700;padding:.3rem .9rem;border-radius:50px;white-space:nowrap}
+.price-box .after-label{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gradient);color:#fff;font-size:.7rem;font-weight:700;padding:.3rem .9rem;border-radius:50px;white-space:nowrap}
 .price-label{font-size:.85rem;color:var(--text-sub);font-weight:700;margin-bottom:.75rem}
 .price-amount{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;line-height:1;letter-spacing:-.02em}
 .price-amount .yen{font-size:.6em;margin-left:.1em}
@@ -187,14 +194,14 @@ img{max-width:100%;display:block}
   <div class="hero-inner">
     <!-- 左：テキスト -->
     <div class="hero-content">
-      <span class="hero-eyebrow">介護事業者向けDX研修</span>
+      <span class="hero-eyebrow"><span class="dot"></span>介護事業者向けDX研修</span>
       <h1 class="hero-title">学んで終わらない、<br><span class="accent">AI研修。</span></h1>
       <div class="hero-divider"></div>
       <p class="hero-sub">研修が終わる頃には、<strong>現場で使える業務アプリが完成している</strong>。<br>介護現場のための、実践型ClaudeCode研修。</p>
       <div class="hero-badges">
-        <span>介護現場特化</span>
-        <span>全12時間オンライン</span>
-        <span>業務アプリ完成サポート</span>
+        <span><span class="check">✓</span>介護現場特化</span>
+        <span><span class="check">✓</span>全12時間オンライン</span>
+        <span><span class="check">✓</span>業務アプリ完成サポート</span>
       </div>
       <div class="hero-visual">
         <img src="https://243875500.fs1.hubspotusercontent-na2.net/hubfs/243875500/ChatGPT%20Image%202026%E5%B9%B45%E6%9C%8812%E6%97%A5%2021_08_09.png" alt="介護現場のための実践型ClaudeCode研修">
@@ -221,11 +228,11 @@ img{max-width:100%;display:block}
       <p class="section-lead">介護現場のための実践型ClaudeCode研修を、1つの資料にまとめました。</p>
     </div>
     <ul class="doc-list">
-      <li><strong>研修の全体像</strong><span>12時間で介護現場が「業務アプリを自作できる」ようになるまでの流れ</span></li>
-      <li><strong>完成イメージ</strong><span>受講中につくれる業務アプリ事例（シフト・記録・連絡帳など）</span></li>
-      <li><strong>助成金活用の進め方</strong><span>申請から支給までの実務フロー</span></li>
-      <li><strong>費用と日程</strong><span>受講料・スケジュール例・助成金適用後の自己負担目安</span></li>
-      <li><strong>よくあるご質問への回答</strong><span>「ITが苦手でも受講できる？」など</span></li>
+      <li><span class="check">✓</span><div class="doc-text"><strong>研修の全体像</strong><span>12時間で介護現場が「業務アプリを自作できる」ようになるまでの流れ</span></div></li>
+      <li><span class="check">✓</span><div class="doc-text"><strong>完成イメージ</strong><span>受講中につくれる業務アプリ事例（シフト・記録・連絡帳など）</span></div></li>
+      <li><span class="check">✓</span><div class="doc-text"><strong>助成金活用の進め方</strong><span>申請から支給までの実務フロー</span></div></li>
+      <li><span class="check">✓</span><div class="doc-text"><strong>費用と日程</strong><span>受講料・スケジュール例・助成金適用後の自己負担目安</span></div></li>
+      <li><span class="check">✓</span><div class="doc-text"><strong>よくあるご質問への回答</strong><span>「ITが苦手でも受講できる？」など</span></div></li>
     </ul>
   </div>
 </section>
@@ -247,6 +254,7 @@ img{max-width:100%;display:block}
       </div>
       <div class="price-arrow">→</div>
       <div class="price-box after">
+        <span class="after-label">助成金適用後</span>
         <div class="price-label">助成金適用後の自己負担目安</div>
         <div class="price-amount">9<span class="yen">万円</span><span class="from">〜</span></div>
         <p class="price-note">事業規模・要件により変動</p>
@@ -266,5 +274,6 @@ img{max-width:100%;display:block}
   <p>&copy; 2026 株式会社ACG</p>
 </footer>
 
+{{ standard_footer_includes }}
 </body>
 </html>
