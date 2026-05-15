@@ -39,31 +39,38 @@ img{max-width:100%;display:block}
 .highlight{background:linear-gradient(transparent 60%,rgba(255,0,128,.18) 60%);padding:0 .1em}
 
 /* ========== Header ========== */
-.lp-header{background:rgba(26,32,44,.95);padding:.75rem 2rem;display:flex;align-items:center;justify-content:space-between;position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(8px)}
-.lp-header-logo{color:#fff;font-size:.85rem;font-weight:700;text-decoration:none}
-.lp-header-cta{background:var(--gradient);color:#fff;padding:.5rem 1.25rem;border-radius:50px;font-size:.8rem;font-weight:700;text-decoration:none;transition:.2s}
-.lp-header-cta:hover{transform:translateY(-2px)}
+.lp-header{background:rgba(255,255,255,.92);padding:.75rem 2rem;display:flex;align-items:center;justify-content:space-between;position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(12px);border-bottom:1px solid rgba(15,23,42,.06);box-shadow:0 4px 24px rgba(15,23,42,.04)}
+.lp-header-logo{color:var(--dark);font-size:1.25rem;font-weight:900;text-decoration:none;letter-spacing:.01em;line-height:1}
+.lp-header-cta{background:var(--gradient);color:#fff;padding:.55rem 1.4rem;border-radius:50px;font-size:.8rem;font-weight:700;text-decoration:none;transition:.2s;box-shadow:0 6px 18px rgba(255,0,128,.25)}
+.lp-header-cta:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(255,0,128,.35)}
 
 /* ========== Hero ========== */
-.lp-hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:120px 20px 80px;background:linear-gradient(135deg,#FF0080 0%,#a020c0 50%,#7928CA 100%);position:relative;overflow:hidden}
-.lp-hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.18) 1px,transparent 1px);background-size:28px 28px;z-index:1;pointer-events:none}
-.hero-orb1{position:absolute;top:8%;left:3%;width:420px;height:420px;background:radial-gradient(circle,rgba(255,255,255,.18) 0%,transparent 65%);border-radius:50%;animation:floatA 9s ease-in-out infinite;pointer-events:none}
-.hero-orb2{position:absolute;bottom:5%;right:3%;width:320px;height:320px;background:radial-gradient(circle,rgba(255,255,255,.13) 0%,transparent 65%);border-radius:50%;animation:floatB 11s ease-in-out infinite;pointer-events:none}
+.lp-hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:130px 20px 90px;background:radial-gradient(1200px 600px at 12% 0%,rgba(255,0,128,.10) 0%,transparent 60%),radial-gradient(1000px 700px at 92% 100%,rgba(121,40,202,.12) 0%,transparent 60%),linear-gradient(180deg,#fdfbff 0%,#f7f2ff 100%);position:relative;overflow:hidden}
+.lp-hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(121,40,202,.06) 1px,transparent 1px);background-size:28px 28px;z-index:1;pointer-events:none;mask-image:linear-gradient(180deg,#000 0%,transparent 90%)}
+.hero-orb1{position:absolute;top:-6%;left:-4%;width:520px;height:520px;background:radial-gradient(circle,rgba(255,0,128,.18) 0%,transparent 65%);border-radius:50%;animation:floatA 12s ease-in-out infinite;pointer-events:none;filter:blur(20px)}
+.hero-orb2{position:absolute;bottom:-8%;right:-4%;width:480px;height:480px;background:radial-gradient(circle,rgba(121,40,202,.18) 0%,transparent 65%);border-radius:50%;animation:floatB 14s ease-in-out infinite;pointer-events:none;filter:blur(20px)}
 @keyframes floatA{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(25px,-18px) scale(1.08)}}
 @keyframes floatB{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-18px,25px) scale(1.06)}}
-.hero-inner{position:relative;z-index:2;max-width:1200px;width:100%;display:grid;grid-template-columns:1fr 440px;gap:48px;align-items:center}
-.hero-content{color:#fff;text-align:left}
-.hero-eyebrow{display:inline-block;font-size:.85rem;font-weight:700;letter-spacing:.06em;color:#fff;margin-bottom:1.25rem;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);padding:.4rem 1rem;border-radius:50px;backdrop-filter:blur(6px)}
-.hero-title{font-size:clamp(1.9rem,4.2vw,3.2rem) !important;font-weight:900;line-height:1.15;letter-spacing:-.03em;margin-bottom:1rem;text-shadow:0 4px 30px rgba(0,0,0,.18)}
-.hero-divider{width:56px;height:3px;background:rgba(255,255,255,.5);margin:.25rem 0 1.25rem;border-radius:2px}
-.hero-sub{font-size:1.05rem;color:rgba(255,255,255,.92);margin-bottom:1.75rem;line-height:1.85;text-shadow:0 2px 10px rgba(0,0,0,.12)}
+.hero-inner{position:relative;z-index:2;max-width:1200px;width:100%;display:grid;grid-template-columns:1fr 440px;gap:56px;align-items:start}
+.hero-content{color:var(--dark);text-align:left}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:800;letter-spacing:.08em;color:#fff;margin-bottom:1.5rem;background:var(--gradient);padding:.45rem 1.1rem;border-radius:50px;box-shadow:0 8px 20px rgba(255,0,128,.22)}
+.hero-eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:#fff;box-shadow:0 0 0 4px rgba(255,255,255,.35)}
+.hero-title{font-size:clamp(2.2rem,5.2vw,4rem) !important;font-weight:900;line-height:1.12;letter-spacing:-.035em;margin-bottom:0;color:var(--dark)}
+.hero-title .accent{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block}
+.hero-divider{width:64px;height:4px;background:var(--gradient);margin:1.5rem 0 1.5rem;border-radius:2px}
+.hero-sub{font-size:clamp(1rem,1.6vw,1.15rem);color:#475569;margin-bottom:1.75rem;line-height:1.95;font-weight:500}
+.hero-sub strong{color:var(--dark);font-weight:800}
 .hero-badges{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:0}
-.hero-badges span{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);color:#fff;padding:.45rem 1rem;border-radius:50px;font-size:.78rem;font-weight:700;backdrop-filter:blur(6px)}
+.hero-badges span{display:inline-flex;align-items:center;gap:.45rem;background:#fff;border:1.5px solid rgba(121,40,202,.35);color:var(--dark);padding:.6rem 1.05rem .6rem .9rem;border-radius:50px;font-size:.86rem;font-weight:800;box-shadow:0 6px 18px rgba(121,40,202,.12);white-space:nowrap}
+.hero-badges span::before{content:'✓';width:20px;height:20px;border-radius:50%;background:var(--gradient);color:#fff;font-size:.72rem;font-weight:900;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;line-height:1;box-shadow:0 2px 6px rgba(255,0,128,.3)}
+.hero-visual{position:relative;margin:2rem 0 0;border-radius:20px;overflow:hidden;box-shadow:0 24px 60px rgba(121,40,202,.18),0 6px 20px rgba(255,0,128,.08)}
+.hero-visual img{width:100%;height:auto;display:block}
 /* フォームパネル */
-.hero-form-panel{position:relative;z-index:2;background:rgba(255,255,255,.97);border-radius:20px;padding:2rem;box-shadow:0 24px 60px rgba(0,0,0,.3)}
-.hero-form-panel h3{font-size:1.15rem;font-weight:900;color:var(--dark);margin-bottom:.4rem;text-align:center}
-.hero-form-panel .form-lead{font-size:.85rem;color:var(--text-sub);text-align:center;margin-bottom:1.25rem;line-height:1.6}
-.hero-form-panel .form-after{font-size:.75rem;color:var(--text-muted);text-align:center;margin-top:1rem;padding-top:1rem;border-top:1px dashed var(--border);line-height:1.6}
+.hero-form-panel{position:relative;z-index:2;background:#fff;border-radius:22px;padding:2.25rem 2rem 2rem;box-shadow:0 30px 70px rgba(15,23,42,.14),0 8px 20px rgba(121,40,202,.08);border:1px solid rgba(121,40,202,.08);overflow:hidden}
+.hero-form-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:var(--gradient)}
+.hero-form-panel h3{font-size:1.2rem;font-weight:900;color:var(--dark);margin-bottom:.5rem;text-align:center;letter-spacing:-.01em}
+.hero-form-panel .form-lead{font-size:.85rem;color:var(--text-sub);text-align:center;margin-bottom:1.25rem;line-height:1.65}
+.hero-form-panel .form-after{font-size:.75rem;color:var(--text-muted);text-align:center;margin-top:1rem;padding-top:1rem;border-top:1px dashed var(--border);line-height:1.65}
 .form-embed{display:block;min-height:60px}
 
 /* ========== Section ========== */
@@ -73,6 +80,14 @@ img{max-width:100%;display:block}
 .section-title{margin-bottom:.6rem}
 .section-lead{font-size:1rem;color:var(--text-muted)}
 .bg-gray{background:var(--bg-gray)}
+
+/* ========== 資料でわかること（doc-list） ========== */
+.doc-list{max-width:760px;margin:0 auto;display:grid;gap:14px;padding:0;list-style:none}
+.doc-list li{background:#fff;border-radius:var(--radius);padding:1.2rem 1.5rem 1.2rem 4.25rem;box-shadow:0 6px 20px rgba(15,23,42,.06);border:1px solid rgba(121,40,202,.08);position:relative;transition:.2s}
+.doc-list li:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(121,40,202,.12)}
+.doc-list li::before{content:'✓';position:absolute;left:1.2rem;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;background:var(--gradient);color:#fff;font-weight:900;font-size:1rem;display:flex;align-items:center;justify-content:center;line-height:1;box-shadow:0 4px 12px rgba(255,0,128,.25)}
+.doc-list li strong{display:block;font-size:1.05rem;font-weight:900;color:var(--dark);margin-bottom:.2rem;letter-spacing:-.01em}
+.doc-list li span{display:block;font-size:.88rem;color:var(--text-sub);line-height:1.7;font-weight:500}
 
 /* ========== Problem ========== */
 .problem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
@@ -161,7 +176,7 @@ img{max-width:100%;display:block}
 
 <!-- ========== ヘッダー ========== -->
 <header class="lp-header">
-  <a href="#top" class="lp-header-logo">ホリエモンAI学校 介護校</a>
+  <a href="#top" class="lp-header-logo">株式会社ACG</a>
   <a href="#form" class="lp-header-cta">無料資料を受け取る &gt;</a>
 </header>
 
@@ -173,190 +188,56 @@ img{max-width:100%;display:block}
     <!-- 左：テキスト -->
     <div class="hero-content">
       <span class="hero-eyebrow">介護事業者向けDX研修</span>
-      <h1 class="hero-title">学んで終わらない、<br>AI研修。</h1>
+      <h1 class="hero-title">学んで終わらない、<br><span class="accent">AI研修。</span></h1>
       <div class="hero-divider"></div>
-      <p class="hero-sub">研修が終わる頃には、現場で使える業務アプリが完成している。<br>介護現場のための、実践型ClaudeCode研修。</p>
+      <p class="hero-sub">研修が終わる頃には、<strong>現場で使える業務アプリが完成している</strong>。<br>介護現場のための、実践型ClaudeCode研修。</p>
       <div class="hero-badges">
-        <span>介護現場特化のカリキュラム</span>
-        <span>全12時間・オンライン受講可</span>
-        <span>業務アプリ完成までサポート</span>
+        <span>介護現場特化</span>
+        <span>全12時間オンライン</span>
+        <span>業務アプリ完成サポート</span>
+      </div>
+      <div class="hero-visual">
+        <img src="https://243875500.fs1.hubspotusercontent-na2.net/hubfs/243875500/ChatGPT%20Image%202026%E5%B9%B45%E6%9C%8812%E6%97%A5%2021_08_09.png" alt="介護現場のための実践型ClaudeCode研修">
       </div>
     </div>
     <!-- 右：フォーム -->
     <div class="hero-form-panel" id="form">
       <h3>無料資料を受け取る</h3>
-      <p class="form-lead">研修内容・助成金活用例・受講者の声をまとめた資料をお届けします</p>
+      <p class="form-lead">いつでもお気軽にお問い合わせください。<br>フォームにご入力いただくと、資料をダウンロードしていただくメールをお送りいたします。</p>
       <div class="form-embed">
-        <!-- HUBSPOT_FORM_EMBED -->
+        <script src="https://js-na2.hsforms.net/forms/embed/243875500.js" defer></script>
+        <div class="hs-form-frame" data-region="na2" data-form-id="ea519ee0-c506-4875-a95b-23ec81e00fa5" data-portal-id="243875500"></div>
       </div>
       <p class="form-after">ご入力後すぐに、詳細資料LPのご案内をメールでお送りします。</p>
     </div>
   </div>
 </section>
 
-<!-- ========== 課題 ========== -->
+<!-- ========== 資料でわかること ========== -->
 <section class="section bg-gray">
   <div class="section-inner">
     <div class="section-header">
-      <h2 class="text-large section-title">こんな<span class="highlight">課題</span>はありませんか？</h2>
-      <p class="section-lead">介護経営の現場で、いま増えているお悩み</p>
+      <h2 class="text-large section-title">資料で<span class="highlight">わかること</span></h2>
+      <p class="section-lead">介護現場のための実践型ClaudeCode研修を、1つの資料にまとめました。</p>
     </div>
-    <div class="problem-grid">
-      <div class="problem-card">
-        <div class="problem-icon">👥</div>
-        <h3>人手不足が止まらない</h3>
-        <p>採用しても続かず、現場スタッフ一人ひとりの負担が増えるばかり。新人育成にも時間が割けない。</p>
-      </div>
-      <div class="problem-card">
-        <div class="problem-icon">📋</div>
-        <h3>業務の効率化が進まない</h3>
-        <p>記録・シフト・申し送り・報告書。紙やExcelでの手作業が多く、本来のケア業務に集中できない。</p>
-      </div>
-      <div class="problem-card">
-        <div class="problem-icon">💴</div>
-        <h3>DX研修はコストが高い</h3>
-        <p>外部の研修は数十万円〜数百万円。中小の介護事業者には、費用面で導入のハードルが高すぎる。</p>
-      </div>
-    </div>
+    <ul class="doc-list">
+      <li><strong>研修の全体像</strong><span>12時間で介護現場が「業務アプリを自作できる」ようになるまでの流れ</span></li>
+      <li><strong>完成イメージ</strong><span>受講中につくれる業務アプリ事例（シフト・記録・連絡帳など）</span></li>
+      <li><strong>助成金活用の進め方</strong><span>申請から支給までの実務フロー</span></li>
+      <li><strong>費用と日程</strong><span>受講料・スケジュール例・助成金適用後の自己負担目安</span></li>
+      <li><strong>よくあるご質問への回答</strong><span>「ITが苦手でも受講できる？」など</span></li>
+    </ul>
   </div>
 </section>
 
-<!-- ========== 解決策 ========== -->
-<section class="section">
-  <div class="section-inner">
-    <div class="section-header">
-      <h2 class="text-large section-title">介護現場のための<br><span class="highlight">ClaudeCode研修</span>とは</h2>
-      <p class="section-lead">難しいIT知識はゼロでOK。現場の言葉で業務アプリが作れるようになる研修です。</p>
-    </div>
-    <p class="solution-intro">
-      本研修は、介護現場で日々起こる「あったらいいな」を、現場スタッフ自身の手でアプリにできるようになることを目的にしています。<br>
-      日本語で話しかけるように指示するだけで、シフト管理・記録入力・申し送りなど、現場で使える業務アプリを作って公開できるようになります。
-    </p>
-    <div class="solution-grid">
-      <div class="solution-card">
-        <div class="solution-icon">🛠️</div>
-        <h3>業務アプリを自作できる</h3>
-        <p>シフト管理・記録入力・連絡帳など、現場のニーズに合わせた小さな業務アプリを、研修中に自分の手で作って公開できます。</p>
-      </div>
-      <div class="solution-card">
-        <div class="solution-icon">🗣️</div>
-        <h3>日本語で話しかけるだけ</h3>
-        <p>難しいコードを書く必要はありません。「こんなアプリが欲しい」と日本語で伝えるだけで、AIが形にしてくれます。</p>
-      </div>
-      <div class="solution-card">
-        <div class="solution-icon">🏢</div>
-        <h3>現場の課題を現場で解決</h3>
-        <p>外部に依頼すれば数十万〜数百万円かかる業務改善を、現場スタッフ自身の手で、必要なときに必要なだけ実現できます。</p>
-      </div>
-      <div class="solution-card">
-        <div class="solution-icon">🌱</div>
-        <h3>スタッフの定着・成長にも</h3>
-        <p>「学べる職場」「自分で工夫できる職場」は、人材定着の大きな武器になります。研修を採用ブランディングにも活かせます。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== 中間CTA ========== -->
-<div class="cta-block">
-  <a href="#form" class="cta-btn-large">無料資料を受け取る</a>
-  <span class="cta-note">受け取り後すぐに、詳細資料LPをご案内します</span>
-</div>
-
-<!-- ========== 研修概要 ========== -->
-<section class="section">
-  <div class="section-inner">
-    <div class="section-header">
-      <h2 class="text-large section-title">研修<span class="highlight">概要</span></h2>
-      <p class="section-lead">全12時間・オンライン受講可・介護現場で実際に使えるアプリを完成させます</p>
-    </div>
-
-    <div class="curriculum-overview">
-      <div class="overview-card">
-        <div class="overview-icon">⏱️</div>
-        <h4>全12時間</h4>
-        <p>分割受講可能</p>
-      </div>
-      <div class="overview-card">
-        <div class="overview-icon">💻</div>
-        <h4>オンライン受講可</h4>
-        <p>全国どこからでも参加OK</p>
-      </div>
-      <div class="overview-card">
-        <div class="overview-icon">🎯</div>
-        <h4>実践型カリキュラム</h4>
-        <p>業務アプリを実際に作成・公開</p>
-      </div>
-      <div class="overview-card">
-        <div class="overview-icon">🤝</div>
-        <h4>少人数制サポート</h4>
-        <p>講師に直接質問できる環境</p>
-      </div>
-    </div>
-
-    <div class="curriculum-list">
-      <div class="curriculum-item">
-        <span class="curriculum-num">STEP 01</span>
-        <div class="curriculum-text">
-          <h4>受講環境のセットアップ</h4>
-          <p>パソコンに必要なツールを入れる、最初の準備。ここを丁寧にサポートします。</p>
-        </div>
-      </div>
-      <div class="curriculum-item">
-        <span class="curriculum-num">STEP 02</span>
-        <div class="curriculum-text">
-          <h4>AIに話しかけてアプリを作る基本</h4>
-          <p>日本語で「こうしたい」と伝えるだけで動くアプリが作れる。その手順を体験します。</p>
-        </div>
-      </div>
-      <div class="curriculum-item">
-        <span class="curriculum-num">STEP 03</span>
-        <div class="curriculum-text">
-          <h4>介護現場のテーマで業務アプリを作る</h4>
-          <p>シフト・記録・連絡帳など、自施設の課題に沿った題材で実際に作成します。</p>
-        </div>
-      </div>
-      <div class="curriculum-item">
-        <span class="curriculum-num">STEP 04</span>
-        <div class="curriculum-text">
-          <h4>作ったアプリを公開して現場で使う</h4>
-          <p>Firebaseという仕組みを使い、作ったアプリをスマホやPCから使える状態にします。</p>
-        </div>
-      </div>
-      <div class="curriculum-item">
-        <span class="curriculum-num">STEP 05</span>
-        <div class="curriculum-text">
-          <h4>変更履歴を残して安心して育てる</h4>
-          <p>GitHubでバージョン管理。「いつ、誰が、何を変えたか」を残し、安心して改良を重ねられる仕組みを整えます。</p>
-        </div>
-      </div>
-      <div class="curriculum-item">
-        <span class="curriculum-num">STEP 06</span>
-        <div class="curriculum-text">
-          <h4>便利な拡張機能でさらに効率化</h4>
-          <p>プラグイン（追加機能）を組み合わせて、より楽に・より速く現場の業務改善を進められるようにします。</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== 助成金（中盤・控えめ） ========== -->
+<!-- ========== 助成金（圧縮版） ========== -->
 <section class="section subsidy-section">
   <div class="section-inner">
     <div class="section-header">
-      <span class="subsidy-badge">あわせて使えるサポート</span>
-      <h2 class="text-large section-title">人材開発支援助成金も<br><span class="highlight">活用いただけます</span></h2>
-      <p class="section-lead">本研修は人材開発支援助成金の対象です。費用面でサポートが必要な場合は、申請までこちらでフォローします。</p>
+      <span class="subsidy-badge">今すぐ動く理由</span>
+      <h2 class="text-large section-title">人材開発支援助成金で<br><span class="highlight">最大75%</span>が助成されます</h2>
+      <p class="section-lead">本研修は人材開発支援助成金の対象。申請の進め方は資料に同封しています。</p>
     </div>
-
-    <div class="subsidy-overview">
-      <h3>人材開発支援助成金とは？</h3>
-      <p>
-        厚生労働省が設けている、企業が従業員に研修を実施した際に、研修費用と研修中の賃金の一部を国が助成する制度です。介護事業者も対象で、要件を満たせば<strong>研修費の最大75%</strong>が助成されます。本研修はこの助成金の対象となるよう設計されています。
-      </p>
-    </div>
-
     <!-- 価格目安 -->
     <div class="price-compare">
       <div class="price-box before">
@@ -371,30 +252,6 @@ img{max-width:100%;display:block}
         <p class="price-note">事業規模・要件により変動</p>
       </div>
     </div>
-
-    <div class="subsidy-support">
-      <div class="support-card">
-        <div class="support-icon">📝</div>
-        <div>
-          <h4>申請書類の作成サポート</h4>
-          <p>必要書類のテンプレートをご用意。記入のポイントもオンラインでご案内します。</p>
-        </div>
-      </div>
-      <div class="support-card">
-        <div class="support-icon">📞</div>
-        <div>
-          <h4>労働局への提出フォロー</h4>
-          <p>計画届の提出から支給申請まで、つまずきやすいポイントを個別にフォローします。</p>
-        </div>
-      </div>
-      <div class="support-card">
-        <div class="support-icon">✅</div>
-        <div>
-          <h4>要件チェックの代行</h4>
-          <p>貴社が助成金の要件を満たしているか、事前にこちらで確認・ご案内します。</p>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -406,7 +263,7 @@ img{max-width:100%;display:block}
 
 <!-- ========== フッター ========== -->
 <footer class="lp-footer">
-  <p>&copy; 2026 ホリエモンAI学校 介護校</p>
+  <p>&copy; 2026 株式会社ACG</p>
 </footer>
 
 </body>
