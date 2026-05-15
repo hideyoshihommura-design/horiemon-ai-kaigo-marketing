@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>デジタル計測トラッキングの全体像｜学習資料</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gradient:linear-gradient(135deg,#FF0080,#7928CA);
+  --gradient-soft:linear-gradient(135deg,rgba(255,0,128,.08),rgba(121,40,202,.08));
+  --accent:#FF0080;
+  --purple:#7928CA;
+  --dark:#1a202c;
+  --bg:#fafbff;
+  --bg-card:#fff;
+  --bg-gray:#f5f7fa;
+  --text:#2d3748;
+  --text-sub:#4a5568;
+  --text-muted:#718096;
+  --border:#e2e8f0;
+  --radius:18px;
+  --shadow-sm:0 4px 14px rgba(15,23,42,.06);
+  --shadow-md:0 12px 32px rgba(15,23,42,.08);
+  --shadow-lg:0 24px 50px rgba(15,23,42,.10);
+  --green:#22c55e;
+  --blue:#3b82f6;
+  --orange:#f59e0b;
+  --red:#ef4444;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:"Noto Sans JP",sans-serif;color:var(--text);background:var(--bg);line-height:1.85;-webkit-font-smoothing:antialiased}
+
+/* ===== ヘッダー ===== */
+.hero{padding:80px 24px 60px;background:linear-gradient(180deg,#fff 0%,#fdfbff 100%);border-bottom:1px solid var(--border);text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-200px;left:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(255,0,128,.10) 0%,transparent 65%);border-radius:50%}
+.hero::after{content:'';position:absolute;bottom:-200px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(121,40,202,.10) 0%,transparent 65%);border-radius:50%}
+.hero-inner{position:relative;z-index:2;max-width:900px;margin:0 auto}
+.hero-eyebrow{display:inline-block;font-size:.78rem;font-weight:800;letter-spacing:.12em;color:#fff;background:var(--gradient);padding:.45rem 1.2rem;border-radius:50px;margin-bottom:1.5rem;text-transform:uppercase}
+.hero h1{font-size:clamp(2.2rem,5vw,3.6rem);font-weight:900;line-height:1.2;letter-spacing:-.03em;color:var(--dark);margin-bottom:1rem}
+.hero h1 .grad{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:clamp(1rem,1.6vw,1.15rem);color:var(--text-sub);line-height:1.95;max-width:680px;margin:0 auto 2rem}
+.hero .target{display:inline-block;background:#fff;border:2px solid rgba(121,40,202,.15);padding:1rem 1.5rem;border-radius:14px;font-size:.9rem;color:var(--text-sub);box-shadow:var(--shadow-sm)}
+.hero .target strong{color:var(--dark);font-weight:800}
+
+/* ===== ナビ ===== */
+.toc{background:#fff;padding:1.5rem 24px;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;backdrop-filter:blur(10px);background:rgba(255,255,255,.92)}
+.toc-inner{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center}
+.toc a{font-size:.78rem;color:var(--text-sub);text-decoration:none;padding:.4rem .8rem;border-radius:50px;border:1px solid var(--border);background:#fff;transition:.2s;white-space:nowrap;font-weight:700}
+.toc a:hover{background:var(--gradient);color:#fff;border-color:transparent;transform:translateY(-2px)}
+
+/* ===== セクション共通 ===== */
+.section{padding:80px 24px;max-width:1100px;margin:0 auto}
+.section-header{margin-bottom:50px;text-align:center}
+.section-num{display:inline-block;font-size:.75rem;font-weight:800;letter-spacing:.15em;color:var(--accent);margin-bottom:.75rem}
+.section-title{font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:900;line-height:1.3;letter-spacing:-.02em;color:var(--dark);margin-bottom:.75rem}
+.section-title .grad{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.section-lead{font-size:1.02rem;color:var(--text-sub);line-height:1.95;max-width:720px;margin:0 auto}
+
+/* ===== 5つの問い ===== */
+.questions-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px;margin-top:30px}
+.q-card{background:var(--bg-card);border-radius:var(--radius);padding:1.75rem 1.5rem;text-align:center;box-shadow:var(--shadow-sm);border-top:4px solid;transition:.3s}
+.q-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-md)}
+.q-card.c1{border-top-color:#FF0080}
+.q-card.c2{border-top-color:#7928CA}
+.q-card.c3{border-top-color:#3b82f6}
+.q-card.c4{border-top-color:#22c55e}
+.q-card.c5{border-top-color:#f59e0b}
+.q-card .label{font-size:2rem;font-weight:900;letter-spacing:-.04em;color:var(--dark);line-height:1;margin-bottom:.5rem;font-family:"Helvetica Neue",sans-serif}
+.q-card .word{font-size:.95rem;font-weight:900;color:var(--accent);margin-bottom:.75rem;letter-spacing:.03em}
+.q-card .desc{font-size:.82rem;color:var(--text-sub);line-height:1.7}
+
+/* ===== カスタマージャーニー ===== */
+.journey{background:var(--bg-gray);padding:3rem 1.5rem;border-radius:var(--radius);overflow-x:auto;margin-top:30px}
+.journey-svg{display:block;margin:0 auto;width:100%;min-width:920px;max-width:1000px}
+
+/* ===== 計測ピラミッド ===== */
+.pyramid-wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;margin-top:30px}
+.pyramid-svg{width:100%;max-width:500px;margin:0 auto;display:block}
+.pyramid-list{display:flex;flex-direction:column;gap:14px}
+.layer-item{background:#fff;border-radius:14px;padding:1.2rem 1.4rem;box-shadow:var(--shadow-sm);border-left:4px solid;transition:.2s}
+.layer-item:hover{transform:translateX(4px);box-shadow:var(--shadow-md)}
+.layer-item.l1{border-color:#e0e7ff}
+.layer-item.l2{border-color:#a78bfa}
+.layer-item.l3{border-color:#7928CA}
+.layer-item.l4{border-color:#FF0080}
+.layer-item.l5{border-color:#1a202c}
+.layer-item h4{font-size:1rem;font-weight:900;margin-bottom:.3rem;color:var(--dark);display:flex;align-items:center;gap:.5rem}
+.layer-item h4 .num{display:inline-flex;width:24px;height:24px;background:var(--gradient);color:#fff;border-radius:50%;align-items:center;justify-content:center;font-size:.72rem;font-weight:900}
+.layer-item p{font-size:.85rem;color:var(--text-sub);line-height:1.65;margin:0}
+
+/* ===== タグ発火フロー ===== */
+.tag-flow{background:#0f0c29;color:#fff;border-radius:var(--radius);padding:3rem 2rem;margin-top:30px;position:relative;overflow:hidden}
+.tag-flow::before{content:'';position:absolute;top:-100px;right:-50px;width:300px;height:300px;background:radial-gradient(circle,rgba(255,0,128,.20),transparent 65%);border-radius:50%}
+.tag-flow-svg{display:block;margin:0 auto;width:100%;max-width:850px;position:relative;z-index:1}
+
+/* ===== 識別子の階層 ===== */
+.id-layers{margin-top:30px;display:flex;flex-direction:column;gap:14px;max-width:760px;margin-left:auto;margin-right:auto}
+.id-row{display:grid;grid-template-columns:60px 1fr auto;align-items:center;background:#fff;border-radius:14px;padding:1.1rem 1.4rem;box-shadow:var(--shadow-sm);gap:1rem;transition:.2s}
+.id-row:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.id-row .id-num{width:42px;height:42px;background:var(--gradient);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1rem}
+.id-row .id-body h4{font-size:.98rem;font-weight:900;color:var(--dark);margin-bottom:.2rem}
+.id-row .id-body p{font-size:.83rem;color:var(--text-sub);line-height:1.6;margin:0}
+.id-row .id-strength{font-size:.7rem;font-weight:700;color:#fff;padding:.3rem .7rem;border-radius:50px;white-space:nowrap}
+.s-low{background:#94a3b8}
+.s-mid{background:#3b82f6}
+.s-high{background:var(--accent)}
+.s-vhigh{background:var(--purple)}
+
+/* ===== ツールエコシステム ===== */
+.tool-quadrant{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:30px}
+.tool-card{background:#fff;border-radius:var(--radius);padding:1.75rem;box-shadow:var(--shadow-sm);border-top:5px solid;transition:.2s}
+.tool-card:hover{box-shadow:var(--shadow-md);transform:translateY(-4px)}
+.tool-card.a{border-top-color:#FF0080}
+.tool-card.b{border-top-color:#3b82f6}
+.tool-card.c{border-top-color:#22c55e}
+.tool-card.d{border-top-color:#f59e0b}
+.tool-card .cat{font-size:.7rem;font-weight:900;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.4rem}
+.tool-card h3{font-size:1.15rem;font-weight:900;color:var(--dark);margin-bottom:.5rem;line-height:1.4}
+.tool-card .role{font-size:.86rem;color:var(--text-sub);line-height:1.7;margin-bottom:1rem}
+.tool-card .tools{display:flex;flex-wrap:wrap;gap:.4rem}
+.tool-card .tools span{font-size:.75rem;background:var(--bg-gray);color:var(--dark);padding:.3rem .7rem;border-radius:50px;font-weight:700}
+.tool-card .tools .star{background:var(--gradient);color:#fff}
+
+/* ===== アトリビューション ===== */
+.attribution-scenario{background:#fff;border-radius:var(--radius);padding:2rem;box-shadow:var(--shadow-sm);margin-top:30px}
+.attribution-scenario h3{font-size:1.1rem;font-weight:900;color:var(--dark);margin-bottom:1.25rem;text-align:center}
+.attribution-svg{width:100%;max-width:840px;display:block;margin:0 auto 1.5rem}
+.attribution-note{background:var(--gradient-soft);border-left:4px solid var(--accent);padding:1.2rem 1.5rem;border-radius:10px;font-size:.92rem;line-height:1.85;color:var(--dark)}
+.attribution-note strong{color:var(--accent)}
+
+.attribution-models{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-top:24px}
+.model-card{background:var(--bg-card);border-radius:12px;padding:1.1rem;border:1px solid var(--border);transition:.2s}
+.model-card:hover{border-color:var(--purple);transform:translateY(-2px)}
+.model-card h5{font-size:.92rem;font-weight:900;color:var(--dark);margin-bottom:.3rem}
+.model-card p{font-size:.78rem;color:var(--text-sub);line-height:1.65;margin:0}
+
+/* ===== プライバシー ===== */
+.privacy-compare{display:grid;grid-template-columns:1fr auto 1fr;gap:24px;align-items:center;margin-top:30px}
+.privacy-box{background:#fff;border-radius:var(--radius);padding:2rem;box-shadow:var(--shadow-sm);position:relative}
+.privacy-box.past{border-top:5px solid #94a3b8}
+.privacy-box.now{border-top:5px solid var(--accent)}
+.privacy-box .era{font-size:.7rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.5rem}
+.privacy-box h3{font-size:1.1rem;font-weight:900;margin-bottom:.75rem;color:var(--dark)}
+.privacy-box ul{list-style:none;padding:0;margin:0}
+.privacy-box li{font-size:.85rem;color:var(--text-sub);padding-left:1.2rem;position:relative;margin-bottom:.5rem;line-height:1.65}
+.privacy-box li::before{content:'';position:absolute;left:0;top:.5em;width:8px;height:8px;border-radius:50%;background:var(--text-muted)}
+.privacy-box.now li::before{background:var(--accent)}
+.privacy-arrow{font-size:2.5rem;color:var(--accent);font-weight:900}
+
+/* ===== 統合マップ ===== */
+.unified{background:linear-gradient(135deg,#fdfbff 0%,#fff5fa 100%);border-radius:var(--radius);padding:2rem;margin-top:30px;overflow-x:auto}
+.unified-svg{display:block;margin:0 auto;width:100%;min-width:900px;max-width:1000px}
+
+/* ===== サマリー ===== */
+.summary{background:var(--dark);color:#fff;border-radius:var(--radius);padding:3rem 2rem;margin-top:40px;position:relative;overflow:hidden}
+.summary::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:var(--gradient)}
+.summary h2{font-size:1.8rem;font-weight:900;margin-bottom:.5rem;color:#fff;text-align:center;letter-spacing:-.02em}
+.summary .sub{text-align:center;color:rgba(255,255,255,.6);font-size:.95rem;margin-bottom:2.5rem}
+.summary-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.summary-item{background:rgba(255,255,255,.05);border-left:3px solid var(--accent);border-radius:10px;padding:1.4rem 1.5rem;backdrop-filter:blur(10px)}
+.summary-item .num{font-size:.7rem;color:var(--accent);font-weight:900;letter-spacing:.15em;margin-bottom:.5rem}
+.summary-item h4{font-size:1.05rem;font-weight:900;color:#fff;margin-bottom:.5rem;letter-spacing:-.01em}
+.summary-item p{font-size:.85rem;color:rgba(255,255,255,.75);line-height:1.75;margin:0}
+
+/* ===== フッター ===== */
+footer{text-align:center;padding:3rem 1.5rem;color:var(--text-muted);font-size:.85rem;background:var(--bg-gray);border-top:1px solid var(--border)}
+
+/* ===== レスポンシブ ===== */
+@media (max-width:768px){
+  .section{padding:60px 16px}
+  .pyramid-wrap{grid-template-columns:1fr;gap:24px}
+  .tool-quadrant{grid-template-columns:1fr}
+  .privacy-compare{grid-template-columns:1fr;gap:16px}
+  .privacy-arrow{transform:rotate(90deg)}
+  .toc{padding:1rem 12px}
+  .toc a{font-size:.7rem;padding:.3rem .6rem}
+  .id-row{grid-template-columns:48px 1fr;row-gap:.5rem}
+  .id-row .id-strength{grid-column:1 / -1;justify-self:start}
+}
+</style>
+</head>
+<body>
+
+<!-- ========== ヒーロー ========== -->
+<header class="hero">
+  <div class="hero-inner">
+    <span class="hero-eyebrow">学習資料</span>
+    <h1>デジタル計測トラッキングの<br><span class="grad">全体像</span>を見える化する</h1>
+    <p>「タグ」「ピクセル」「コンバージョン」「ヒートマップ」── 個別の用語を覚える前に、<br>これらが何のために存在し、どう繋がっているかの<strong>地図</strong>を作ります。</p>
+    <div class="target">📍 <strong>このドキュメントの読み方</strong>　上から順に読むと、計測の全体像が頭の中に組み上がります。</div>
+  </div>
+</header>
+
+<!-- ========== 目次 ========== -->
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#s1">1. 何を測ろうとしているのか</a>
+    <a href="#s2">2. カスタマージャーニー</a>
+    <a href="#s3">3. 計測ピラミッド</a>
+    <a href="#s4">4. タグはどう動くか</a>
+    <a href="#s5">5. 識別子の階層</a>
+    <a href="#s6">6. ツールエコシステム</a>
+    <a href="#s7">7. アトリビューション問題</a>
+    <a href="#s8">8. プライバシー革命</a>
+    <a href="#s9">9. 全体地図</a>
+    <a href="#s10">10. サマリー</a>
+  </div>
+</nav>
+
+<!-- ========== 1. 5つの問い ========== -->
+<section class="section" id="s1">
+  <div class="section-header">
+    <div class="section-num">CHAPTER 01</div>
+    <h2 class="section-title">トラッキングは<span class="grad">5つの問い</span>に答えるためにある</h2>
+    <p class="section-lead">技術や用語に振り回される前に、まず「何を知りたいのか」をハッキリさせます。すべてのツールは、この5つの問いのどれかに答えるためだけに存在します。</p>
+  </div>
+
+  <div class="questions-grid">
+    <div class="q-card c1">
+      <div class="label">Who</div>
+      <div class="word">誰が</div>
+      <div class="desc">来た？性別・年代・興味関心・地域。属性プロファイル</div>
+    </div>
+    <div class="q-card c2">
+      <div class="label">Where</div>
+      <div class="word">どこから</div>
+      <div class="desc">来た？広告・検索・SNS・直接入力。流入経路</div>
+    </div>
+    <div class="q-card c3">
+      <div class="label">What</div>
+      <div class="word">何を</div>
+      <div class="desc">見た？どのページ・どのセクション・どのコンテンツ</div>
+    </div>
+    <div class="q-card c4">
+      <div class="label">How</div>
+      <div class="word">どこまで</div>
+      <div class="desc">進んだ？スクロール深度・ボタンクリック・申込完了</div>
+    </div>
+    <div class="q-card c5">
+      <div class="label">Why</div>
+      <div class="word">なぜ</div>
+      <div class="desc">離脱／成約した？録画・ヒートマップ・行動パターン</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 2. カスタマージャーニー ========== -->
+<section class="section" id="s2">
+  <div class="section-header">
+    <div class="section-num">CHAPTER 02</div>
+    <h2 class="section-title">カスタマージャーニーと<span class="grad">測定ポイント</span></h2>
+    <p class="section-lead">ユーザーは認知→興味→検討→申込→契約と段階的に進みます。段階ごとに測れる情報も、使うツールも違います。</p>
+  </div>
+
+  <div class="journey">
+    <svg class="journey-svg" viewBox="0 0 1000 420" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="jg1" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#FF0080"/>
+          <stop offset="100%" stop-color="#7928CA"/>
+        </linearGradient>
+        <marker id="arrow1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" fill="#7928CA"/>
+        </marker>
+      </defs>
+
+      <!-- ステージラベル -->
+      <text x="500" y="30" text-anchor="middle" font-size="14" font-weight="900" fill="#1a202c" font-family="Noto Sans JP">ユーザーの段階的な行動</text>
+
+      <!-- ステージ円 -->
+      <g>
+        <circle cx="80" cy="100" r="40" fill="#FF0080" opacity="0.9"/>
+        <text x="80" y="105" text-anchor="middle" font-size="13" font-weight="900" fill="#fff" font-family="Noto Sans JP">認知</text>
+        <text x="80" y="160" text-anchor="middle" font-size="11" fill="#4a5568" font-family="Noto Sans JP">広告表示</text>
+      </g>
+      <g>
+        <circle cx="230" cy="100" r="40" fill="#e879f9" opacity="0.9"/>
+        <text x="230" y="105" text-anchor="middle" font-size="13" font-weight="900" fill="#fff" font-family="Noto Sans JP">興味</text>
+        <text x="230" y="160" text-anchor="middle" font-size="11" fill="#4a5568" font-family="Noto Sans JP">広告クリック</text>
+      </g>
+      <g>
+        <circle cx="390" cy="100" r="40" fill="#a78bfa" opacity="0.9"/>
+        <text x="390" y="105" text-anchor="middle" font-size="13" font-weight="900" fill="#fff" font-family="Noto Sans JP">検討</text>
+        <text x="390" y="160" text-anchor="middle" font-size="11" fill="#4a5568" font-family="Noto Sans JP">LP閲覧・比較</text>
+      </g>
+      <g>
+        <circle cx="550" cy="100" r="40" fill="#7928CA" opacity="0.9"/>
+        <text x="550" y="105" text-anchor="middle" font-size="13" font-weight="900" fill="#fff" font-family="Noto Sans JP">行動</text>
+        <text x="550" y="160" text-anchor="middle" font-size="11" fill="#4a5568" font-family="Noto Sans JP">申込完了</text>
+      </g>
+      <g>
+        <circle cx="720" cy="100" r="40" fill="#5b21b6" opacity="0.9"/>
+        <text x="720" y="105" text-anchor="middle" font-size="13" font-weight="900" fill="#fff" font-family="Noto Sans JP">継続</text>
+        <text x="720" y="160" text-anchor="middle" font-size="11" fill="#4a5568" font-family="Noto Sans JP">契約・再訪</text>
+      </g>
+      <g>
+        <circle cx="900" cy="100" r="40" fill="#1a202c" opacity="0.9"/>
+        <text x="900" y="105" text-anchor="middle" font-size="13" font-weight="900" fill="#fff" font-family="Noto Sans JP">推奨</text>
+        <text x="900" y="160" text-anchor="middle" font-size="11" fill="#4a5568" font-family="Noto Sans JP">紹介・口コミ</text>
+      </g>
+
+      <!-- 矢印 -->
+      <line x1="120" y1="100" x2="190" y2="100" stroke="#7928CA" stroke-width="2" marker-end="url(#arrow1)"/>
+      <line x1="270" y1="100" x2="350" y2="100" stroke="#7928CA" stroke-width="2" marker-end="url(#arrow1)"/>
+      <line x1="430" y1="100" x2="510" y2="100" stroke="#7928CA" stroke-width="2" marker-end="url(#arrow1)"/>
+      <line x1="590" y1="100" x2="680" y2="100" stroke="#7928CA" stroke-width="2" marker-end="url(#arrow1)"/>
+      <line x1="760" y1="100" x2="860" y2="100" stroke="#7928CA" stroke-width="2" marker-end="url(#arrow1)"/>
+
+      <!-- 担当ツールラベル -->
+      <text x="500" y="220" text-anchor="middle" font-size="14" font-weight="900" fill="#1a202c" font-family="Noto Sans JP">各段階を担当するツール</text>
+
+      <!-- ツールボックス -->
+      <g>
+        <rect x="20" y="240" width="120" height="60" rx="10" fill="#fff" stroke="#FF0080" stroke-width="2"/>
+        <text x="80" y="265" text-anchor="middle" font-size="11" font-weight="900" fill="#1a202c" font-family="Noto Sans JP">広告管理画面</text>
+        <text x="80" y="282" text-anchor="middle" font-size="9" fill="#4a5568" font-family="Noto Sans JP">Google Ads</text>
+        <text x="80" y="294" text-anchor="middle" font-size="9" fill="#4a5568" font-family="Noto Sans JP">Meta広告</text>
+      </g>
+      <g>
+        <rect x="170" y="240" width="120" height="60" rx="10" fill="#fff" stroke="#e879f9" stroke-width="2"/>
+        <text x="230" y="265" text-anchor="middle" font-size="11" font-weight="900" fill="#1a202c" font-family="Noto Sans JP">広告管理画面</text>
+        <text x="230" y="282" text-anchor="middle" font-size="9" fill="#4a5568" font-family="Noto Sans JP">クリック計測</text>
+      </g>
+      <g>
+        <rect x="320" y="240" width="140" height="60" rx="10" fill="#fff" stroke="#a78bfa" stroke-width="2"/>
+        <text x="390" y="265" text-anchor="middle" font-size="11" font-weight="900" fill="#1a202c" font-family="Noto Sans JP">Web解析・UX分析</text>
+        <text x="390" y="282" text-anchor="middle" font-size="9" fill="#4a5568" font-family="Noto Sans JP">GA4 / Clarity</text>
+      </g>
+      <g>
+        <rect x="490" y="240" width="120" height="60" rx="10" fill="#fff" stroke="#7928CA" stroke-width="2"/>
+        <text x="550" y="265" text-anchor="middle" font-size="11" font-weight="900" fill="#1a202c" font-family="Noto Sans JP">Web/MA</text>
+        <text x="550" y="282" text-anchor="middle" font-size="9" fill="#4a5568" font-family="Noto Sans JP">HubSpot / CV計測</text>
+      </g>
+      <g>
+        <rect x="660" y="240" width="120" height="60" rx="10" fill="#fff" stroke="#5b21b6" stroke-width="2"/>
+        <text x="720" y="265" text-anchor="middle" font-size="11" font-weight="900" fill="#1a202c" font-family="Noto Sans JP">CRM</text>
+        <text x="720" y="282" text-anchor="middle" font-size="9" fill="#4a5568" font-family="Noto Sans JP">HubSpot</text>
+      </g>
+      <g>
+        <rect x="840" y="240" width="120" height="60" rx="10" fill="#fff" stroke="#1a202c" stroke-width="2"/>
+        <text x="900" y="265" text-anchor="middle" font-size="11" font-weight="900" fill="#1a202c" font-family="Noto Sans JP">アンケート</text>
+        <text x="900" y="282" text-anchor="middle" font-size="9" fill="#4a5568" font-family="Noto Sans JP">NPS調査</text>
+      </g>
+
+      <!-- 接続線 -->
+      <line x1="80" y1="140" x2="80" y2="240" stroke="#FF0080" stroke-width="2" stroke-dasharray="4,3" opacity="0.6"/>
+      <line x1="230" y1="140" x2="230" y2="240" stroke="#e879f9" stroke-width="2" stroke-dasharray="4,3" opacity="0.6"/>
+      <line x1="390" y1="140" x2="390" y2="240" stroke="#a78bfa" stroke-width="2" stroke-dasharray="4,3" opacity="0.6"/>
+      <line x1="550" y1="140" x2="550" y2="240" stroke="#7928CA" stroke-width="2" stroke-dasharray="4,3" opacity="0.6"/>
+      <line x1="720" y1="140" x2="720" y2="240" stroke="#5b21b6" stroke-width="2" stroke-dasharray="4,3" opacity="0.6"/>
+      <line x1="900" y1="140" x2="900" y2="240" stroke="#1a202c" stroke-width="2" stroke-dasharray="4,3" opacity="0.6"/>
+
+      <!-- 注釈 -->
+      <text x="500" y="350" text-anchor="middle" font-size="13" font-weight="700" fill="#FF0080" font-family="Noto Sans JP">← 左ほど「人数が多い・浅い」　／　右ほど「人数が少ない・深い・価値が高い」 →</text>
+      <text x="500" y="380" text-anchor="middle" font-size="11" fill="#4a5568" font-family="Noto Sans JP">同じユーザーが各段階で「別ツール」によって観測されている。だからツールが多い。</text>
+    </svg>
+  </div>
+</section>
+
+<!-- ========== 3. 計測ピラミッド ========== -->
+<section class="section" id="s3" style="background:linear-gradient(180deg,#fff,#fafbff);border-radius:var(--radius);">
+  <div class="section-header">
+    <div class="section-num">CHAPTER 03</div>
+    <h2 class="section-title">計測の<span class="grad">5階層ピラミッド</span></h2>
+    <p class="section-lead">「サンクスページ到達（CV）」は山の頂上の話。その下に4つの層があり、上に行くほど価値が高く、下に行くほど人数が多い。</p>
+  </div>
+
+  <div class="pyramid-wrap">
+    <svg class="pyramid-svg" viewBox="0 0 500 420" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="pyg5" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#0f0c29"/>
+          <stop offset="100%" stop-color="#1a202c"/>
+        </linearGradient>
+        <linearGradient id="pyg4" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#FF0080"/>
+          <stop offset="100%" stop-color="#e0006e"/>
+        </linearGradient>
+        <linearGradient id="pyg3" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#a78bfa"/>
+          <stop offset="100%" stop-color="#7928CA"/>
+        </linearGradient>
+        <linearGradient id="pyg2" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#c4b5fd"/>
+          <stop offset="100%" stop-color="#a78bfa"/>
+        </linearGradient>
+        <linearGradient id="pyg1" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#e0e7ff"/>
+          <stop offset="100%" stop-color="#c4b5fd"/>
+        </linearGradient>
+      </defs>
+
+      <!-- 5段ピラミッド -->
+      <polygon points="220,20 280,20 310,80 190,80" fill="url(#pyg5)"/>
+      <text x="250" y="58" text-anchor="middle" font-size="14" font-weight="900" fill="#fff" font-family="Noto Sans JP">⑤ 売上・LTV</text>
+
+      <polygon points="190,80 310,80 340,160 160,160" fill="url(#pyg4)"/>
+      <text x="250" y="125" text-anchor="middle" font-size="15" font-weight="900" fill="#fff" font-family="Noto Sans JP">④ CV（申込完了）</text>
+
+      <polygon points="160,160 340,160 380,240 120,240" fill="url(#pyg3)"/>
+      <text x="250" y="205" text-anchor="middle" font-size="15" font-weight="900" fill="#fff" font-family="Noto Sans JP">③ マイクロCV</text>
+
+      <polygon points="120,240 380,240 420,320 80,320" fill="url(#pyg2)"/>
+      <text x="250" y="285" text-anchor="middle" font-size="15" font-weight="900" fill="#fff" font-family="Noto Sans JP">② エンゲージメント</text>
+
+      <polygon points="80,320 420,320 460,400 40,400" fill="url(#pyg1)"/>
+      <text x="250" y="365" text-anchor="middle" font-size="15" font-weight="900" fill="#1a202c" font-family="Noto Sans JP">① PageView</text>
+
+      <!-- 矢印 -->
+      <text x="490" y="65" font-size="10" fill="#FF0080" font-weight="700" font-family="Noto Sans JP">深い</text>
+      <text x="490" y="395" font-size="10" fill="#a78bfa" font-weight="700" font-family="Noto Sans JP">浅い</text>
+      <line x1="490" y1="80" x2="490" y2="380" stroke="#7928CA" stroke-width="1.5" stroke-dasharray="3,3"/>
+    </svg>
+
+    <div class="pyramid-list">
+      <div class="layer-item l5">
+        <h4><span class="num">5</span>売上・LTV</h4>
+        <p>受講料・契約金額・継続率。HubSpot/CRMと連携してマーケと売上を紐付ける</p>
+      </div>
+      <div class="layer-item l4">
+        <h4><span class="num">4</span>CV（申込完了）</h4>
+        <p>サンクスページ到達。各広告プラットフォームの最適化AIが学習する元データ</p>
+      </div>
+      <div class="layer-item l3">
+        <h4><span class="num">3</span>マイクロCV</h4>
+        <p>申込前の小さな行動。ボタンクリック・フォーム入力開始・動画視聴</p>
+      </div>
+      <div class="layer-item l2">
+        <h4><span class="num">2</span>エンゲージメント</h4>
+        <p>スクロール深度・滞在時間・特定セクションの到達。「料金で何秒止まったか」もここ</p>
+      </div>
+      <div class="layer-item l1">
+        <h4><span class="num">1</span>PageView</h4>
+        <p>ページが表示された回数。すべての計測の土台</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 4. タグはどう動くか ========== -->
+<section class="section" id="s4">
+  <div class="section-header">
+    <div class="section-num">CHAPTER 04</div>
+    <h2 class="section-title"><span class="grad">「タグ」</span>は、ユーザーの裏側で同時に何社にも報告している</h2>
+    <p class="section-lead">あなたのLPを誰かが開いた1秒の間に、ブラウザの裏では複数のタグが同時に動いて、それぞれ違う会社のサーバーに「ページ見られたよ」を報告しています。</p>
+  </div>
+
+  <div class="tag-flow">
+    <svg class="tag-flow-svg" viewBox="0 0 850 460" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="tfg" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#FF0080"/>
+          <stop offset="100%" stop-color="#7928CA"/>
+        </linearGradient>
+      </defs>
+
+      <!-- ユーザー -->
+      <g>
+        <rect x="350" y="20" width="150" height="80" rx="14" fill="#fff" stroke="url(#tfg)" stroke-width="2"/>
+        <text x="425" y="48" text-anchor="middle" font-size="13" font-weight="900" fill="#1a202c" font-family="Noto Sans JP">🖥 ユーザー</text>
+        <text x="425" y="68" text-anchor="middle" font-size="11" fill="#4a5568" font-family="Noto Sans JP">のブラウザ</text>
+        <text x="425" y="86" text-anchor="middle" font-size="10" fill="#7928CA" font-weight="700" font-family="Noto Sans JP">LPを開いた瞬間</text>
+      </g>
+
+      <!-- HTML -->
+      <g>
+        <rect x="300" y="130" width="250" height="60" rx="10" fill="rgba(255,255,255,0.1)" stroke="#fff" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="425" y="158" text-anchor="middle" font-size="12" font-weight="900" fill="#fff" font-family="Noto Sans JP">HTMLに仕込まれたタグ群</text>
+        <text x="425" y="178" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.7)" font-family="Noto Sans JP">script・pixel・noscript</text>
+      </g>
+      <line x1="425" y1="100" x2="425" y2="130" stroke="#fff" stroke-width="2" opacity="0.6"/>
+
+      <!-- 5本に分岐 -->
+      <line x1="425" y1="190" x2="100" y2="250" stroke="#FF0080" stroke-width="2" opacity="0.8"/>
+      <line x1="425" y1="190" x2="265" y2="250" stroke="#4285F4" stroke-width="2" opacity="0.8"/>
+      <line x1="425" y1="190" x2="425" y2="250" stroke="#1877F2" stroke-width="2" opacity="0.8"/>
+      <line x1="425" y1="190" x2="590" y2="250" stroke="#06C755" stroke-width="2" opacity="0.8"/>
+      <line x1="425" y1="190" x2="750" y2="250" stroke="#FFB900" stroke-width="2" opacity="0.8"/>
+
+      <!-- 5つのタグ -->
+      <g>
+        <rect x="40" y="250" width="120" height="60" rx="10" fill="#FF0080"/>
+        <text x="100" y="276" text-anchor="middle" font-size="12" font-weight="900" fill="#fff" font-family="Noto Sans JP">GA4タグ</text>
+        <text x="100" y="294" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.85)" font-family="Noto Sans JP">サイト解析</text>
+      </g>
+      <g>
+        <rect x="205" y="250" width="120" height="60" rx="10" fill="#4285F4"/>
+        <text x="265" y="276" text-anchor="middle" font-size="12" font-weight="900" fill="#fff" font-family="Noto Sans JP">Google Ads</text>
+        <text x="265" y="294" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.85)" font-family="Noto Sans JP">広告CV計測</text>
+      </g>
+      <g>
+        <rect x="365" y="250" width="120" height="60" rx="10" fill="#1877F2"/>
+        <text x="425" y="276" text-anchor="middle" font-size="12" font-weight="900" fill="#fff" font-family="Noto Sans JP">Meta Pixel</text>
+        <text x="425" y="294" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.85)" font-family="Noto Sans JP">FB/IG広告CV</text>
+      </g>
+      <g>
+        <rect x="530" y="250" width="120" height="60" rx="10" fill="#06C755"/>
+        <text x="590" y="276" text-anchor="middle" font-size="12" font-weight="900" fill="#fff" font-family="Noto Sans JP">LINE Tag</text>
+        <text x="590" y="294" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.85)" font-family="Noto Sans JP">LINE広告CV</text>
+      </g>
+      <g>
+        <rect x="690" y="250" width="120" height="60" rx="10" fill="#FFB900"/>
+        <text x="750" y="276" text-anchor="middle" font-size="12" font-weight="900" fill="#1a202c" font-family="Noto Sans JP">Clarity</text>
+        <text x="750" y="294" text-anchor="middle" font-size="9" fill="rgba(26,32,44,0.85)" font-family="Noto Sans JP">行動可視化</text>
+      </g>
+
+      <!-- サーバー送信ライン -->
+      <line x1="100" y1="310" x2="100" y2="370" stroke="#FF0080" stroke-width="2" opacity="0.5"/>
+      <line x1="265" y1="310" x2="265" y2="370" stroke="#4285F4" stroke-width="2" opacity="0.5"/>
+      <line x1="425" y1="310" x2="425" y2="370" stroke="#1877F2" stroke-width="2" opacity="0.5"/>
+      <line x1="590" y1="310" x2="590" y2="370" stroke="#06C755" stroke-width="2" opacity="0.5"/>
+      <line x1="750" y1="310" x2="750" y2="370" stroke="#FFB900" stroke-width="2" opacity="0.5"/>
+
+      <!-- サーバー -->
+      <g>
+        <rect x="40" y="370" width="120" height="50" rx="8" fill="rgba(255,255,255,0.1)" stroke="#fff" stroke-width="1"/>
+        <text x="100" y="392" text-anchor="middle" font-size="10" fill="#fff" font-family="Noto Sans JP">Googleサーバー</text>
+        <text x="100" y="406" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.6)" font-family="Noto Sans JP">analytics.google.com</text>
+      </g>
+      <g>
+        <rect x="205" y="370" width="120" height="50" rx="8" fill="rgba(255,255,255,0.1)" stroke="#fff" stroke-width="1"/>
+        <text x="265" y="392" text-anchor="middle" font-size="10" fill="#fff" font-family="Noto Sans JP">Googleサーバー</text>
+        <text x="265" y="406" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.6)" font-family="Noto Sans JP">ads.google.com</text>
+      </g>
+      <g>
+        <rect x="365" y="370" width="120" height="50" rx="8" fill="rgba(255,255,255,0.1)" stroke="#fff" stroke-width="1"/>
+        <text x="425" y="392" text-anchor="middle" font-size="10" fill="#fff" font-family="Noto Sans JP">Metaサーバー</text>
+        <text x="425" y="406" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.6)" font-family="Noto Sans JP">business.facebook.com</text>
+      </g>
+      <g>
+        <rect x="530" y="370" width="120" height="50" rx="8" fill="rgba(255,255,255,0.1)" stroke="#fff" stroke-width="1"/>
+        <text x="590" y="392" text-anchor="middle" font-size="10" fill="#fff" font-family="Noto Sans JP">LINEサーバー</text>
+        <text x="590" y="406" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.6)" font-family="Noto Sans JP">admanager.line.biz</text>
+      </g>
+      <g>
+        <rect x="690" y="370" width="120" height="50" rx="8" fill="rgba(255,255,255,0.1)" stroke="#fff" stroke-width="1"/>
+        <text x="750" y="392" text-anchor="middle" font-size="10" fill="#fff" font-family="Noto Sans JP">MSサーバー</text>
+        <text x="750" y="406" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.6)" font-family="Noto Sans JP">clarity.microsoft.com</text>
+      </g>
+
+      <text x="425" y="450" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.7)" font-family="Noto Sans JP">それぞれのサーバーで集計され、各社のダッシュボードで可視化される</text>
+    </svg>
+  </div>
+</section>
+
+<!-- ========== 5. 識別子の階層 ========== -->
+<section class="section" id="s5">
+  <div class="section-header">
+    <div class="section-num">CHAPTER 05</div>
+    <h2 class="section-title"><span class="grad">「あなたが誰か」</span>を、各社はどう識別しているか</h2>
+    <p class="section-lead">「広告クリック→申込」を同じ人と紐付けるための、IDの仕組みは5層あります。下に行くほど識別精度が高い。</p>
+  </div>
+
+  <div class="id-layers">
+    <div class="id-row">
+      <div class="id-num">1</div>
+      <div class="id-body">
+        <h4>セッションID</h4>
+        <p>訪問ごとに発行される一時的な番号。同じ訪問中だけ同一人物として扱える</p>
+      </div>
+      <span class="id-strength s-low">識別精度: 低</span>
+    </div>
+    <div class="id-row">
+      <div class="id-num">2</div>
+      <div class="id-body">
+        <h4>Cookie（クッキー）</h4>
+        <p>ブラウザに保存される識別子。次回訪問でも同一人物として扱える。1stパーティ（自社）と3rdパーティ（他社）の2種類がある</p>
+      </div>
+      <span class="id-strength s-mid">識別精度: 中</span>
+    </div>
+    <div class="id-row">
+      <div class="id-num">3</div>
+      <div class="id-body">
+        <h4>クリックID（gclid・fbclid）</h4>
+        <p>広告クリック時にURLに自動付与される。「広告クリックした人とCVした人」を紐付ける主要な仕組み</p>
+      </div>
+      <span class="id-strength s-mid">識別精度: 中〜高</span>
+    </div>
+    <div class="id-row">
+      <div class="id-num">4</div>
+      <div class="id-body">
+        <h4>ログインID</h4>
+        <p>GoogleアカウントやMetaアカウントにログイン中なら、本人特定可能。広告主は直接見えないが、各社が裏で同一人物判定に使う</p>
+      </div>
+      <span class="id-strength s-high">識別精度: 高</span>
+    </div>
+    <div class="id-row">
+      <div class="id-num">5</div>
+      <div class="id-body">
+        <h4>ハッシュ化メアド（HEM）</h4>
+        <p>申込フォームで入力したメアドを暗号化して各社に送信。Conversion API・Enhanced Conversionの主要な仕組み</p>
+      </div>
+      <span class="id-strength s-vhigh">識別精度: 最高</span>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 6. ツールエコシステム ========== -->
+<section class="section" id="s6">
+  <div class="section-header">
+    <div class="section-num">CHAPTER 06</div>
+    <h2 class="section-title">ツールエコシステムの<span class="grad">4ジャンル</span></h2>
+    <p class="section-lead">世の中のツールは大きく4ジャンルに分かれます。それぞれ目的が違い、競合ではなく分業関係です。</p>
+  </div>
+
+  <div class="tool-quadrant">
+    <div class="tool-card a">
+      <div class="cat">A. AD PLATFORM</div>
+      <h3>広告配信プラットフォーム</h3>
+      <p class="role">広告を出稿する＋自社広告経由のCVを計測する。各社が独自のPixelを配布</p>
+      <div class="tools">
+        <span class="star">Google Ads</span>
+        <span class="star">Meta広告</span>
+        <span class="star">LINE広告</span>
+        <span>Yahoo!</span>
+        <span>X</span>
+        <span>TikTok</span>
+        <span>Indeed</span>
+      </div>
+    </div>
+    <div class="tool-card b">
+      <div class="cat">B. WEB ANALYTICS</div>
+      <h3>ウェブ解析（アナリティクス）</h3>
+      <p class="role">広告に依存しない、サイト全体の動向を把握する。流入元・滞在時間・遷移パスなど</p>
+      <div class="tools">
+        <span class="star">GA4（無料・標準）</span>
+        <span>Adobe Analytics</span>
+        <span>Mixpanel</span>
+        <span>Amplitude</span>
+      </div>
+    </div>
+    <div class="tool-card c">
+      <div class="cat">C. UX INSIGHTS</div>
+      <h3>行動可視化・UX分析</h3>
+      <p class="role">「人がどう動いたか」を直感的に見る。ヒートマップ・セッション録画</p>
+      <div class="tools">
+        <span class="star">Microsoft Clarity（無料）</span>
+        <span>Hotjar</span>
+        <span>Mouseflow</span>
+        <span>FullStory</span>
+      </div>
+    </div>
+    <div class="tool-card d">
+      <div class="cat">D. TAG MGT & MA/CRM</div>
+      <h3>タグ管理＆MA/CRM</h3>
+      <p class="role">タグの統合管理＋顧客データ管理＋メール配信などのマーケティング自動化</p>
+      <div class="tools">
+        <span class="star">HubSpot（使用中）</span>
+        <span class="star">Google Tag Manager</span>
+        <span>Salesforce</span>
+        <span>Marketo</span>
+        <span>Segment</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 7. アトリビューション ========== -->
+<section class="section" id="s7" style="background:var(--bg-gray);border-radius:var(--radius)">
+  <div class="section-header">
+    <div class="section-num">CHAPTER 07</div>
+    <h2 class="section-title">「同じCV」のはずなのに<span class="grad">数字が合わない</span>問題</h2>
+    <p class="section-lead">複数のツールで見ているとCV数がバラバラに見えます。これは故障ではなく仕様。「アトリビューション問題」と呼ばれます。</p>
+  </div>
+
+  <div class="attribution-scenario">
+    <h3>シナリオ：1人が申込に至るまで</h3>
+
+    <svg class="attribution-svg" viewBox="0 0 840 360" xmlns="http://www.w3.org/2000/svg">
+      <!-- 時間軸 -->
+      <line x1="60" y1="100" x2="780" y2="100" stroke="#cbd5e0" stroke-width="2"/>
+
+      <!-- 接点 -->
+      <g>
+        <circle cx="120" cy="100" r="14" fill="#ff0050"/>
+        <text x="120" y="105" text-anchor="middle" font-size="11" font-weight="900" fill="#fff" font-family="Noto Sans JP">①</text>
+        <text x="120" y="140" text-anchor="middle" font-size="11" font-weight="900" fill="#1a202c" font-family="Noto Sans JP">10/1</text>
+        <text x="120" y="158" text-anchor="middle" font-size="10" fill="#4a5568" font-family="Noto Sans JP">TikTok広告</text>
+        <text x="120" y="172" text-anchor="middle" font-size="10" fill="#4a5568" font-family="Noto Sans JP">を見た</text>
+      </g>
+      <g>
+        <circle cx="290" cy="100" r="14" fill="#1877F2"/>
+        <text x="290" y="105" text-anchor="middle" font-size="11" font-weight="900" fill="#fff" font-family="Noto Sans JP">②</text>
+        <text x="290" y="140" text-anchor="middle" font-size="11" font-weight="900" fill="#1a202c" font-family="Noto Sans JP">10/3</text>
+        <text x="290" y="158" text-anchor="middle" font-size="10" fill="#4a5568" font-family="Noto Sans JP">Instagram広告</text>
+        <text x="290" y="172" text-anchor="middle" font-size="10" fill="#4a5568" font-family="Noto Sans JP">をクリック</text>
+      </g>
+      <g>
+        <circle cx="460" cy="100" r="14" fill="#34a853"/>
+        <text x="460" y="105" text-anchor="middle" font-size="11" font-weight="900" fill="#fff" font-family="Noto Sans JP">③</text>
+        <text x="460" y="140" text-anchor="middle" font-size="11" font-weight="900" fill="#1a202c" font-family="Noto Sans JP">10/5</text>
+        <text x="460" y="158" text-anchor="middle" font-size="10" fill="#4a5568" font-family="Noto Sans JP">Google検索</text>
+        <text x="460" y="172" text-anchor="middle" font-size="10" fill="#4a5568" font-family="Noto Sans JP">自然流入</text>
+      </g>
+      <g>
+        <circle cx="630" cy="100" r="14" fill="#4285F4"/>
+        <text x="630" y="105" text-anchor="middle" font-size="11" font-weight="900" fill="#fff" font-family="Noto Sans JP">④</text>
+        <text x="630" y="140" text-anchor="middle" font-size="11" font-weight="900" fill="#1a202c" font-family="Noto Sans JP">10/7</text>
+        <text x="630" y="158" text-anchor="middle" font-size="10" fill="#4a5568" font-family="Noto Sans JP">Google検索広告</text>
+        <text x="630" y="172" text-anchor="middle" font-size="10" fill="#4a5568" font-family="Noto Sans JP">クリック→申込</text>
+      </g>
+      <g>
+        <rect x="730" y="80" width="60" height="40" rx="8" fill="#FF0080"/>
+        <text x="760" y="105" text-anchor="middle" font-size="11" font-weight="900" fill="#fff" font-family="Noto Sans JP">CV</text>
+      </g>
+      <line x1="644" y1="100" x2="725" y2="100" stroke="#FF0080" stroke-width="2"/>
+
+      <!-- 各社の主張 -->
+      <text x="420" y="220" text-anchor="middle" font-size="13" font-weight="900" fill="#1a202c" font-family="Noto Sans JP">↓ 各広告プラットフォームは「自分の貢献」と主張する</text>
+
+      <g>
+        <rect x="60" y="240" width="170" height="40" rx="8" fill="#fff" stroke="#ff0050" stroke-width="2"/>
+        <text x="145" y="265" text-anchor="middle" font-size="11" font-weight="700" fill="#ff0050" font-family="Noto Sans JP">TikTok広告：CV 1件</text>
+      </g>
+      <g>
+        <rect x="250" y="240" width="170" height="40" rx="8" fill="#fff" stroke="#1877F2" stroke-width="2"/>
+        <text x="335" y="265" text-anchor="middle" font-size="11" font-weight="700" fill="#1877F2" font-family="Noto Sans JP">Meta広告：CV 1件</text>
+      </g>
+      <g>
+        <rect x="440" y="240" width="170" height="40" rx="8" fill="#fff" stroke="#34a853" stroke-width="2"/>
+        <text x="525" y="265" text-anchor="middle" font-size="11" font-weight="700" fill="#34a853" font-family="Noto Sans JP">GA4：オーガニックCV</text>
+      </g>
+      <g>
+        <rect x="620" y="240" width="170" height="40" rx="8" fill="#fff" stroke="#4285F4" stroke-width="2"/>
+        <text x="705" y="265" text-anchor="middle" font-size="11" font-weight="700" fill="#4285F4" font-family="Noto Sans JP">Google Ads：CV 1件</text>
+      </g>
+
+      <!-- 結論 -->
+      <text x="420" y="320" text-anchor="middle" font-size="13" font-weight="900" fill="#FF0080" font-family="Noto Sans JP">合算すると4件 → でも実際は1件のCV</text>
+      <text x="420" y="345" text-anchor="middle" font-size="11" fill="#4a5568" font-family="Noto Sans JP">これがアトリビューション問題。同じCVを誰の手柄にするか、配分ルールが必要</text>
+    </svg>
+
+    <div class="attribution-note">
+      <strong>重要な気づき:</strong> 各プラットフォームのレポートを単純合算してはいけない。本当のCV総数は <strong>HubSpot側で1人=1CV</strong> として数えるのが正解です。広告側のCV数は「最適化AIへの学習データ」として割り切って使う。
+    </div>
+
+    <div class="attribution-models">
+      <div class="model-card">
+        <h5>ラストクリック</h5>
+        <p>最後の接点に100%帰属。各広告プラットフォームの標準</p>
+      </div>
+      <div class="model-card">
+        <h5>ファーストクリック</h5>
+        <p>最初の接点に100%帰属。認知獲得を評価したい時に使う</p>
+      </div>
+      <div class="model-card">
+        <h5>線形</h5>
+        <p>全接点に均等配分。フェアだが過大評価のリスク</p>
+      </div>
+      <div class="model-card">
+        <h5>時間減衰</h5>
+        <p>CVに近い接点ほど重く配分</p>
+      </div>
+      <div class="model-card">
+        <h5>データドリブン</h5>
+        <p>AI判定。GA4の標準。十分なデータ量が必要</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 8. プライバシー革命 ========== -->
+<section class="section" id="s8">
+  <div class="section-header">
+    <div class="section-num">CHAPTER 08</div>
+    <h2 class="section-title"><span class="grad">プライバシー革命</span>と計測の未来</h2>
+    <p class="section-lead">2020年代以降、ブラウザだけで人を追えなくなりました。同意管理とサーバー連携が新しい主流です。</p>
+  </div>
+
+  <div class="privacy-compare">
+    <div class="privacy-box past">
+      <div class="era">過去　2010年代</div>
+      <h3>3rdパーティCookie全盛時代</h3>
+      <ul>
+        <li>あらゆるサイト横断で誰でも追跡可能</li>
+        <li>ブラウザの裏で大量の広告ネットワークが追尾</li>
+        <li>パーソナライズ広告の精度は高かった</li>
+        <li>ユーザー側の選択肢は事実上なし</li>
+      </ul>
+    </div>
+    <div class="privacy-arrow">→</div>
+    <div class="privacy-box now">
+      <div class="era">現在　2020年代以降</div>
+      <h3>1stパーティ＋サーバー連携時代</h3>
+      <ul>
+        <li>GDPR・改正個人情報保護法・CCPA等で同意が必須</li>
+        <li>iOS 14のATT（追跡許可ポップアップ）で追跡力激減</li>
+        <li>Safari/Firefox ITPで3rdパーティCookieは事実上死亡</li>
+        <li>Chromeも段階的に3rdパーティCookie廃止</li>
+        <li>対応：CAPI（サーバー間連携）・Enhanced Conversion・同意管理プラットフォーム</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 9. 統合マップ ========== -->
+<section class="section" id="s9">
+  <div class="section-header">
+    <div class="section-num">CHAPTER 09</div>
+    <h2 class="section-title">すべてを統合する<span class="grad">1枚絵</span></h2>
+    <p class="section-lead">配信→計測→蓄積→分析→意思決定。デジタルマーケティングの全体構造を1枚で見渡す地図です。</p>
+  </div>
+
+  <div class="unified">
+    <svg class="unified-svg" viewBox="0 0 1000 540" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" fill="#7928CA"/>
+        </marker>
+      </defs>
+
+      <!-- 列ヘッダー -->
+      <text x="100" y="30" text-anchor="middle" font-size="12" font-weight="900" fill="#FF0080" font-family="Noto Sans JP">広告側</text>
+      <text x="350" y="30" text-anchor="middle" font-size="12" font-weight="900" fill="#7928CA" font-family="Noto Sans JP">サイト側</text>
+      <text x="620" y="30" text-anchor="middle" font-size="12" font-weight="900" fill="#3b82f6" font-family="Noto Sans JP">顧客管理側</text>
+      <text x="880" y="30" text-anchor="middle" font-size="12" font-weight="900" fill="#22c55e" font-family="Noto Sans JP">経営側</text>
+
+      <!-- 縦区切り -->
+      <line x1="200" y1="50" x2="200" y2="510" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4,3"/>
+      <line x1="500" y1="50" x2="500" y2="510" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4,3"/>
+      <line x1="740" y1="50" x2="740" y2="510" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4,3"/>
+
+      <!-- 広告群 -->
+      <rect x="20" y="60" width="160" height="36" rx="6" fill="#FF0080"/>
+      <text x="100" y="84" text-anchor="middle" font-size="11" font-weight="700" fill="#fff" font-family="Noto Sans JP">Google Ads</text>
+      <rect x="20" y="105" width="160" height="36" rx="6" fill="#1877F2"/>
+      <text x="100" y="129" text-anchor="middle" font-size="11" font-weight="700" fill="#fff" font-family="Noto Sans JP">Meta広告</text>
+      <rect x="20" y="150" width="160" height="36" rx="6" fill="#06C755"/>
+      <text x="100" y="174" text-anchor="middle" font-size="11" font-weight="700" fill="#fff" font-family="Noto Sans JP">LINE広告</text>
+      <rect x="20" y="195" width="160" height="36" rx="6" fill="#000"/>
+      <text x="100" y="219" text-anchor="middle" font-size="11" font-weight="700" fill="#fff" font-family="Noto Sans JP">TikTok / X / 他</text>
+
+      <!-- LP -->
+      <rect x="230" y="80" width="240" height="80" rx="10" fill="#fff" stroke="#7928CA" stroke-width="2"/>
+      <text x="350" y="115" text-anchor="middle" font-size="13" font-weight="900" fill="#1a202c" font-family="Noto Sans JP">LP（介護研修）</text>
+      <text x="350" y="135" text-anchor="middle" font-size="10" fill="#4a5568" font-family="Noto Sans JP">HubSpotで管理</text>
+
+      <!-- 矢印 広告→LP -->
+      <line x1="185" y1="123" x2="225" y2="120" stroke="#7928CA" stroke-width="2" marker-end="url(#ar2)"/>
+
+      <!-- フォーム送信 -->
+      <rect x="230" y="180" width="240" height="50" rx="8" fill="#fdfbff" stroke="#a78bfa" stroke-width="2"/>
+      <text x="350" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="#1a202c" font-family="Noto Sans JP">フォーム送信</text>
+      <line x1="350" y1="160" x2="350" y2="180" stroke="#7928CA" stroke-width="2" marker-end="url(#ar2)"/>
+
+      <!-- サンクスページ -->
+      <rect x="230" y="250" width="240" height="80" rx="10" fill="#1a202c"/>
+      <text x="350" y="285" text-anchor="middle" font-size="13" font-weight="900" fill="#fff" font-family="Noto Sans JP">🎯 サンクスページ</text>
+      <text x="350" y="305" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.7)" font-family="Noto Sans JP">CV発火（4社同時報告）</text>
+      <line x1="350" y1="230" x2="350" y2="250" stroke="#7928CA" stroke-width="2" marker-end="url(#ar2)"/>
+
+      <!-- GA4 / Clarity -->
+      <rect x="230" y="360" width="115" height="50" rx="8" fill="#fff" stroke="#FF0080" stroke-width="2"/>
+      <text x="287" y="383" text-anchor="middle" font-size="11" font-weight="900" fill="#1a202c" font-family="Noto Sans JP">GA4</text>
+      <text x="287" y="400" text-anchor="middle" font-size="9" fill="#4a5568" font-family="Noto Sans JP">解析（数値）</text>
+
+      <rect x="355" y="360" width="115" height="50" rx="8" fill="#fff" stroke="#f59e0b" stroke-width="2"/>
+      <text x="412" y="383" text-anchor="middle" font-size="11" font-weight="900" fill="#1a202c" font-family="Noto Sans JP">Clarity</text>
+      <text x="412" y="400" text-anchor="middle" font-size="9" fill="#4a5568" font-family="Noto Sans JP">可視化</text>
+
+      <line x1="287" y1="330" x2="287" y2="360" stroke="#FF0080" stroke-width="1.5" stroke-dasharray="3,3"/>
+      <line x1="412" y1="330" x2="412" y2="360" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="3,3"/>
+
+      <!-- LP改善 -->
+      <rect x="230" y="435" width="240" height="50" rx="8" fill="#fff5fa" stroke="#FF0080" stroke-width="2" stroke-dasharray="5,3"/>
+      <text x="350" y="466" text-anchor="middle" font-size="11" font-weight="700" fill="#FF0080" font-family="Noto Sans JP">LP改善の意思決定</text>
+      <line x1="350" y1="410" x2="350" y2="435" stroke="#FF0080" stroke-width="2" marker-end="url(#ar2)"/>
+
+      <!-- HubSpot CRM -->
+      <rect x="530" y="170" width="200" height="80" rx="10" fill="#fff" stroke="#3b82f6" stroke-width="2"/>
+      <text x="630" y="200" text-anchor="middle" font-size="13" font-weight="900" fill="#1a202c" font-family="Noto Sans JP">HubSpot CRM</text>
+      <text x="630" y="220" text-anchor="middle" font-size="10" fill="#4a5568" font-family="Noto Sans JP">リード情報 / 商談履歴</text>
+      <text x="630" y="235" text-anchor="middle" font-size="10" fill="#4a5568" font-family="Noto Sans JP">メール配信</text>
+
+      <line x1="475" y1="290" x2="525" y2="225" stroke="#3b82f6" stroke-width="2" marker-end="url(#ar2)"/>
+
+      <!-- 各社CV連携 -->
+      <rect x="530" y="280" width="200" height="50" rx="8" fill="#fff" stroke="#3b82f6" stroke-width="2"/>
+      <text x="630" y="305" text-anchor="middle" font-size="11" font-weight="700" fill="#1a202c" font-family="Noto Sans JP">各社CV連携</text>
+      <text x="630" y="320" text-anchor="middle" font-size="9" fill="#4a5568" font-family="Noto Sans JP">CAPI / Enhanced Conversion</text>
+      <line x1="630" y1="250" x2="630" y2="280" stroke="#3b82f6" stroke-width="2"/>
+
+      <!-- 売上分析 -->
+      <rect x="760" y="170" width="220" height="80" rx="10" fill="#fff" stroke="#22c55e" stroke-width="2"/>
+      <text x="870" y="200" text-anchor="middle" font-size="13" font-weight="900" fill="#1a202c" font-family="Noto Sans JP">売上分析・ROI判定</text>
+      <text x="870" y="220" text-anchor="middle" font-size="10" fill="#4a5568" font-family="Noto Sans JP">CPA / ROAS / LTV</text>
+
+      <line x1="735" y1="210" x2="755" y2="210" stroke="#22c55e" stroke-width="2" marker-end="url(#ar2)"/>
+
+      <!-- マーケ戦略 -->
+      <rect x="760" y="280" width="220" height="80" rx="10" fill="#fdfbff" stroke="#22c55e" stroke-width="2"/>
+      <text x="870" y="310" text-anchor="middle" font-size="13" font-weight="900" fill="#1a202c" font-family="Noto Sans JP">マーケティング戦略</text>
+      <text x="870" y="330" text-anchor="middle" font-size="10" fill="#4a5568" font-family="Noto Sans JP">予算配分・改善判断</text>
+      <line x1="870" y1="250" x2="870" y2="280" stroke="#22c55e" stroke-width="2" marker-end="url(#ar2)"/>
+
+      <!-- 下端：プロセスラベル -->
+      <text x="100" y="515" text-anchor="middle" font-size="10" fill="#4a5568" font-weight="700" font-family="Noto Sans JP">配信</text>
+      <text x="350" y="515" text-anchor="middle" font-size="10" fill="#4a5568" font-weight="700" font-family="Noto Sans JP">計測</text>
+      <text x="620" y="515" text-anchor="middle" font-size="10" fill="#4a5568" font-weight="700" font-family="Noto Sans JP">蓄積・分析</text>
+      <text x="880" y="515" text-anchor="middle" font-size="10" fill="#4a5568" font-weight="700" font-family="Noto Sans JP">意思決定</text>
+    </svg>
+  </div>
+</section>
+
+<!-- ========== 10. サマリー ========== -->
+<section class="section" id="s10">
+  <div class="summary">
+    <h2>覚えておくべき5つの<span style="background:linear-gradient(135deg,#FF0080,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">コア概念</span></h2>
+    <p class="sub">この5つだけ押さえれば、どんな新しいツールに出会っても位置付けが理解できます</p>
+
+    <div class="summary-list">
+      <div class="summary-item">
+        <div class="num">CORE 01</div>
+        <h4>計測ピラミッド</h4>
+        <p>PageView → エンゲージメント → マイクロCV → CV → 売上、と階層がある。下が広く、上が価値高い</p>
+      </div>
+      <div class="summary-item">
+        <div class="num">CORE 02</div>
+        <h4>ジャーニーと測定点</h4>
+        <p>認知から成約まで、段階ごとに別ツールが担当する。ツールの多さの正体は段階の多さ</p>
+      </div>
+      <div class="summary-item">
+        <div class="num">CORE 03</div>
+        <h4>識別子の階層</h4>
+        <p>Cookie・クリックID・ログインID・ハッシュ化メアド。下の階層ほど精度が高い</p>
+      </div>
+      <div class="summary-item">
+        <div class="num">CORE 04</div>
+        <h4>ツール4ジャンル</h4>
+        <p>広告配信／Web解析／UX分析／タグ管理＆MA。それぞれ目的が違う分業関係</p>
+      </div>
+      <div class="summary-item">
+        <div class="num">CORE 05</div>
+        <h4>アトリビューション</h4>
+        <p>同じCVを各社が「自分のおかげ」と主張する。だから数字が合わないのは正常</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>デジタル計測トラッキング 全体像 学習資料｜株式会社ACG マーケティング部</p>
+  <p style="margin-top:.5rem;font-size:.75rem;opacity:.7">理解が深まったら、各論（GA4の構造／Clarityの使い方／CAPI設計／介護FCのアトリビューション設計）に進めます</p>
+</footer>
+
+</body>
+</html>
