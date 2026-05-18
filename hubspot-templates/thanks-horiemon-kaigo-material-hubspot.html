@@ -1,0 +1,182 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: ホリエモンAI学校 介護校 資料請求サンクスページ HubSpot版
+-->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>{{ content.html_title }}</title>
+<meta name="description" content="{{ content.meta_description }}">
+{{ standard_header_includes }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+<!-- ==========================================================
+     コンバージョン計測タグ（各IDを差し替えて使用）
+     ========================================================== -->
+
+<!-- 【1】Google Analytics 4（GA4） -->
+<!-- ※ G-XXXXXXXXXX を実際の測定IDに置き換え -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+  gtag('event', 'generate_lead', {
+    'event_category': 'form',
+    'event_label': 'horiemon-kaigo-document',
+    'value': 1
+  });
+</script>
+
+<!-- 【2】Google Ads コンバージョントラッキング -->
+<!-- ※ AW-XXXXXXXXXX と XXXXXXXXX を実際の値に置き換え -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXXXXX"></script>
+<script>
+  gtag('config', 'AW-XXXXXXXXXX');
+  gtag('event', 'conversion', {
+    'send_to': 'AW-XXXXXXXXXX/XXXXXXXXX',
+    'value': 1.0,
+    'currency': 'JPY'
+  });
+</script>
+
+<!-- 【3】Meta（Facebook/Instagram）ピクセル -->
+<!-- ※ XXXXXXXXXXXXXXXX を実際のピクセルIDに置き換え -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', 'XXXXXXXXXXXXXXXX');
+  fbq('track', 'PageView');
+  fbq('track', 'Lead', {
+    content_name: 'horiemon-kaigo-document',
+    currency: 'JPY',
+    value: 1.0
+  });
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=XXXXXXXXXXXXXXXX&ev=Lead&noscript=1"/></noscript>
+
+<!-- 【4】LINE Tag -->
+<!-- ※ XXXXXXXXXX を実際のタグIDに置き換え -->
+<script>
+  (function(g,d,o){
+  g._ltq=g._ltq||[];g._lt=g._lt||function(){g._ltq.push(arguments)};
+  var h=location.protocol==='https:'?'https://d.line-scdn.net':'http://d.line-cdn.net';
+  var s=d.createElement('script');s.async=1;
+  s.src=o||h+'/n/line_tag/public/release/v1/lt.js';
+  var t=d.getElementsByTagName('script')[0];t.parentNode.insertBefore(s,t);
+  })(window,document);
+  _lt('init', {
+    customerType: 'lap',
+    tagId: 'XXXXXXXXXX'
+  });
+  _lt('send', 'cv', {
+    type: 'Conversion'
+  }, ['XXXXXXXXXX']);
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://tr.line.me/tag.gif?c_t=lap&t_id=XXXXXXXXXX&e=cv&noscript=1"/></noscript>
+
+<style>
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;padding:0}
+img{max-width:100%;display:block}
+a{color:inherit}
+@media (max-width:600px){
+  .thx-main{padding:60px 16px 60px !important}
+  .thx-title{font-size:28px !important}
+  .thx-check{width:80px !important;height:80px !important}
+  .thx-check-svg{width:40px !important;height:40px !important}
+  .thx-card{padding:24px !important}
+  .thx-header{padding:12px 16px !important}
+  .thx-header-logo{font-size:16px !important}
+}
+</style>
+</head>
+
+<body style="margin:0;padding:0;font-family:'Noto Sans JP','Hiragino Sans',sans-serif;color:#333;background:#fff;line-height:1.7;-webkit-font-smoothing:antialiased">
+
+<!-- ============ ヘッダー ============ -->
+<header class="thx-header" style="background:#ffffff;padding:14px 32px;display:flex;align-items:center;justify-content:flex-start;border-bottom:1px solid #ececec;box-shadow:0 2px 10px rgba(0,0,0,0.04)">
+  <a href="https://fc.horiemon.ai/kaigo/" target="_blank" rel="noopener" class="thx-header-logo" style="color:#1a202c;font-size:20px;font-weight:900;text-decoration:none;letter-spacing:0.01em;line-height:1">ホリエモンAI学校 介護校</a>
+</header>
+
+<!-- ============ メイン ============ -->
+<main class="thx-main" style="padding:80px 20px 80px;background:linear-gradient(180deg,#fdfbff 0%,#f7f2ff 100%)">
+  <div style="max-width:720px;margin:0 auto;text-align:center">
+
+    <!-- 完了アイコン -->
+    <div class="thx-check" style="width:96px;height:96px;border-radius:50%;background:linear-gradient(135deg,#FF0080,#7928CA);display:flex;align-items:center;justify-content:center;margin:0 auto 28px;box-shadow:0 20px 50px rgba(255,0,128,0.30)">
+      <svg class="thx-check-svg" viewBox="0 0 24 24" style="width:48px;height:48px;stroke:#ffffff;stroke-width:3.5;fill:none;stroke-linecap:round;stroke-linejoin:round">
+        <polyline points="5 13 10 18 19 7"></polyline>
+      </svg>
+    </div>
+
+    <!-- タイトル -->
+    <h1 class="thx-title" style="font-size:40px;font-weight:900;line-height:1.25;letter-spacing:-0.02em;color:#1a202c;margin:0 0 20px 0">
+      <span style="color:#FF0080">資料のご請求</span>、<br>ありがとうございました。
+    </h1>
+
+    <!-- リード -->
+    <p style="font-size:17px;color:#475569;line-height:1.95;margin:0 0 40px 0">
+      ご登録のメールアドレスに、<br>
+      <strong style="color:#1a202c;font-weight:800">資料ダウンロードのご案内</strong>をお送りしました。<br>
+      数分以内にメールが届きますので、ご確認ください。
+    </p>
+
+    <!-- 通知カード -->
+    <div class="thx-card" style="background:#ffffff;border-radius:20px;padding:32px;text-align:left;box-shadow:0 24px 60px rgba(15,23,42,0.10),0 6px 18px rgba(121,40,202,0.06);border:1px solid rgba(121,40,202,0.08);margin-bottom:24px;position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(135deg,#FF0080,#7928CA)"></div>
+      <h3 style="font-size:17px;font-weight:900;color:#1a202c;margin:0 0 12px 0;display:flex;align-items:center;gap:10px">
+        <span style="font-size:21px;line-height:1">✉</span>
+        <span>メールが届かない場合</span>
+      </h3>
+      <p style="font-size:15px;color:#666;line-height:1.85;margin:0 0 12px 0">
+        以下をご確認ください。
+      </p>
+      <p style="font-size:13px;color:#999;line-height:1.85;margin:0">
+        ・<strong style="color:#1a202c;font-weight:700">迷惑メールフォルダ</strong>に振り分けられていないか<br>
+        ・<strong style="color:#1a202c;font-weight:700">受信拒否設定</strong>で送信元ドメインがブロックされていないか<br>
+        ・<strong style="color:#1a202c;font-weight:700">ご登録のメールアドレスに誤り</strong>がないか
+      </p>
+      <p style="font-size:13px;color:#999;line-height:1.85;margin:16px 0 0 0">
+        10分以上経ってもメールが届かない場合は、下記までお気軽にお問い合わせください。
+      </p>
+    </div>
+
+    <!-- お問い合わせカード -->
+    <div class="thx-card" style="background:#ffffff;border-radius:20px;padding:32px;text-align:left;box-shadow:0 16px 40px rgba(15,23,42,0.06);border:1px solid rgba(121,40,202,0.08);margin-bottom:24px">
+      <h3 style="font-size:16px;font-weight:900;color:#1a202c;margin:0 0 8px 0;display:flex;align-items:center;gap:10px">
+        <span style="font-size:18px;line-height:1">💡</span>
+        <span>お問い合わせ</span>
+      </h3>
+      <p style="font-size:14px;color:#666;line-height:1.85;margin:0">
+        資料に関するご質問・個別のご相談など、お気軽にご連絡ください。<br>
+        <a href="mailto:hideyoshi.hommura@aozora-cg.com" style="color:#7928CA;font-weight:700;text-decoration:none;border-bottom:1px dashed #7928CA">hideyoshi.hommura@aozora-cg.com</a>
+      </p>
+    </div>
+
+  </div>
+</main>
+
+<!-- ============ フッター ============ -->
+<footer style="background:#0f0c29;color:rgba(255,255,255,0.55);padding:32px 24px;text-align:center;font-size:12px;line-height:1.8">
+  <p style="margin:0">&copy; 2026 ホリエモンAI学校 介護校</p>
+</footer>
+
+{{ standard_footer_includes }}
+</body>
+</html>
