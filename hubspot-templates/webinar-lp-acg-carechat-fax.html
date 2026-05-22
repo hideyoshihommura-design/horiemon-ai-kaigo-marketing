@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  ACG × ケアchat 共催ウェビナーLP
+  テーマ: そのFAX業務、まだ人件費で処理しますか？
+  開催日: 2026/6/4(木) 14:00〜14:30
+  ============================================================
+  ⚠️ HubSpotフォーム差し替え必要箇所（2か所）
+   - ヒーローのフォーム埋め込み（hs-form-frame）
+   - 申込みセクションのフォーム埋め込み（hs-form-frame）
+   - <script src="https://js-na2.hsforms.net/forms/embed/{PORTAL_ID}.js" defer></script>
+   - ACG用のPortal IDとForm IDを取得後、{PORTAL_ID} / {FORM_ID} を置換してください
+  ============================================================
+-->
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>そのFAX業務、まだ人件費で処理しますか？｜介護DXウェビナー｜ACG × ケアchat 共催</title>
+<meta name="description" content="介護施設の経営者・施設長向け無料ウェビナー。介護専用AIが『見て、判断し、整理する』。FAX管理・書類作成・転記業務を月間190時間→約90%削減した実例を、ライブデモでお見せします。6/4(木)14:00〜14:30・Zoom開催・参加無料。">
+<meta property="og:title" content="そのFAX業務、まだ人件費で処理しますか？｜介護DXウェビナー">
+<meta property="og:description" content="介護専用AIが『見て、判断し、整理する』。月間190時間が約90%削減。ACG × ケアchat 共催。6/4(木)14:00〜開催。">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<!-- HubSpotフォーム埋め込みスクリプト（ACG用Portal IDに差し替え） -->
+<script src="https://js-na2.hsforms.net/forms/embed/{PORTAL_ID}.js" defer></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  /* ACG × ケアchat 共催カラー（暖色系・落ち着いた信頼感） */
+  --primary:#1f3a5f;            /* ネイビー（信頼） */
+  --primary-dark:#15263d;
+  --accent:#d97757;             /* テラコッタ・オレンジ（クリエイティブ準拠） */
+  --accent-dark:#b8593a;
+  --warm-bg:#fdf8f3;            /* クリーム背景（クリエイティブ準拠） */
+  --warm-bg2:#f7efe5;
+  --paper:#fffaf2;
+  --gradient:linear-gradient(135deg,#d97757 0%,#c45a3a 100%);
+  --gradient-primary:linear-gradient(135deg,#1f3a5f 0%,#2c4f7c 100%);
+  --gradient-warm:linear-gradient(180deg,#fdf8f3 0%,#f7efe5 100%);
+  --text:#2d2520;
+  --text-sub:#5a5048;
+  --text-muted:#8a8078;
+  --border:#e8dfd2;
+  --radius:14px;
+  --green:#3a8d5c;
+  --red:#c44a4a;
+  --gold:#c8924d;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN",sans-serif;color:var(--text);background:#fff;line-height:1.75;margin:0;-webkit-font-smoothing:antialiased}
+
+/* ========== Typography ========== */
+.text-mega{font-size:clamp(2.6rem,6.5vw,4.6rem);font-weight:900;line-height:1.1;letter-spacing:-.03em}
+.text-huge{font-size:clamp(2rem,4.8vw,3.2rem);font-weight:900;line-height:1.25;letter-spacing:-.02em}
+.text-large{font-size:clamp(1.7rem,3.8vw,2.4rem);font-weight:900;line-height:1.3;letter-spacing:-.02em}
+.text-body{font-size:1rem;line-height:1.85;color:var(--text-sub)}
+.highlight{background:linear-gradient(transparent 60%,rgba(217,119,87,.25) 60%);padding:0 .1em}
+.text-accent{color:var(--accent)}
+.text-primary{color:var(--primary)}
+
+/* ========== Header ========== */
+.lp-header{background:rgba(21,38,61,.96);padding:.9rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(10px);border-bottom:3px solid var(--accent);box-shadow:0 2px 16px rgba(0,0,0,.18)}
+.lp-header-brand{display:flex;align-items:center;gap:.4rem;color:#fff;font-size:.95rem;font-weight:900;text-decoration:none;letter-spacing:.02em}
+.lp-header-brand .cohost-tag{display:inline-block;background:var(--accent);color:#fff;font-size:.65rem;font-weight:900;padding:.2rem .55rem;border-radius:4px;letter-spacing:.08em;margin-right:.3rem}
+.lp-header-brand .x-mark{color:var(--accent);font-size:1.2em;margin:0 .15rem}
+.lp-header-cta{background:var(--gradient);color:#fff;padding:.7rem 1.5rem;border-radius:50px;font-size:.85rem;font-weight:900;text-decoration:none;transition:.2s;box-shadow:0 4px 16px rgba(217,119,87,.45);letter-spacing:.02em}
+.lp-header-cta:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(217,119,87,.55)}
+
+/* ========== Hero ========== */
+.lp-hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:90px 20px 60px;background:var(--gradient-warm);position:relative;overflow:hidden}
+.lp-hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 15% 20%,rgba(217,119,87,.08),transparent 45%),radial-gradient(circle at 85% 80%,rgba(31,58,95,.06),transparent 45%);pointer-events:none}
+.hero-inner{position:relative;z-index:2;max-width:1120px;width:100%;display:grid;grid-template-columns:1fr 420px;gap:48px;align-items:center}
+.hero-content{text-align:left}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:.5rem;background:#fff;border:1.5px solid var(--accent);color:var(--accent);padding:.4rem 1rem;border-radius:50px;font-size:.78rem;font-weight:900;margin-bottom:1.25rem;letter-spacing:.05em}
+.hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero-co-host{display:flex;align-items:center;gap:.6rem;font-size:.85rem;font-weight:700;color:var(--text-sub);margin-bottom:1rem;flex-wrap:wrap}
+.hero-co-host .label{background:var(--primary);color:#fff;padding:.2rem .6rem;border-radius:4px;font-size:.7rem;letter-spacing:.05em}
+.hero-co-host .host-name{color:var(--primary);font-weight:900}
+.hero-co-host .x-mark{color:var(--accent);font-weight:900}
+.hero-title{margin-bottom:1.2rem;color:var(--primary-dark)}
+.hero-title .pop{color:var(--accent)}
+.hero-sub{font-size:1.05rem;color:var(--text);margin-bottom:1.5rem;line-height:1.85;font-weight:700}
+.hero-sub strong{background:linear-gradient(transparent 60%,rgba(217,119,87,.25) 60%);font-weight:900}
+.hero-points{display:flex;flex-direction:column;gap:.6rem;margin-bottom:0;padding:0;list-style:none}
+.hero-points li{font-size:.95rem;color:var(--text);padding-left:1.85rem;position:relative;font-weight:500}
+.hero-points li::before{content:'✓';position:absolute;left:0;top:.15rem;width:20px;height:20px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:900}
+.hero-form-panel{position:relative;z-index:2;background:#fff;border-radius:18px;padding:1.85rem;box-shadow:0 20px 50px rgba(31,58,95,.18),0 4px 14px rgba(0,0,0,.06);border:1px solid var(--border)}
+.hero-form-panel .form-badge{display:inline-block;background:var(--accent);color:#fff;font-size:.7rem;font-weight:900;padding:.25rem .7rem;border-radius:4px;letter-spacing:.08em;margin-bottom:.75rem}
+.hero-form-panel h3{font-size:1.15rem;font-weight:900;color:var(--primary-dark);margin-bottom:.4rem;text-align:left;line-height:1.4}
+.hero-form-panel p.form-lead{font-size:.82rem;color:var(--text-sub);text-align:left;margin-bottom:1.2rem}
+.hero-form-panel .form-date{background:var(--warm-bg2);border-left:3px solid var(--accent);padding:.7rem .9rem;border-radius:4px;margin-bottom:1.2rem;font-size:.85rem;color:var(--primary-dark);font-weight:700}
+.hero-form-panel .form-date .date-strong{display:block;font-size:1.1rem;font-weight:900;color:var(--accent);margin-bottom:.15rem}
+
+/* ========== Stats Bar ========== */
+.stats-bar{background:var(--primary-dark);padding:60px 20px;position:relative;overflow:hidden}
+.stats-bar::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 25% 50%,rgba(217,119,87,.15),transparent 50%),radial-gradient(circle at 75% 50%,rgba(200,146,77,.1),transparent 50%);pointer-events:none}
+.stats-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:48px;position:relative;z-index:2}
+.stat{text-align:center;color:#fff}
+.stat-label{display:inline-block;font-size:.78rem;font-weight:900;letter-spacing:.08em;color:var(--accent);margin-bottom:.7rem;background:rgba(217,119,87,.12);padding:.25rem .85rem;border-radius:50px}
+.stat-value{font-size:clamp(2.4rem,5vw,3.6rem);font-weight:900;line-height:1;margin-bottom:.5rem;letter-spacing:-.03em}
+.stat-value .unit{font-size:.45em;font-weight:700;color:rgba(255,255,255,.7);margin-left:.1em}
+.stat-value .arrow{color:var(--accent);font-weight:900;margin:0 .15em;display:inline-block}
+.stat-value .strike{position:relative;color:rgba(255,255,255,.45);font-size:.65em;vertical-align:middle;margin-right:.25em}
+.stat-value .strike::after{content:'';position:absolute;left:-4px;right:-4px;top:50%;height:3px;background:var(--red);transform:rotate(-8deg)}
+.stat-desc{font-size:.85rem;color:rgba(255,255,255,.75);line-height:1.65}
+
+/* ========== Section ========== */
+.section{padding:90px 20px}
+.section-inner{max-width:980px;margin:0 auto}
+.section-header{text-align:center;margin-bottom:48px}
+.section-title{margin-bottom:.65rem;color:var(--primary-dark)}
+.section-lead{font-size:1.02rem;color:var(--text-muted)}
+.bg-warm{background:var(--warm-bg)}
+.bg-warm2{background:var(--warm-bg2)}
+.bg-paper{background:var(--paper)}
+
+/* ========== Problem ========== */
+.problem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.problem-card{background:#fff;border-radius:var(--radius);padding:1.85rem 1.5rem;box-shadow:0 4px 18px rgba(31,58,95,.07);border-left:4px solid var(--red);transition:.2s}
+.problem-card:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(31,58,95,.12)}
+.problem-icon{font-size:1.9rem;margin-bottom:.75rem;display:inline-block}
+.problem-card h3{font-size:1.05rem;font-weight:900;margin-bottom:.6rem;color:var(--primary-dark)}
+.problem-card p{font-size:.88rem;color:var(--text-sub);margin:0;line-height:1.8}
+
+/* ========== Key Section (Showpiece) ========== */
+.key-section{background:var(--primary-dark);color:#fff;padding:110px 20px;position:relative;overflow:hidden}
+.key-section::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(217,119,87,.2),transparent 50%),radial-gradient(circle at 70% 70%,rgba(200,146,77,.15),transparent 50%);pointer-events:none}
+.key-inner{max-width:1000px;margin:0 auto;position:relative;z-index:2;text-align:center}
+.key-eyebrow{display:inline-block;background:var(--gradient);color:#fff;padding:.45rem 1.2rem;border-radius:50px;font-size:.72rem;font-weight:900;letter-spacing:.12em;margin-bottom:1.5rem}
+.key-quote{font-size:clamp(1.6rem,3.8vw,2.4rem);font-weight:900;line-height:1.5;margin-bottom:.75rem;letter-spacing:-.02em}
+.key-quote .em{background:linear-gradient(135deg,#fff,#d97757);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.key-sub{font-size:1.05rem;color:rgba(255,255,255,.78);margin-bottom:48px;line-height:1.85}
+.ba-compare{display:grid;grid-template-columns:1fr auto 1fr;gap:32px;align-items:center;max-width:880px;margin:0 auto}
+.ba-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:2.5rem 1.5rem;text-align:center;backdrop-filter:blur(8px)}
+.ba-card.before{border-top:3px solid var(--red)}
+.ba-card.after{border-top:3px solid var(--accent);background:linear-gradient(180deg,rgba(217,119,87,.15),rgba(255,255,255,.04))}
+.ba-label{font-size:.7rem;font-weight:900;letter-spacing:.2em;margin-bottom:.5rem}
+.ba-card.before .ba-label{color:var(--red)}
+.ba-card.after .ba-label{color:var(--accent)}
+.ba-num{font-size:clamp(2.4rem,5.5vw,3.8rem);font-weight:900;line-height:1;margin-bottom:.5rem;letter-spacing:-.04em}
+.ba-card.before .ba-num{color:rgba(255,255,255,.6);text-decoration:line-through;text-decoration-color:rgba(196,74,74,.55);text-decoration-thickness:4px}
+.ba-card.after .ba-num{background:linear-gradient(135deg,#fff,#d97757);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.ba-desc{font-size:.85rem;color:rgba(255,255,255,.72);line-height:1.65}
+.ba-arrow{font-size:2.5rem;color:var(--accent);font-weight:900}
+
+/* ========== Solution Flow（見て・判断し・整理する） ========== */
+.flow-intro{max-width:780px;margin:0 auto 48px;text-align:center;font-size:1.05rem;color:var(--text);line-height:2;font-weight:500}
+.flow-intro strong{background:linear-gradient(transparent 60%,rgba(217,119,87,.25) 60%);font-weight:900}
+.flow-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:920px;margin:0 auto;position:relative}
+.flow-step{background:#fff;border-radius:var(--radius);padding:2rem 1.5rem;text-align:center;box-shadow:0 4px 20px rgba(31,58,95,.08);position:relative;border:2px solid transparent;transition:.2s}
+.flow-step:hover{border-color:var(--accent);transform:translateY(-4px)}
+.flow-step::after{content:'→';position:absolute;right:-18px;top:50%;transform:translateY(-50%);font-size:1.8rem;color:var(--accent);font-weight:900;z-index:2}
+.flow-step:last-child::after{display:none}
+.flow-step-num{display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;background:var(--gradient);color:#fff;font-size:1.15rem;font-weight:900;margin-bottom:1rem;box-shadow:0 6px 20px rgba(217,119,87,.35)}
+.flow-step-verb{font-size:.7rem;font-weight:900;letter-spacing:.2em;color:var(--accent);margin-bottom:.4rem}
+.flow-step h3{font-size:1.1rem;font-weight:900;margin-bottom:.5rem;color:var(--primary-dark)}
+.flow-step p{font-size:.88rem;color:var(--text-sub);margin:0;line-height:1.75}
+
+/* ========== Agenda ========== */
+.agenda-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+.agenda-item{background:#fff;border-radius:var(--radius);padding:1.5rem 1.75rem;display:grid;grid-template-columns:auto 1fr auto;gap:1.5rem;align-items:center;box-shadow:0 4px 18px rgba(31,58,95,.07);border-left:5px solid var(--accent);transition:.2s}
+.agenda-item:hover{transform:translateX(4px);box-shadow:0 8px 24px rgba(31,58,95,.12)}
+.agenda-num{font-size:2rem;font-weight:900;color:var(--accent);line-height:1;font-family:Georgia,serif}
+.agenda-body h3{font-size:1.05rem;font-weight:900;margin-bottom:.3rem;color:var(--primary-dark)}
+.agenda-body p{font-size:.88rem;color:var(--text-sub);margin:0;line-height:1.65}
+.agenda-time{background:var(--warm-bg2);color:var(--primary-dark);padding:.45rem .85rem;border-radius:6px;font-size:.85rem;font-weight:900;white-space:nowrap}
+
+/* ========== Target ========== */
+.target-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:820px;margin:0 auto}
+.target-item{background:#fff;border-radius:var(--radius);padding:1.2rem 1.5rem;display:flex;align-items:center;gap:1rem;box-shadow:0 3px 14px rgba(31,58,95,.06);font-size:.95rem;font-weight:700;color:var(--text)}
+.target-check{flex-shrink:0;width:32px;height:32px;background:var(--gradient);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.95rem;font-weight:900}
+
+/* ========== Speaker ========== */
+.speaker-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;max-width:820px;margin:0 auto}
+.speaker-card{background:#fff;border-radius:var(--radius);padding:1.85rem;box-shadow:0 4px 20px rgba(31,58,95,.08);display:flex;gap:1.25rem;align-items:flex-start;border-top:3px solid var(--accent)}
+.speaker-avatar{width:64px;height:64px;border-radius:50%;background:var(--gradient-primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:900;flex-shrink:0}
+.speaker-card:nth-child(2) .speaker-avatar{background:var(--gradient)}
+.speaker-info{flex:1}
+.speaker-role{font-size:.7rem;font-weight:900;letter-spacing:.12em;color:var(--accent);margin-bottom:.25rem}
+.speaker-name{font-size:1.1rem;font-weight:900;color:var(--primary-dark);margin-bottom:.25rem}
+.speaker-title{font-size:.82rem;color:var(--primary);font-weight:700;margin-bottom:.6rem}
+.speaker-bio{font-size:.85rem;color:var(--text-sub);line-height:1.8;margin:0}
+
+/* ========== Co-host Section ========== */
+.cohost-section{background:var(--warm-bg);padding:80px 20px}
+.cohost-grid{max-width:920px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.cohost-card{background:#fff;border-radius:var(--radius);padding:2rem;box-shadow:0 4px 20px rgba(31,58,95,.08);text-align:center}
+.cohost-card .role{display:inline-block;background:var(--primary);color:#fff;font-size:.7rem;font-weight:900;letter-spacing:.1em;padding:.3rem .85rem;border-radius:4px;margin-bottom:.85rem}
+.cohost-card h3{font-size:1.3rem;font-weight:900;color:var(--primary-dark);margin-bottom:.5rem}
+.cohost-card .tagline{font-size:.85rem;color:var(--accent);font-weight:700;margin-bottom:1rem}
+.cohost-card p{font-size:.88rem;color:var(--text-sub);line-height:1.85;margin:0;text-align:left}
+
+/* ========== Inline CTA ========== */
+.cta-block{text-align:center;padding:56px 20px;background:var(--warm-bg)}
+.cta-btn-large{display:inline-block;background:var(--gradient);color:#fff;padding:1.25rem 3rem;border-radius:50px;font-size:1.1rem;font-weight:900;text-decoration:none;transition:.3s;box-shadow:0 12px 36px rgba(217,119,87,.35);letter-spacing:.02em}
+.cta-btn-large:hover{transform:translateY(-4px);box-shadow:0 18px 50px rgba(217,119,87,.45)}
+.cta-btn-large .arrow{display:inline-block;margin-left:.5rem;transition:.2s}
+.cta-btn-large:hover .arrow{transform:translateX(4px)}
+.cta-note{display:block;margin-top:.85rem;font-size:.8rem;color:var(--text-muted)}
+
+/* ========== Event Details ========== */
+.details-box{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:0 6px 24px rgba(31,58,95,.1);max-width:680px;margin:0 auto;border:1px solid var(--border)}
+.details-header{background:var(--primary-dark);color:#fff;padding:1.1rem 1.5rem;font-weight:900;font-size:1.05rem;display:flex;align-items:center;gap:.6rem}
+.details-header::before{content:'📅';font-size:1.1em}
+.details-row{display:flex;padding:1rem 1.5rem;border-bottom:1px solid var(--border)}
+.details-row:last-child{border-bottom:none}
+.details-label{width:100px;font-weight:900;flex-shrink:0;font-size:.88rem;color:var(--primary-dark)}
+.details-value{flex:1;font-size:.92rem;color:var(--text-sub)}
+.details-value .price{color:var(--green);font-weight:900;font-size:1.3rem}
+.details-value .strong{color:var(--accent);font-weight:900}
+
+/* ========== Form Section ========== */
+.form-section{background:var(--gradient-primary);padding:90px 20px;text-align:center;position:relative;overflow:hidden}
+.form-section::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.1) 1px,transparent 1px);background-size:32px 32px;pointer-events:none}
+.form-section::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(217,119,87,.15),transparent 60%);pointer-events:none}
+.form-section .section-header{position:relative;z-index:2}
+.form-section .section-title{color:#fff}
+.form-section .section-lead{color:rgba(255,255,255,.85)}
+.form-wrapper{position:relative;z-index:2;max-width:520px;margin:0 auto;background:#fff;border-radius:16px;padding:2.5rem;box-shadow:0 24px 70px rgba(0,0,0,.35)}
+.form-note{position:relative;z-index:2;color:rgba(255,255,255,.78);font-size:.78rem;margin-top:1.5rem}
+
+/* ========== FAQ ========== */
+.faq-list{max-width:720px;margin:0 auto}
+.faq-item{margin-bottom:.85rem;background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:0 2px 12px rgba(31,58,95,.05);border-left:3px solid var(--accent)}
+.faq-q{padding:1.2rem 1.5rem;font-weight:700;font-size:.95rem;position:relative;padding-left:3.25rem;color:var(--primary-dark)}
+.faq-q::before{content:'Q';position:absolute;left:1.1rem;top:50%;transform:translateY(-50%);width:26px;height:26px;background:var(--gradient);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:900}
+.faq-a{padding:0 1.5rem 1.2rem 3.25rem;font-size:.88rem;color:var(--text-sub);line-height:1.85}
+
+/* ========== Footer CTA ========== */
+.footer-cta{background:var(--primary-dark);color:#fff;padding:80px 20px;text-align:center;position:relative;overflow:hidden}
+.footer-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(217,119,87,.2),transparent 50%);pointer-events:none}
+.footer-cta > *{position:relative;z-index:2}
+.footer-cta .text-large{margin-bottom:1rem;color:#fff}
+.footer-cta .text-body{color:rgba(255,255,255,.72);margin-bottom:1.85rem}
+.footer-cta .text-accent{background:linear-gradient(135deg,#fff,#d97757);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* ========== Footer ========== */
+.lp-footer{background:#0d1828;color:rgba(255,255,255,.45);padding:1.75rem 1rem;text-align:center;font-size:.75rem}
+.lp-footer .footer-hosts{margin-bottom:.5rem;color:rgba(255,255,255,.7);font-weight:700}
+.lp-footer a{color:rgba(255,255,255,.55);text-decoration:none;margin:0 .35rem}
+.lp-footer a:hover{color:#fff}
+
+@media(max-width:768px){
+  .section{padding:60px 15px}
+  .hero-inner{grid-template-columns:1fr;gap:32px}
+  .hero-form-panel{order:1}
+  .hero-content{order:2;text-align:center}
+  .hero-eyebrow{margin-left:auto;margin-right:auto}
+  .hero-co-host{justify-content:center}
+  .hero-points{align-items:flex-start;text-align:left;max-width:340px;margin:0 auto}
+  .stats-inner{grid-template-columns:1fr;gap:32px}
+  .stats-bar{padding:48px 20px}
+  .problem-grid,.flow-steps,.speaker-grid,.cohost-grid,.target-grid{grid-template-columns:1fr;gap:24px}
+  .flow-step::after{content:'↓';right:50%;top:auto;bottom:-26px;transform:translateX(50%)}
+  .details-row{flex-direction:column;gap:.3rem}
+  .details-label{width:auto}
+  .lp-header{padding:.55rem 1rem}
+  .key-section{padding:72px 20px}
+  .ba-compare{grid-template-columns:1fr;gap:16px}
+  .ba-arrow{transform:rotate(90deg)}
+  .speaker-card{flex-direction:column;align-items:center;text-align:center}
+  .agenda-item{grid-template-columns:auto 1fr;gap:1rem}
+  .agenda-time{grid-column:1/-1;justify-self:start}
+  .lp-header-brand .cohost-tag{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ========== ヘッダー ========== -->
+<header class="lp-header">
+  <a href="#top" class="lp-header-brand"><span class="cohost-tag">共催</span>株式会社ACG <span class="x-mark">×</span> 株式会社ケアchat</a>
+  <a href="#form-bottom" class="lp-header-cta">無料で申込む &nbsp;→</a>
+</header>
+
+<!-- ========== ヒーロー ========== -->
+<section class="lp-hero" id="top">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-eyebrow"><span class="dot"></span>介護DXウェビナー｜Care DX</div>
+      <div class="hero-co-host">
+        <span class="label">共催</span>
+        <span class="host-name">株式会社ACG</span>
+        <span class="x-mark">×</span>
+        <span class="host-name">株式会社ケアchat</span>
+      </div>
+      <h1 class="text-huge hero-title">そのFAX業務、<br>まだ<span class="pop">人件費</span>で<br>処理しますか？</h1>
+      <p class="hero-sub">介護専用AIが「<strong>見て、判断し、整理する</strong>」<br>FAX管理・書類作成・転記業務を、ほぼゼロへ。</p>
+      <ul class="hero-points">
+        <li>月間190時間の事務作業が、約90%削減</li>
+        <li>FAXを「読んで・分類して・転記する」までAIが自動</li>
+        <li>30分のライブデモで、現場での使い方を実演</li>
+      </ul>
+    </div>
+    <div class="hero-form-panel">
+      <span class="form-badge">参加無料</span>
+      <h3>介護DXウェビナーに<br>申し込む</h3>
+      <p class="form-lead">お申込み30秒・Zoom開催</p>
+      <div class="form-date">
+        <span class="date-strong">2026/6/4(木) 14:00〜14:30</span>
+        所要30分・録画配信あり
+      </div>
+      <!-- ⚠️ ACG用HubSpotフォーム埋め込み（Portal ID / Form IDを差し替え） -->
+      <div class="hs-form-frame" data-region="na2" data-form-id="{FORM_ID}" data-portal-id="{PORTAL_ID}"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Stats Bar ========== -->
+<section class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat">
+      <div class="stat-label">月間の事務時間</div>
+      <div class="stat-value"><span class="strike">190h</span><span class="arrow">→</span>19<span class="unit">h</span></div>
+      <div class="stat-desc">月間190時間の事務作業が<br>約90%削減</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">FAXの転記作業</div>
+      <div class="stat-value">0<span class="unit">転記</span></div>
+      <div class="stat-desc">FAXを読んで分類・転記する<br>作業がほぼゼロに</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">必要なスキル</div>
+      <div class="stat-value">0<span class="unit">学習</span></div>
+      <div class="stat-desc">専用AIだから設定不要<br>現場職員がそのまま使える</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Agenda (30分の構成) ========== -->
+<section class="section bg-warm">
+  <div class="section-inner">
+    <div class="section-header">
+      <h2 class="text-large section-title">30分で<span class="highlight">お伝えすること</span></h2>
+      <p class="section-lead">サービス説明 → ライブデモ → 質疑応答の3部構成</p>
+    </div>
+    <div class="agenda-list">
+      <div class="agenda-item">
+        <div class="agenda-num">01</div>
+        <div class="agenda-body">
+          <h3>サービス概要と要点解説</h3>
+          <p>介護専用AIが解決する3つの業務（FAX管理・書類作成・転記業務）。導入施設の実例と削減効果を、現場のリアルな声でお伝えします。</p>
+        </div>
+        <div class="agenda-time">10分</div>
+      </div>
+      <div class="agenda-item">
+        <div class="agenda-num">02</div>
+        <div class="agenda-body">
+          <h3>実際に触りながらライブデモ</h3>
+          <p>本物のFAX書類をその場で読み込ませ、AIがどう「見て・判断し・整理する」のかを画面共有でお見せします。よくある書類パターンで実演。</p>
+        </div>
+        <div class="agenda-time">10分</div>
+      </div>
+      <div class="agenda-item">
+        <div class="agenda-num">03</div>
+        <div class="agenda-body">
+          <h3>質疑応答・個別相談タイム</h3>
+          <p>「うちの施設だとどう使える?」「セキュリティは?」など、参加者の質問にその場でお答えします。気軽にチャットでご質問ください。</p>
+        </div>
+        <div class="agenda-time">10分</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 登壇者紹介 ========== -->
+<section class="section bg-paper">
+  <div class="section-inner">
+    <div class="section-header">
+      <h2 class="text-large section-title">当日の<span class="highlight">登壇者</span></h2>
+      <p class="section-lead">ACG・ケアchat双方から、現場と技術の両視点で解説</p>
+    </div>
+    <div class="speaker-grid">
+      <div class="speaker-card">
+        <div class="speaker-avatar">A</div>
+        <div class="speaker-info">
+          <div class="speaker-role">SPEAKER</div>
+          <div class="speaker-name">ACG担当者</div>
+          <div class="speaker-title">介護事業DX推進担当</div>
+          <p class="speaker-bio">介護事業者への経営支援・業務改革の現場で得た知見をベースに、「どこからDXを始めるべきか」を具体的に解説。施設長・経営者目線で、導入後の運用イメージまでお伝えします。</p>
+        </div>
+      </div>
+      <div class="speaker-card">
+        <div class="speaker-avatar">C</div>
+        <div class="speaker-info">
+          <div class="speaker-role">SPEAKER</div>
+          <div class="speaker-name">ケアchat担当者</div>
+          <div class="speaker-title">介護専用AIプロダクト開発担当</div>
+          <p class="speaker-bio">介護現場の業務に特化したAIプロダクトの開発を主導。「現場の手間を本当に減らすには何が必要か」を、開発者視点でデモを交えながらお見せします。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 開催概要 ========== -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-header">
+      <h2 class="text-large section-title">開催<span class="highlight">概要</span></h2>
+    </div>
+    <div class="details-box">
+      <div class="details-header">介護DXウェビナー｜開催詳細</div>
+      <div class="details-row"><span class="details-label">日時</span><span class="details-value"><span class="strong">2026年6月4日(木) 14:00〜14:30</span></span></div>
+      <div class="details-row"><span class="details-label">所要時間</span><span class="details-value">30分（質疑応答含む）</span></div>
+      <div class="details-row"><span class="details-label">形式</span><span class="details-value">Zoomウェビナー（オンライン）</span></div>
+      <div class="details-row"><span class="details-label">参加費</span><span class="details-value"><span class="price">無料</span></span></div>
+      <div class="details-row"><span class="details-label">主催</span><span class="details-value">株式会社ACG × 株式会社ケアchat（共催）</span></div>
+      <div class="details-row"><span class="details-label">対象</span><span class="details-value">介護施設の経営者・施設長・現場リーダー・事務担当者</span></div>
+      <div class="details-row"><span class="details-label">録画</span><span class="details-value">参加者全員に後日配信（当日参加できない方もお申込みOK）</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 申込みフォーム ========== -->
+<section class="form-section" id="form-bottom">
+  <div class="section-header">
+    <h2 class="text-large section-title">今すぐ申し込む</h2>
+    <p class="section-lead">6/4(木) 14:00〜14:30・Zoom開催・参加無料</p>
+  </div>
+  <div class="form-wrapper">
+    <!-- ⚠️ ACG用HubSpotフォーム埋め込み（Portal ID / Form IDを差し替え） -->
+    <div class="hs-form-frame" data-region="na2" data-form-id="{FORM_ID}" data-portal-id="{PORTAL_ID}"></div>
+  </div>
+  <p class="form-note">※ ご登録いただいた情報は、ウェビナー運営および関連サービスのご案内目的でのみ使用します</p>
+</section>
+
+<!-- ========== FAQ ========== -->
+<section class="section bg-warm">
+  <div class="section-inner">
+    <div class="section-header">
+      <h2 class="text-large section-title">よくある<span class="highlight">質問</span></h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">パソコンが苦手な職員でも使えますか？</div>
+        <div class="faq-a">介護専用に設計されているため、難しい設定や専門知識は不要です。普段のFAX対応と同じ感覚でお使いいただけるよう作られています。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">当日参加できない場合は？</div>
+        <div class="faq-a">録画を後日配信します。お申し込みいただければ、当日参加できない方にも録画URLをお送りしますので、まずはお申し込みだけお済ませください。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">申込後に連絡はありますか？</div>
+        <div class="faq-a">ご記入の連絡先に、ウェビナー内容のご案内や、当日お話しした内容に関する個別フォローのお電話をさしあげる場合があります。不要な場合はお電話の際にお伝えください。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== フッターCTA ========== -->
+<section class="footer-cta">
+  <h2 class="text-large">利用者様と向き合う時間に、<br><span class="text-accent">FAX処理が消えている。</span></h2>
+  <p class="text-body">参加無料・30分・Zoom開催・録画配信あり<br>6/4(木) 14:00〜14:30</p>
+  <a href="#form-bottom" class="cta-btn-large">無料ウェビナーに申し込む<span class="arrow">→</span></a>
+</section>
+
+<!-- ========== フッター ========== -->
+<footer class="lp-footer">
+  <div class="footer-hosts">主催: 株式会社ACG × 株式会社ケアchat</div>
+  <p>© 2026 株式会社ACG / 株式会社ケアchat ｜ <a href="#">プライバシーポリシー</a> ｜ <a href="#">特定商取引法に基づく表記</a></p>
+</footer>
+
+</body>
+</html>
