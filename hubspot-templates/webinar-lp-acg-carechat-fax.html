@@ -3,13 +3,9 @@
   ============================================================
   ACG × ケアchat 共催ウェビナーLP
   テーマ: そのFAX業務、まだ人件費で処理しますか？
-  開催日: 2026/6/4(木) 14:00〜14:30
-  ============================================================
-  ⚠️ HubSpotフォーム差し替え必要箇所（2か所）
-   - ヒーローのフォーム埋め込み（hs-form-frame）
-   - 申込みセクションのフォーム埋め込み（hs-form-frame）
-   - <script src="https://js-na2.hsforms.net/forms/embed/{PORTAL_ID}.js" defer></script>
-   - ACG用のPortal IDとForm IDを取得後、{PORTAL_ID} / {FORM_ID} を置換してください
+  開催日: 2026/6/4(木) 15:00〜15:30
+  HubSpot Portal ID: 243875500
+  HubSpot Form ID:   2395eaa9-eb89-4102-9cbf-085fceace537
   ============================================================
 -->
 <html lang="ja">
@@ -17,14 +13,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>そのFAX業務、まだ人件費で処理しますか？｜介護DXウェビナー｜ACG × ケアchat 共催</title>
-<meta name="description" content="介護施設の経営者・施設長向け無料ウェビナー。介護専用AIが『見て、判断し、整理する』。FAX管理・書類作成・転記業務を月間190時間→約90%削減した実例を、ライブデモでお見せします。6/4(木)14:00〜14:30・Zoom開催・参加無料。">
+<meta name="description" content="介護施設の経営者・施設長向け無料ウェビナー。介護専用AIが『見て、判断し、整理する』。FAX管理・書類作成・転記業務を月間190時間→約90%削減した実例を、ライブデモでお見せします。6/4(木)15:00〜15:30・Zoom開催・参加無料。">
 <meta property="og:title" content="そのFAX業務、まだ人件費で処理しますか？｜介護DXウェビナー">
-<meta property="og:description" content="介護専用AIが『見て、判断し、整理する』。月間190時間が約90%削減。ACG × ケアchat 共催。6/4(木)14:00〜開催。">
+<meta property="og:description" content="介護専用AIが『見て、判断し、整理する』。月間190時間が約90%削減。ACG × ケアchat 共催。6/4(木)15:00〜開催。">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
-<!-- HubSpotフォーム埋め込みスクリプト（ACG用Portal IDに差し替え） -->
-<script src="https://js-na2.hsforms.net/forms/embed/{PORTAL_ID}.js" defer></script>
+<!-- HubSpotフォーム埋め込みスクリプト -->
+<script src="https://js-na2.hsforms.net/forms/embed/243875500.js" defer></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -176,7 +172,7 @@ body{font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN",sans-serif;color:var
 /* ========== Speaker ========== */
 .speaker-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;max-width:820px;margin:0 auto}
 .speaker-card{background:#fff;border-radius:var(--radius);padding:1.85rem;box-shadow:0 4px 20px rgba(31,58,95,.08);display:flex;gap:1.25rem;align-items:flex-start;border-top:3px solid var(--accent)}
-.speaker-avatar{width:64px;height:64px;border-radius:50%;background:var(--gradient-primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:900;flex-shrink:0}
+.speaker-avatar{width:88px;height:88px;border-radius:50%;background:var(--gradient-primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:900;flex-shrink:0}
 .speaker-card:nth-child(2) .speaker-avatar{background:var(--gradient)}
 .speaker-info{flex:1}
 .speaker-role{font-size:.7rem;font-weight:900;letter-spacing:.12em;color:var(--accent);margin-bottom:.25rem}
@@ -279,32 +275,19 @@ body{font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN",sans-serif;color:var
 <!-- ========== ヒーロー ========== -->
 <section class="lp-hero" id="top">
   <div class="hero-inner">
-    <div class="hero-content">
-      <div class="hero-eyebrow"><span class="dot"></span>介護DXウェビナー｜Care DX</div>
-      <div class="hero-co-host">
-        <span class="label">共催</span>
-        <span class="host-name">株式会社ACG</span>
-        <span class="x-mark">×</span>
-        <span class="host-name">株式会社ケアchat</span>
-      </div>
-      <h1 class="text-huge hero-title">そのFAX業務、<br>まだ<span class="pop">人件費</span>で<br>処理しますか？</h1>
-      <p class="hero-sub">介護専用AIが「<strong>見て、判断し、整理する</strong>」<br>FAX管理・書類作成・転記業務を、ほぼゼロへ。</p>
-      <ul class="hero-points">
-        <li>月間190時間の事務作業が、約90%削減</li>
-        <li>FAXを「読んで・分類して・転記する」までAIが自動</li>
-        <li>30分のライブデモで、現場での使い方を実演</li>
-      </ul>
+    <div class="hero-content" style="text-align:center;">
+      <img src="https://243875500.fs1.hubspotusercontent-na2.net/hubfs/243875500/%E3%82%A6%E3%82%A7%E3%83%93%E3%83%8A%E3%83%BC%E6%AD%A3%E6%96%B9%E5%BD%A2%203.png" alt="そのFAX業務、まだ人件費で処理しますか？介護DXウェビナー｜ACG×ケアchat共催" style="max-width:100%;width:100%;height:auto;border-radius:18px;box-shadow:0 20px 50px rgba(31,58,95,.18),0 4px 14px rgba(0,0,0,.08);display:block;margin:0 auto;" />
     </div>
     <div class="hero-form-panel">
       <span class="form-badge">参加無料</span>
       <h3>介護DXウェビナーに<br>申し込む</h3>
       <p class="form-lead">お申込み30秒・Zoom開催</p>
       <div class="form-date">
-        <span class="date-strong">2026/6/4(木) 14:00〜14:30</span>
+        <span class="date-strong">2026/6/4(木) 15:00〜15:30</span>
         所要30分・録画配信あり
       </div>
       <!-- ⚠️ ACG用HubSpotフォーム埋め込み（Portal ID / Form IDを差し替え） -->
-      <div class="hs-form-frame" data-region="na2" data-form-id="{FORM_ID}" data-portal-id="{PORTAL_ID}"></div>
+      <div class="hs-form-frame" data-region="na2" data-form-id="2395eaa9-eb89-4102-9cbf-085fceace537" data-portal-id="243875500"></div>
     </div>
   </div>
 </section>
@@ -375,21 +358,19 @@ body{font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN",sans-serif;color:var
     </div>
     <div class="speaker-grid">
       <div class="speaker-card">
-        <div class="speaker-avatar">A</div>
+        <div class="speaker-avatar" role="img" aria-label="株式会社ACG 代表取締役 大牟禮 康佑" style="background-image:url('https://243875500.fs1.hubspotusercontent-na2.net/hubfs/243875500/%E5%A4%A7%E7%89%9F%E7%A6%AE%E7%A4%BE%E9%95%B7%20(1).jpeg?width=400&amp;name=omure-shacho-avatar-v2.jpg');background-color:#f7efe5;background-size:cover;background-position:center 25%;background-repeat:no-repeat;"></div>
         <div class="speaker-info">
           <div class="speaker-role">SPEAKER</div>
-          <div class="speaker-name">ACG担当者</div>
-          <div class="speaker-title">介護事業DX推進担当</div>
-          <p class="speaker-bio">介護事業者への経営支援・業務改革の現場で得た知見をベースに、「どこからDXを始めるべきか」を具体的に解説。施設長・経営者目線で、導入後の運用イメージまでお伝えします。</p>
+          <div class="speaker-name">大牟禮 康佑</div>
+          <div class="speaker-title">株式会社ACG 代表取締役</div>
         </div>
       </div>
       <div class="speaker-card">
-        <div class="speaker-avatar">C</div>
+        <div class="speaker-avatar" role="img" aria-label="株式会社ケアchat 代表取締役 城戸 勇人" style="background-image:url('https://243875500.fs1.hubspotusercontent-na2.net/hubfs/243875500/Image_20260523_110306_066.jpeg?length=400');background-color:#f7efe5;background-size:cover;background-position:center 25%;background-repeat:no-repeat;"></div>
         <div class="speaker-info">
           <div class="speaker-role">SPEAKER</div>
-          <div class="speaker-name">ケアchat担当者</div>
-          <div class="speaker-title">介護専用AIプロダクト開発担当</div>
-          <p class="speaker-bio">介護現場の業務に特化したAIプロダクトの開発を主導。「現場の手間を本当に減らすには何が必要か」を、開発者視点でデモを交えながらお見せします。</p>
+          <div class="speaker-name">城戸 勇人</div>
+          <div class="speaker-title">株式会社ケアchat 代表取締役</div>
         </div>
       </div>
     </div>
@@ -404,7 +385,7 @@ body{font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN",sans-serif;color:var
     </div>
     <div class="details-box">
       <div class="details-header">介護DXウェビナー｜開催詳細</div>
-      <div class="details-row"><span class="details-label">日時</span><span class="details-value"><span class="strong">2026年6月4日(木) 14:00〜14:30</span></span></div>
+      <div class="details-row"><span class="details-label">日時</span><span class="details-value"><span class="strong">2026年6月4日(木) 15:00〜15:30</span></span></div>
       <div class="details-row"><span class="details-label">所要時間</span><span class="details-value">30分（質疑応答含む）</span></div>
       <div class="details-row"><span class="details-label">形式</span><span class="details-value">Zoomウェビナー（オンライン）</span></div>
       <div class="details-row"><span class="details-label">参加費</span><span class="details-value"><span class="price">無料</span></span></div>
@@ -419,11 +400,11 @@ body{font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN",sans-serif;color:var
 <section class="form-section" id="form-bottom">
   <div class="section-header">
     <h2 class="text-large section-title">今すぐ申し込む</h2>
-    <p class="section-lead">6/4(木) 14:00〜14:30・Zoom開催・参加無料</p>
+    <p class="section-lead">6/4(木) 15:00〜15:30・Zoom開催・参加無料</p>
   </div>
   <div class="form-wrapper">
     <!-- ⚠️ ACG用HubSpotフォーム埋め込み（Portal ID / Form IDを差し替え） -->
-    <div class="hs-form-frame" data-region="na2" data-form-id="{FORM_ID}" data-portal-id="{PORTAL_ID}"></div>
+    <div class="hs-form-frame" data-region="na2" data-form-id="2395eaa9-eb89-4102-9cbf-085fceace537" data-portal-id="243875500"></div>
   </div>
   <p class="form-note">※ ご登録いただいた情報は、ウェビナー運営および関連サービスのご案内目的でのみ使用します</p>
 </section>
@@ -454,7 +435,7 @@ body{font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN",sans-serif;color:var
 <!-- ========== フッターCTA ========== -->
 <section class="footer-cta">
   <h2 class="text-large">利用者様と向き合う時間に、<br><span class="text-accent">FAX処理が消えている。</span></h2>
-  <p class="text-body">参加無料・30分・Zoom開催・録画配信あり<br>6/4(木) 14:00〜14:30</p>
+  <p class="text-body">参加無料・30分・Zoom開催・録画配信あり<br>6/4(木) 15:00〜15:30</p>
   <a href="#form-bottom" class="cta-btn-large">無料ウェビナーに申し込む<span class="arrow">→</span></a>
 </section>
 
