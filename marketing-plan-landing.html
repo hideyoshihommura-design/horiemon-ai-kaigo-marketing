@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>計画の落としどころレポート｜ホリエモンAI学校 介護校</title>
+<style>
+:root{
+--c-bg:#f5f6fa;--c-surface:#fff;--c-text:#1a1a2e;--c-text-sub:#555;
+--c-primary:#2563eb;--c-primary-light:#dbeafe;
+--c-accent:#f59e0b;--c-accent-light:#fef3c7;
+--c-success:#16a34a;--c-success-light:#dcfce7;
+--c-danger:#dc2626;--c-danger-light:#fee2e2;
+--c-info:#0891b2;--c-info-light:#cffafe;
+--c-border:#e2e8f0;--radius:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Noto Sans JP","Hiragino Sans",sans-serif;color:var(--c-text);background:var(--c-bg);line-height:1.75;font-size:15px}
+.wrap{max-width:960px;margin:0 auto;padding:0 0 5rem}
+.hero{background:linear-gradient(135deg,#1e293b 0%,#334155 100%);color:#fff;padding:3.5rem 3rem}
+.hero-label{font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--c-accent);margin-bottom:.6rem;font-weight:700}
+.hero h1{font-size:1.85rem;font-weight:800;line-height:1.4;margin-bottom:.8rem}
+.hero-sub{font-size:1rem;color:#cbd5e1}
+.hero-meta{font-size:.8rem;color:#94a3b8;margin-top:1rem}
+section{padding:2.6rem 3rem;border-bottom:1px solid var(--c-border)}
+section:nth-child(even){background:#fff}
+h2{font-size:1.45rem;font-weight:800;margin-bottom:1.3rem;padding-bottom:.5rem;border-bottom:2px solid var(--c-border)}
+.section-num{color:var(--c-primary);margin-right:.5rem;font-size:1rem;font-weight:800}
+h3{font-size:1.1rem;font-weight:700;margin:1.5rem 0 .7rem}
+p{margin:.6rem 0}
+ul,ol{margin:.6rem 0 .6rem 1.3rem}
+li{margin:.3rem 0}
+table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.85rem}
+thead th{background:#f1f5f9;font-weight:700;text-align:left;padding:.55rem .7rem;border-bottom:2px solid var(--c-border)}
+tbody td,tbody th{padding:.5rem .7rem;border-bottom:1px solid var(--c-border);text-align:left;vertical-align:top}
+tbody th{font-weight:600;background:#f8fafc}
+.row-total td,.row-total th{font-weight:700;background:#f1f5f9;border-top:2px solid var(--c-border)}
+.row-highlight td,.row-highlight th{font-weight:800;background:var(--c-primary-light)}
+.cell-danger{color:var(--c-danger);font-weight:700}
+.cell-success{color:var(--c-success);font-weight:700}
+.cell-warn{color:#92400e;font-weight:700}
+.card{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius);padding:1.1rem 1.4rem;margin:1rem 0;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.card.accent{border-left:4px solid var(--c-accent)}
+.card.primary{border-left:4px solid var(--c-primary);background:#f7faff}
+.card.danger{border-left:4px solid var(--c-danger);background:#fff8f8}
+.card.success{border-left:4px solid var(--c-success);background:#f8fdf9}
+blockquote{border-left:3px solid var(--c-primary);padding:.6rem 1rem;background:var(--c-primary-light);margin:.8rem 0;border-radius:0 var(--radius) var(--radius) 0}
+.note{font-size:.8rem;color:var(--c-text-sub);margin-top:.5rem}
+.badge{display:inline-block;padding:.22rem .55rem;border-radius:20px;font-size:.7rem;font-weight:700}
+.b-danger{background:var(--c-danger-light);color:var(--c-danger)}
+.b-success{background:var(--c-success-light);color:var(--c-success)}
+.b-warn{background:var(--c-accent-light);color:#92400e}
+.b-info{background:var(--c-info-light);color:var(--c-info)}
+.tldr{background:#1e293b;color:#e2e8f0;border-radius:var(--radius);padding:1.4rem 1.6rem;margin:1rem 0}
+.tldr strong{color:#fff}.tldr .hl{color:var(--c-accent);font-weight:700}
+
+/* funnel compare */
+.fcompare{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.2rem 0}
+@media(max-width:640px){.fcompare{grid-template-columns:1fr}}
+.fcol h4{text-align:center;font-size:.9rem;font-weight:700;margin-bottom:.6rem;padding:.3rem;border-radius:6px}
+.fcol.now h4{background:#fee2e2;color:var(--c-danger)}
+.fcol.goal h4{background:#dcfce7;color:var(--c-success)}
+.stage{color:#fff;border-radius:6px;padding:.6rem .8rem;text-align:center;margin:0 auto}
+.stage .name{font-size:.72rem;opacity:.9}
+.stage .num{font-size:1.2rem;font-weight:800;line-height:1.25}
+.now .s1{width:100%;background:#7f1d1d}.now .s2{width:80%;background:#b91c1c}.now .s3{width:60%;background:#dc2626}.now .s4{width:40%;background:#ef4444}.now .s5{width:24%;background:#f87171}
+.goal .s1{width:100%;background:#14532d}.goal .s2{width:80%;background:#15803d}.goal .s3{width:62%;background:#16a34a}.goal .s4{width:44%;background:#22c55e}.goal .s5{width:28%;background:#4ade80}
+.conv{text-align:center;font-size:.72rem;color:var(--c-text-sub);padding:.3rem 0;font-weight:700}
+.two-stage{display:grid;grid-template-columns:1fr auto 1fr;gap:1rem;align-items:center;margin:1.2rem 0}
+@media(max-width:640px){.two-stage{grid-template-columns:1fr}}
+.stage-box{background:#fff;border:2px solid var(--c-border);border-radius:var(--radius);padding:1.1rem}
+.stage-box.s1b{border-color:var(--c-success)}
+.stage-box.s2b{border-color:var(--c-primary)}
+.stage-box .t{font-size:.75rem;font-weight:700;color:var(--c-text-sub)}
+.stage-box .big{font-size:1.4rem;font-weight:800;margin:.2rem 0}
+.arrow-mid{text-align:center;font-size:1.6rem;color:var(--c-primary);font-weight:800}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hero">
+  <div class="hero-label">Strategy Report ／ 計画の落としどころ</div>
+  <h1>計画としての現実的な落としどころ</h1>
+  <div class="hero-sub">当初計画（年7,500万）と実測ベース計画（年1,500万）の間で、どこに目標を置くべきか</div>
+  <div class="hero-meta">根拠：運用2ヶ月の実測値（W1〜W9）　／　作成日：2026/6/9　／　契約単価 約80万円・営業は当面兼任</div>
+</div>
+
+<!-- 00 結論 -->
+<section>
+  <h2><span class="section-num">00</span>結論</h2>
+  <div class="tldr">
+    <p>現実的な落としどころは <span class="hl">年5,000〜5,400万円（月5〜6成約）</span>。</p>
+    <p>これは感覚ではなく<strong>2つの数字が自動的に決める</strong>位置。①ここが<strong>1成約あたり広告費が許容CPA内に収まる最初の段</strong>（採算が健全化する）。②同時に<strong>兼任1〜2名でさばける商談数の上限</strong>（月28件）でもある。つまり<strong>「今の体制で、利益を出しながら到達できる最大値」</strong>がちょうど年5,000万円。</p>
+    <p>当初の7,500万円は捨てない。<strong>商談専任を1名入れた瞬間にキャパの壁が外れ、次の段（7,500〜9,000万）に入る。</strong>＝二段構えで狙う。</p>
+  </div>
+</section>
+
+<!-- 01 5段階比較 -->
+<section>
+  <h2><span class="section-num">01</span>5段階の比較（実測からの距離で並べる）</h2>
+  <table>
+    <thead><tr><th>段階</th><th>前提（商談化×成約率）</th><th>月予算</th><th>月成約</th><th>年FC売上</th><th>1成約広告費</th><th>採算</th></tr></thead>
+    <tbody>
+      <tr><th>現状</th><td>4% × 12%</td><td>75万</td><td>1.3件</td><td>約1,260万</td><td>¥570,000</td><td><span class="badge b-danger">超過</span></td></tr>
+      <tr><th>床（現状維持計画）</th><td>4% × 12%</td><td>90万</td><td>1.4件</td><td>約1,400万</td><td>¥625,000</td><td><span class="badge b-danger">超過</span></td></tr>
+      <tr><th>コミット（ほぼ確実）</th><td>6% × 15%</td><td>90万</td><td>2.7件</td><td>約2,600万</td><td>¥333,000</td><td><span class="badge b-warn">わずか超過</span></td></tr>
+      <tr class="row-highlight"><th>落としどころ（推奨）</th><td>8% × 20%</td><td>105万</td><td>5.6件</td><td>約5,000〜5,400万</td><td class="cell-success">¥187,500</td><td><span class="badge b-success">健全</span></td></tr>
+      <tr><th>ストレッチ（要・専任採用）</th><td>10% × 22%</td><td>150万</td><td>9.4件</td><td>約9,000万</td><td>¥159,000</td><td><span class="badge b-success">健全</span></td></tr>
+      <tr><th>当初計画</th><td>20% × 30%</td><td>120万</td><td>7.8件</td><td>7,500万</td><td>—</td><td><span class="badge b-danger">兼任では破綻</span></td></tr>
+    </tbody>
+  </table>
+  <p class="note">許容CPA上限 ¥307,000（報告書基準）。落としどころより上の段で初めて1成約あたり広告費がこれを下回る。当初計画は商談39件/月が必要で、兼任1〜2名のキャパ（月25〜30件）を超えるため成立しない。</p>
+</section>
+
+<!-- 02 落としどころが決まる2つの基準 -->
+<section>
+  <h2><span class="section-num">02</span>落としどころが「ここ」になる2つの理由</h2>
+  <div class="card success">
+    <strong>理由① 採算が初めて健全になる段</strong>
+    <p>床・コミットの段では、1成約あたり広告費（¥625,000／¥333,000）が許容CPA上限¥307,000を超え、「回るが薄利」のまま。商談化8%・成約20%に乗ると<strong>¥187,500</strong>まで下がり、許容内に入ってはっきり黒字構造になる。＝<strong>持続できる最初のライン</strong>。</p>
+  </div>
+  <div class="card primary">
+    <strong>理由② 兼任体制の物理的な天井</strong>
+    <p>1商談あたり約1.75時間。落としどころの月28商談＝<strong>約49時間/月</strong>で、兼任1〜2名の片手間で回せる実質上限。これ以上はリードでも予算でもなく<strong>「人手」が律速</strong>になる。つまり今の体制では、これが取りうる最大値。</p>
+  </div>
+  <blockquote>採算が健全化する下限ライン と 兼任キャパの上限ライン が、ちょうど同じ「年5,000万円」で重なる。だからここが計画の自然な着地点になる。</blockquote>
+</section>
+
+<!-- 03 ファネル: 現状 vs 落としどころ -->
+<section>
+  <h2><span class="section-num">03</span>目標ファネル（現状 vs 落としどころ・月あたり）</h2>
+  <p>注目点は<strong>リード数をほとんど増やしていない</strong>こと。予算は75万→105万の微増、伸びるのは<strong>商談化率（4%→8%）と成約率（12%→20%）</strong>だけ。同じ集客力の上で、下流の歩留まりを2倍にするのが落としどころの中身。</p>
+  <div class="fcompare">
+    <div class="fcol now">
+      <h4>現状（月）</h4>
+      <div class="stage s1"><div class="name">広告費</div><div class="num">75万円</div></div>
+      <div class="conv">▼ CPL ¥2,736</div>
+      <div class="stage s2"><div class="name">リード</div><div class="num">274件</div></div>
+      <div class="conv">▼ 商談化 4%</div>
+      <div class="stage s3"><div class="name">商談</div><div class="num">11件</div></div>
+      <div class="conv">▼ 成約 12%</div>
+      <div class="stage s4"><div class="name">成約</div><div class="num">1.3件</div></div>
+      <div class="conv">▼ 80万/件</div>
+      <div class="stage s5"><div class="name">FC売上</div><div class="num">105万円</div></div>
+    </div>
+    <div class="fcol goal">
+      <h4>落としどころ（月）</h4>
+      <div class="stage s1"><div class="name">広告費</div><div class="num">105万円</div></div>
+      <div class="conv">▼ CPL ¥3,000</div>
+      <div class="stage s2"><div class="name">リード</div><div class="num">350件</div></div>
+      <div class="conv">▼ 商談化 <strong>8%</strong>（2倍）</div>
+      <div class="stage s3"><div class="name">商談</div><div class="num">28件</div></div>
+      <div class="conv">▼ 成約 <strong>20%</strong>（1.7倍）</div>
+      <div class="stage s4"><div class="name">成約</div><div class="num">5.6件</div></div>
+      <div class="conv">▼ 80万/件</div>
+      <div class="stage s5"><div class="name">FC売上</div><div class="num">448万円</div></div>
+    </div>
+  </div>
+  <table>
+    <thead><tr><th>段</th><th>現状</th><th>落としどころ</th><th>変化</th></tr></thead>
+    <tbody>
+      <tr><th>広告費/月</th><td>75万円</td><td>105万円</td><td>+30万（微増）</td></tr>
+      <tr><th>リード/月</th><td>274件</td><td>350件</td><td>+28%（ほぼ据置）</td></tr>
+      <tr class="row-highlight"><th>商談化率</th><td>4%</td><td>8%</td><td class="cell-success">×2（最大レバー）</td></tr>
+      <tr><th>商談/月</th><td>11件</td><td>28件</td><td>兼任キャパ上限</td></tr>
+      <tr class="row-highlight"><th>成約率</th><td>12%</td><td>20%</td><td class="cell-success">×1.7</td></tr>
+      <tr class="row-total"><th>成約/月</th><td>1.3件</td><td>5.6件</td><td>×4.3</td></tr>
+      <tr class="row-total"><th>年FC売上</th><td>約1,260万</td><td>約5,376万</td><td>×4.3</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 04 二段構え -->
+<section>
+  <h2><span class="section-num">04</span>計画の形：二段構え</h2>
+  <div class="two-stage">
+    <div class="stage-box s1b">
+      <div class="t">第1段（兼任のまま・本計画）</div>
+      <div class="big" style="color:var(--c-success)">年5,000〜5,400万円</div>
+      <div class="note" style="margin:0">月5〜6成約／予算105万円<br>商談化8%・成約20%を達成<br>採算健全化（¥187,500）</div>
+    </div>
+    <div class="arrow-mid">▶</div>
+    <div class="stage-box s2b">
+      <div class="t">第2段（専任1名を追加して解禁）</div>
+      <div class="big" style="color:var(--c-primary)">年7,500〜9,000万円</div>
+      <div class="note" style="margin:0">月8〜9成約／予算150万円<br>商談キャパの壁を撤廃<br>当初KGIが射程に</div>
+    </div>
+  </div>
+  <div class="card accent">
+    <strong>移行の判断基準</strong>
+    <p>第1段で<strong>商談化が安定して6%超・1成約あたり広告費が許容CPA内</strong>に入ったら、第2段（専任採用＋増額）に進む。採算が健全化してから人とお金を足すので、リスクが小さい。広告費を増やすより<strong>専任1名の追加のほうが投資効率が高い</strong>（ボトルネックが人手のため）。</p>
+  </div>
+</section>
+
+<!-- 05 前提 -->
+<section style="border:none">
+  <h2><span class="section-num">05</span>前提とリスク</h2>
+  <ul>
+    <li><strong>落としどころの前提（商談化4→8%、成約12→20%）はどちらも約2倍。</strong> 自動では起きない。鍵は初動フォローの速度（1時間以内）と商談予約への導線。</li>
+    <li><strong>成約率は判定途上：</strong>確定1件＋進行中3件。3件のクローズ結果で定数（20%）を再設定する。</li>
+    <li><strong>契約単価80万円は暫定：</strong>平均受講人数の実績が出れば、売上・採算をすべて再計算（比例して動く）。</li>
+    <li><strong>CPM飽和：</strong>Meta常設のCPMが上昇傾向。オーディエンス刷新を怠ると同予算でリードが減る。</li>
+    <li>本レポートは当初計画と実測ベース計画の中間目標を定めるもの。実行詳細は別途「最初の3ヶ月の実行計画」で固める。</li>
+  </ul>
+</section>
+
+</div>
+</body>
+</html>

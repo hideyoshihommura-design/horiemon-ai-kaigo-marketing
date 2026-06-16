@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>マーケティング戦略【立て直し版】｜ホリエモンAI学校 介護校</title>
+<style>
+:root{
+--c-bg:#f5f6fa;--c-surface:#fff;--c-text:#1a1a2e;--c-text-sub:#555;
+--c-primary:#2563eb;--c-primary-light:#dbeafe;
+--c-accent:#f59e0b;--c-accent-light:#fef3c7;
+--c-success:#16a34a;--c-success-light:#dcfce7;
+--c-danger:#dc2626;--c-danger-light:#fee2e2;
+--c-info:#0891b2;--c-info-light:#cffafe;
+--c-border:#e2e8f0;--radius:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Noto Sans JP","Hiragino Sans",sans-serif;color:var(--c-text);background:var(--c-bg);line-height:1.75;font-size:15px}
+.wrap{max-width:980px;margin:0 auto;padding:0 0 5rem}
+.hero{background:linear-gradient(135deg,#1e293b 0%,#334155 100%);color:#fff;padding:3.5rem 3rem}
+.hero-label{font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--c-accent);margin-bottom:.6rem;font-weight:700}
+.hero h1{font-size:1.9rem;font-weight:800;line-height:1.4;margin-bottom:.8rem}
+.hero-sub{font-size:1rem;color:#cbd5e1}
+.hero-meta{font-size:.8rem;color:#94a3b8;margin-top:1rem}
+.toc{background:#0f172a;color:#cbd5e1;padding:1rem 3rem;font-size:.82rem;display:flex;flex-wrap:wrap;gap:.3rem 1.4rem}
+.toc a{color:#93c5fd;text-decoration:none}
+section{padding:2.6rem 3rem;border-bottom:1px solid var(--c-border)}
+section:nth-child(even){background:#fff}
+h2{font-size:1.45rem;font-weight:800;margin-bottom:1.3rem;padding-bottom:.5rem;border-bottom:2px solid var(--c-border)}
+.section-num{color:var(--c-primary);margin-right:.5rem;font-size:1rem;font-weight:800}
+h3{font-size:1.1rem;font-weight:700;margin:1.6rem 0 .7rem}
+h4{font-size:.95rem;font-weight:700;margin:1.1rem 0 .4rem}
+p{margin:.6rem 0}
+ul,ol{margin:.6rem 0 .6rem 1.3rem}
+li{margin:.35rem 0}
+table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.85rem}
+thead th{background:#f1f5f9;font-weight:700;text-align:left;padding:.55rem .7rem;border-bottom:2px solid var(--c-border)}
+tbody td,tbody th{padding:.5rem .7rem;border-bottom:1px solid var(--c-border);text-align:left;vertical-align:top}
+tbody th{font-weight:600;background:#f8fafc}
+.row-total td,.row-total th{font-weight:700;background:#f1f5f9;border-top:2px solid var(--c-border)}
+.row-highlight td,.row-highlight th{font-weight:800;background:var(--c-primary-light)}
+.cell-danger{color:var(--c-danger);font-weight:700}
+.cell-success{color:var(--c-success);font-weight:700}
+.cell-warn{color:#92400e;font-weight:700}
+.card{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius);padding:1.1rem 1.4rem;margin:1rem 0;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.card.accent{border-left:4px solid var(--c-accent)}
+.card.primary{border-left:4px solid var(--c-primary);background:#f7faff}
+.card.danger{border-left:4px solid var(--c-danger);background:#fff8f8}
+.card.success{border-left:4px solid var(--c-success);background:#f8fdf9}
+blockquote{border-left:3px solid var(--c-primary);padding:.6rem 1rem;background:var(--c-primary-light);margin:.8rem 0;border-radius:0 var(--radius) var(--radius) 0}
+.note{font-size:.8rem;color:var(--c-text-sub);margin-top:.5rem}
+.badge{display:inline-block;padding:.22rem .55rem;border-radius:20px;font-size:.7rem;font-weight:700}
+.b-danger{background:var(--c-danger-light);color:var(--c-danger)}
+.b-success{background:var(--c-success-light);color:var(--c-success)}
+.b-warn{background:var(--c-accent-light);color:#92400e}
+.b-info{background:var(--c-info-light);color:var(--c-info)}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.8rem;margin:1rem 0}
+.kpi{background:#fff;border:1px solid var(--c-border);border-radius:var(--radius);padding:1rem;text-align:center}
+.kpi .v{font-size:1.45rem;font-weight:800;color:var(--c-primary)}
+.kpi .v.danger{color:var(--c-danger)}.kpi .v.success{color:var(--c-success)}
+.kpi .l{font-size:.74rem;color:var(--c-text-sub);margin-top:.2rem}
+.tldr{background:#1e293b;color:#e2e8f0;border-radius:var(--radius);padding:1.4rem 1.6rem;margin:1rem 0}
+.tldr strong{color:#fff}.tldr .hl{color:var(--c-accent);font-weight:700}
+.fcompare{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.2rem 0}
+@media(max-width:640px){.fcompare{grid-template-columns:1fr}}
+.fcol h4{text-align:center;font-size:.9rem;font-weight:700;margin-bottom:.6rem;padding:.3rem;border-radius:6px}
+.fcol.now h4{background:#fee2e2;color:var(--c-danger)}
+.fcol.goal h4{background:#dcfce7;color:var(--c-success)}
+.stage{color:#fff;border-radius:6px;padding:.55rem .8rem;text-align:center;margin:0 auto}
+.stage .name{font-size:.7rem;opacity:.9}
+.stage .num{font-size:1.15rem;font-weight:800;line-height:1.25}
+.now .s1{width:100%;background:#7f1d1d}.now .s2{width:80%;background:#b91c1c}.now .s3{width:60%;background:#dc2626}.now .s4{width:40%;background:#ef4444}.now .s5{width:24%;background:#f87171}
+.goal .s1{width:100%;background:#14532d}.goal .s2{width:80%;background:#15803d}.goal .s3{width:62%;background:#16a34a}.goal .s4{width:44%;background:#22c55e}.goal .s5{width:28%;background:#4ade80}
+.conv{text-align:center;font-size:.7rem;color:var(--c-text-sub);padding:.28rem 0;font-weight:700}
+.step-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--c-primary);color:#fff;font-weight:800;font-size:.85rem;margin-right:.5rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hero">
+  <div class="hero-label">Marketing Strategy ／ 立て直し版</div>
+  <h1>マーケティング戦略【立て直し版】</h1>
+  <div class="hero-sub">想定（商談化20%・成約30%）と実測（4%・12%）の乖離を受けた全面再構築<br>戦略 → ファネル更新 → 週次で回す分析、までを1本に</div>
+  <div class="hero-meta">根拠：運用2ヶ月の実測値（2026/4/7〜6/8・W1〜W9）　／　作成日：2026/6/9　／　契約単価 約80万円・営業は当面兼任</div>
+</div>
+
+<div class="toc">
+  <strong style="color:#fff">目次：</strong>
+  <a href="#s1">01 診断</a>
+  <a href="#s2">02 戦略の転換</a>
+  <a href="#s3">03 目標（二段構え）</a>
+  <a href="#s4">04 ファネル更新</a>
+  <a href="#s5">05 4つの打ち手</a>
+  <a href="#s6">06 チャネル再配分</a>
+  <a href="#s7">07 新KPIと目標値</a>
+  <a href="#s8">08 週次で回す分析</a>
+  <a href="#s9">09 ロードマップ</a>
+</div>
+
+<!-- 01 診断 -->
+<section id="s1">
+  <h2><span class="section-num">01</span>診断：乖離はどこで起きているか</h2>
+  <div class="tldr">
+    <p><strong>上流（集客）は計画超過＝強み。下流（商談化・成約）に乖離が集中。</strong></p>
+    <p>リード月<span class="hl">276件</span>（目標130-170超過）／CPL<span class="hl">¥2,736</span>（目標を大幅クリア）。一方、商談化率<span class="hl">4.0%</span>（想定20-25%）、成約率<span class="hl">約12%</span>（想定30%）。リード→成約の通し転換は想定の<span class="hl">約1/20</span>。</p>
+  </div>
+  <table>
+    <thead><tr><th>指標</th><th>想定（旧計画）</th><th>実測</th><th>判定</th></tr></thead>
+    <tbody>
+      <tr><th>リード数/月</th><td>130〜170件</td><td class="cell-success">276件</td><td><span class="badge b-success">超過</span></td></tr>
+      <tr><th>CPL</th><td>5,000〜15,000円</td><td class="cell-success">¥2,736</td><td><span class="badge b-success">大幅クリア</span></td></tr>
+      <tr><th>商談化率</th><td>20〜25%</td><td class="cell-danger">4.0%</td><td><span class="badge b-danger">約1/5</span></td></tr>
+      <tr><th>成約率</th><td>30%</td><td class="cell-danger">約12%</td><td><span class="badge b-warn">判定途上</span></td></tr>
+      <tr class="row-highlight"><th>リード→成約</th><td>6%</td><td class="cell-danger">約0.5%</td><td><span class="badge b-danger">約1/12〜1/20</span></td></tr>
+    </tbody>
+  </table>
+  <div class="card danger">
+    <strong>乖離の正体は「採算」に出る</strong>
+    <p>現状の歩留まりだと<strong>1成約あたり広告費は約¥570,000</strong>。契約単価80万に対し粗利23万で、許容CPA上限¥307,000を1.86倍超過。<strong>「リードは安いのに1成約は高い」薄利体質</strong>が、乖離の本質。</p>
+  </div>
+</section>
+
+<!-- 02 戦略の転換 -->
+<section id="s2">
+  <h2><span class="section-num">02</span>戦略の転換：「集める」から「変える」へ</h2>
+  <p>旧戦略は「リードをいかに増やすか」が中心だった。実測はリードが余っていることを示している。よって戦略の重心を移す。</p>
+  <table>
+    <thead><tr><th></th><th>旧戦略</th><th>新戦略（立て直し）</th></tr></thead>
+    <tbody>
+      <tr><th>重心</th><td>リードを増やす（集客）</td><td class="cell-success">リードを商談・成約に変える（歩留まり）</td></tr>
+      <tr><th>予算</th><td>段階的に120万へ増額</td><td class="cell-success">当面は増やさない（約90〜105万で固定）</td></tr>
+      <tr><th>主戦場</th><td>広告チャネルの拡大</td><td class="cell-success">フォロー速度・商談導線・成約支援</td></tr>
+      <tr><th>成長の制約</th><td>広告予算</td><td class="cell-success">商談をさばく人手（兼任キャパ）</td></tr>
+    </tbody>
+  </table>
+  <blockquote>いま広告を増やしても、さばけないリードが積み上がるだけ。<strong>下流の歩留まりを2倍にする方が、予算を2倍にするより安く・速く・確実に効く</strong>（同予算で商談化4%→8%＝成約数2倍、1成約あたり広告費は許容内に低下）。</blockquote>
+</section>
+
+<!-- 03 目標 -->
+<section id="s3">
+  <h2><span class="section-num">03</span>目標：二段構え</h2>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="v success">年5,000〜5,400万</div><div class="l">第1段（兼任のまま）</div></div>
+    <div class="kpi"><div class="v">月5〜6件</div><div class="l">必要成約数</div></div>
+    <div class="kpi"><div class="v">7,500〜9,000万</div><div class="l">第2段（専任追加で解禁）</div></div>
+  </div>
+  <p>当初の年7,500万円は「兼任では商談39件/月が必要」で物理的に成立しない。一方、現状維持（年1,400万）は採算が薄すぎる。両者の現実的な中間＝<strong>採算が健全化し、かつ兼任キャパを使い切る最大値</strong>が落としどころ。</p>
+  <table>
+    <thead><tr><th>段階</th><th>前提</th><th>月予算</th><th>月成約</th><th>年FC売上</th><th>1成約広告費</th><th>採算</th></tr></thead>
+    <tbody>
+      <tr><th>現状</th><td>4%×12%</td><td>75万</td><td>1.3件</td><td>約1,260万</td><td>¥570,000</td><td><span class="badge b-danger">超過</span></td></tr>
+      <tr><th>コミット</th><td>6%×15%</td><td>90万</td><td>2.7件</td><td>約2,600万</td><td>¥333,000</td><td><span class="badge b-warn">わずか超過</span></td></tr>
+      <tr class="row-highlight"><th>落としどころ（第1段）</th><td>8%×20%</td><td>105万</td><td>5.6件</td><td>約5,000〜5,400万</td><td class="cell-success">¥187,500</td><td><span class="badge b-success">健全</span></td></tr>
+      <tr><th>第2段（要・専任）</th><td>10%×22%</td><td>150万</td><td>9.4件</td><td>約9,000万</td><td>¥159,000</td><td><span class="badge b-success">健全</span></td></tr>
+    </tbody>
+  </table>
+  <p class="note">移行基準：第1段で商談化6%超・1成約あたり広告費が許容CPA内に安定したら、専任採用＋増額で第2段へ。採算が健全化してから人とお金を足すのでリスクが小さい。</p>
+</section>
+
+<!-- 04 ファネル更新 -->
+<section id="s4">
+  <h2><span class="section-num">04</span>ファネル更新（現状 → 目標）</h2>
+  <p>リードはほぼ据え置き。伸ばすのは<strong>商談化率（4→8%）と成約率（12→20%）だけ</strong>。これが新ファネルの設計思想。</p>
+  <div class="fcompare">
+    <div class="fcol now">
+      <h4>現状（月）</h4>
+      <div class="stage s1"><div class="name">広告費</div><div class="num">75万円</div></div>
+      <div class="conv">▼ CPL ¥2,736</div>
+      <div class="stage s2"><div class="name">リード</div><div class="num">274件</div></div>
+      <div class="conv">▼ 商談化 4%</div>
+      <div class="stage s3"><div class="name">商談</div><div class="num">11件</div></div>
+      <div class="conv">▼ 成約 12%</div>
+      <div class="stage s4"><div class="name">成約</div><div class="num">1.3件</div></div>
+      <div class="conv">▼ 80万/件</div>
+      <div class="stage s5"><div class="name">FC売上</div><div class="num">105万円</div></div>
+    </div>
+    <div class="fcol goal">
+      <h4>目標（第1段・月）</h4>
+      <div class="stage s1"><div class="name">広告費</div><div class="num">105万円</div></div>
+      <div class="conv">▼ CPL ¥3,000</div>
+      <div class="stage s2"><div class="name">リード</div><div class="num">350件</div></div>
+      <div class="conv">▼ 商談化 <strong>8%</strong></div>
+      <div class="stage s3"><div class="name">商談</div><div class="num">28件</div></div>
+      <div class="conv">▼ 成約 <strong>20%</strong></div>
+      <div class="stage s4"><div class="name">成約</div><div class="num">5.6件</div></div>
+      <div class="conv">▼ 80万/件</div>
+      <div class="stage s5"><div class="name">FC売上</div><div class="num">448万円</div></div>
+    </div>
+  </div>
+  <p class="note">商談28件/月（約49時間）は兼任1〜2名の実質上限。これがファネルの天井であり、第2段で人を足すまで超えられない設計。</p>
+</section>
+
+<!-- 05 打ち手 -->
+<section id="s5">
+  <h2><span class="section-num">05</span>4つの打ち手（歩留まりを2倍にする）</h2>
+
+  <div class="card primary">
+    <h4><span class="step-num">1</span>初動フォローを「1時間以内」へ（最大レバー）</h4>
+    <p>リード発生と同時にWeb会議予約リンクを自動送付（メール＋LINE/SMS）。人手を介さず予約まで誘導。商談化率を押し上げる最も効く施策。<strong>狙い：商談化 4%→6%</strong></p>
+  </div>
+  <div class="card primary">
+    <h4><span class="step-num">2</span>商談への導線を作る</h4>
+    <p>サンクスページ・LP・資料DL後に「無料個別相談（Web会議）」CTAを直結。既存のサンクスページ資産に予約導線を足すだけ。<strong>狙い：商談化 6%→8%</strong></p>
+  </div>
+  <div class="card primary">
+    <h4><span class="step-num">3</span>リードスコアリングで兼任の時間を集中</h4>
+    <p>兼任キャパは限られる。ウェビナー参加・特定設問回答など高温度リードだけ優先架電し、低温度は自動ナーチャリングに回す。<strong>狙い：限られた工数で商談化を最大化</strong></p>
+  </div>
+  <div class="card primary">
+    <h4><span class="step-num">4</span>成約率を上げる（事例・助成金・失注分析）</h4>
+    <p>導入事例（社名入り1-2件）／助成金申請の社労士面談をワンストップ化（最大の離脱要因を除去）／失注理由をログ化／進行中3商談のクローズ管理。<strong>狙い：成約 12%→20%</strong></p>
+  </div>
+  <p class="note">いずれも追加の広告費は不要。HubSpotナーチャリング設計書・サンクスページ等の既存資産を「稼働させる」ことが中心。</p>
+</section>
+
+<!-- 06 チャネル -->
+<section id="s6">
+  <h2><span class="section-num">06</span>チャネル再配分（実測CPL順）</h2>
+  <table>
+    <thead><tr><th>チャネル</th><th>実測CPL</th><th>方針</th></tr></thead>
+    <tbody>
+      <tr><th>Meta ウェビナー</th><td class="cell-success">¥1,977</td><td><span class="badge b-success">主軸・最大配分</span> CVR7.8%。集客の柱に</td></tr>
+      <tr><th>Meta 常設・介護校LP</th><td>¥2,969</td><td><span class="badge b-info">維持＋是正</span> ¥15,000/日へ戻し+オーディエンス刷新（CPM飽和対策）</td></tr>
+      <tr><th>Google 常設</th><td>¥4,032</td><td><span class="badge b-info">小額保険</span> 分散用に常時少額</td></tr>
+      <tr><th>Google ウェビナー</th><td class="cell-danger">¥7,584</td><td><span class="badge b-danger">停止維持</span></td></tr>
+      <tr><th>LINE</th><td class="cell-danger">CV0</td><td><span class="badge b-danger">停止維持</span> タグ・LP・フォーム実機検証まで再開しない</td></tr>
+    </tbody>
+  </table>
+  <div class="card success">
+    <strong>同予算でリードが増える：</strong>ウェビナー60%＋常設40%へ寄せるとブレンドCPLは¥2,736→約¥2,374。月75万でリード274→約316件（+42件）。LINEの無駄打ち（¥127,131・総消費の8%）停止で実質予算も増える。
+  </div>
+</section>
+
+<!-- 07 KPI -->
+<section id="s7">
+  <h2><span class="section-num">07</span>新KPIと目標値（週次分析が追う指標）</h2>
+  <table>
+    <thead><tr><th>KPI</th><th>現状</th><th>3ヶ月（コミット）</th><th>6ヶ月（落としどころ）</th><th>判定頻度</th></tr></thead>
+    <tbody>
+      <tr><th>ブレンドCPL</th><td>¥2,736</td><td>¥2,400台</td><td>¥2,400台</td><td>週次</td></tr>
+      <tr class="row-highlight"><th>商談化率</th><td class="cell-danger">4.0%</td><td>6%</td><td>8%</td><td><strong>週次・最重要</strong></td></tr>
+      <tr><th>成約率</th><td>約12%</td><td>15%</td><td>20%</td><td>月次</td></tr>
+      <tr><th>1成約あたり広告費</th><td>¥570,000</td><td>¥333,000</td><td class="cell-success">¥187,500</td><td>月次</td></tr>
+      <tr><th>月成約数</th><td>1.3件</td><td>2.7件</td><td>5.6件</td><td>月次</td></tr>
+      <tr><th>月FC売上</th><td>105万</td><td>216万</td><td>448万</td><td>月次</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 08 週次分析 -->
+<section id="s8">
+  <h2><span class="section-num">08</span>その上で「分析を回す」：週次サイクル</h2>
+  <p>戦略とファネルを更新したら、毎週この順で回す。専用の<strong>週次分析テンプレ（Excel）</strong>に数字を貼れば、各段の転換率・対目標判定・推移が自動計算される。</p>
+  <table>
+    <thead><tr><th>ステップ</th><th>内容</th></tr></thead>
+    <tbody>
+      <tr><th><span class="step-num">1</span>入力</th><td>週次の実績（広告費・LP訪問・リード・商談・成約）をテンプレに貼る</td></tr>
+      <tr><th><span class="step-num">2</span>判定</th><td>商談化率・成約率・CPL・1成約あたり広告費が目標に対し ◎○△✗ で自動表示</td></tr>
+      <tr><th><span class="step-num">3</span>特定</th><td>どの段が目標未達か（＝今週のボトルネック）を1つに絞る</td></tr>
+      <tr><th><span class="step-num">4</span>打ち手</th><td>その段に効く施策（§05の4つ）から1つ実行。商談化が最優先</td></tr>
+      <tr><th><span class="step-num">5</span>記録</th><td>失注理由・流入元（v1/v2）・パイプライン状況を更新し、翌週へ</td></tr>
+    </tbody>
+  </table>
+  <div class="card accent">
+    <strong>分析の見るべき順番（上流から潰さない）</strong>
+    <p>上流は健全なので、<strong>毎週まず「商談化率」を見る</strong>。ここが動かない限り他をいじらない。商談化が目標に乗ったら次に成約率、最後にCPL/チャネル配分。<strong>一度に1つの段だけ</strong>改善する。</p>
+  </div>
+</section>
+
+<!-- 09 ロードマップ -->
+<section id="s9" style="border:none">
+  <h2><span class="section-num">09</span>ロードマップ</h2>
+  <table>
+    <thead><tr><th>期間</th><th>テーマ</th><th>やること</th><th>到達目安</th></tr></thead>
+    <tbody>
+      <tr><th>0〜1ヶ月</th><td>計測と無駄排除</td><td>フォロー自動化・予約導線／LINE停止・CV0自動停止／オフラインCV連携／週次テンプレ稼働開始</td><td>商談化 4%→5〜6%へ動き出す</td></tr>
+      <tr><th>1〜3ヶ月</th><td>コミットライン</td><td>スコアリング／失注ログ／進行中商談クローズ</td><td>商談化6%・成約15%・月2.7成約</td></tr>
+      <tr><th>4〜6ヶ月</th><td>落としどころ到達</td><td>事例蓄積・助成金ワンストップ／月105万で安定運用</td><td>商談化8%・成約20%・年5,000万ペース</td></tr>
+      <tr><th>7ヶ月〜</th><td>第2段の判断</td><td>採算が許容CPA内で安定したら専任採用＋増額</td><td>7,500〜9,000万へ</td></tr>
+    </tbody>
+  </table>
+  <p class="note">本戦略書は当初計画（marketing-plan.html）を置き換える立て直し版。実測の前提（成約率12%・契約80万）は判定途上のため、週次分析の蓄積で随時アップデートする。</p>
+</section>
+
+</div>
+</body>
+</html>

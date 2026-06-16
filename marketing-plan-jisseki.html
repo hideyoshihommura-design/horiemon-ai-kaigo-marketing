@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新マーケティング計画【実測ベース】｜ホリエモンAI学校 介護校</title>
+<style>
+:root{
+--c-bg:#f5f6fa;--c-surface:#fff;--c-text:#1a1a2e;--c-text-sub:#555;
+--c-primary:#2563eb;--c-primary-light:#dbeafe;
+--c-accent:#f59e0b;--c-accent-light:#fef3c7;
+--c-success:#16a34a;--c-success-light:#dcfce7;
+--c-danger:#dc2626;--c-danger-light:#fee2e2;
+--c-info:#0891b2;--c-info-light:#cffafe;
+--c-border:#e2e8f0;--radius:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Noto Sans JP","Hiragino Sans",sans-serif;color:var(--c-text);background:var(--c-bg);line-height:1.75;font-size:15px}
+.wrap{max-width:960px;margin:0 auto;padding:0 0 5rem}
+.hero{background:linear-gradient(135deg,#1e293b 0%,#334155 100%);color:#fff;padding:3.5rem 3rem}
+.hero-label{font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--c-accent);margin-bottom:.6rem;font-weight:700}
+.hero h1{font-size:1.85rem;font-weight:800;line-height:1.4;margin-bottom:.8rem}
+.hero-sub{font-size:1rem;color:#cbd5e1}
+.hero-meta{font-size:.8rem;color:#94a3b8;margin-top:1rem}
+section{padding:2.6rem 3rem;border-bottom:1px solid var(--c-border)}
+section:nth-child(even){background:#fff}
+h2{font-size:1.45rem;font-weight:800;margin-bottom:1.3rem;padding-bottom:.5rem;border-bottom:2px solid var(--c-border)}
+.section-num{color:var(--c-primary);margin-right:.5rem;font-size:1rem;font-weight:800}
+h3{font-size:1.1rem;font-weight:700;margin:1.5rem 0 .7rem}
+p{margin:.6rem 0}
+ul,ol{margin:.6rem 0 .6rem 1.3rem}
+li{margin:.3rem 0}
+table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.85rem}
+thead th{background:#f1f5f9;font-weight:700;text-align:left;padding:.55rem .7rem;border-bottom:2px solid var(--c-border)}
+tbody td,tbody th{padding:.5rem .7rem;border-bottom:1px solid var(--c-border);text-align:left;vertical-align:top}
+tbody th{font-weight:600;background:#f8fafc}
+.row-total td,.row-total th{font-weight:700;background:#f1f5f9;border-top:2px solid var(--c-border)}
+.row-highlight td,.row-highlight th{font-weight:700;background:var(--c-primary-light)}
+.cell-danger{color:var(--c-danger);font-weight:700}
+.cell-success{color:var(--c-success);font-weight:700}
+.cell-warn{color:#92400e;font-weight:700}
+.card{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius);padding:1.1rem 1.4rem;margin:1rem 0;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.card.accent{border-left:4px solid var(--c-accent)}
+.card.primary{border-left:4px solid var(--c-primary);background:#f7faff}
+.card.danger{border-left:4px solid var(--c-danger);background:#fff8f8}
+.card.success{border-left:4px solid var(--c-success);background:#f8fdf9}
+blockquote{border-left:3px solid var(--c-primary);padding:.6rem 1rem;background:var(--c-primary-light);margin:.8rem 0;border-radius:0 var(--radius) var(--radius) 0}
+.note{font-size:.8rem;color:var(--c-text-sub);margin-top:.5rem}
+.badge{display:inline-block;padding:.22rem .55rem;border-radius:20px;font-size:.7rem;font-weight:700}
+.b-danger{background:var(--c-danger-light);color:var(--c-danger)}
+.b-success{background:var(--c-success-light);color:var(--c-success)}
+.b-warn{background:var(--c-accent-light);color:#92400e}
+.b-info{background:var(--c-info-light);color:var(--c-info)}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.8rem;margin:1rem 0}
+.kpi{background:#fff;border:1px solid var(--c-border);border-radius:var(--radius);padding:1rem;text-align:center}
+.kpi .v{font-size:1.5rem;font-weight:800;color:var(--c-primary)}
+.kpi .v.danger{color:var(--c-danger)}
+.kpi .v.success{color:var(--c-success)}
+.kpi .l{font-size:.75rem;color:var(--c-text-sub);margin-top:.2rem}
+.tldr{background:#1e293b;color:#e2e8f0;border-radius:var(--radius);padding:1.4rem 1.6rem;margin:1rem 0}
+.tldr strong{color:#fff}.tldr .hl{color:var(--c-accent);font-weight:700}
+.funnel .step{background:#fff;border:1px solid var(--c-border);border-radius:var(--radius);padding:.65rem 1rem;margin:.3rem 0;display:flex;justify-content:space-between;align-items:center}
+.funnel .arrow{text-align:center;color:var(--c-text-sub);font-size:.8rem;padding:.1rem}
+.stage{margin:0 auto;color:#fff;border-radius:6px;padding:.7rem 1rem;text-align:center}
+.stage .name{font-size:.8rem;opacity:.92;font-weight:600}
+.stage .num{font-size:1.35rem;font-weight:800;line-height:1.2}
+.stage .sub{font-size:.72rem;opacity:.85}
+.s1{width:100%;background:#334155}
+.s2{width:82%;background:#1d4ed8}
+.s3{width:62%;background:#2563eb}
+.s4{width:42%;background:#d97706}
+.s5{width:24%;background:#dc2626}
+.conv{text-align:center;font-size:.78rem;color:var(--c-text-sub);padding:.35rem 0;font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hero">
+  <div class="hero-label">Marketing Plan ／ 実測ベース全面改訂版</div>
+  <h1>新マーケティング計画【実測ベース】</h1>
+  <div class="hero-sub">ホリエモンAI学校 介護校／法人向けAI研修　― 当初計画を破棄し、運用2ヶ月の実測値から再構築 ―</div>
+  <div class="hero-meta">実測期間：2026/4/7〜6/8（W1〜W9）　／　作成日：2026/6/9　／　計画の定数＝実測値（願望値は使わない）</div>
+</div>
+
+<!-- 00 考え方 -->
+<section>
+  <h2><span class="section-num">00</span>この計画の考え方</h2>
+  <div class="tldr">
+    <p>当初計画は「商談化20%・成約30%」という<strong>未検証の願望値</strong>で逆算されていた。本計画は、運用2ヶ月で<strong>実際に出た数字を“定数”として固定</strong>し、そこからKGI・予算・ロードマップを組み直す。</p>
+    <p>実測の核心：<span class="hl">1成約あたりの広告費 ¥570,000</span> に対し、許容CPA上限は ¥307,000。<strong>現状の歩留まりでは、1成約を取るコストが許容上限の1.86倍</strong>。集客は安いが、商談・成約に変わらないため、1件の重みが極端に大きい。</p>
+    <p>結論：<span class="hl">いまは広告を増やす局面ではない</span>。同じ予算のままチャネルを最効率に寄せ、薄い利益を確実に黒字化させるのが本計画の骨子。年間目標も実測から引き直す。</p>
+  </div>
+</section>
+
+<!-- 01 新KGI -->
+<section>
+  <h2><span class="section-num">01</span>新KGI（実測から逆算した現実的目標）</h2>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="v success">年1,500万円</div><div class="l">FC売上目標（12ヶ月）</div></div>
+    <div class="kpi"><div class="v">月1.5件</div><div class="l">必要成約数</div></div>
+    <div class="kpi"><div class="v">月90万円</div><div class="l">推奨広告予算</div></div>
+    <div class="kpi"><div class="v">約450万円</div><div class="l">想定年間粗利</div></div>
+  </div>
+  <p>現行レート（商談化4%・成約率12%）と、最効率チャネル配分（後述）を前提に、<strong>持続可能で確実に黒字</strong>の水準として設定。当初の年7,500万円は実測の約15倍の歩留まりを必要とし、現データからは達成根拠がないため取り下げる。</p>
+  <table>
+    <thead><tr><th>水準</th><th>前提</th><th>月成約</th><th>年FC売上</th><th>年粗利</th></tr></thead>
+    <tbody>
+      <tr><th>下限（現状維持）</th><td>月75万・現行レート</td><td>1.3件</td><td>約1,260万円</td><td>約360万円</td></tr>
+      <tr class="row-highlight"><th>新KGI（推奨）</th><td>月90万・最効率配分</td><td>1.5件</td><td>約1,500万円</td><td>約450万円</td></tr>
+      <tr><th>上振れ</th><td>月75万・商談化6〜8%へ改善</td><td>2.0〜2.6件</td><td>1,900〜2,500万円</td><td>—</td></tr>
+    </tbody>
+  </table>
+  <p class="note">成約率は確定1件＋進行中3件（商談15件）で判定途上のため、計画定数は中位12%（決着分8%〜進行中込20%のレンジ）。3件のクローズ結果が出れば再設定する。</p>
+</section>
+
+<!-- 02 ユニットエコノミクス -->
+<section>
+  <h2><span class="section-num">02</span>計画の定数：実測ユニットエコノミクス</h2>
+  <p>すべての数字はW1〜W9の実測。これを計画の前提に固定する。</p>
+  <table>
+    <thead><tr><th>定数</th><th>実測値</th><th>備考</th></tr></thead>
+    <tbody>
+      <tr><th>CPL（リード単価）</th><td class="cell-success">¥2,736</td><td>全体実測。目標5,000〜15,000円を大幅クリア</td></tr>
+      <tr><th>商談化率（リード→商談）</th><td class="cell-danger">約4%</td><td>W1〜W7：商談15件/リード351（4.3%）</td></tr>
+      <tr><th>成約率（商談→成約）</th><td class="cell-warn">12%（中位）</td><td>確定8%〜進行中込20%。判定途上</td></tr>
+      <tr><th>契約単価（FC取り分）</th><td>¥800,000</td><td>平均受講5名相当（暫定）</td></tr>
+      <tr><th>許容CPA上限</th><td>¥307,000</td><td>報告書の基準値</td></tr>
+    </tbody>
+  </table>
+  <h3>1成約あたりの採算（最重要）</h3>
+  <table>
+    <thead><tr><th>成約率シナリオ</th><th>リード→成約</th><th>1成約あたり広告費</th><th>粗利/成約</th><th>ROAS</th><th>許容CPAとの比</th></tr></thead>
+    <tbody>
+      <tr><th>保守（決着9%）</th><td>0.36%</td><td class="cell-danger">¥760,000</td><td>¥40,000</td><td>1.05</td><td class="cell-danger">2.48倍 超過</td></tr>
+      <tr class="row-highlight"><th>中位（12%）</th><td>0.48%</td><td>¥570,000</td><td>¥230,000</td><td>1.40</td><td class="cell-warn">1.86倍 超過</td></tr>
+      <tr><th>上振れ（20%）</th><td>0.80%</td><td>¥342,000</td><td>¥458,000</td><td>2.34</td><td>1.11倍</td></tr>
+    </tbody>
+  </table>
+  <div class="card danger">
+    <strong>この計画が直視すべき事実</strong>
+    <p>現状レートでは、1成約を取るのに<strong>¥570,000の広告費</strong>がかかり、許容上限¥307,000を大きく超える。保守シナリオではROAS1.05＝ほぼ損益分岐。<strong>「リードは安いのに、1成約は高い」</strong>＝薄利体質。だからこそ、リードを増やす前に「1件あたりの採算」を改善することが計画の中心になる。</p>
+  </div>
+</section>
+
+<!-- 03 予算別シナリオ -->
+<section>
+  <h2><span class="section-num">03</span>予算別シナリオ（現行レート固定）</h2>
+  <p>商談化4%・成約率12%・CPL¥2,736を固定したまま予算を変えたときの到達。レートが同じなら粗利率は約29%で一定（CPLが安いため黒字は出るが薄い）。</p>
+  <table>
+    <thead><tr><th>月予算</th><th>リード/月</th><th>商談/月</th><th>成約/月</th><th>FC売上/月</th><th>粗利/月</th><th>年FC売上</th></tr></thead>
+    <tbody>
+      <tr><th>50万円</th><td>183</td><td>7.3</td><td>0.9</td><td>70万</td><td>20万</td><td>約842万</td></tr>
+      <tr class="row-highlight"><th>75万円（現状）</th><td>274</td><td>11.0</td><td>1.3</td><td>105万</td><td>30万</td><td>約1,260万</td></tr>
+      <tr><th>100万円</th><td>365</td><td>14.6</td><td>1.8</td><td>140万</td><td>40万</td><td>約1,680万</td></tr>
+      <tr><th>150万円</th><td>548</td><td>21.9</td><td>2.6</td><td>211万</td><td>61万</td><td>約2,530万</td></tr>
+    </tbody>
+  </table>
+  <blockquote>予算を倍にすれば売上も倍になるが、粗利率は29%のまま。しかも実測ではMeta常設のCPMが飽和傾向（W3¥3,087→W9¥5,097）で、予算増はCPL悪化を招きやすい。<strong>＝予算スケールは「効率の良い薄利を増やす」だけで、根本改善にならない。</strong></blockquote>
+
+  <h3>同じ予算で「商談化」を上げた場合（最も投資効率の高い打ち手）</h3>
+  <table>
+    <thead><tr><th>商談化率</th><th>成約/月（予算75万）</th><th>年FC売上</th><th>1成約あたり広告費</th></tr></thead>
+    <tbody>
+      <tr><th>4%（現状）</th><td>1.3件</td><td>約1,260万</td><td>¥570,000</td></tr>
+      <tr><th>6%</th><td>2.0件</td><td>約1,900万</td><td>¥380,000</td></tr>
+      <tr class="row-highlight"><th>8%</th><td>2.6件</td><td>約2,530万</td><td class="cell-success">¥285,000（許容内）</td></tr>
+    </tbody>
+  </table>
+  <p class="note">予算を1円も増やさず、商談化を4%→8%にするだけで、150万円に増額したのと同じ成約数になり、かつ1成約あたり広告費が許容CPA内に収まる。<strong>予算より歩留まりが効く</strong>ことが実測から定量的に示される。</p>
+
+  <h3>目標成約数から逆算（現行レートで量を積む場合の上部ファネル）</h3>
+  <p>レートを改善せず、現行の<strong>商談化4%・成約率12%</strong>のまま目標成約数を取りにいく場合、上部ファネルがどこまで必要かを逆算する。出発点は「<strong>1成約＝リード208件・広告費¥570,000・LP訪問(クリック)約7,440</strong>」。これを目標成約数だけ積み上げる。</p>
+
+  <div class="funnel">
+    <div class="stage s1"><div class="name">広告費</div><div class="num">約342万円／月</div></div>
+    <div class="conv">▼ CPC（クリック単価）</div>
+    <div class="stage s2"><div class="name">LP訪問（クリック）</div><div class="num">約44,600／月</div></div>
+    <div class="conv">▼ LP CVR 2.8%</div>
+    <div class="stage s3"><div class="name">リード獲得</div><div class="num">1,250件／月</div><div class="sub">現状の約4.6倍</div></div>
+    <div class="conv">▼ 商談化率 4%（現状のまま）</div>
+    <div class="stage s4"><div class="name">商談</div><div class="num">50件／月</div></div>
+    <div class="conv">▼ 成約率 12%（現状のまま）</div>
+    <div class="stage s5"><div class="name">成約（目標）</div><div class="num">6件／月</div><div class="sub">FC売上 480万円</div></div>
+  </div>
+  <p class="note">↑ 目標成約（月6件＝落としどころ相当）から、現行レート（商談化4%・成約率12%）で逆算した上部ファネル。必要リードは1,250件/月＝現状の約4.6倍。下表は他の目標成約数のケース。</p>
+
+  <table>
+    <thead><tr><th>月成約</th><th>商談</th><th>リード/月</th><th>LP訪問(クリック)/月</th><th>広告費/月</th><th>FC売上/月</th><th>粗利/月</th><th>ROAS</th></tr></thead>
+    <tbody>
+      <tr><th>1.3（現状実績）</th><td>11</td><td>約274</td><td>約9,700</td><td>約75万</td><td>104万</td><td>30万</td><td>1.40</td></tr>
+      <tr class="row-highlight"><th>6（落としどころ相当）</th><td>50</td><td>1,250</td><td>約44,600</td><td>約342万</td><td>480万</td><td>138万</td><td>1.40</td></tr>
+      <tr><th>8</th><td>67</td><td>1,667</td><td>約59,500</td><td>約456万</td><td>640万</td><td>184万</td><td>1.40</td></tr>
+      <tr class="row-highlight"><th>10（KGI相当）</th><td>83</td><td>2,083</td><td>約74,400</td><td>約570万</td><td>800万</td><td>230万</td><td>1.40</td></tr>
+    </tbody>
+  </table>
+  <div class="card danger">
+    <strong>机上は黒字だが、現実性に壁がある</strong>
+    <p>ROASは常に1.40で赤字ではない。しかし<strong>①必要リードが現状の約4.6倍（月6）〜7.6倍（月10）</strong>。今の274リードでもMeta常設のCPMは飽和傾向（¥3,000→¥5,000）で、リードを5〜8倍に増やすとCPMが跳ね、<strong>CPLが¥2,736では収まらず</strong>1成約コストが¥570,000を超えて薄利が消えるリスクが高い。<strong>②1成約あたり広告費¥570,000は許容CPA¥307,000の1.9倍</strong>でもともと理想ラインの外。③悲観の成約率9%で見ると、月10成約に<strong>リード2,778件・広告費760万</strong>とさらに重くなる。</p>
+  </div>
+  <p class="note">比較：商談化を4%→8%に改善すれば、<strong>同じ月6成約を予算約105万円</strong>で取れる（下のファネル）。量で押すと3倍以上の予算がかかる＝<strong>レート改善のほうが圧倒的に投資効率が高い</strong>。これが「まず歩留まりを直す」を選ぶ理由。</p>
+
+  <h3>現実的な場合（歩留まりを改善＝落としどころ）の逆算ファネル</h3>
+  <p>同じ月6成約でも、<strong>商談化を8%・成約率を20%に改善</strong>すると、必要なリード・広告費が激減する。出発点は「<strong>1成約＝リード62.5件・広告費約17万円</strong>」（現状レートの約1/3）。</p>
+  <div class="funnel">
+    <div class="stage s1"><div class="name">広告費</div><div class="num">約103万円／月</div></div>
+    <div class="conv">▼ CPC（クリック単価）</div>
+    <div class="stage s2"><div class="name">LP訪問（クリック）</div><div class="num">約13,400／月</div></div>
+    <div class="conv">▼ LP CVR 2.8%</div>
+    <div class="stage s3"><div class="name">リード獲得</div><div class="num">375件／月</div><div class="sub">現状の約1.4倍</div></div>
+    <div class="conv">▼ 商談化率 8%（改善）</div>
+    <div class="stage s4"><div class="name">商談</div><div class="num">30件／月</div></div>
+    <div class="conv">▼ 成約率 20%（改善）</div>
+    <div class="stage s5"><div class="name">成約（目標）</div><div class="num">6件／月</div><div class="sub">FC売上 480万円</div></div>
+  </div>
+  <div class="card success">
+    <strong>同じ成果が約1/3の規模で取れる</strong>
+    <p>月6成約は同じでも、必要リードは <strong>1,250件 → 375件</strong>、広告費は <strong>約342万円 → 約103万円</strong>に縮小。1成約あたり広告費も <strong>¥570,000 → 約¥171,000</strong>で許容CPA（¥307,000）内に収まる。CPMの飽和リスクも小さく、現実的に到達できる規模。<strong>「量で押す」より「歩留まりを直す」が正解</strong>であることが、2つのファネルの対比で分かる。</p>
+  </div>
+</section>
+
+<!-- 04 チャネル戦略 -->
+<section>
+  <h2><span class="section-num">04</span>チャネル戦略（実測効率順に再配分）</h2>
+  <p>実測CPL順に「伸ばす／絞る／止める」を機械的に決める。願望でなく数字で配分する。</p>
+  <table>
+    <thead><tr><th>チャネル</th><th>実測CPL</th><th>方針</th></tr></thead>
+    <tbody>
+      <tr><th>Meta 常設・ClaudeCode開発講座 <span class="badge b-warn">別商材</span></th><td class="cell-success">¥1,672</td><td><span class="badge b-success">主軸・最効率</span> 全枠で最安。ClaudeCode事業の集客。<strong>現状すでに稼働中</strong>＝このまま継続・スケール候補</td></tr>
+      <tr><th>Meta ウェビナー（介護校）</th><td class="cell-success">¥1,977</td><td><span class="badge b-success">主軸</span> 配分を最大に。最効率かつCVR7.8%</td></tr>
+      <tr><th>Meta 常設・介護校LP</th><td>¥2,969</td><td><span class="badge b-info">維持＋是正</span> ¥15,000/日へ戻しオーディエンス刷新（CPM飽和対策）</td></tr>
+      <tr><th>Google 常設（介護校）</th><td>¥4,032</td><td><span class="badge b-warn">停止中</span> 現在は配信停止。Meta不調時の保険として再開は選択肢だが、当面は計画に含めない</td></tr>
+      <tr><th>Google ウェビナー</th><td class="cell-danger">¥7,584</td><td><span class="badge b-danger">停止維持</span></td></tr>
+      <tr><th>LINE</th><td class="cell-danger">CV0</td><td><span class="badge b-danger">停止維持</span> 計測タグ・LP・フォームを実機検証してから再開可否判断</td></tr>
+    </tbody>
+  </table>
+  <div class="card success">
+    <strong>同じ予算でリードが増える</strong>
+    <p>ウェビナー60%＋常設介護校40%へ寄せると、ブレンドCPLは¥2,736→<strong>約¥2,374</strong>。月75万円でリードが<strong>274件→約316件（+42件）</strong>。さらにLINEの無駄打ち（¥127,131・総消費の8%）を止めれば実質予算が増える。</p>
+  </div>
+</section>
+
+<!-- 05 予算案 -->
+<section>
+  <h2><span class="section-num">05</span>予算案（推奨：月90万円・最効率配分）</h2>
+  <table>
+    <thead><tr><th>項目</th><th>月額</th><th>狙い</th></tr></thead>
+    <tbody>
+      <tr><th>Meta ウェビナー</th><td>54万円（60%）</td><td>最効率の主軸。次回ウェビナー集客を強化</td></tr>
+      <tr><th>Meta 常設・介護校LP</th><td>27万円（30%）</td><td>母数確保。¥15,000/日＋オーディエンス刷新</td></tr>
+      <tr><th>Meta 常設・ClaudeCode開発講座</th><td>9万円（10%）</td><td class="cell-success">現状すでに稼働中の最安枠（CPL¥1,672）＝ClaudeCode事業の集客</td></tr>
+      <tr class="row-total"><th>合計</th><td>90万円</td><td>LINE・Google（常設/ウェビナー）は停止中のため計上しない</td></tr>
+    </tbody>
+  </table>
+  <p class="note">リードは余っているため、当面は90万円を上限とし増額しない。商談化が安定して6%を超えた段階で、はじめて増額（または専任採用）を検討する。</p>
+  <div class="card accent">
+    <strong>ClaudeCode枠でやること</strong>
+    <ul>
+      <li>ClaudeCodeは現状稼働中のまま継続（最安枠 CPL¥1,672）。</li>
+      <li>週次テンプレのClaudeCode行で商談・成約を商材別に記録し、安いリードが売上になるか計測する。</li>
+      <li>成約が確認できたら増額。Meta不調時の分散が必要なら、停止中のGoogle常設の再開を検討。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 06 ロードマップ -->
+<section>
+  <h2><span class="section-num">06</span>ロードマップ（実測ベース）</h2>
+  <table>
+    <thead><tr><th>期間</th><th>テーマ</th><th>やること</th><th>到達目安</th></tr></thead>
+    <tbody>
+      <tr><th>0〜1ヶ月</th><td>無駄排除と計測</td><td>LINE停止／CV0自動停止ルール／チャネルをウェビナー主軸へ／商談・成約をMetaにオフラインCV連携／歩留まり週次計測の再開</td><td>ブレンドCPL ¥2,400台・実質予算+8%</td></tr>
+      <tr><th>1〜3ヶ月</th><td>1成約あたり採算の改善</td><td>進行中3商談のクローズ管理／失注理由ログ化／商談化を4%→6%（初動フォロー速度・予約導線）</td><td>成約 月1.3→2件・1成約広告費¥380,000</td></tr>
+      <tr><th>4〜6ヶ月</th><td>黒字の安定化</td><td>成約率を事例蓄積・助成金ワンストップで底上げ／月90万で安定運用</td><td>年換算1,500万円ペース・粗利安定</td></tr>
+      <tr><th>7ヶ月〜</th><td>拡大の判断</td><td>商談化が6%超で安定したら、増額 or 商談専任の追加を検討（採算が許容CPA内に入って初めて拡大）</td><td>次の成長フェーズへ</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 07 効果測定 -->
+<section>
+  <h2><span class="section-num">07</span>効果測定（KPIと判定基準）</h2>
+  <table>
+    <thead><tr><th>KPI</th><th>現状</th><th>3ヶ月目標</th><th>判定</th></tr></thead>
+    <tbody>
+      <tr><th>ブレンドCPL</th><td>¥2,736</td><td>¥2,400台</td><td>月次</td></tr>
+      <tr><th>商談化率</th><td class="cell-danger">約4%（4.3%）</td><td>6%</td><td><strong>最重要・週次</strong></td></tr>
+      <tr><th>成約率</th><td>約9〜12%</td><td>15%</td><td>月次（パイプライン管理）</td></tr>
+      <tr><th>1成約あたり広告費</th><td>¥570,000</td><td>¥380,000</td><td>月次</td></tr>
+      <tr><th>月成約数</th><td>1.3件</td><td>2件</td><td>月次</td></tr>
+    </tbody>
+  </table>
+  <ul>
+    <li><strong>オフラインCV連携</strong>：商談・成約をMetaに返し、広告を“商談につながるリード”に最適化（安いだけのリードへの最適化を脱却）。</li>
+    <li><strong>商談ログに流入元（媒体・キャンペーン・v1/v2）を記録</strong>：A/BをCPLでなく商談単価で評価。</li>
+    <li><strong>成約パイプラインのステータス管理</strong>：進行中3件を含め、長いリードタイム（1〜3ヶ月）の案件を取りこぼさない。</li>
+  </ul>
+</section>
+
+<!-- 08 統合版 -->
+<section>
+  <h2><span class="section-num">08</span>統合版：介護校＋ClaudeCodeを1事業として</h2>
+  <p>介護校（AI研修）とClaudeCode開発講座を1つの事業として扱う。設計は<strong>「上流（広告→リード）は合算、下流（成約→売上）は商材別に計上して合算」</strong>。単価も成約率も商材で違うため、下流だけ分けるのが正しい組み方。</p>
+  <div class="card accent">
+    <strong>前提（ClaudeCodeは仮置き・データ蓄積で差し替え）</strong>
+    <ul>
+      <li>ClaudeCode契約単価：<strong>65万円（仮）</strong>。実態は40〜90万円のレンジで、まだ実績データなし。</li>
+      <li>ClaudeCodeの商談化率・成約率：当面<strong>介護校と同じ（商談化4%・成約12%）</strong>と仮置き。週次テンプレで商材別に成約を記録して確定する。</li>
+    </ul>
+  </div>
+  <h3>上流は合算（実データ）／下流は商材別 → 合算</h3>
+  <table>
+    <thead><tr><th>商材</th><th>リード/月</th><th>消費/月</th><th>CPL</th><th>想定成約/月</th><th>契約単価</th><th>想定売上/月</th></tr></thead>
+    <tbody>
+      <tr><th>介護校（AI研修）</th><td>244</td><td>約70万</td><td>¥2,874</td><td>1.17</td><td>80万</td><td>約94万</td></tr>
+      <tr><th>ClaudeCode開発講座</th><td>32</td><td>約5万</td><td class="cell-success">¥1,672</td><td>0.15</td><td>40〜90万（仮65）</td><td>約6〜14万</td></tr>
+      <tr class="row-total"><th>事業全体（合算）</th><td>276</td><td>約76万</td><td>¥2,736</td><td>1.32</td><td>—</td><td>約104万</td></tr>
+    </tbody>
+  </table>
+  <p class="note">※現行レート（商談化4%・成約12%）での試算。数値は運用2ヶ月実績の月換算。ClaudeCode売上は単価40/65/90万でのレンジ。</p>
+  <div class="card success">
+    <strong>ClaudeCodeは「最も安いリード源」＝スケール候補</strong>
+    <p>ClaudeCodeのCPLは<strong>¥1,672</strong>で、介護校（¥2,874）より<strong>約4割安い</strong>。今はリードが月32件と小さいが、ここを増やせば事業全体のリード単価を押し下げられる。<strong>事業全体の成長レバーは2つ</strong>：①介護校の歩留まり改善（商談化4%→8%＝本計画の主軸）、②ClaudeCodeの安いリードを増やす（要・単価と成約率の実データ確定）。</p>
+  </div>
+  <p class="note">統合KGIは「介護校売上＋ClaudeCode売上」。ただしClaudeCodeは単価・成約率が未確定のため、まず<strong>週次テンプレで商材別に商談・成約を記録</strong>して実データを貯め、確定後に統合KGIを数値で固定する。それまでは介護校の数字を主、ClaudeCodeを成長枠として扱う。</p>
+</section>
+
+<!-- 09 リスク -->
+<section style="border:none">
+  <h2><span class="section-num">09</span>前提・リスク</h2>
+  <ul>
+    <li><strong>成約率は判定途上</strong>：確定1件のため定数12%は仮。進行中3件の結果で上下する。最初の見直しトリガー。</li>
+    <li><strong>契約単価80万円は暫定</strong>：実績の平均が出れば全数字を再計算（売上・採算が比例して動く）。</li>
+    <li><strong>ClaudeCodeは単価・成約率が未確定</strong>：単価は40〜90万（仮65万）、成約率は介護校と同一前提で仮置き。商材別の商談・成約データが貯まり次第、統合KGIを確定する。</li>
+    <li><strong>CPM飽和</strong>：Meta常設のCPMが上昇傾向。オーディエンス刷新を怠ると同じ予算でリードが減る。</li>
+    <li><strong>商談キャパ</strong>：兼任1〜2名のため、商談は月25〜30件が実質上限。これを超える成長には人手の追加が前提。</li>
+    <li>本計画は当初計画（marketing-plan.html）を置き換える実測ベースの新版。願望値での逆算は行わない。</li>
+  </ul>
+</section>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>現状ファネル設計（実測ベース）｜介護校マーケティング</title>
+<style>
+:root{
+--c-bg:#f5f6fa;--c-surface:#fff;--c-text:#1a1a2e;--c-text-sub:#555;
+--c-primary:#2563eb;--c-primary-light:#dbeafe;
+--c-accent:#f59e0b;--c-accent-light:#fef3c7;
+--c-success:#16a34a;--c-success-light:#dcfce7;
+--c-danger:#dc2626;--c-danger-light:#fee2e2;
+--c-info:#0891b2;--c-info-light:#cffafe;
+--c-border:#e2e8f0;--radius:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Noto Sans JP","Hiragino Sans",sans-serif;color:var(--c-text);background:var(--c-bg);line-height:1.7;font-size:15px}
+.wrap{max-width:920px;margin:0 auto;padding:0 0 5rem}
+.hero{background:linear-gradient(135deg,#1e293b 0%,#334155 100%);color:#fff;padding:3rem}
+.hero-label{font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--c-accent);margin-bottom:.6rem;font-weight:700}
+.hero h1{font-size:1.7rem;font-weight:800;line-height:1.4;margin-bottom:.7rem}
+.hero-sub{font-size:.95rem;color:#cbd5e1}
+.hero-meta{font-size:.8rem;color:#94a3b8;margin-top:.9rem}
+section{padding:2.4rem 3rem;border-bottom:1px solid var(--c-border)}
+section:nth-child(even){background:#fff}
+h2{font-size:1.35rem;font-weight:800;margin-bottom:1.2rem;padding-bottom:.5rem;border-bottom:2px solid var(--c-border)}
+.section-num{color:var(--c-primary);margin-right:.5rem;font-size:1rem;font-weight:800}
+h3{font-size:1.05rem;font-weight:700;margin:1.4rem 0 .7rem}
+p{margin:.5rem 0}
+table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.85rem}
+thead th{background:#f1f5f9;font-weight:700;text-align:left;padding:.55rem .7rem;border-bottom:2px solid var(--c-border)}
+tbody td,tbody th{padding:.5rem .7rem;border-bottom:1px solid var(--c-border);text-align:left}
+tbody th{font-weight:600;background:#f8fafc}
+.row-total td,.row-total th{font-weight:700;background:#f1f5f9;border-top:2px solid var(--c-border)}
+.cell-danger{color:var(--c-danger);font-weight:700}
+.cell-success{color:var(--c-success);font-weight:700}
+.cell-warn{color:#92400e;font-weight:700}
+.note{font-size:.8rem;color:var(--c-text-sub);margin-top:.5rem}
+.badge{display:inline-block;padding:.22rem .55rem;border-radius:20px;font-size:.7rem;font-weight:700}
+.b-danger{background:var(--c-danger-light);color:var(--c-danger)}
+.b-success{background:var(--c-success-light);color:var(--c-success)}
+.b-warn{background:var(--c-accent-light);color:#92400e}
+.b-info{background:var(--c-info-light);color:var(--c-info)}
+.card{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius);padding:1rem 1.3rem;margin:1rem 0;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.card.danger{border-left:4px solid var(--c-danger);background:#fff8f8}
+.card.info{border-left:4px solid var(--c-info);background:#f5fdff}
+
+/* funnel */
+.funnel{margin:1.5rem 0}
+.stage{margin:0 auto;color:#fff;border-radius:6px;padding:.8rem 1rem;text-align:center;position:relative}
+.stage .name{font-size:.8rem;opacity:.92;font-weight:600}
+.stage .num{font-size:1.45rem;font-weight:800;line-height:1.2}
+.stage .sub{font-size:.72rem;opacity:.85}
+.s1{width:100%;background:#334155}
+.s2{width:84%;background:#1d4ed8}
+.s3{width:66%;background:#2563eb}
+.s4{width:44%;background:#d97706}
+.s5{width:26%;background:#dc2626}
+.conv{text-align:center;font-size:.8rem;color:var(--c-text-sub);padding:.45rem 0;font-weight:600}
+.conv .rate{color:var(--c-text);font-weight:800}
+.conv .drop{color:var(--c-danger);font-weight:700}
+.conv .ok{color:var(--c-success);font-weight:700}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.7rem;margin:1rem 0}
+.kpi{background:#fff;border:1px solid var(--c-border);border-radius:var(--radius);padding:.9rem;text-align:center}
+.kpi .v{font-size:1.35rem;font-weight:800;color:var(--c-primary)}
+.kpi .v.danger{color:var(--c-danger)}
+.kpi .v.success{color:var(--c-success)}
+.kpi .l{font-size:.73rem;color:var(--c-text-sub);margin-top:.2rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hero">
+  <div class="hero-label">現状ファネル設計 ／ As-Is</div>
+  <h1>現状ファネル設計（実測ベース）</h1>
+  <div class="hero-sub">ホリエモンAI学校 介護校／改善前の実態をそのまま可視化したベースライン</div>
+  <div class="hero-meta">対象：2026/4/7〜6/8（W1〜W9・約2.1ヶ月）　／　数値はMarketingレポートW9確定値　／　契約単価 約80万円前提</div>
+</div>
+
+<!-- サマリーKPI -->
+<section>
+  <h2><span class="section-num">01</span>現状サマリー</h2>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="v">¥755,563</div><div class="l">月あたり広告費</div></div>
+    <div class="kpi"><div class="v success">276件</div><div class="l">月あたりリード</div></div>
+    <div class="kpi"><div class="v success">¥2,736</div><div class="l">CPL（リード単価）</div></div>
+    <div class="kpi"><div class="v danger">4.0%</div><div class="l">商談化率</div></div>
+    <div class="kpi"><div class="v danger">約9%</div><div class="l">成約率（決着分）</div></div>
+    <div class="kpi"><div class="v danger">1件</div><div class="l">成約（2ヶ月累計）</div></div>
+  </div>
+  <p class="note">数値は月あたり換算（2.08ヶ月で割戻し）。成約はリードタイムが長く（1〜3ヶ月）、現時点で確定1件＋進行中3件のため判定途上。</p>
+</section>
+
+<!-- ファネル本体 -->
+<section>
+  <h2><span class="section-num">02</span>現状ファネル（全体・月あたり）</h2>
+  <div class="funnel">
+
+    <div class="stage s1">
+      <div class="name">広告費（有効分・Meta＋Google）</div>
+      <div class="num">¥694,000 / 月</div>
+      <div class="sub">総額¥755,563（うちLINE ¥61,000はCV0の無駄打ち）</div>
+    </div>
+    <div class="conv">▼ LP訪問へ</div>
+
+    <div class="stage s2">
+      <div class="name">LP訪問（広告クリック）</div>
+      <div class="num">約9,800 / 月</div>
+      <div class="sub">2ヶ月累計 20,296クリック（LINEの空クリック10万は除外）</div>
+    </div>
+    <div class="conv">▼ LP CVR <span class="rate">2.8%</span> ｜ 計画前提 4〜5% → <span class="drop">やや未達</span></div>
+
+    <div class="stage s3">
+      <div class="name">リード（ウェビナー申込・資料請求）</div>
+      <div class="num">276件 / 月</div>
+      <div class="sub">2ヶ月累計 574件　CPL ¥2,736</div>
+    </div>
+    <div class="conv">▼ 商談化率 <span class="rate">4.0%</span> ｜ 計画前提 20〜25% → <span class="drop">大幅未達（約1/5）</span></div>
+
+    <div class="stage s4">
+      <div class="name">商談（Web会議実施）</div>
+      <div class="num">約11件 / 月</div>
+      <div class="sub">W1〜W7実測 14件（W8・W9はログ未取得）</div>
+    </div>
+    <div class="conv">▼ 成約率 <span class="rate">約9%</span> ｜ 計画前提 30% → <span class="drop">未達（判定途上）</span></div>
+
+    <div class="stage s5">
+      <div class="name">成約（法人契約）</div>
+      <div class="num">約1件 / 月</div>
+      <div class="sub">2ヶ月で確定1件＋進行中3件　FC売上 約80万円</div>
+    </div>
+  </div>
+
+  <div class="card danger">
+    <strong>ボトルネックは一目瞭然：リード→商談（4.0%）</strong>
+    <p>上流（LP訪問・リード・CPL）は計画水準を満たすか超えている。落差が一気に開くのは<strong>リード→商談</strong>の段（計画20%に対し実測4%）。次が商談→成約（9%）。<strong>「リードは取れているが商談に変わらない」</strong>が現状の構造。</p>
+  </div>
+</section>
+
+<!-- 段ごとの実測vs計画 -->
+<section>
+  <h2><span class="section-num">03</span>各段の転換率：実測 vs 計画前提</h2>
+  <table>
+    <thead><tr><th>段</th><th>指標</th><th>実測</th><th>計画前提</th><th>判定</th></tr></thead>
+    <tbody>
+      <tr><th>訪問→リード</th><td>LP CVR</td><td>2.8%</td><td>4〜5%</td><td><span class="badge b-warn">やや未達</span></td></tr>
+      <tr><th>—</th><td>CPL</td><td class="cell-success">¥2,736</td><td>5,000〜15,000円</td><td><span class="badge b-success">大幅クリア</span></td></tr>
+      <tr><th>—</th><td>リード数／月</td><td class="cell-success">276件</td><td>130〜170件</td><td><span class="badge b-success">超過</span></td></tr>
+      <tr><th>リード→商談</th><td>商談化率</td><td class="cell-danger">4.0%</td><td>20〜25%</td><td><span class="badge b-danger">大幅未達</span></td></tr>
+      <tr><th>商談→成約</th><td>成約率</td><td class="cell-danger">約9%</td><td>30%</td><td><span class="badge b-warn">判定途上</span></td></tr>
+      <tr class="row-total"><th>リード→成約</th><td>通し転換</td><td class="cell-danger">約0.3%</td><td>6%</td><td><span class="badge b-danger">計画の約1/20</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- チャネル内訳 -->
+<section>
+  <h2><span class="section-num">04</span>リードはどこから来ているか（チャネル内訳・2ヶ月累計）</h2>
+  <table>
+    <thead><tr><th>チャネル</th><th>消費</th><th>リード(CV)</th><th>CPL</th><th>LP CVR</th><th>評価</th></tr></thead>
+    <tbody>
+      <tr><th>Meta ウェビナー</th><td>¥417,075</td><td class="cell-success">211</td><td class="cell-success">¥1,977</td><td>7.76%</td><td><span class="badge b-success">主力・最効率</span></td></tr>
+      <tr><th>Meta 常設・介護校LP</th><td>¥846,183</td><td>285</td><td>¥2,969</td><td>1.85%</td><td><span class="badge b-info">最大の母数・CPM飽和気味</span></td></tr>
+      <tr><th>Meta 常設・ClaudeCode <span class="badge b-warn">別商材</span></th><td>¥110,372</td><td>66</td><td>¥1,672</td><td>4.81%</td><td><span class="badge b-info">介護校とは別講座</span></td></tr>
+      <tr><th>Google ウェビナー</th><td>¥45,505</td><td>6</td><td class="cell-danger">¥7,584</td><td>1.45%</td><td><span class="badge b-danger">停止済</span></td></tr>
+      <tr><th>Google 常設</th><td>¥24,189</td><td>6</td><td>¥4,032</td><td>1.60%</td><td><span class="badge b-info">目標内・小</span></td></tr>
+      <tr><th>LINE（常設＋ウェビナー）</th><td>¥127,131</td><td class="cell-danger">0</td><td>算出不可</td><td>0.00%</td><td><span class="badge b-danger">CV0・計測疑い</span></td></tr>
+      <tr class="row-total"><th>合計</th><td>¥1,570,455</td><td>574</td><td>¥2,736</td><td>2.8%</td><td>—</td></tr>
+    </tbody>
+  </table>
+  <div class="card info">
+    <strong>読み取れること</strong>
+    <p>リードの大半は<strong>Meta（ウェビナー＋常設介護校で496件）</strong>。最も効率が良いのは<strong>Metaウェビナー（CPL¥1,977・CVR7.8%）</strong>。一方<strong>LINEは¥127,131使ってCV0</strong>（総消費の約8%が無駄＝計測未発火の疑い）。<strong>ClaudeCode（66件）は介護校とは別商材</strong>なので、介護校の純リードは実質508件前後。</p>
+  </div>
+</section>
+
+<!-- 前提・注記 -->
+<section style="border:none">
+  <h2><span class="section-num">05</span>このファネルの前提・注記</h2>
+  <ul style="margin-left:1.3rem">
+    <li>月あたり数値は期間2.08ヶ月で割り戻した換算値。</li>
+    <li>商談14件・歩留まり4.0%はW1〜W7の実測（商談ログ5/24最新、W8・W9未取得）。</li>
+    <li>成約は確定1件＋進行中3件。リードタイムが長いため成約率は今後変動する（決着分9%〜最大29%のレンジ）。</li>
+    <li>「商談」の定義はWeb会議実施ベース。計測の統一が今後の精度向上の前提。</li>
+    <li>LP訪問はLINEの空クリック（CV0・約10万クリック）を除いた有効クリックを採用。</li>
+    <li>契約単価は暫定80万円（平均受講5名相当）。確定値が出れば再計算。</li>
+  </ul>
+</section>
+
+</div>
+</body>
+</html>
