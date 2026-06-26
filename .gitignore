@@ -12,3 +12,7 @@ sns-auto-poster/output/
 
 # Claude Code ローカル設定
 .claude/settings.local.json
+
+# 一時ファイル・ロックファイル（LibreOffice / PDF生成など）
+.~lock.*#
+*.tmp

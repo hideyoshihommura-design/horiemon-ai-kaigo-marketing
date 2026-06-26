@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ゼロベース収益設計｜ホリエモンAI学校 介護校</title>
+<style>
+:root{--c-bg:#f5f6fa;--c-surface:#fff;--c-text:#1a1a2e;--c-text-sub:#555;--c-primary:#2563eb;--c-primary-light:#dbeafe;--c-accent:#f59e0b;--c-accent-light:#fef3c7;--c-success:#16a34a;--c-success-light:#dcfce7;--c-danger:#dc2626;--c-danger-light:#fee2e2;--c-info:#0891b2;--c-border:#e2e8f0;--radius:8px;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Noto Sans JP","Hiragino Sans",sans-serif;color:var(--c-text);background:var(--c-bg);line-height:1.75;font-size:15px}
+.wrap{max-width:960px;margin:0 auto;padding:0 0 5rem}
+.hero{background:linear-gradient(135deg,#1e293b,#334155);color:#fff;padding:3.5rem 3rem}
+.hero-label{font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--c-accent);font-weight:700;margin-bottom:.6rem}
+.hero h1{font-size:1.85rem;font-weight:800;line-height:1.4;margin-bottom:.8rem}
+.hero-sub{font-size:1rem;color:#cbd5e1}.hero-meta{font-size:.8rem;color:#94a3b8;margin-top:1rem}
+section{padding:2.6rem 3rem;border-bottom:1px solid var(--c-border)}section:nth-child(even){background:#fff}
+h2{font-size:1.45rem;font-weight:800;margin-bottom:1.3rem;padding-bottom:.5rem;border-bottom:2px solid var(--c-border)}
+.section-num{color:var(--c-primary);margin-right:.5rem;font-size:1rem;font-weight:800}
+h3{font-size:1.1rem;font-weight:700;margin:1.5rem 0 .7rem}p{margin:.6rem 0}
+table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.85rem}
+thead th{background:#f1f5f9;font-weight:700;text-align:left;padding:.55rem .7rem;border-bottom:2px solid var(--c-border)}
+tbody td,tbody th{padding:.5rem .7rem;border-bottom:1px solid var(--c-border);text-align:left;vertical-align:top}
+tbody th{font-weight:600;background:#f8fafc}
+.row-highlight td,.row-highlight th{font-weight:800;background:var(--c-primary-light)}
+.cell-danger{color:var(--c-danger);font-weight:700}.cell-success{color:var(--c-success);font-weight:700}
+.card{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius);padding:1.1rem 1.4rem;margin:1rem 0;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.card.danger{border-left:4px solid var(--c-danger);background:#fff8f8}.card.success{border-left:4px solid var(--c-success);background:#f8fdf9}.card.accent{border-left:4px solid var(--c-accent)}
+.note{font-size:.8rem;color:var(--c-text-sub);margin-top:.5rem}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.8rem;margin:1rem 0}
+.kpi{background:#fff;border:1px solid var(--c-border);border-radius:var(--radius);padding:1rem;text-align:center}
+.kpi .v{font-size:1.45rem;font-weight:800;color:var(--c-primary)}.kpi .v.success{color:var(--c-success)}.kpi .v.danger{color:var(--c-danger)}
+.kpi .l{font-size:.74rem;color:var(--c-text-sub);margin-top:.2rem}
+.tldr{background:#1e293b;color:#e2e8f0;border-radius:var(--radius);padding:1.4rem 1.6rem;margin:1rem 0}.tldr strong{color:#fff}.tldr .hl{color:var(--c-accent);font-weight:700}
+.funnel{margin:1.3rem 0}.stage{margin:0 auto;color:#fff;border-radius:6px;padding:.65rem 1rem;text-align:center}
+.stage .name{font-size:.72rem;opacity:.9}.stage .num{font-size:1.25rem;font-weight:800;line-height:1.2}.stage .sub{font-size:.7rem;opacity:.85}
+.s1{width:100%;background:#334155}.s2{width:80%;background:#1d4ed8}.s3{width:60%;background:#2563eb}.s4{width:42%;background:#d97706}.s5{width:26%;background:#16a34a}
+.conv{text-align:center;font-size:.76rem;color:var(--c-text-sub);padding:.3rem 0;font-weight:600}
+.pl{font-family:"Noto Sans JP";font-size:.9rem}.pl td{padding:.4rem .7rem;border-bottom:1px solid var(--c-border)}.pl .tot td{font-weight:800;border-top:2px solid var(--c-border);background:#f1f5f9}
+</style>
+</head>
+<body><div class="wrap">
+
+<div class="hero">
+  <div class="hero-label">Zero-Based Profit Design</div>
+  <h1>ゼロベース収益設計<br>― 固定費250万円を踏まえた目標売上〜広告予算の再設計 ―</h1>
+  <div class="hero-sub">「目標 営業利益率」から逆算して、売上・成約・リード・各広告予算まで一気通貫で組み直す</div>
+  <div class="hero-meta">新前提：人件費＋販管費 月250万円（広告費とは別）／作成日 2026/6/19／契約単価 80万円・動画教材販売</div>
+</div>
+
+<section>
+  <h2><span class="section-num">00</span>結論</h2>
+  <div class="tldr">
+    <p>固定費（人件費＋販管費）<span class="hl">月250万円</span>が加わると、収益設計の鍵は「1件の成約をいくらで取れるか」に直結する。</p>
+    <p><strong>現行レート（商談化4%・成約12%）では、そもそも固定費を賄えず赤字。</strong>損益分岐に月10.9成約（広告620万円）が必要で非現実的。</p>
+    <p><strong>商談化8%・成約20%に改善すれば成立する。</strong>目標 売上高営業利益率<span class="hl">20%</span>なら、<span class="hl">月5.5成約・売上442万円（年5,300万円）・広告費104万円</span>で、営業利益 月88万円（年約1,060万円）。</p>
+    <p>＝この事業は「歩留まりを8%／20%へ上げること」が黒字化の絶対条件。広告予算はその上で決まる。</p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="section-num">01</span>新しい前提とコスト構造</h2>
+  <table>
+    <thead><tr><th>項目</th><th>値</th><th>備考</th></tr></thead>
+    <tbody>
+      <tr><th>売上（1成約あたり）</th><td>80万円</td><td>介護校のFC取り分（本部50%控除後）。動画教材販売</td></tr>
+      <tr><th>人件費＋販管費（固定費）</th><td class="cell-danger">月250万円</td><td><strong>今回の新前提</strong>。広告費とは別の固定費</td></tr>
+      <tr><th>広告費（変動費）</th><td>設計対象</td><td>必要成約数×1成約あたり広告費</td></tr>
+      <tr><th>1成約あたり広告費</th><td>¥187,500</td><td>商談化8%×成約20%×CPL¥3,000（＝落としどころレート）</td></tr>
+      <tr><th>1成約あたり貢献利益</th><td class="cell-success">¥612,500</td><td>売上80万 − 広告¥187,500</td></tr>
+    </tbody>
+  </table>
+  <div class="card accent">
+    <strong>「売上高利益率」の置き方</strong>
+    <p>動画教材・オンライン講座は<strong>粗利率70〜90%</strong>と高いのが業界特性だが、それは固定費前の粗利。本事業は「FC取り分（売上）− 広告費 − 固定費250万」で見るべきなので、指標は<strong>売上高営業利益率</strong>。デジタル教育で健全・現実的な水準として<strong>20%</strong>を設計の軸に置く（15〜30%で感度も提示）。一般的な中小企業の営業利益率（3〜5%）より高い水準を狙えるのは、動画教材の高粗利ゆえ。</p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="section-num">02</span>目標営業利益率 → 必要売上の逆算</h2>
+  <p>固定費250万円／月を前提に、目標 売上高営業利益率ごとに「必要な成約数・売上・広告費・営業利益」を逆算した。</p>
+  <table>
+    <thead><tr><th>目標営業利益率</th><th>必要成約/月</th><th>売上/月</th><th>年売上</th><th>広告費/月</th><th>営業利益/月</th><th>年営業利益</th></tr></thead>
+    <tbody>
+      <tr><th>10%</th><td>4.7件</td><td>376万</td><td>4,507万</td><td>88万</td><td>38万</td><td>451万</td></tr>
+      <tr><th>15%</th><td>5.1件</td><td>406万</td><td>4,873万</td><td>95万</td><td>61万</td><td>731万</td></tr>
+      <tr class="row-highlight"><th>20%（推奨）</th><td>5.5件</td><td>442万</td><td>5,304万</td><td>104万</td><td>88万</td><td>1,061万</td></tr>
+      <tr><th>25%</th><td>6.1件</td><td>485万</td><td>5,818万</td><td>114万</td><td>121万</td><td>1,455万</td></tr>
+      <tr><th>30%</th><td>6.7件</td><td>537万</td><td>6,443万</td><td>126万</td><td>161万</td><td>1,933万</td></tr>
+    </tbody>
+  </table>
+  <p class="note">※すべて落としどころレート（商談化8%・成約20%・CPL¥3,000・単価80万）前提。固定費250万を引いた後の営業利益。</p>
+</section>
+
+<section>
+  <h2><span class="section-num">03</span>推奨設計（営業利益率20%）の逆算ファネル</h2>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="v">年5,300万</div><div class="l">目標売上（月442万）</div></div>
+    <div class="kpi"><div class="v">月5.5件</div><div class="l">必要成約</div></div>
+    <div class="kpi"><div class="v">月104万</div><div class="l">広告予算</div></div>
+    <div class="kpi"><div class="v success">年1,061万</div><div class="l">営業利益（率20%）</div></div>
+  </div>
+  <p>営業利益率20%の達成に必要な上部ファネルを、成約から逆算するとこうなる。</p>
+  <div class="funnel">
+    <div class="stage s1"><div class="name">広告費</div><div class="num">月 104万円</div><div class="sub">Meta 3枠に配分</div></div>
+    <div class="conv">▼ CPC（クリック単価）</div>
+    <div class="stage s2"><div class="name">LP訪問（クリック）</div><div class="num">月 約12,300</div></div>
+    <div class="conv">▼ LP CVR 2.8%</div>
+    <div class="stage s3"><div class="name">リード</div><div class="num">月 約345件</div></div>
+    <div class="conv">▼ 商談化率 8%（要改善：現状4%）</div>
+    <div class="stage s4"><div class="name">商談</div><div class="num">月 約28件</div></div>
+    <div class="conv">▼ 成約率 20%（要改善：現状12%）</div>
+    <div class="stage s5"><div class="name">成約</div><div class="num">月 5.5件</div><div class="sub">売上 442万円</div></div>
+  </div>
+  <h3>月次の損益（P/L）イメージ</h3>
+  <table class="pl">
+    <tbody>
+      <tr><td>売上（FC取り分　5.5成約×80万）</td><td style="text-align:right">＋442万円</td></tr>
+      <tr><td>広告費（5.5成約×¥187,500）</td><td style="text-align:right;color:var(--c-danger)">−104万円</td></tr>
+      <tr><td>人件費＋販管費（固定費）</td><td style="text-align:right;color:var(--c-danger)">−250万円</td></tr>
+      <tr class="tot"><td>営業利益（売上高営業利益率 20.0%）</td><td style="text-align:right;color:var(--c-success)">＋88万円</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2><span class="section-num">04</span>広告予算の配分（月104万円・Meta主軸）</h2>
+  <table>
+    <thead><tr><th>枠</th><th>月予算</th><th>狙い（実測CPL順）</th></tr></thead>
+    <tbody>
+      <tr><th>Meta ウェビナー</th><td>62万円（60%）</td><td>最効率（CPL¥1,977）。集客の主軸</td></tr>
+      <tr><th>Meta 常設・介護校LP</th><td>26万円（25%）</td><td>母数確保。オーディエンス刷新でCPM飽和対策</td></tr>
+      <tr><th>Meta 常設・ClaudeCode</th><td>16万円（15%）</td><td>最安リード源（CPL¥1,672）。現状稼働中</td></tr>
+      <tr style="font-weight:700;background:#f1f5f9"><th>合計</th><td>104万円</td><td>Google・LINEは停止中（成果が見えたら再検討）</td></tr>
+    </tbody>
+  </table>
+  <p class="note">※リードは現状の集客力（月約276）に対し約345が必要＝約1.25倍。CPL¥3,000は飽和を見込んだ保守値。効率配分でブレンドCPLが下がれば予算は圧縮できる。</p>
+</section>
+
+<section>
+  <h2><span class="section-num">05</span>最重要：現行レートでは固定費を賄えない</h2>
+  <div class="card danger">
+    <strong>商談化4%・成約12%のままだと赤字</strong>
+    <p>現行レートでは1成約あたり広告費が<strong>¥570,000</strong>、貢献利益は¥230,000/成約しかない。固定費250万を賄う損益分岐は<strong>月10.9成約</strong>（売上870万・広告620万）。営業利益率20%に至っては<strong>月35.7成約（広告2,036万）</strong>が必要で、いずれも現実的でない。</p>
+  </div>
+  <table>
+    <thead><tr><th></th><th>現行レート(4%×12%)</th><th>目標レート(8%×20%)</th></tr></thead>
+    <tbody>
+      <tr><th>1成約あたり広告費</th><td class="cell-danger">¥570,000</td><td class="cell-success">¥187,500</td></tr>
+      <tr><th>1成約あたり貢献利益</th><td>¥230,000</td><td>¥612,500</td></tr>
+      <tr><th>固定費250万の損益分岐</th><td class="cell-danger">月10.9成約（広告620万）</td><td>月4.1成約（広告77万）</td></tr>
+      <tr><th>営業利益率20%に必要</th><td class="cell-danger">月35.7成約（広告2,036万）</td><td class="cell-success">月5.5成約（広告104万）</td></tr>
+    </tbody>
+  </table>
+  <p><strong>結論：固定費250万円が乗った今、「商談化8%・成約20%への改善」は“あれば良い”ではなく“黒字化の絶対条件”。</strong>広告予算を増やすより先に、初動フォローの速度・商談予約への導線・事例蓄積で歩留まりを2倍にすることが、この設計全体の前提になる。</p>
+</section>
+
+<section>
+  <h2><span class="section-num">06</span>現行レート固定シナリオの完全逆算（商談化4%・成約12%・営業利益率20%）</h2>
+  <p>「歩留まりは今のまま（商談化4%・成約12%）」を固定し、固定費250万円のもとで売上高営業利益率20%を満たすには何が必要か、ゼロベースで逆算した。現行レートでは1成約あたり広告費が¥570,000、貢献利益は¥230,000/成約しかない点が起点。</p>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="v danger">月35.7件</div><div class="l">必要成約</div></div>
+    <div class="kpi"><div class="v danger">年3.43億</div><div class="l">必要売上（月2,857万）</div></div>
+    <div class="kpi"><div class="v danger">月2,036万</div><div class="l">必要広告費</div></div>
+    <div class="kpi"><div class="v">年6,857万</div><div class="l">営業利益（率20%）</div></div>
+  </div>
+  <table>
+    <thead><tr><th>項目</th><th>月あたり</th><th>年換算</th></tr></thead>
+    <tbody>
+      <tr><th>必要成約</th><td>35.7件</td><td>428件</td></tr>
+      <tr><th>売上（FC取り分）</th><td>2,857万円</td><td>3.43億円</td></tr>
+      <tr><th>広告費</th><td class="cell-danger">2,036万円</td><td>2.44億円</td></tr>
+      <tr><th>人件費＋販管費（固定）</th><td>250万円</td><td>3,000万円</td></tr>
+      <tr class="row-highlight"><th>営業利益（率20%）</th><td>571万円</td><td>6,857万円</td></tr>
+    </tbody>
+  </table>
+  <h3>逆算ファネル（現行レート固定）</h3>
+  <div class="funnel">
+    <div class="stage s1"><div class="name">広告費</div><div class="num">月 2,036万円</div></div>
+    <div class="conv">▼ CPC（クリック単価）</div>
+    <div class="stage s2"><div class="name">LP訪問（クリック）</div><div class="num">月 約265,700</div></div>
+    <div class="conv">▼ LP CVR 2.8%</div>
+    <div class="stage s3"><div class="name">リード</div><div class="num">月 約7,440件</div></div>
+    <div class="conv">▼ 商談化率 4%（現状のまま）</div>
+    <div class="stage s4"><div class="name">商談</div><div class="num">月 約298件</div></div>
+    <div class="conv">▼ 成約率 12%（現状のまま）</div>
+    <div class="stage s5"><div class="name">成約</div><div class="num">月 35.7件</div><div class="sub">売上 2,857万円</div></div>
+  </div>
+  <h3>月次の損益（P/L）</h3>
+  <table class="pl">
+    <tbody>
+      <tr><td>売上（FC取り分　35.7成約×80万）</td><td style="text-align:right">＋2,857万円</td></tr>
+      <tr><td>広告費（35.7成約×¥570,000）</td><td style="text-align:right;color:var(--c-danger)">−2,036万円</td></tr>
+      <tr><td>人件費＋販管費（固定費）</td><td style="text-align:right;color:var(--c-danger)">−250万円</td></tr>
+      <tr class="tot"><td>営業利益（売上高営業利益率 20.0%）</td><td style="text-align:right;color:var(--c-success)">＋571万円</td></tr>
+    </tbody>
+  </table>
+  <div class="card danger">
+    <strong>この規模は現実的に実行できない</strong>
+    <p>必要リード7,440件/月は現状（約276件/月）の<strong>約27倍</strong>、広告費2,036万円/月も現状の<strong>約27倍</strong>。Meta単体ではこの量を今のCPLで買えず、CPM飽和でCPLがさらに悪化して必要額は膨らむ。<strong>＝固定費250万を抱えたまま「レートを今のまま」で営業利益率20%を出すのは、数字上ほぼ不可能。</strong></p>
+  </div>
+  <div class="card success">
+    <strong>対比：レートを改善すれば同じ20%が現実的な規模で成立</strong>
+    <p>商談化8%・成約20%へ改善すれば（§02〜04）、同じ営業利益率20%が<strong>月5.5成約・売上442万・広告104万</strong>で成立する。必要成約は35.7件→5.5件（<strong>約1/6.5</strong>）、広告費は2,036万→104万（<strong>約1/20</strong>）。<strong>歩留まり改善は“黒字化の絶対条件”であり、最大の投資効率</strong>であることが、この対比で明確になる。</p>
+  </div>
+</section>
+
+<section style="border:none">
+  <h2><span class="section-num">07</span>前提・注記</h2>
+  <ul style="margin-left:1.3rem">
+    <li><strong>指標は売上高営業利益率</strong>。動画教材は粗利70〜90%と高いが、固定費後の営業利益率で評価。健全水準として20%を軸（15〜30%で感度提示）。</li>
+    <li><strong>固定費250万円／月</strong>は人件費＋販管費の平均（広告費とは別）。実額が変われば必要成約・売上が比例して動く。</li>
+    <li><strong>レートは落としどころ（商談化8%・成約20%・CPL¥3,000）</strong>を前提。現行レートでは本設計は成立しない（§05）。</li>
+    <li><strong>単価80万円</strong>は介護校の暫定。ClaudeCode開発講座の売上は本設計に上乗せの伸びしろ（単価・成約率が確定したら統合）。</li>
+    <li>成約はリードタイムが長い（1〜3ヶ月）。月次の達成は均すと上記ペース、という意味。</li>
+  </ul>
+</section>
+
+</div></body></html>
