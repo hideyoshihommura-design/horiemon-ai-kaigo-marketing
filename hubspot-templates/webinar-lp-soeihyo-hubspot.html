@@ -1,10 +1,17 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: ウェビナーLP - 介護×Claude Codeで送迎表自動作成 HubSpot版
+  screenshotPath: ../images/webinar-soeihyo-hubspot-preview.png
+-->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>介護 × Claude Code｜毎日の送迎表が、頼むだけでできる。介護施設向け無料ウェビナー</title>
-<meta name="description" content="通所介護・デイサービスの経営者・管理者・送迎担当者向け無料ウェビナー。毎日30分かかっていた送迎表づくりを、日本語で頼むだけでClaude Codeが自動生成する実演をライブでお見せします。30分・Zoom開催・参加無料。">
+<title>{{ content.html_title }}</title>
+<meta name="description" content="{{ content.meta_description }}">
+{{ standard_header_includes }}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
 <script src="https://js-na2.hsforms.net/forms/embed/243875500.js" defer></script>
@@ -184,7 +191,7 @@ body{font-family:"Noto Sans JP",sans-serif;color:var(--text);background:#fff;lin
 @media(max-width:768px){
   .section{padding:60px 15px}
   .hero-inner{grid-template-columns:1fr;gap:24px}
-  .hero-content{display:contents}
+  .hero-content,.hero-content > .hs_cos_wrapper{display:contents}
   .hero-eyebrow{order:1}
   .hero-title{order:2;margin-bottom:0}
   .hero-form-panel{order:3}
@@ -209,7 +216,8 @@ body{font-family:"Noto Sans JP",sans-serif;color:var(--text);background:#fff;lin
 
 <!-- ========== ヘッダー ========== -->
 <header class="lp-header">
-  <a href="https://fc.horiemon.ai/kaigo" class="lp-header-logo">ホリエモンAI学校 介護校</a>
+  {% module "header_logo" path="@hubspot/rich_text", label="ヘッダーロゴ",
+    html="<a href='https://fc.horiemon.ai/kaigo' class='lp-header-logo'>ホリエモンAI学校 介護校</a>" %}
   <a href="#form" class="lp-header-cta">無料で参加 &gt;</a>
 </header>
 
@@ -219,21 +227,21 @@ body{font-family:"Noto Sans JP",sans-serif;color:var(--text);background:#fff;lin
   <div class="hero-orb2"></div>
   <div class="hero-inner">
     <div class="hero-content">
-      <div class="hero-eyebrow"><span class="dot"></span>2026年7月15日（水）15:00〜15:30 ・ Zoom開催</div>
-      <h1 class="text-huge hero-title">毎日の<span class="hero-keyword">送迎表</span>が、<br><span class="u">頼むだけでできる</span>。</h1>
+      {% module "hero_eyebrow" path="@hubspot/rich_text", label="ヒーロー アイブロウ",
+        html="<div class='hero-eyebrow'><span class='dot'></span>2026年7月15日（水）15:00〜15:30 ・ Zoom開催</div>" %}
+      {% module "hero_title" path="@hubspot/rich_text", label="ヒーロー タイトル",
+        html="<h1 class='text-huge hero-title'>毎日の<span class='hero-keyword'>送迎表</span>が、<br><span class='u'>頼むだけでできる</span>。</h1>" %}
       <div class="hero-visual">
-        <img src="https://243875500.fs1.hubspotusercontent-na2.net/hubfs/243875500/ChatGPT%20Image%202026%E5%B9%B47%E6%9C%885%E6%97%A5%2020_49_47.png" alt="Claude Codeで手間のかかる送迎表作成を劇的に効率化！介護施設向け無料ウェビナー 7/15（水）15:00〜15:30" style="width:100%;height:auto;display:block;border-radius:16px;box-shadow:0 24px 60px rgba(0,0,0,.25)">
+        {% module "hero_visual" path="@hubspot/rich_text", label="ヒーロー ビジュアル",
+          html="<img src='https://243875500.fs1.hubspotusercontent-na2.net/hubfs/243875500/ChatGPT%20Image%202026%E5%B9%B47%E6%9C%885%E6%97%A5%2020_49_47.png' alt='Claude Codeで手間のかかる送迎表作成を劇的に効率化！介護施設向け無料ウェビナー 7/15（水）15:00〜15:30' style='width:100%;height:auto;display:block;border-radius:16px;box-shadow:0 24px 60px rgba(0,0,0,.25)'>" %}
       </div>
     </div>
     <div class="hero-form-panel">
-      <h3>無料ウェビナーに申し込む</h3>
-      <p class="form-lead">お申し込み30秒・参加費無料</p>
+      {% module "hero_form_title" path="@hubspot/rich_text", label="ヒーロー フォーム見出し",
+        html="<h3>無料ウェビナーに申し込む</h3><p class='form-lead'>お申し込み30秒・参加費無料</p>" %}
       <div class="hs-form-frame" data-region="na2" data-form-id="18e06ae1-81a3-41f4-8a1b-e9b41a9e6fe9" data-portal-id="243875500"></div>
-      <ul class="form-trust">
-        <li>お申し込み30秒・参加費完全無料</li>
-        <li>カメラOFF・匿名表示OK。気軽にご参加ください</li>
-        <li>申込後すぐにZoom参加URLをメールでお送りします</li>
-      </ul>
+      {% module "hero_form_trust" path="@hubspot/rich_text", label="ヒーロー フォーム下 信頼3点",
+        html="<ul class='form-trust'><li>お申し込み30秒・参加費完全無料</li><li>カメラOFF・匿名表示OK。気軽にご参加ください</li><li>申込後すぐにZoom参加URLをメールでお送りします</li></ul>" %}
     </div>
   </div>
 </section>
@@ -242,52 +250,33 @@ body{font-family:"Noto Sans JP",sans-serif;color:var(--text);background:#fff;lin
 <section class="section bg-cream">
   <div class="section-inner">
     <div class="section-header">
-      <h2 class="text-large section-title">介護現場で、<span class="highlight">Claude Code</span>にできること</h2>
-      <p class="section-lead">むずかしい操作はゼロ。「日本語で頼む」だけで動きます</p>
+      {% module "what_title" path="@hubspot/rich_text", label="介護×Claude タイトル",
+        html="<h2 class='text-large section-title'>介護現場で、<span class='highlight'>Claude Code</span>にできること</h2><p class='section-lead'>むずかしい操作はゼロ。「日本語で頼む」だけで動きます</p>" %}
     </div>
-    <p class="what-intro">
-      Claude Codeは、<strong>「日本語で頼むと、そのとおりに作業してくれる新しいAI」</strong>。<br>
-      パソコンに詳しくない方でも、現場の言葉そのままで使えます。
-    </p>
-    <div class="what-steps">
-      <div class="what-step">
-        <div class="what-step-num">1</div>
-        <h3>3つだけ用意する</h3>
-        <p>利用者リスト・送迎エリア（順番や時間）・車両とドライバー。すでに事業所にあるものをそのまま使えます。</p>
-      </div>
-      <div class="what-step">
-        <div class="what-step-num">2</div>
-        <h3>日本語で頼む</h3>
-        <p>「明日の送迎表を作って。9時着のお迎えを優先で」と、いつも通りの言葉でそのまま頼むだけ。</p>
-      </div>
-      <div class="what-step">
-        <div class="what-step-num">3</div>
-        <h3>確認する</h3>
-        <p>車両ごとのルート・お迎え順・到着の目安まで整えた送迎表が、約3分で完成します。</p>
-      </div>
-    </div>
+    {% module "what_intro" path="@hubspot/rich_text", label="介護×Claude リード文",
+      html="<p class='what-intro'>Claude Codeは、<strong>「日本語で頼むと、そのとおりに作業してくれる新しいAI」</strong>。<br>パソコンに詳しくない方でも、現場の言葉そのままで使えます。</p>" %}
+    {% module "what_steps" path="@hubspot/rich_text", label="介護×Claude 3ステップ",
+      html="<div class='what-steps'>
+        <div class='what-step'><div class='what-step-num'>1</div><h3>3つだけ用意する</h3><p>利用者リスト・送迎エリア（順番や時間）・車両とドライバー。すでに事業所にあるものをそのまま使えます。</p></div>
+        <div class='what-step'><div class='what-step-num'>2</div><h3>日本語で頼む</h3><p>「明日の送迎表を作って。9時着のお迎えを優先で」と、いつも通りの言葉でそのまま頼むだけ。</p></div>
+        <div class='what-step'><div class='what-step-num'>3</div><h3>確認する</h3><p>車両ごとのルート・お迎え順・到着の目安まで整えた送迎表が、約3分で完成します。</p></div>
+      </div>" %}
   </div>
 </section>
 
 <!-- ========== Key Section (Showpiece) ========== -->
 <section class="key-section">
   <div class="key-inner">
-    <div class="key-eyebrow">いちばん、伝えたいこと</div>
-    <p class="key-quote"><span class="em">送迎表</span>を、<br>「組む」から「確認するだけ」へ。</p>
-    <p class="key-sub">急な欠席や追加が入っても、慌てず数分で組み直せる。</p>
-    <div class="ba-compare">
-      <div class="ba-card before">
-        <div class="ba-label">BEFORE</div>
-        <div class="ba-num">30分</div>
-        <div class="ba-desc">毎日くり返す<br>送迎ルート組み</div>
-      </div>
-      <div class="ba-arrow">→</div>
-      <div class="ba-card after">
-        <div class="ba-label">AFTER</div>
-        <div class="ba-num">3分</div>
-        <div class="ba-desc">頼むだけで完成。<br>車両・到着時間まで全自動</div>
-      </div>
-    </div>
+    {% module "key_eyebrow" path="@hubspot/rich_text", label="決めセクション ラベル",
+      html="<div class='key-eyebrow'>いちばん、伝えたいこと</div>" %}
+    {% module "key_quote" path="@hubspot/rich_text", label="決めセクション 本文",
+      html="<p class='key-quote'><span class='em'>送迎表</span>を、<br>「組む」から「確認するだけ」へ。</p><p class='key-sub'>急な欠席や追加が入っても、慌てず数分で組み直せる。</p>" %}
+    {% module "ba_compare" path="@hubspot/rich_text", label="Before/After 巨大対比",
+      html="<div class='ba-compare'>
+        <div class='ba-card before'><div class='ba-label'>BEFORE</div><div class='ba-num'>30分</div><div class='ba-desc'>毎日くり返す<br>送迎ルート組み</div></div>
+        <div class='ba-arrow'>→</div>
+        <div class='ba-card after'><div class='ba-label'>AFTER</div><div class='ba-num'>3分</div><div class='ba-desc'>頼むだけで完成。<br>車両・到着時間まで全自動</div></div>
+      </div>" %}
   </div>
 </section>
 
@@ -295,29 +284,15 @@ body{font-family:"Noto Sans JP",sans-serif;color:var(--text);background:#fff;lin
 <section class="section">
   <div class="section-inner">
     <div class="section-header">
-      <h2 class="text-large section-title">30分で<span class="highlight">お見せすること</span></h2>
-      <p class="section-lead">通所介護・20名規模を想定した、リアルなライブデモ</p>
+      {% module "show_title" path="@hubspot/rich_text", label="ウェビナー内容 タイトル",
+        html="<h2 class='text-large section-title'>30分で<span class='highlight'>お見せすること</span></h2><p class='section-lead'>通所介護・20名規模を想定した、リアルなライブデモ</p>" %}
     </div>
-    <div class="show-grid">
-      <div class="show-card">
-        <div class="show-bignum">01</div>
-        <div class="show-num">DEMO 01</div>
-        <h3>送迎表の自動生成</h3>
-        <p>利用者リスト・送迎エリア・車両を渡して、「明日の送迎表を作って」と頼むだけ。お迎え順・車両の割り当て・到着の目安まで自動で組み上がる瞬間をライブで。</p>
-      </div>
-      <div class="show-card">
-        <div class="show-bignum">02</div>
-        <div class="show-num">DEMO 02</div>
-        <h3>急な欠席・追加への即時対応</h3>
-        <p>「Aさんは今日お休み」「Bさんを追加で」とふだんの言葉で伝えるだけ。ルートのムリ・ムダを避けたまま、数秒で送迎表が組み直される様子を実演。</p>
-      </div>
-      <div class="show-card">
-        <div class="show-bignum">03</div>
-        <div class="show-num">DEMO 03</div>
-        <h3>導入の注意点と始め方</h3>
-        <p>利用者情報の匿名化・最終チェックの仕組み・スモールスタートの3ステップ。失敗しないための実務ノウハウまでお伝えします。</p>
-      </div>
-    </div>
+    {% module "show_cards" path="@hubspot/rich_text", label="ウェビナー内容 カード",
+      html="<div class='show-grid'>
+        <div class='show-card'><div class='show-bignum'>01</div><div class='show-num'>DEMO 01</div><h3>送迎表の自動生成</h3><p>利用者リスト・送迎エリア・車両を渡して、「明日の送迎表を作って」と頼むだけ。お迎え順・車両の割り当て・到着の目安まで自動で組み上がる瞬間をライブで。</p></div>
+        <div class='show-card'><div class='show-bignum'>02</div><div class='show-num'>DEMO 02</div><h3>急な欠席・追加への即時対応</h3><p>「Aさんは今日お休み」「Bさんを追加で」とふだんの言葉で伝えるだけ。ルートのムリ・ムダを避けたまま、数秒で送迎表が組み直される様子を実演。</p></div>
+        <div class='show-card'><div class='show-bignum'>03</div><div class='show-num'>DEMO 03</div><h3>導入の注意点と始め方</h3><p>利用者情報の匿名化・最終チェックの仕組み・スモールスタートの3ステップ。失敗しないための実務ノウハウまでお伝えします。</p></div>
+      </div>" %}
   </div>
 </section>
 
@@ -325,29 +300,14 @@ body{font-family:"Noto Sans JP",sans-serif;color:var(--text);background:#fff;lin
 <section class="section bg-gray">
   <div class="section-inner">
     <div class="section-header">
-      <h2 class="text-large section-title">お話しする<span class="highlight">2人</span></h2>
-      <p class="section-lead">介護現場を知り尽くした講師と、現場の声を代弁する聞き手</p>
+      {% module "speaker_title" path="@hubspot/rich_text", label="登壇者 タイトル",
+        html="<h2 class='text-large section-title'>お話しする<span class='highlight'>2人</span></h2><p class='section-lead'>介護現場を知り尽くした講師と、現場の声を代弁する聞き手</p>" %}
     </div>
-    <div class="speaker-grid">
-      <div class="speaker-card">
-        <div class="speaker-avatar"><img src="https://243875500.fs1.hubspotusercontent-na2.net/hubfs/243875500/IMG_5034.jpg" alt="本村 知子"></div>
-        <div class="speaker-info">
-          <div class="speaker-role">SPEAKER</div>
-          <div class="speaker-name">本村 知子</div>
-          <div class="speaker-title">ホリエモンAI学校 介護校 校長</div>
-          <p class="speaker-bio">15年にわたる介護現場での実務経験をベースに、各事業所の業務を細かく分解し、「どこをAIに置き換えられるか」を具体的に設計してきた。現場目線で、事業所ごとにフィットするリアルに使えるAI活用を届ける。</p>
-        </div>
-      </div>
-      <div class="speaker-card">
-        <div class="speaker-avatar"><img src="https://243875500.fs1.hubspotusercontent-na2.net/hubfs/243875500/IMG_5037.jpg" alt="本村 英誉"></div>
-        <div class="speaker-info">
-          <div class="speaker-role">INTERVIEWER</div>
-          <div class="speaker-name">本村 英誉</div>
-          <div class="speaker-title">ホリエモンAI学校 介護校 副校長</div>
-          <p class="speaker-bio">介護業界向けAI学校の運営を通じて、日々現場の方々の声を聞いてきた立場。テクノロジー初心者だからこそ、参加者と同じ目線で「分からない」を「分かる」に変える役割を担う。</p>
-        </div>
-      </div>
-    </div>
+    {% module "speaker_cards" path="@hubspot/rich_text", label="登壇者 カード",
+      html="<div class='speaker-grid'>
+        <div class='speaker-card'><div class='speaker-avatar'><img src='https://243875500.fs1.hubspotusercontent-na2.net/hubfs/243875500/IMG_5034.jpg' alt='本村 知子'></div><div class='speaker-info'><div class='speaker-role'>SPEAKER</div><div class='speaker-name'>本村 知子</div><div class='speaker-title'>ホリエモンAI学校 介護校 校長</div><p class='speaker-bio'>15年にわたる介護現場での実務経験をベースに、各事業所の業務を細かく分解し、「どこをAIに置き換えられるか」を具体的に設計してきた。現場目線で、事業所ごとにフィットするリアルに使えるAI活用を届ける。</p></div></div>
+        <div class='speaker-card'><div class='speaker-avatar'><img src='https://243875500.fs1.hubspotusercontent-na2.net/hubfs/243875500/IMG_5037.jpg' alt='本村 英誉'></div><div class='speaker-info'><div class='speaker-role'>INTERVIEWER</div><div class='speaker-name'>本村 英誉</div><div class='speaker-title'>ホリエモンAI学校 介護校 副校長</div><p class='speaker-bio'>介護業界向けAI学校の運営を通じて、日々現場の方々の声を聞いてきた立場。テクノロジー初心者だからこそ、参加者と同じ目線で「分からない」を「分かる」に変える役割を担う。</p></div></div>
+      </div>" %}
   </div>
 </section>
 
@@ -361,16 +321,18 @@ body{font-family:"Noto Sans JP",sans-serif;color:var(--text);background:#fff;lin
 <section class="section">
   <div class="section-inner">
     <div class="section-header">
-      <h2 class="text-large section-title">開催<span class="highlight">概要</span></h2>
+      {% module "event_title" path="@hubspot/rich_text", label="開催概要 タイトル",
+        html="<h2 class='text-large section-title'>開催<span class='highlight'>概要</span></h2>" %}
     </div>
     <div class="details-box">
       <div class="details-header">ウェビナー詳細</div>
-      <div class="details-row"><span class="details-label">日時</span><span class="details-value"><strong style="color:var(--dark2);font-size:1.05rem">2026年7月15日（水）15:00〜15:30</strong></span></div>
-      <div class="details-row"><span class="details-label">所要時間</span><span class="details-value">30分（質疑応答含む）</span></div>
-      <div class="details-row"><span class="details-label">形式</span><span class="details-value">Zoomウェビナー（オンライン）</span></div>
-      <div class="details-row"><span class="details-label">参加費</span><span class="details-value"><span class="price">無料</span></span></div>
-      <div class="details-row"><span class="details-label">対象</span><span class="details-value">通所介護・デイサービスの経営者・管理者・生活相談員・送迎担当者</span></div>
-      <div class="details-row"><span class="details-label">録画</span><span class="details-value">参加者全員に後日配信</span></div>
+      {% module "event_details" path="@hubspot/rich_text", label="開催概要 本文",
+        html="<div class='details-row'><span class='details-label'>日時</span><span class='details-value'><strong style='color:#1a202c;font-size:1.05rem'>2026年7月15日（水）15:00〜15:30</strong></span></div>
+        <div class='details-row'><span class='details-label'>所要時間</span><span class='details-value'>30分（質疑応答含む）</span></div>
+        <div class='details-row'><span class='details-label'>形式</span><span class='details-value'>Zoomウェビナー（オンライン）</span></div>
+        <div class='details-row'><span class='details-label'>参加費</span><span class='details-value'><span class='price'>無料</span></span></div>
+        <div class='details-row'><span class='details-label'>対象</span><span class='details-value'>通所介護・デイサービスの経営者・管理者・生活相談員・送迎担当者</span></div>
+        <div class='details-row'><span class='details-label'>録画</span><span class='details-value'>参加者全員に後日配信</span></div>" %}
     </div>
   </div>
 </section>
@@ -378,8 +340,8 @@ body{font-family:"Noto Sans JP",sans-serif;color:var(--text);background:#fff;lin
 <!-- ========== 申込みフォーム ========== -->
 <section class="form-section">
   <div class="section-header">
-    <h2 class="text-large section-title">今すぐ申し込む</h2>
-    <p class="section-lead">30分・Zoom開催・参加無料</p>
+    {% module "form_title" path="@hubspot/rich_text", label="フォームセクション タイトル",
+      html="<h2 class='text-large section-title'>今すぐ申し込む</h2><p class='section-lead'>30分・Zoom開催・参加無料</p>" %}
   </div>
   <div class="form-wrapper">
     <div class="hs-form-frame" data-region="na2" data-form-id="18e06ae1-81a3-41f4-8a1b-e9b41a9e6fe9" data-portal-id="243875500"></div>
@@ -390,40 +352,32 @@ body{font-family:"Noto Sans JP",sans-serif;color:var(--text);background:#fff;lin
 <section class="section bg-gray">
   <div class="section-inner">
     <div class="section-header">
-      <h2 class="text-large section-title">よくある<span class="highlight">質問</span></h2>
+      {% module "faq_title" path="@hubspot/rich_text", label="FAQ タイトル",
+        html="<h2 class='text-large section-title'>よくある<span class='highlight'>質問</span></h2>" %}
     </div>
     <div class="faq-list">
-      <div class="faq-item">
-        <div class="faq-q">パソコンが苦手な職員でも使えますか？</div>
-        <div class="faq-a">Claude Codeは日本語で頼むだけで動くので、特別なパソコン知識は不要です。初期設定だけハードルがありますが、私たちのAI学校で導入支援も行っています。</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">利用者の個人情報を扱う上での注意点は？</div>
-        <div class="faq-a">Claude（有料プラン）は入力データを学習に使わない設定がデフォルトです。それでも、利用者を匿名化（「利用者A、B、C」）した状態で運用を始めることを強くおすすめしています。具体的な手順はウェビナーで解説します。</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">AIが変な送迎表を作ったらどうしますか？</div>
-        <div class="faq-a">Claude Codeはあくまで「下書きを作るツール」です。出力された送迎表は必ず人間が最終チェックしてから運用するため、AIの間違いがそのまま現場に出ることはありません。</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q">当日参加できない場合は？</div>
-        <div class="faq-a">録画を後日配信します。ご質問等はメールにてお受けいたします。</div>
-      </div>
+      {% module "faq_content" path="@hubspot/rich_text", label="FAQ 本文",
+        html="<div class='faq-item'><div class='faq-q'>パソコンが苦手な職員でも使えますか？</div><div class='faq-a'>Claude Codeは日本語で頼むだけで動くので、特別なパソコン知識は不要です。初期設定だけハードルがありますが、私たちのAI学校で導入支援も行っています。</div></div>
+        <div class='faq-item'><div class='faq-q'>利用者の個人情報を扱う上での注意点は？</div><div class='faq-a'>Claude（有料プラン）は入力データを学習に使わない設定がデフォルトです。それでも、利用者を匿名化（「利用者A、B、C」）した状態で運用を始めることを強くおすすめしています。具体的な手順はウェビナーで解説します。</div></div>
+        <div class='faq-item'><div class='faq-q'>AIが変な送迎表を作ったらどうしますか？</div><div class='faq-a'>Claude Codeはあくまで「下書きを作るツール」です。出力された送迎表は必ず人間が最終チェックしてから運用するため、AIの間違いがそのまま現場に出ることはありません。</div></div>
+        <div class='faq-item'><div class='faq-q'>当日参加できない場合は？</div><div class='faq-a'>録画を後日配信します。ご質問等はメールにてお受けいたします。</div></div>" %}
     </div>
   </div>
 </section>
 
 <!-- ========== フッターCTA ========== -->
 <section class="footer-cta">
-  <h2 class="text-large"><span class="kw-accent">送迎表</span>を、<br>「組む」から「確認するだけ」へ。</h2>
-  <p class="text-body">参加無料・30分・Zoom開催・録画配信あり</p>
+  {% module "footer_cta" path="@hubspot/rich_text", label="フッターCTA",
+    html="<h2 class='text-large'><span class='kw-accent'>送迎表</span>を、<br>「組む」から「確認するだけ」へ。</h2><p class='text-body'>参加無料・30分・Zoom開催・録画配信あり</p>" %}
   <a href="#form" class="cta-btn-large">無料ウェビナーに申し込む</a>
 </section>
 
 <!-- ========== フッター ========== -->
 <footer class="lp-footer">
-  <p>© 2026 ホリエモンAI学校 介護校 ｜ <a href="https://fc.horiemon.ai/kaigo">ホーム</a> ｜ <a href="https://fc.horiemon.ai/kaigo/privacy">プライバシーポリシー</a></p>
+  {% module "footer_text" path="@hubspot/rich_text", label="フッター",
+    html="<p>© 2026 ホリエモンAI学校 介護校 ｜ <a href='https://fc.horiemon.ai/kaigo'>ホーム</a> ｜ <a href='https://fc.horiemon.ai/kaigo/privacy'>プライバシーポリシー</a></p>" %}
 </footer>
 
+{{ standard_footer_includes }}
 </body>
 </html>
