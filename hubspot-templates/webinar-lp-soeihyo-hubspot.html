@@ -146,6 +146,24 @@ body{font-family:"Noto Sans JP",sans-serif;color:var(--text);background:#fff;lin
 .speaker-title{font-size:.82rem;color:var(--purple);font-weight:700;margin-bottom:.6rem}
 .speaker-bio{font-size:.85rem;color:var(--text-sub);line-height:1.75;margin:0}
 
+/* ========== Media / YouTube ========== */
+.media-section{padding:90px 20px;background:var(--bg-cream)}
+.media-inner{max-width:940px;margin:0 auto}
+.media-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:44px;align-items:center}
+.media-thumb{position:relative;display:block;border-radius:var(--radius);overflow:hidden;box-shadow:0 16px 44px rgba(0,0,0,.18);transition:.25s}
+.media-thumb:hover{transform:translateY(-4px);box-shadow:0 22px 60px rgba(0,0,0,.25)}
+.media-thumb img{width:100%;height:auto;display:block}
+.media-thumb::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.12);transition:.25s;pointer-events:none}
+.media-thumb:hover::after{background:rgba(0,0,0,0)}
+.media-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:74px;height:74px;background:#FF0000;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.4);z-index:2;transition:.25s;pointer-events:none}
+.media-thumb:hover .media-play{transform:translate(-50%,-50%) scale(1.08)}
+.media-play::before{content:'';border-style:solid;border-width:13px 0 13px 22px;border-color:transparent transparent transparent #fff;margin-left:5px}
+.media-eyebrow{display:inline-flex;align-items:center;gap:.4rem;background:#FF0000;color:#fff;padding:.4rem 1rem;border-radius:50px;font-size:.78rem;font-weight:900;letter-spacing:.03em;margin-bottom:1rem}
+.media-info h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:900;line-height:1.4;color:var(--dark2);margin-bottom:1rem;letter-spacing:-.02em}
+.media-info p{font-size:.92rem;color:var(--text-sub);line-height:1.85;margin-bottom:1.5rem}
+.media-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--accent);font-weight:900;font-size:.95rem;text-decoration:none}
+.media-link:hover{text-decoration:underline}
+
 /* ========== Inline CTA ========== */
 .cta-block{text-align:center;padding:48px 20px}
 .cta-btn-large{display:inline-block;background:var(--gradient);color:#fff;padding:1.2rem 2.75rem;border-radius:50px;font-size:1.08rem;font-weight:900;text-decoration:none;transition:.3s;box-shadow:0 12px 40px rgba(255,0,128,.35)}
@@ -200,6 +218,8 @@ body{font-family:"Noto Sans JP",sans-serif;color:var(--text);background:#fff;lin
   .hero-brand{justify-content:center}
   .hero-points{align-items:flex-start;text-align:left;max-width:320px;margin:0 auto}
   .show-grid,.what-steps,.speaker-grid{grid-template-columns:1fr;gap:30px}
+  .media-grid{grid-template-columns:1fr;gap:28px}
+  .media-section{padding:60px 15px}
   .what-step::after{content:'↓';right:50%;top:auto;bottom:-26px;transform:translateX(50%)}
   .details-row{flex-direction:column;gap:.3rem}
   .details-label{width:auto}
@@ -308,6 +328,22 @@ body{font-family:"Noto Sans JP",sans-serif;color:var(--text);background:#fff;lin
         <div class='speaker-card'><div class='speaker-avatar'><img src='https://243875500.fs1.hubspotusercontent-na2.net/hubfs/243875500/IMG_5034.jpg' alt='本村 知子'></div><div class='speaker-info'><div class='speaker-role'>SPEAKER</div><div class='speaker-name'>本村 知子</div><div class='speaker-title'>ホリエモンAI学校 介護校 校長</div><p class='speaker-bio'>15年にわたる介護現場での実務経験をベースに、各事業所の業務を細かく分解し、「どこをAIに置き換えられるか」を具体的に設計してきた。現場目線で、事業所ごとにフィットするリアルに使えるAI活用を届ける。</p></div></div>
         <div class='speaker-card'><div class='speaker-avatar'><img src='https://243875500.fs1.hubspotusercontent-na2.net/hubfs/243875500/IMG_5037.jpg' alt='本村 英誉'></div><div class='speaker-info'><div class='speaker-role'>INTERVIEWER</div><div class='speaker-name'>本村 英誉</div><div class='speaker-title'>ホリエモンAI学校 介護校 副校長</div><p class='speaker-bio'>介護業界向けAI学校の運営を通じて、日々現場の方々の声を聞いてきた立場。テクノロジー初心者だからこそ、参加者と同じ目線で「分からない」を「分かる」に変える役割を担う。</p></div></div>
       </div>" %}
+  </div>
+</section>
+
+<!-- ========== メディア出演（YouTube） ========== -->
+<section class="media-section">
+  <div class="media-inner">
+    <div class="media-grid">
+      <a class="media-thumb" href="https://www.youtube.com/watch?v=T6h7729VhqU&t=613s" target="_blank" rel="noopener">
+        <img src="https://img.youtube.com/vi/T6h7729VhqU/maxresdefault.jpg" alt="ホリエモンチャンネル出演｜現役の介護会社がAI活用を支援！ホリエモンAI学校 介護校のAI導入支援">
+        <span class="media-play" aria-hidden="true"></span>
+      </a>
+      <div class="media-info">
+        {% module "media_text" path="@hubspot/rich_text", label="メディア出演 テキスト",
+          html="<span class='media-eyebrow'>▶ ホリエモンチャンネル 出演</span><h2>まずは動画で、<br>介護×AIの<span class='text-accent'>リアル</span>を。</h2><p>ホリエモンチャンネルで、ホリエモンAI学校 介護校のAI導入支援が特集されました。介護現場でAIがどう役立つのか、動画でもぜひご覧ください。</p><a class='media-link' href='https://www.youtube.com/watch?v=T6h7729VhqU&t=613s' target='_blank' rel='noopener'>動画を見る（YouTube）→</a>" %}
+      </div>
+    </div>
   </div>
 </section>
 
